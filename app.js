@@ -23,7 +23,6 @@ var fortune = require('./lib/fortune.js');
 app.use(function(req,res,next){
 res.locals.showTests = app.get('env') !== 'production' && req.query.text ==='1';
 next();
-
 });
 
 
