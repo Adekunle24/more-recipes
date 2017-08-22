@@ -1,0 +1,42 @@
+body{
+    font-family:"Roboto", "-apple-system", "system-ui", "BlinkMacSystemFont", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+font-weight: normal;
+line-height: 1.5;
+color: #888da8;
+background-color: #edf2f6;
+
+}
+.app-body{
+    background: url('../images/background.jpg') no-repeat center center fixed; 
+  background-size:cover;
+}
+
+.navbar-toggle{
+    border: 1px solid gray;
+}
+.navbar-default{
+    padding-top:10px;
+}
+#app-logo{
+    width:70%;
+    padding-top:10px;
+}
+.dropdown-menu > li > a
+{
+    padding:10px 20px;
+}
+.padding-5{
+    padding:5px !important;
+}
+#body-container{
+    margin-top:150px;
+}
+.intro-title{
+    font-weight:300px;
+    font-size: 2.5em;
+    line-height: 1.3;
+    color:#fff;
+}
+.margin-top-20{
+    margin-top:20px;
+}

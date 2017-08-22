@@ -1,20 +1,21 @@
 //using express framework
 var express = require('express');
+var fs = require('fs');
 
 //create express application
 var app = express();
 
 //set up handlebars view engine
-var handlebars = require('express3-handlebars').create({defaultLayout:'main'});
+// var handlebars = require('express3-handlebars').create({defaultLayout:'main'});
 
-app.engine('handlebars',handlebars.engine);
-app.set('view engine','handlebars');
+// app.engine('handlebars',handlebars.engine);
+// app.set('view engine','handlebars');
 
 //set server listening port 
 app.set('port',process.env.PORT || 3000);
 
 //directory for static files
-app.use(express.static(__dirname+'/public'));
+app.use(express.static(__dirname+'/template'));
 
 //load fortune library
 var fortune = require('./lib/fortune.js');
@@ -30,7 +31,18 @@ next();
 app.get('/',function(req,res)
 {
     var data = { username: "Adekunle"};
-    res.render('home',data);
+    fs.readFile(__dirname+'/template/home.html',function(err,data){
+        if(err)
+        {
+            res.send("error occured");
+        }
+        else{
+            res.end(data);
+  //res.end(data);
+        }
+       
+    });
+   // res.render('home',data);
 });
 
 //add dashboard route
