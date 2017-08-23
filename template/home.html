@@ -9,10 +9,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"  />
+	<link rel="stylesheet" href="css/bootstrap-extend.min.css"/>
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/jPinning.min.css"  />
 	<link rel="stylesheet" href="css/bootstrap-datepicker3.css"/>
-
+<link rel="stylesheet" href="css/buttons.min.css"/>
 <link rel="stylesheet" type="text/css" href="css/site.css">
 </head>
 <body data-ng-controller="myController" data-ng-app="myApp" class="app-body">
@@ -144,14 +145,17 @@
 		 Share your thoughts, reviews, recipes, earn badges, points and much more! 
 		 Explore your world of dexterity, Try a new Recipe today!
 	</p>
-	<a class="btn btn-animate btn-animate-side btn-primary btn-floating btn-lg btn-block margin-top-20"> Register </a>
+<div class="text-center">
+	<a id="register-2" class="btn btn-lg btn-pill-left btn-info margin-top-20"> Register </a>
+	<a id="login-2" class="btn btn-lg btn-pill-right btn-warning margin-top-20"> Sign In </a>
+	</div>	
 </div>
 <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 <!--begin tabs -->
 <div class="registration-form">
 <ul class="nav nav-pills nav-stacked inline float-left height-300 registration-nav">
-    <li class="active" ><a  data-toggle="pill" href="#home"><i class="fa fa-user fa-2x"></i></a></li>
-    <li><a data-toggle="pill" href="#menu1"><i class="fa fa-lock fa-2x"></i></a></li>
+    <li data-toggle="tooltip" title="Click here to Register an account" data-placement="right" class="active" ><a  data-toggle="pill" href="#home"><i class="fa fa-user fa-2x"></i></a></li>
+    <li data-toggle="tooltip" title="Click here to Sign In"  data-placement="right"><a data-toggle="pill" href="#menu1"><i class="fa fa-lock fa-2x"></i></a></li>
   </ul>
   
   <div class="tab-content">
@@ -161,14 +165,14 @@
 							<div class="row">
 								<div class="col-lg-5 col-md-5">
 									<div class="form-group label-floating is-empty">
-										<label class="control-label">First Name</label>
-										<input class="form-control" placeholder="First Name" type="text">
+										<label class="control-label">Full Name</label>
+										<input class="form-control" placeholder="Full Name" type="text">
 									</div>
 								</div>
 								<div class="col-lg-5 col-md-5">
 									<div class="form-group label-floating is-empty">
-										<label class="control-label ">Last Name</label>
-										<input class="form-control" placeholder="Last Name" type="text">
+										<label class="control-label ">User Name</label>
+										<input class="form-control" placeholder="User Name" type="text">
 									</div>
 								</div>
 								<div class="col-xl-10 col-lg-10 col-md-10 ">
@@ -203,18 +207,18 @@
 										</div>
 									</div>
 
-								<div class="text-center margin-30">	<a href="#" data-toggle="tooltip" title="Click here to Register and account" class="btn btn-purple btn-lg full-width btn-primary">Complete Registration!</a></div>
+								<div class="text-center margin-30">	<a href="#" data-toggle="tooltip" title="Click here to Register an account" class="btn btn-purple btn-lg full-width btn-primary">Complete Registration!</a></div>
 								</div>
 
 								<!--Social Media Networking -->
 								<div style="padding-bottom:0px;" class='full-tile column col-xs-12 social-links'>
-<span class="social-links-title">Go ahead and follow us on social media.</span>
-<ul class="icons inline">
-<li class="pinterest"><a href="" class="elegant-icons" target="_blank"><i class="fa fa-pinterest"></i></a></li>
-<li class="facebook"><a href="" class="elegant-icons" target="_blank"><i class="fa fa-facebook-f"></i></a></li>
-<li class="twitter"><a href="" class="elegant-icons" target="_blank"><i class="fa fa-twitter"></i></a></li>
-<li class="googleplus"><a href="" class="social-icon icon-google_plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-<li class="instagram btnInstagram"><a href="" class="icon-social_instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
+<div class="social-links-title margin-top-10">Go ahead and follow us on social media.</div>
+<ul class="icons inline social-icons icon-circle margin-top-20">
+<li class="pinterest" data-toggle="tooltip" title="Pinterest"><a href="" class="elegant-" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+<li class="facebook" data-toggle="tooltip" title="Facebook"><a href="" class="elegant-" target="_blank"><i class="fa fa-facebook"></i></a></li>
+<li class="twitter" data-toggle="tooltip" title="Twitter"><a href="" class="" target="_blank"><i class="fa fa-twitter"></i></a></li>
+<li class="googleplus" data-toggle="tooltip" title="GooglePlus"><a href="" class="social-icon icon-google_plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+<li class="instagram" class="tooltip" title="Instagram" ><a href="" target="_blank"><i class="fa fa-instagram"></i></a></li>
 </ul>
 </div>
 <!--End Authentication Services -->
@@ -222,7 +226,7 @@
 						</form>
     </div>
     <div id="menu1" class="tab-pane fade">
-      <h3 class="text-center margin-bottom-30">Login</h3>
+      <h3 class="text-center margin-bottom-30">Sign In</h3>
       <form class="login-form">
 							<div class="row">
 								<div class="col-lg-10 col-md-10">
@@ -237,19 +241,19 @@
 										<input required class="form-control" placeholder="Password" type="password">
 									</div>
 								<div class="text-center">	<img data-ng-show="LoginLoader" src="images/loader.gif" width="100" height="70"/></div>
-								<div class="text-center">	<input  type="submit" data-ng-click="simulateLogin()" class="btn btn-purple btn-lg full-width btn-info" value="Login"/></div>
+								<div class="text-center">	<input  type="submit" data-ng-click="simulateLogin()" class="btn btn-purple btn-lg full-width btn-info" value="Sign In"/></div>
 								
 								</div>
 <div class="col-lg-10 col-md-10">
 								<!--Begin Authentication services -->
 								<div class="full-tile column col-xs-12 social-links text-center">
-<span class="social-links-title">Go ahead and sign in with any of the services below.</span>
-<ul class="icons inline">
-<li class="pinterest"><a href="" class="elegant-icons" target="_blank"></a></li>
-<li class="facebook"><a href="" class="elegant-icons" target="_blank"></a></li>
-<li class="twitter"><a href="" class="elegant-icons" target="_blank"></a></li>
-<li class="googleplus"><a href="" class="social-icon icon-google_plus" target="_blank"></a></li>
-<li class="instagram btnInstagram"><a href="" class="icon-social_instagram" target="_blank"></a></li>
+<div class="social-links-title margin-top-10">Go ahead and sign in with any of the services below.</div>
+<ul class="icons inline social-icons icon-circle margin-top-20">
+<li class="pinterest" data-toggle="tooltip" title="Pinterest"><a href="" class="elegant-" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+<li class="facebook" data-toggle="tooltip" title="Facebook"><a href="" class="elegant-" target="_blank"><i class="fa fa-facebook"></i></a></li>
+<li class="twitter" data-toggle="tooltip" title="Twitter"><a href="" class="" target="_blank"><i class="fa fa-twitter"></i></a></li>
+<li class="googleplus" data-toggle="tooltip" title="GooglePlus"><a href="" class="social-icon icon-google_plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+<li class="instagram" class="tooltip" title="Instagram" ><a href="" target="_blank"><i class="fa fa-instagram"></i></a></li>
 </ul>
 </div>
 <!--End Authentication Services -->
@@ -270,7 +274,58 @@
 </div>
 <!--Body content ends here -->
 
+<footer class="">
+<div class="container-fluid">
+<div class="row">
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+<div class="about-widget">
+<a href="#" class="logo">
+						<img src="images/logo.png" alt="MoreRecipes">
+						<h6 class="logo-title">MoreRecipes</h6>
+						RECIPE LIBRARY
+					</a>
+					<p>
+						More-Recipes​ provides​ ​a​ ​platform​ ​for​ ​users​ ​to​ ​share​ ​the​ ​awesome​ ​and​ ​exciting​ ​​ ​recipe​ ​ideas​ ​they
+have​ ​invented​ ​or​ ​learnt.
+							</p>
+														<div style="padding-bottom:0px;" class='full-tile column col-xs-12 social-links'>
+<div class="social-links-title margin-top-10">Go ahead and follow us on social media.</div>
+<ul class="icons inline social-icons icon-circle margin-top-20">
+<li class="pinterest" data-toggle="tooltip" title="Pinterest"><a href="" class="elegant-" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+<li class="facebook" data-toggle="tooltip" title="Facebook"><a href="" class="elegant-" target="_blank"><i class="fa fa-facebook"></i></a></li>
+<li class="twitter" data-toggle="tooltip" title="Twitter"><a href="" class="" target="_blank"><i class="fa fa-twitter"></i></a></li>
+<li class="googleplus" data-toggle="tooltip" title="GooglePlus"><a href="" class="social-icon icon-google_plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+<li class="instagram" class="tooltip" title="Instagram" ><a href="" target="_blank"><i class="fa fa-instagram"></i></a></li>
+</ul>
+</div>
+</div>
+	</div>
+	<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+<h6 class="text-center">Quick Links</h6>
+<ul class="footer-links">
+				<li><a href="/view-recipe/latest">Latest Recipe</a></li>
+					<li><a href="/view-recipe/most-view">Most Viewed Recipe</a></li>
+					<li><a href="/recipe-user/photos">Photos</a></li>
+			<li><a href="/recipe-filter/trending">Trending</a></li>
+				<li><a href="/recipe-filter/trending">Friends Recipe</a></li>
+</ul>
+	</div>
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 
+	</div>
+	<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+<h6 class="text-center">More Recipe</h6>
+<ul class="footer-links">
+				<li><a href="/legal/privacy">Privacy</a></li>
+					<li><a href="/legal/terms-conditions">Terms and Conditions</a></li>
+					<li><a href="/social/forums">Forums</a></li>
+			<li><a href="/others/statistics">Statistics</a></li>
+				<li><a href="/developer/api/download">Web Developer API</a></li>
+</ul>
+	</div>
+</div>
+</div>
+</footer>
 <!--Begin Page Modal -->
 <!--Terms and Conditions -->
     <div class="modal fade modal-rotate-from-left" id="modalTermsAndConditions" aria-hidden="false" aria-labelledby="modalSignIn"

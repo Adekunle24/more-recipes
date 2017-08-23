@@ -26,6 +26,20 @@ $('[data-toggle="tooltip"]').tooltip();
 
 //Initiate Angular
 var app = angular.module('myApp',[]);
+
+//Propagate register event
+$('#register-2').click(
+    function(){
+  $('a[href="#home"]').click();
+    }
+);
+//Propage login event
+$('#login-2').click(function(){
+        $('a[href="#menu1"]').click();
+});
+
+
+
 //Begin Angular controller here
 app.controller('myController',function($scope,$http,$timeout,$window)
 {
