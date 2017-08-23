@@ -29,7 +29,7 @@ background-color: #edf2f6;
     padding:5px !important;
 }
 #body-container{
-    margin-top:150px;
+    margin-top:100px;
 }
 .intro-title{
     font-weight:300px;
@@ -39,4 +39,49 @@ background-color: #edf2f6;
 }
 .margin-top-20{
     margin-top:20px;
+}
+.float-right{
+    float:right;
+}
+.float-left{
+    float:left;
+}
+.app-color{
+color:#46642d;
+}
+.app-backcolor{
+background-color:#46642d;
+}
+.white{
+    color:white !important;
+}
+.registration-form{
+    border: 1px solid #e6ecf5;
+border-radius: 0 5px 5px 0;
+background-color: #fff;
+overflow: hidden;
+position: relative;
+padding-left: 21px;
+margin-bottom: 20px;
+min-height: 655px;
+
+}
+.registration-nav
+{
+width:60px;
+}
+.registration-form > .registration-nav > li > a{
+padding-top: 100px;
+padding-bottom: 100px;
+text-align: center;
+
+}
+.height-300{
+    height:400px !important;
+}
+.margin-bottom-30{
+    margin-bottom: 30px;
+}
+.login-form{
+    margin-top:20%;
 }

@@ -27,7 +27,7 @@ next();
 });
 
 
-//add homepage route
+//add startup route
 app.get('/',function(req,res)
 {
     var data = { username: "Adekunle"};
@@ -45,6 +45,23 @@ app.get('/',function(req,res)
    // res.render('home',data);
 });
 
+//add homepage route
+app.get('/home',function(req,res)
+{
+    var data = { username: "Adekunle"};
+    fs.readFile(__dirname+'/template/home.html',function(err,data){
+        if(err)
+        {
+            res.send("error occured");
+        }
+        else{
+            res.end(data);
+  //res.end(data);
+        }
+       
+    });
+   // res.render('home',data);
+});
 //add dashboard route
 app.get('/dashboard',function(req,res)
 {

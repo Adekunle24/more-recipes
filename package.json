@@ -1,0 +1,30 @@
+{
+  "name": "more-recipes",
+  "version": "1.0.0",
+  "description": "More-Recipes​ ​provides​ ​a​ ​platform​ ​for​ ​users​ ​to​ ​share​ ​the​ ​awesome​ ​and​ ​exciting​ ​​ ​recipe​ ​ideas​ ​they",
+  "main": "app.js",
+  "dependencies": {
+    "chai": "^4.1.1",
+    "express": "^4.15.4",
+    "express3-handlebars": "^0.5.2",
+    "pg": "^7.2.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.7.1"
+  },
+  "devDependencies": {
+    "mocha": "^3.5.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adekunle24/more-recipes.git"
+  },
+  "author": "adekunle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adekunle24/more-recipes/issues"
+  },
+  "homepage": "https://github.com/Adekunle24/more-recipes#readme"
+}
