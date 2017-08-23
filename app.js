@@ -62,6 +62,26 @@ app.get('/home',function(req,res)
     });
    // res.render('home',data);
 });
+
+//add view-recipes route
+app.get('/view-recipes',function(req,res)
+{
+    var data = { username: "Adekunle"};
+    fs.readFile(__dirname+'/template/view-recipes.html',function(err,data){
+        if(err)
+        {
+            res.send("error occured");
+        }
+        else{
+            res.end(data);
+  //res.end(data);
+        }
+       
+    });
+   // res.render('home',data);
+});
+
+
 //add dashboard route
 app.get('/dashboard',function(req,res)
 {

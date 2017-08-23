@@ -6,6 +6,9 @@ color: #888da8;
 background-color: #edf2f6;
 
 }
+label{
+    font-weight:600;
+}
 ul{
     list-style: none;
 }
