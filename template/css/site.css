@@ -215,6 +215,9 @@ text-decoration: none;
 .social-links > .social-links-title{
     margin:20px;
 }
+.recipe-gallery img{
+    width:80%;
+}
 .social-icons .fa-facebook,.social-icons .fa-facebook-square{background-color:#3C599F;}
 .social-icons .fa-pinterest,.social-icons .fa-pinterest-square{background-color:#CC2127;} 
 .social-icons .fa-twitter,.social-icons .fa-twitter-square{background-color:#32CCFE;}
