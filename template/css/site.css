@@ -38,7 +38,7 @@ ul > li > a:hover{
     padding:5px !important;
 }
 #body-container{
-    margin-top:100px;
+    margin-top:80px;
 }
 .intro-title{
     font-weight:300px;
@@ -225,3 +225,15 @@ text-decoration: none;
 .social-icons .fa-pinterest,.social-icons .fa-pinterest-square{background-color:#CC2127;} 
 .social-icons .fa-twitter,.social-icons .fa-twitter-square{background-color:#32CCFE;}
 .social-icons .fa-google-plus,.social-icons .fa-google-plus-square{background-color:#CF3D2E;} 
+
+
+/*Begin View-Top-Recipe Styles **/
+.main-header {
+    padding: 20px 0 20px 0;
+    max-width: calc(100%);
+    margin: 0 auto 30px;
+    position: relative;
+}
+.bg-gray{
+    background-color:rgba(0,0,0,0.4) !important;
+}

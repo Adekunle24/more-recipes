@@ -5,11 +5,9 @@ var path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
+const config = require(`${__dirname}/server/config/config.json`)["development"];
 
-
-
-var option = {"dialect":"postgres","host":"localhost"};
-var sequelize = new Sequelize("More-Recipes", "postgres", "postgre",option);
+var sequelize = new Sequelize(config.database,config.username, config.password,config.options);
 
 //create express application
 var app = express();
@@ -28,9 +26,39 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-//directory for static files
-app.use(express.static(__dirname+'/template'));
+        //add homepage route
+app.get('/home',function(req,res)
+{
+    var data = { username: "Adekunle"};
+    fs.readFile(__dirname+'/template/home.html',function(err,data){
+        if(err)
+        {
+            res.send("error occured");
+        }
+        else{
+            res.end(data);
+        }
+    });
+   // res.render('home',data);
+});
 
+//directory for static files
+    app.use(express.static(__dirname+'/template'));
+
+app.get('/view-recipes',function(req,res)
+{
+    var data = { username: "Adekunle"};
+    fs.readFile(__dirname+'/template/view-recipes.html',function(err,data){
+        if(err)
+        {
+            res.send("error occured "+err);
+        }
+        else{
+            res.end(data);
+        }
+       
+    });
+});
 //load fortune library
 var fortune = require('./lib/fortune.js');
 
@@ -59,52 +87,9 @@ app.get('/',function(req,res)
    // res.render('home',data);
 });
 
-//add homepage route
-app.get('/home',function(req,res)
-{
-    var data = { username: "Adekunle"};
-    fs.readFile(__dirname+'/template/home.html',function(err,data){
-        if(err)
-        {
-            res.send("error occured");
-        }
-        else{
-            res.end(data);
-  //res.end(data);
-        }
-       
-    });
-   // res.render('home',data);
-});
+require(`${__dirname}/server/routes`)(app,fs,sequelize,express);
 
-//add view-recipes route
-app.get('/view-recipes',function(req,res)
-{
-    var data = { username: "Adekunle"};
-    fs.readFile(__dirname+'/template/view-recipes.html',function(err,data){
-        if(err)
-        {
-            res.send("error occured");
-        }
-        else{
-            res.end(data);
-  //res.end(data);
-        }
-       
-    });
-   // res.render('home',data);
-});
 
-app.get('/api',function(req,res)
-{
-    var data = { username: "Adekunle"};
-sequelize.query('select count(*) as NumberOfUsers from users',{item:sequelize.QueryTypes.SELECT}).spread(function(results,metadata){
-var json_string = JSON.stringify(results);
-var json_obj = JSON.parse(json_string);
-res.send(json_obj[0].numberofusers);
-});
-   // res.render('home',data);
-});
 
 //add dashboard route
 app.get('/dashboard',function(req,res)
