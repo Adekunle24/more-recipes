@@ -16,10 +16,16 @@ ul > li > a:hover{
     text-decoration: none;
 }
 .app-body{
-    background: url('../images/background.jpg') no-repeat center center fixed; 
+  /*  background: url('../images/background.jpg') no-repeat center center fixed; 
   background-size:cover;
+  */
 }
-
+a{
+color: #515365;
+}
+a:hover{
+text-decoration: none;
+}
 .navbar-toggle{
     border: 1px solid gray;
 }
@@ -44,7 +50,6 @@ ul > li > a:hover{
     font-weight:300px;
     font-size: 2.5em;
     line-height: 1.3;
-    color:#fff;
 }
 .margin-top-20{
     margin-top:20px;
@@ -236,4 +241,113 @@ text-decoration: none;
 }
 .bg-gray{
     background-color:rgba(0,0,0,0.4) !important;
+}
+.bg-white{
+background-color: white !important;
+}
+.banner-block{
+background-color: #fff;
+border-radius: 5px;
+border: 1px solid #e6ecf5;
+margin-bottom: 5px;
+}
+.width-250{
+    width:250px !important;
+}
+.banner-block-title {
+    padding: 23px 25px 18px;
+    line-height: 1;
+    border-bottom: 1px solid #e6ecf5;
+    border-top: 1px solid #e6ecf5;
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.banner-block-title > * {
+    margin-bottom: 0;
+    display: table-cell;
+    vertical-align: middle;
+}
+.banner-select .title {
+    float: left;
+    line-height: 40px;
+    margin-right: 15px;
+}
+.banner-select {
+    padding: 0 20px 0 0;
+}
+.btn-md-2 {
+    padding: .8rem 2.1rem;
+    border-radius: 0.3rem;
+}
+.banner-search {
+    width: 340px;
+}
+.padding-left-10{
+    padding-left:10px !important;
+}
+.margin-left-10{
+    margin-left:10px !important;
+}
+.recipe-thumb{
+    border-radius: 5px;
+margin-bottom: 25px;
+overflow: hidden;
+position: relative;
+}
+.recipe-category{
+    display: inline-block;
+border-radius: 3px;
+padding: 4px 9px;
+color: #fff;
+font-size: 10px;
+text-transform: uppercase;
+margin-bottom: 5px;
+}
+.bg-orange{
+    background-color: #ff3407
+}
+.recipe-title{
+    font-weight: 300;
+display: block;
+margin-bottom: 14px;
+font-size:1.5em;
+}
+.recipe-title:hover{
+      color: #ff3407
+}
+.recipe-content
+{
+    padding: 10px 15px;
+}
+.black{
+    color: #515365 !important;
+}
+.recipe-author{
+    text-transform: uppercase;
+font-size: 12px;
+}
+.recipe-author > a{
+    font-size:11px;
+    font-weight:700;
+}
+.recipe-content > p{
+    font-weight: 600;
+}
+.recipe-actions{
+    padding: 20px 0 0;
+    margin-top:5px;
+border-top: 1px solid #e6ecf5;
+}
+.margin-left-10{
+    margin-left:10px !important;
+}
+.fa-thumbs-up{
+    background-color:#CC2127;
+}
+.fa-heart{
+    background-color:red;
+}
+.fa-comment-o{
+   background-color: #0086BE;
 }
