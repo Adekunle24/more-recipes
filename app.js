@@ -5,8 +5,8 @@ var fs = require('fs');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
-var option = {"dialect":"postgres"};
-var sequelize = new Sequelize("More-Recipes", "postgre", "alphaomega95",option);
+var option = {"dialect":"postgres","host":"localhost"};
+var sequelize = new Sequelize("recipes", "postgres", "postgre",option);
 //create express application
 var app = express();
 
@@ -94,7 +94,14 @@ app.get('/view-recipes',function(req,res)
 app.get('/api',function(req,res)
 {
     var data = { username: "Adekunle"};
-   res.end("Application api");
+sequelize
+  .authenticate()
+  .then(() => {
+    res.end('Connection has been established successfully.');
+  })
+  .catch(err => {
+    res.end('Unable to connect to the database:', err);
+  });
    // res.render('home',data);
 });
 
