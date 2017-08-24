@@ -1,12 +1,16 @@
 //using express framework
 var express = require('express');
 var fs = require('fs');
-
+var path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
+
+
+
 var option = {"dialect":"postgres","host":"localhost"};
 var sequelize = new Sequelize("More-Recipes", "postgres", "postgre",option);
+
 //create express application
 var app = express();
 
@@ -94,14 +98,11 @@ app.get('/view-recipes',function(req,res)
 app.get('/api',function(req,res)
 {
     var data = { username: "Adekunle"};
-sequelize
-  .authenticate()
-  .then(() => {
-    res.end('Connection has been established successfully.');
-  })
-  .catch(err => {
-    res.end('Unable to connect to the database:', err);
-  });
+sequelize.query('select count(*) as NumberOfUsers from users',{item:sequelize.QueryTypes.SELECT}).spread(function(results,metadata){
+var json_string = JSON.stringify(results);
+var json_obj = JSON.parse(json_string);
+res.send(json_obj[0].numberofusers);
+});
    // res.render('home',data);
 });
 
