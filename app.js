@@ -6,7 +6,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
 var option = {"dialect":"postgres","host":"localhost"};
-var sequelize = new Sequelize("recipes", "postgres", "postgre",option);
+var sequelize = new Sequelize("More-Recipes", "postgres", "postgre",option);
 //create express application
 var app = express();
 
