@@ -2,6 +2,11 @@
 var express = require('express');
 var fs = require('fs');
 
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+var Sequelize = require('sequelize');
+var option = {"dialect":"postgres"};
+var sequelize = new Sequelize("More-Recipes", "postgre", "alphaomega95",option);
 //create express application
 var app = express();
 
@@ -11,8 +16,13 @@ var app = express();
 // app.engine('handlebars',handlebars.engine);
 // app.set('view engine','handlebars');
 
+
 //set server listening port 
 app.set('port',process.env.PORT || 3000);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 
 //directory for static files
 app.use(express.static(__dirname+'/template'));
@@ -81,6 +91,12 @@ app.get('/view-recipes',function(req,res)
    // res.render('home',data);
 });
 
+app.get('/api',function(req,res)
+{
+    var data = { username: "Adekunle"};
+   res.end("Application api");
+   // res.render('home',data);
+});
 
 //add dashboard route
 app.get('/dashboard',function(req,res)
