@@ -24,6 +24,7 @@ a{
 color: #515365;
 }
 a:hover{
+    cursor:pointer;
 text-decoration: none;
 }
 .navbar-toggle{
@@ -130,13 +131,13 @@ color:white;
     text-align:center;
 }
 .social-icons .fa {
-	font-size: 1.8em;
+	font-size: 1.2em;
 }
 /*Change icons circle size and color here*/
 .social-icons .fa {
-	width: 50px;
-	height: 50px;
-	line-height: 50px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
 	text-align: center;
 	color: #FFF;
 	color: rgba(255, 255, 255, 0.8);
@@ -230,7 +231,7 @@ text-decoration: none;
 .social-icons .fa-pinterest,.social-icons .fa-pinterest-square{background-color:#CC2127;} 
 .social-icons .fa-twitter,.social-icons .fa-twitter-square{background-color:#32CCFE;}
 .social-icons .fa-google-plus,.social-icons .fa-google-plus-square{background-color:#CF3D2E;} 
-
+.social-icons .fa-thumbs-down{background-color:#241E20;color:#3984EA;}
 
 /*Begin View-Top-Recipe Styles **/
 .main-header {
@@ -333,6 +334,12 @@ font-size: 12px;
 }
 .recipe-content > p{
     font-weight: 600;
+}
+.recipe-content > .comment-container{
+    position: absolute;
+bottom: 60px;
+width: 90%;
+
 }
 .recipe-actions{
     padding: 20px 0 0;
