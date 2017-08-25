@@ -346,6 +346,9 @@ width: 90%;
     margin-top:5px;
 border-top: 1px solid #e6ecf5;
 }
+.recipe-actions  .action-items{
+padding-left:0px;
+}
 .margin-left-10{
     margin-left:10px !important;
 }
@@ -357,4 +360,24 @@ border-top: 1px solid #e6ecf5;
 }
 .fa-comment-o{
    background-color: #0086BE;
+}
+.pagination{
+margin-top: 40px;
+margin-bottom: 40px;
+display: flex;
+padding-left: 0;
+list-style: none;
+border-radius: 0.25rem;
+color:#241E20 !important;
+}
+.pagination .page-item{
+    font-size: 12px;
+font-weight: 700;
+padding: 0 4px;
+}
+.pagination .page-item .page-link{
+    color:#333;
+}
+.justify-content-center{
+    justify-content: center !important;
 }
