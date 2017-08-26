@@ -99,7 +99,6 @@ function searchFor(_selector, _subject) {
 $('.recipe-item-comment').click(function(){
   nextInDOM($(this), $('.comment-container')).toggleClass('hide');
 });
-<<<<<<< HEAD
 //hide all recipe-items spinner
 $('.recipe-actions .fa-spin, .fa-spin').addClass('hide');
 
@@ -185,5 +184,3 @@ function PushRandomActionValues()
     });
 }
 PushRandomActionValues();
-=======
->>>>>>> parent of 5f0c399... done with view-top-recipes
