@@ -215,6 +215,13 @@ $('.reply-comment').click(function(){
  element.toggleClass('hide');
 });
 
+//handle single-item-aside textbox toggle-display
+$('.recipe-item-comment').click(function(){
+ var element = nextInDOM($(this),'.comment-container');
+ alert(element.html());
+ //element.toggleClass('hide');
+});
+
 //simulate random values for actions
 function PushRandomActionValues()
 {
