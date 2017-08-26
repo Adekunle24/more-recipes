@@ -32,9 +32,9 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <span class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+        <li class=""><a href="#">Home <span class="sr-only">(current)</span></a></li>
       <li class=""><a href="/view-recipes/top">Top Recipes</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Trending <span class="caret"></span></a>
@@ -43,8 +43,10 @@
             <li><a href="#">Most Viewed Recipes</a></li>
             <li class="divider"></li>
             <li><a href="#">Foreign Recipes</a></li>
+						
           </ul>
         </li>
+				<li class="active"><a href="#">Favourite Recipes</a></li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -53,10 +55,20 @@
         <button type="submit" class="btn btn-default"><i class="fa fa-search padding-5"></i>Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">FAQS</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Help & Support <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+					<span class="comment-author">  <img src="/images/avatar.jpg" class="float-left"  />
+				Olayinka Kemi
+				<div>Account &nbsp;</div>
+					</span>
+						 <span class="caret float-right"></span></a>
           <ul class="dropdown-menu" role="menu">
+						<li><a href="#"><i class="fa fa-gear padding-right-10"></i>Add Recipe</a></li>
+						   <li><a href="#"><i class="fa fa-gear padding-right-10"></i>Profile settings</a></li>
+							  <li class="active"><a class="" href="#"><i class="padding-right-10"></i>Favourite Recipe</a></li>
+								 <li class=""><a class="" href="#"><i class="fa fa-lock padding-right-10"></i>Sign out</a></li>
+								 <li class=" divider"></li>
+								  <li class=""><a class="" href="#"><i class=" padding-right-10"></i>Terms and condition</a></li>
             <li><a href="#">Contact us</a></li>
 			  <li><a href="#">Feedback</a></li>
           </ul>
@@ -85,7 +97,58 @@
 <!--End Master Notification Container -->
 
 <!--top banner -->
-<section class=" top-banner"  id="subscribe">
+<section class=" top-banner margin-top-10"  id="subscribe">
+
+<div class="container">
+<div class="row">
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="banner-block">
+<div class="top-header">
+
+<div class="top-header-thumb">
+<img src="/images/cover_photo.jpg" class="image-full"/>
+</div>
+<div class="profile-section">
+<div class="row">
+<div class="col-lg-5 col-md-5">
+<ul class="profile-list">
+<li>My Recent Recipes</li>
+<li>Friends Recipes</li>
+</ul>
+</div>
+<div class="col-lg-5 offset-2 col-md-5 ">
+<ul class="profile-list">
+<li>Recipes Photos</li>
+<li>Add Recipes</li>
+ <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Edit Profile</a></li>
+			  <li><a href="#">Feedback</a></li>
+          </ul>
+        </li>
+</ul>
+</div>
+
+</div>
+</div>
+<div class="user-header-picture">
+<a class="author-thumb">
+<img class="img-circle" src="/images/avatar.jpg" />
+</a>
+ <div class="author-date">
+            <a href="author-name" >Olayinka Kunle</a>
+            <div class="comment-date country">Lagos, Nigeria </div>
+    </div>
+</div>
+</div>
+</div>
+	</div>
+</div>
+</div>
+</section>
+
+
     <div class="container">
 	<div class="row">
 		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -128,7 +191,445 @@
 		</div>
 	</div>
 </div>
-    </section>
+
+
+<div class="container">
+<div class="row">
+<div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12">
+<div class="banner-block float-right">
+ <article class="recipe-post">
+	 <div class="col-md-6">
+	<div class="recipe-thumb margin-bottom-5">
+					<img src="images/recipe_item_2.jpg" alt="photo">
+                    <a href="#" class="recipe-category recipe-category-overlay bg-orange">TOP RECIPES</a>
+				</div>
+	 </div>
+	  <div class="col-md-6">
+		<div class="recipe-content float-right">
+					<div class="recipe-author">
+						by &nbsp;
+						<a class="" href="#">Olayinka Kunle</a>
+						<div class="recipe-date inline-block">
+							<time class="published">
+								- 2 weeks ago
+							</time>
+						</div>
+					</div>
+			<h5>		<a href="#" class=" recipe-title black">Here’s the featured recipe of August! </a></h5>
+	<p>Check out classic beef burgers, turkey burgers, veggie burgers, and lamb burgers..</p>
+
+					<div class="recipe-actions padding-top-10">
+<span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+						<ul class="action-items icons inline social-icons icon-circle">
+							<li>
+								<a >
+								<i class="fa fa-thumbs-up"></i>
+             <span class="action-value">    5</span>
+								</a>
+							</li>
+              	<li>
+								<a >
+								<i class="fa fa-thumbs-down"></i>
+          <span class="action-value">       5</span>
+								</a>
+							</li>
+							<li>
+								<a >
+								<i class="fa fa-heart"></i>
+             <span class="action-value">    	26</span>
+								</a>
+							</li>
+              <li>
+                <a  class="recipe-item-comment inline-items">
+                <i class="fa fa-comment-o"></i>
+								<span class="action-value">100</span>
+							</a>
+              </li>
+						</ul>
+						</div>
+<div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+					</div>
+	 </div>
+                    </article>
+</div>
+
+<div class="banner-block float-right">
+ <article class="recipe-post">
+	 <div class="col-md-6">
+	<div class="recipe-thumb margin-bottom-5">
+					<img src="images/recipe_item_2.jpg" alt="photo">
+                    <a href="#" class="recipe-category recipe-category-overlay bg-orange">TOP RECIPES</a>
+				</div>
+	 </div>
+	  <div class="col-md-6">
+		<div class="recipe-content float-right">
+					<div class="recipe-author">
+						by &nbsp;
+						<a class="" href="#">Olayinka Kunle</a>
+						<div class="recipe-date inline-block">
+							<time class="published">
+								- 2 weeks ago
+							</time>
+						</div>
+					</div>
+			<h5>		<a href="#" class=" recipe-title black">Here’s the featured recipe of August! </a></h5>
+	<p>Check out classic beef burgers, turkey burgers, veggie burgers, and lamb burgers..</p>
+
+					<div class="recipe-actions padding-top-10">
+<span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+						<ul class="action-items icons inline social-icons icon-circle">
+							<li>
+								<a >
+								<i class="fa fa-thumbs-up"></i>
+             <span class="action-value">    5</span>
+								</a>
+							</li>
+              	<li>
+								<a >
+								<i class="fa fa-thumbs-down"></i>
+          <span class="action-value">       5</span>
+								</a>
+							</li>
+							<li>
+								<a >
+								<i class="fa fa-heart"></i>
+             <span class="action-value">    	26</span>
+								</a>
+							</li>
+              <li>
+                <a  class="recipe-item-comment inline-items">
+                <i class="fa fa-comment-o"></i>
+								<span class="action-value">100</span>
+							</a>
+              </li>
+						</ul>
+						</div>
+<div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+					</div>
+	 </div>
+                    </article>
+</div>
+
+<div class="banner-block float-right">
+ <article class="recipe-post">
+	 <div class="col-md-6">
+	<div class="recipe-thumb margin-bottom-5">
+					<img src="images/recipe_item_3.jpg" alt="photo">
+                    <a href="#" class="recipe-category recipe-category-overlay bg-orange">TOP RECIPES</a>
+				</div>
+	 </div>
+	  <div class="col-md-6">
+		<div class="recipe-content float-right">
+					<div class="recipe-author">
+						by &nbsp;
+						<a class="" href="#">Olayinka Kunle</a>
+						<div class="recipe-date inline-block">
+							<time class="published">
+								- 2 weeks ago
+							</time>
+						</div>
+					</div>
+			<h5>		<a href="#" class=" recipe-title black">Here’s the featured recipe of August! </a></h5>
+	<p>Check out classic beef burgers, turkey burgers, veggie burgers, and lamb burgers..</p>
+
+					<div class="recipe-actions padding-top-10">
+<span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+						<ul class="action-items icons inline social-icons icon-circle">
+							<li>
+								<a >
+								<i class="fa fa-thumbs-up"></i>
+             <span class="action-value">    5</span>
+								</a>
+							</li>
+              	<li>
+								<a >
+								<i class="fa fa-thumbs-down"></i>
+          <span class="action-value">       5</span>
+								</a>
+							</li>
+							<li>
+								<a >
+								<i class="fa fa-heart"></i>
+             <span class="action-value">    	26</span>
+								</a>
+							</li>
+              <li>
+                <a  class="recipe-item-comment inline-items">
+                <i class="fa fa-comment-o"></i>
+								<span class="action-value">100</span>
+							</a>
+              </li>
+						</ul>
+						</div>
+<div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+					</div>
+	 </div>
+                    </article>
+</div>
+<div class="banner-block float-right">
+ <article class="recipe-post">
+	 <div class="col-md-6">
+	<div class="recipe-thumb margin-bottom-5">
+					<img src="images/recipe_item_4.jpg" alt="photo">
+                    <a href="#" class="recipe-category recipe-category-overlay bg-orange">TOP RECIPES</a>
+				</div>
+	 </div>
+	  <div class="col-md-6">
+		<div class="recipe-content float-right">
+					<div class="recipe-author">
+						by &nbsp;
+						<a class="" href="#">Olayinka Kunle</a>
+						<div class="recipe-date inline-block">
+							<time class="published">
+								- 2 weeks ago
+							</time>
+						</div>
+					</div>
+			<h5>		<a href="#" class=" recipe-title black">Here’s the featured recipe of August! </a></h5>
+	<p>Check out classic beef burgers, turkey burgers, veggie burgers, and lamb burgers..</p>
+
+					<div class="recipe-actions padding-top-10">
+<span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+						<ul class="action-items icons inline social-icons icon-circle">
+							<li>
+								<a >
+								<i class="fa fa-thumbs-up"></i>
+             <span class="action-value">    5</span>
+								</a>
+							</li>
+              	<li>
+								<a >
+								<i class="fa fa-thumbs-down"></i>
+          <span class="action-value">       5</span>
+								</a>
+							</li>
+							<li>
+								<a >
+								<i class="fa fa-heart"></i>
+             <span class="action-value">    	26</span>
+								</a>
+							</li>
+              <li>
+                <a  class="recipe-item-comment inline-items">
+                <i class="fa fa-comment-o"></i>
+								<span class="action-value">100</span>
+							</a>
+              </li>
+						</ul>
+						</div>
+<div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+					</div>
+	 </div>
+                    </article>
+</div>
+
+
+</div>
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+<aside>
+ <div class="banner-block">
+     <div class="banner-block-title">
+<h5 class="black">More Recipes by Adekunle</h5>
+     </div>
+    </div>
+    
+     <div class="banner-block">
+         <article class="recipe-post">
+				<div class="recipe-thumb margin-bottom-5">
+					<img src="images/recipe_item_aside_1.jpg" alt="photo">
+                    <a href="#" class="recipe-category recipe-category-overlay bg-orange">TOP RECIPES</a>
+				</div>
+				<div class="recipe-content">
+					<div class="recipe-author">
+						by &nbsp;
+						<a class="" href="#">Olayinka Kunle</a>
+						<div class="recipe-date inline-block">
+							<time class="published">
+								- 2 weeks ago
+							</time>
+						</div>
+					</div>
+			<h5>		<a href="#" class=" recipe-title black">Here’s the featured recipe of August! </a></h5>
+
+					
+
+					<div class="recipe-actions padding-top-10">
+<span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+						<ul class="action-items icons inline social-icons icon-circle">
+							<li>
+								<a >
+								<i class="fa fa-thumbs-up"></i>
+             <span class="action-value">    5</span>
+								</a>
+							</li>
+              	<li>
+								<a >
+								<i class="fa fa-thumbs-down"></i>
+          <span class="action-value">       5</span>
+								</a>
+							</li>
+							<li>
+								<a >
+								<i class="fa fa-heart"></i>
+             <span class="action-value">    	26</span>
+								</a>
+							</li>
+              <li>
+                <a  class="recipe-item-comment inline-items">
+                <i class="fa fa-comment-o"></i>
+								<span class="action-value">100</span>
+							</a>
+              </li>
+						</ul>
+						</div>
+<div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+					</div>
+                    </article>
+				</div>
+
+     <div class="banner-block">
+          <article class="recipe-post">
+				<div class="recipe-thumb margin-bottom-5">
+					<img src="images/recipe_item_aside_3.jpg" alt="photo">
+                    <a href="#" class="recipe-category recipe-category-overlay bg-indigo-600">LATEST RECIPES</a>
+				</div>
+				<div class="recipe-content">
+					<div class="recipe-author">
+						by &nbsp;
+						<a class="" href="#">Olayinka Kunle</a>
+						<div class="recipe-date inline-block">
+							<time class="published">
+								- 2 weeks ago
+							</time>
+						</div>
+					</div>
+			<h5>		<a href="#" class=" recipe-title black">Here’s the featured recipe of August! </a></h5>
+
+					
+
+					<div class="recipe-actions padding-top-10">
+<span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+						<ul class="action-items icons inline social-icons icon-circle">
+							<li>
+								<a >
+								<i class="fa fa-thumbs-up"></i>
+             <span class="action-value">    5</span>
+								</a>
+							</li>
+              	<li>
+								<a >
+								<i class="fa fa-thumbs-down"></i>
+          <span class="action-value">       5</span>
+								</a>
+							</li>
+							<li>
+								<a >
+								<i class="fa fa-heart"></i>
+             <span class="action-value">    	26</span>
+								</a>
+							</li>
+              <li>
+                <a  class="recipe-item-comment inline-items">
+                <i class="fa fa-comment-o"></i>
+								<span class="action-value">100</span>
+							</a>
+              </li>
+						</ul>
+						</div>
+<div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+					</div>
+                    </article>
+				</div>
+      <div class="banner-block">
+           <article class="recipe-post">
+				<div class="recipe-thumb margin-bottom-5">
+					<img src="images/recipe_item_aside_4.jpg" alt="photo">
+                    <a href="#" class="recipe-category recipe-category-overlay  bg-indigo-800">FEATURED RECIPES</a>
+				</div>
+				<div class="recipe-content">
+					<div class="recipe-author">
+						by &nbsp;
+						<a class="" href="#">Olayinka Kunle</a>
+						<div class="recipe-date inline-block">
+							<time class="published">
+								- 2 weeks ago
+							</time>
+						</div>
+					</div>
+			<h5>		<a href="#" class=" recipe-title black">Here’s the featured recipe of August! </a></h5>
+
+					
+
+					<div class="recipe-actions padding-top-10">
+<span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+						<ul class="action-items icons inline social-icons icon-circle">
+							<li>
+								<a >
+								<i class="fa fa-thumbs-up"></i>
+             <span class="action-value">    5</span>
+								</a>
+							</li>
+              	<li>
+								<a >
+								<i class="fa fa-thumbs-down"></i>
+          <span class="action-value">       5</span>
+								</a>
+							</li>
+							<li>
+								<a >
+								<i class="fa fa-heart"></i>
+             <span class="action-value">    	26</span>
+								</a>
+							</li>
+              <li>
+                <a  class="recipe-item-comment inline-items">
+                <i class="fa fa-comment-o"></i>
+								<span class="action-value">100</span>
+							</a>
+              </li>
+						</ul>
+						</div>
+<div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+					</div>
+                    </article>
+				</div>
+</aside>
+
+	</div>
+</div>
+</div>
+
+
+
+
 <!--Body content starts here -->
 <div class="main-header">
 	<div class="container">
