@@ -185,6 +185,18 @@ $('.fa-heart').click(
        scope.LoveRecipe(initial_value,loader);
     }
 );
+<<<<<<< HEAD
+=======
+
+//handle comment content accordion
+$('.more-comment').click(function(){
+ var initial_value = nextInDOM($(this),$('#comment-content'));
+initial_value.toggleClass('in');
+});
+
+
+
+>>>>>>> parent of 3c9f265... Done with recipe details
 //simulate random values for actions
 function PushRandomActionValues()
 {
