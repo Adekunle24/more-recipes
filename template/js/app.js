@@ -132,14 +132,7 @@ $('.fa-heart').click(
 );
 
 //handle comment content accordion
-<<<<<<< HEAD
-$('.more-comment').click(function(){
- var initial_value = nextInDOM($(this),$('#comment-content'));
-initial_value.toggleClass('in');
-});
 
-
-=======
 $('.accordion-handle').click(function(){
  var initial_value = nextInDOM($(this),$('.comment-content'));
  if(initial_value.css('display')=='none')
@@ -174,8 +167,6 @@ $('.reply-comment').click(function(){
  var element = nextInDOM($(this),'.comment-container');
  element.toggleClass('hide');
 });
->>>>>>> view-recipes
-
 //simulate random values for actions
 function PushRandomActionValues()
 {
