@@ -180,6 +180,7 @@ $('.fa-heart').click(
 );
 
 //handle comment content accordion
+
 $('.accordion-handle').click(function(){
  var initial_value = nextInDOM($(this),$('.comment-content'));
  if(initial_value.css('display')=='none')
@@ -214,6 +215,7 @@ $('.reply-comment').click(function(){
  var element = nextInDOM($(this),'.comment-container');
  element.toggleClass('hide');
 });
+<<<<<<< HEAD
 
 //handle single-item-aside textbox toggle-display
 $('.recipe-item-comment').click(function(){
@@ -222,6 +224,8 @@ $('.recipe-item-comment').click(function(){
  //element.toggleClass('hide');
 });
 
+=======
+>>>>>>> cf1b3e9723175abfb2e61226a91a0e6e2f7ec018
 //simulate random values for actions
 function PushRandomActionValues()
 {

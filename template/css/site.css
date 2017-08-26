@@ -379,6 +379,11 @@ padding: 0 4px;
 .justify-content-center{
     justify-content: center !important;
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> view-recipes
 
 .single-recipe{
     padding: 20px 30px;
@@ -416,6 +421,9 @@ margin-right: 12px;
 .padding-top-10{
     padding-top:10px !important;
 }
+<<<<<<< HEAD
+>>>>>>> parent of 3c9f265... Done with recipe details
+=======
 .margin-left-10{
     margin-left:5px !important;
 }
@@ -430,7 +438,14 @@ top: 15px;
 }
 .margin-bottom-5{
     margin-bottom: 5px !important;
+<<<<<<< HEAD
 }
 .recipe-actions > .action-items{
 padding-left:5px;
 }
+=======
+=======
+>>>>>>> parent of 5f0c399... done with view-top-recipes
+}
+>>>>>>> view-recipes
+>>>>>>> cf1b3e9723175abfb2e61226a91a0e6e2f7ec018
