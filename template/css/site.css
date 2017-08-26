@@ -381,3 +381,40 @@ padding: 0 4px;
 .justify-content-center{
     justify-content: center !important;
 }
+
+.single-recipe{
+    padding: 20px 30px;
+}
+.padding-20{
+    padding:20px !important;
+}
+.single-recipe-content{
+    padding: 0 20px 30px 40px;
+overflow: hidden;
+line-height: 1.5;
+}
+.single-recipe-content > h5{
+    line-height: 1.5;
+}
+.single-recipe-comments-list li{
+    padding: 25px;
+border-bottom: 1px solid #e6ecf5;
+background-color: #fafbfd;
+position: relative;
+}
+.comment-author img{
+    width: 40px;
+height: 40px;
+border-radius: 100%;
+overflow: hidden;
+margin-right: 12px;
+}
+.padding-left-0{
+    padding-left:0px !important;
+}
+.border-none{
+    border:none;
+}
+.padding-top-10{
+    padding-top:10px !important;
+}

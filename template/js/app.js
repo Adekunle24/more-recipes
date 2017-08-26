@@ -185,6 +185,15 @@ $('.fa-heart').click(
        scope.LoveRecipe(initial_value,loader);
     }
 );
+
+//handle comment content accordion
+$('.more-comment').click(function(){
+ var initial_value = nextInDOM($(this),$('#comment-content'));
+initial_value.toggleClass('in');
+});
+
+
+
 //simulate random values for actions
 function PushRandomActionValues()
 {
