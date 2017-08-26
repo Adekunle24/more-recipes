@@ -67,6 +67,36 @@ $scope.LoginLoader = false;
 };
 //End login simulation
 
+//simulate like attempt
+$scope.LikeRecipe = function(initial_value,loader)
+{
+  loader.removeClass('hide');
+  $timeout(function(){
+      var tt = parseInt(initial_value.html());
+    initial_value.html(tt+1);
+    loader.addClass('hide');
+  },1000);
+};
+//simulate dislike attempt
+$scope.DisLikeRecipe = function(initial_value,loader)
+{
+  loader.removeClass('hide');
+  $timeout(function(){
+      var tt = parseInt(initial_value.html());
+    initial_value.html(tt+1);
+    loader.addClass('hide');
+  },1000);
+};
+$scope.LoveRecipe = function(initial_value,loader)
+{
+  loader.removeClass('hide');
+  $timeout(function(){
+      var tt = parseInt(initial_value.html());
+    initial_value.html(tt+1);
+    loader.addClass('hide');
+  },1000);
+};
+
 });
 
 //next element
@@ -83,6 +113,24 @@ function getNext(_subject) {
     if(_subject.next().length > 0) return _subject.next();
     return getNext(_subject.parent());
 }
+
+//previous element
+//next element
+function prevInDOM(_subject, _selector) {
+    var previous = getPrev(_subject);
+    while(previous.length != 0) {
+        var found = searchFor(_selector, previous);
+        if(found != null) return found;
+        previous = getPrev(previous);
+    }
+    return null;
+}
+function getPrev(_subject) {
+    if(_subject.prev().length > 0) return _subject.prev();
+    return getPrev(_subject.parent());
+}
+
+
 function searchFor(_selector, _subject) {
     if(_subject.is(_selector)) return _subject;
     else {

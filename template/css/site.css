@@ -343,6 +343,7 @@ width: 90%;
 }
 .recipe-actions{
     padding: 20px 0 0;
+    padding-left:0px !important;
     margin-top:5px;
 border-top: 1px solid #e6ecf5;
 }
@@ -357,7 +358,6 @@ border-top: 1px solid #e6ecf5;
 }
 .fa-comment-o{
    background-color: #0086BE;
-<<<<<<< HEAD
 }
 .pagination{
 margin-top: 40px;
@@ -430,6 +430,7 @@ top: 15px;
 }
 .margin-bottom-5{
     margin-bottom: 5px !important;
-=======
->>>>>>> parent of 5f0c399... done with view-top-recipes
+}
+.recipe-actions > .action-items{
+padding-left:5px;
 }
