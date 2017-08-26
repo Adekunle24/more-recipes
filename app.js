@@ -89,6 +89,20 @@ app.get('/favourite-recipes',function(req,res)
        
     });
 });
+app.get('/user-profile',function(req,res)
+{
+    var data = { username: "Adekunle"};
+    fs.readFile(__dirname+'/template/user-profile.html',function(err,data){
+        if(err)
+        {
+            res.send("error occured "+err);
+        }
+        else{
+            res.end(data);
+        }
+       
+    });
+});
 //load fortune library
 var fortune = require('./lib/fortune.js');
 

@@ -269,6 +269,9 @@ margin-bottom: 5px;
     display: table-cell;
     vertical-align: middle;
 }
+.banner-block-content{
+    padding: 24px 23px 23px;
+}
 .banner-select .title {
     float: left;
     line-height: 40px;
@@ -445,6 +448,9 @@ padding-left:5px;
 padding: 38px 0;
 z-index: 19;
 }
+.profile-tabs{
+padding: 10px 0;
+}
 .profile-list{
     margin-bottom: 0;
 display: -webkit-box;
@@ -484,4 +490,10 @@ background-color: #FDFBEE;
 }
 .width-half{
     width:50%;
+}
+.banner-block-title:first-child{
+    border-top:none;
+}
+.full-width{
+    width:100%;
 }
