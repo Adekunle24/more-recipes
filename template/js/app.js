@@ -155,7 +155,7 @@ $('.recipe-item-comment').click(function(){
   nextInDOM($(this), $('.comment-container')).toggleClass('hide');
 });
 //hide all recipe-items spinner
-$('.recipe-actions .fa-spin').addClass('hide');
+$('.recipe-actions .fa-spin, .fa-spin').addClass('hide');
 
 //simulate liking attempt
 $('.fa-thumbs-up').click(
@@ -187,12 +187,40 @@ $('.fa-heart').click(
 );
 
 //handle comment content accordion
-$('.more-comment').click(function(){
- var initial_value = nextInDOM($(this),$('#comment-content'));
+$('.accordion-handle').click(function(){
+ var initial_value = nextInDOM($(this),$('.comment-content'));
+ if(initial_value.css('display')=='none')
+ {
+     initial_value.removeClass('collapse');
+     initial_value.addClass('collapsing');
+    
+     $(this).addClass('fa-chevron-up');
+     var accordion_timeout = setTimeout(function() {
+         initial_value.removeClass('collapsing');
+         initial_value.addClass('in');
+         initial_value.addClass('collapse');
+     }, 100);
+      $(this).removeClass('fa-chevron-down');
+ }
+ else{
+      initial_value.removeClass('collapse');
+     initial_value.addClass('collapsing');
+     $(this).addClass('fa-chevron-down');
+     var accordion_timeout = setTimeout(function() {
+         initial_value.removeClass('collapsing');
+         initial_value.removeClass('in');
+         initial_value.addClass('collapse');
+     }, 100);
+       $(this).removeClass('fa-chevron-up');
+ }
 initial_value.toggleClass('in');
 });
 
-
+//handle comment-reply textbox toggle-display
+$('.reply-comment').click(function(){
+ var element = nextInDOM($(this),'.comment-container');
+ element.toggleClass('hide');
+});
 
 //simulate random values for actions
 function PushRandomActionValues()

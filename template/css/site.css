@@ -418,3 +418,18 @@ margin-right: 12px;
 .padding-top-10{
     padding-top:10px !important;
 }
+.margin-left-10{
+    margin-left:5px !important;
+}
+.width-full{
+    width:90%;
+}
+.recipe-category.recipe-category-overlay{
+    border-radius: 0;
+position: absolute;
+left: 0;
+top: 15px;
+}
+.margin-bottom-5{
+    margin-bottom: 5px !important;
+}
