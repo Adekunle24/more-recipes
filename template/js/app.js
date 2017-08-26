@@ -5,10 +5,6 @@
  * framework NodeJS, Express and PostgreDb
  */
 
-//declare Angular variable scope for outside access 
- var scope = angular.element($('.app-body')).scope();
-
-
 //Initiate JPinning 
 $('nav').jPinning();
 
@@ -71,44 +67,9 @@ $scope.LoginLoader = false;
 };
 //End login simulation
 
-//simulate liking event
-$scope.LikeRecipe = function(element,loader){
-  var initial_value = element.html();
-  loader.removeClass('hide');
-  $timeout(function(){
-    element.html(parseInt(initial_value)+1);
-    loader.addClass('hide');
-  },1000);
-};
-
-//simulate thumbs-down event
-$scope.DisLikeRecipe = function(element,loader){
-  var initial_value = element.html();
-  loader.removeClass('hide');
-  $timeout(function(){
-    element.html(parseInt(initial_value)+1);
-    loader.addClass('hide');
-  },1000);
-};
-
-
-//simulate love event
-$scope.LoveRecipe = function(element,loader){
-  var initial_value = element.html();
-  loader.removeClass('hide');
-  $timeout(function(){
-    element.html(parseInt(initial_value)+1);
-    loader.addClass('hide');
-  },1000);
-};
-
-
-
 });
-//End Angular controller
 
-
-//next element selector
+//next element
 function nextInDOM(_subject, _selector) {
     var next = getNext(_subject);
     while(next.length != 0) {
@@ -134,26 +95,11 @@ function searchFor(_selector, _subject) {
     }
 }
 
-//previous element selector
-function prevInDOM(_subject, _selector) {
-    var previous = getPrev(_subject);
-    while(previous.length != 0) {
-        var found = searchFor(_selector, previous);
-        if(found != null) return found;
-        previous = getPrev(previous);
-    }
-    return null;
-}
-function getPrev(_subject) {
-    if(_subject.prev().length > 0) return _subject.prev();
-    return getPrev(_subject.parent());
-}
-
-
 
 $('.recipe-item-comment').click(function(){
   nextInDOM($(this), $('.comment-container')).toggleClass('hide');
 });
+<<<<<<< HEAD
 //hide all recipe-items spinner
 $('.recipe-actions .fa-spin, .fa-spin').addClass('hide');
 
@@ -239,3 +185,5 @@ function PushRandomActionValues()
     });
 }
 PushRandomActionValues();
+=======
+>>>>>>> parent of 5f0c399... done with view-top-recipes
