@@ -5,10 +5,6 @@
  * framework NodeJS, Express and PostgreDb
  */
 
-//declare Angular variable scope for outside access 
- var scope = angular.element($('.app-body')).scope();
-
-
 //Initiate JPinning 
 $('nav').jPinning();
 
@@ -71,44 +67,9 @@ $scope.LoginLoader = false;
 };
 //End login simulation
 
-//simulate liking event
-$scope.LikeRecipe = function(element,loader){
-  var initial_value = element.html();
-  loader.removeClass('hide');
-  $timeout(function(){
-    element.html(parseInt(initial_value)+1);
-    loader.addClass('hide');
-  },1000);
-};
-
-//simulate thumbs-down event
-$scope.DisLikeRecipe = function(element,loader){
-  var initial_value = element.html();
-  loader.removeClass('hide');
-  $timeout(function(){
-    element.html(parseInt(initial_value)+1);
-    loader.addClass('hide');
-  },1000);
-};
-
-
-//simulate love event
-$scope.LoveRecipe = function(element,loader){
-  var initial_value = element.html();
-  loader.removeClass('hide');
-  $timeout(function(){
-    element.html(parseInt(initial_value)+1);
-    loader.addClass('hide');
-  },1000);
-};
-
-
-
 });
-//End Angular controller
 
-
-//next element selector
+//next element
 function nextInDOM(_subject, _selector) {
     var next = getNext(_subject);
     while(next.length != 0) {
@@ -134,28 +95,12 @@ function searchFor(_selector, _subject) {
     }
 }
 
-//previous element selector
-function prevInDOM(_subject, _selector) {
-    var previous = getPrev(_subject);
-    while(previous.length != 0) {
-        var found = searchFor(_selector, previous);
-        if(found != null) return found;
-        previous = getPrev(previous);
-    }
-    return null;
-}
-function getPrev(_subject) {
-    if(_subject.prev().length > 0) return _subject.prev();
-    return getPrev(_subject.parent());
-}
-
-
 
 $('.recipe-item-comment').click(function(){
   nextInDOM($(this), $('.comment-container')).toggleClass('hide');
 });
 //hide all recipe-items spinner
-$('.recipe-actions .fa-spin').addClass('hide');
+$('.recipe-actions .fa-spin, .fa-spin').addClass('hide');
 
 //simulate liking attempt
 $('.fa-thumbs-up').click(
@@ -187,12 +132,49 @@ $('.fa-heart').click(
 );
 
 //handle comment content accordion
+<<<<<<< HEAD
 $('.more-comment').click(function(){
  var initial_value = nextInDOM($(this),$('#comment-content'));
 initial_value.toggleClass('in');
 });
 
 
+=======
+$('.accordion-handle').click(function(){
+ var initial_value = nextInDOM($(this),$('.comment-content'));
+ if(initial_value.css('display')=='none')
+ {
+     initial_value.removeClass('collapse');
+     initial_value.addClass('collapsing');
+    
+     $(this).addClass('fa-chevron-up');
+     var accordion_timeout = setTimeout(function() {
+         initial_value.removeClass('collapsing');
+         initial_value.addClass('in');
+         initial_value.addClass('collapse');
+     }, 100);
+      $(this).removeClass('fa-chevron-down');
+ }
+ else{
+      initial_value.removeClass('collapse');
+     initial_value.addClass('collapsing');
+     $(this).addClass('fa-chevron-down');
+     var accordion_timeout = setTimeout(function() {
+         initial_value.removeClass('collapsing');
+         initial_value.removeClass('in');
+         initial_value.addClass('collapse');
+     }, 100);
+       $(this).removeClass('fa-chevron-up');
+ }
+initial_value.toggleClass('in');
+});
+
+//handle comment-reply textbox toggle-display
+$('.reply-comment').click(function(){
+ var element = nextInDOM($(this),'.comment-container');
+ element.toggleClass('hide');
+});
+>>>>>>> view-recipes
 
 //simulate random values for actions
 function PushRandomActionValues()
