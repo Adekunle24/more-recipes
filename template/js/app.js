@@ -48,6 +48,14 @@ app.controller('myController',function($scope,$http,$timeout,$window)
     $scope.LoginLoader = false;    //login loader gif
     $scope.MasterNotify= true;      //master notification display
     $scope.MasterNotifyMessage = "You have a new notification message"; //notification message
+    $scope.Ingredients = [{ "item":"Andela Oil","quantity":"1 cup" }];
+    $scope.TotalRecipes = [{"poster":"images/recipe_2.jpg","recipe_title":"How to make Okro soup","comment":"I love the recipe. I tried it once and all my kids enjoyed the taste and aroma","likes_count":"56","timeline":"4 minutes ago"},
+    {"poster":"images/recipe_3.jpg","recipe_title":"How to make Homemade Pizza","comment":"I love the recipe. I tried it once and all my kids enjoyed the taste and aroma","likes_count":"22","timeline":"3 weeks ago"},
+    {"poster":"images/recipe_5.jpg","recipe_title":"How to make Burger","comment":"I love the recipe. I tried it once and all my kids enjoyed the taste and aroma","likes_count":"24","timeline":"7 days ago"},
+    {"poster":"images/recipe_4.jpg","recipe_title":"How to make Burger","comment":"I love the recipe. I tried it once and all my kids enjoyed the taste and aroma","likes_count":"50","timeline":"50 seconds ago"},
+    {"poster":"images/recipe_6.jpg","recipe_title":"How to make Burger","comment":"I love the recipe. I tried it once and all my kids enjoyed the taste and aroma","likes_count":"20","timeline":"2 days ago"},
+    {"poster":"images/recipe_7.jpg","recipe_title":"How to make Burger","comment":"I love the recipe. I tried it once and all my kids enjoyed the taste and aroma","likes_count":"287","timeline":"3 months ago"}
+    ];
 //close master notification 
 $scope.CloseMasterNotify = function(){
 $('.master-notification').fadeOut(500);
@@ -95,6 +103,17 @@ $scope.LoveRecipe = function(initial_value,loader)
     initial_value.html(tt+1);
     loader.addClass('hide');
   },1000);
+};
+//add ingredient to table
+$scope.AddIngredient = function(){
+var item_dic = { "item": $scope.Item,"quantity":$scope.Quantity };
+  $scope.Ingredients.push(item_dic);
+};
+
+//remove ingredient from table
+//add ingredient to table
+$scope.RemoveIngredient = function(index){
+  $scope.Ingredients.splice(index,1);
 };
 
 });
