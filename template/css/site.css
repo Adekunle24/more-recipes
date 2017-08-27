@@ -228,7 +228,7 @@ text-decoration: none;
     width:80%;
 }
 .social-icons .fa-facebook,.social-icons .fa-facebook-square{background-color:#3C599F;}
-.social-icons .fa-pinterest,.social-icons .fa-pinterest-square{background-color:#CC2127;} 
+.social-icons .fa-pinterest,.social-icons .fa-pinterest-square{background-color:#CC2127;}  
 .social-icons .fa-twitter,.social-icons .fa-twitter-square{background-color:#32CCFE;}
 .social-icons .fa-google-plus,.social-icons .fa-google-plus-square{background-color:#CF3D2E;} 
 .social-icons .fa-thumbs-down{background-color:#241E20;color:#3984EA;}
@@ -448,6 +448,11 @@ padding-left:5px;
 padding: 38px 0;
 z-index: 19;
 }
+.profile-section .control-block-button {
+    position: absolute;
+right: 38px;
+top: -31px;
+}
 .profile-tabs{
 padding: 10px 0;
 }
@@ -496,4 +501,41 @@ background-color: #FDFBEE;
 }
 .full-width{
     width:100%;
+}
+.profile-widget {
+    padding-left:0px;
+}
+.profile-widget  li:first-child{
+    padding: 10px 0;
+     margin-top:5px;
+}
+.profile-widget  li{
+    padding: 10px 0;
+    margin-top:20px;
+}
+.profile-widget .title{
+    font-size:13px;
+    font-weight:600;
+    color:black;
+}
+.profile-widget li .title-content{
+    font-size:11px;
+    width:70%;
+    float:right;
+    padding-top:5px;
+}
+.padding-bottom-20{
+    padding-bottom: 20px;
+}
+.control-block-button a {
+    padding:10px;
+}
+.photo-album .content{
+padding: 25px 25px 20px;
+text-align: center;
+}
+.photo-album  img{
+    width:100%;
+    height:250px;
+    border-radius: 5px;
 }
