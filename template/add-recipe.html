@@ -187,15 +187,14 @@
     <div id="my-recipes" class="tab-pane fade">
 		<div class="container">
 <div class="row">
-<div class="col-md-4 photo-album">
+  <!--Simulate with Angular -->
+<div data-ng-repeat="recipe in TotalRecipes" class="col-md-4 photo-album">
 	<div class="banner-block">
 	<div data-picturehover>
-<img src="images/recipe_2.jpg" title='<a class="" data-toggle="tooltip" title="click to edit recipe" data-placement="bottom"><i class="fa fa-edit fa-2x white"></i></a> 
-<a class=" margin-left-10" data-toggle="tooltip" title="click to delete recipe" data-placement="bottom"><i class="fa fa-trash fa-2x white"></i></a>
-'>
+<img src="{{recipe.poster}}" title='<a class="" data-toggle="tooltip" title="click to edit recipe" data-placement="bottom"><i class="fa fa-edit fa-2x white"></i></a> '>
 </div>
 <div class="content">
-<div><a class="title"><h5>My Recipe Background</h5></a></div>
+<div><a class="title"><h5>My Recipe Background</h5></a><a class=" margin-left-10 float-left" data-ng-click="DeletePostedRecipe($index)" data-toggle="tooltip"  title="click to delete recipe" data-placement="bottom"><i class="fa fa-trash fa-2x"></i></a></div>
 <span class="sub-title">Added 4 hours ago</span>
 <span class="float-right"><a > <i  class="fa fa-chevron-down accordion-handle"></i></a></span>
   <div class="margin-top-10 padding-top-10 comment-content collapse" >   <p>I love the recipe. I tried it once and all my kids enjoyed the taste and aroma</p>
@@ -206,143 +205,14 @@
             </span>
      <a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10"> 24 </span></a>
      <a class="reply-comment margin-left-10">
-         Reply
+        <span class="delete-recipe"> Reply </span>
          <div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
      </a>
      </div>
 </div>
 </div>
 </div>
-<div class="col-md-4 photo-album">
-	<div class="banner-block">
-	<div data-picturehover>
-<img src="images/recipe_5.jpg" title='<a class="" data-toggle="tooltip" title="click to edit recipe" data-placement="bottom"><i class="fa fa-edit fa-2x white"></i></a> 
-<a class=" margin-left-10" data-toggle="tooltip" title="click to delete recipe" data-placement="bottom"><i class="fa fa-trash fa-2x white"></i></a>
-'>
-</div>
-<div class="content">
-<div><a class="title"><h5>My Recipe Background</h5></a></div>
-<span class="sub-title">Added 4 hours ago</span>
-<span class="float-right"><a > <i  class="fa fa-chevron-down accordion-handle"></i></a></span>
-  <div class="margin-top-10 padding-top-10 comment-content collapse" >   <p>I love the recipe. I tried it once and all my kids enjoyed the taste and aroma</p>
-    <span>
-                <a>
-                  <i class="fa fa-spinner fa-spin"></i>
-                </a>
-            </span>
-     <a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10"> 24 </span></a>
-     <a class="reply-comment margin-left-10">
-         Reply
-         <div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
-     </a>
-     </div>
-</div>
-</div>
-</div>
-<div class="col-md-4 photo-album">
-	<div class="banner-block">
-	<div data-picturehover>
-<img src="images/recipe_7.jpg" title='<a class="" data-toggle="tooltip" title="click to edit recipe" data-placement="bottom"><i class="fa fa-edit fa-2x white"></i></a> 
-<a class=" margin-left-10" data-toggle="tooltip" title="click to delete recipe" data-placement="bottom"><i class="fa fa-trash fa-2x white"></i></a>
-'>
-</div>
-<div class="content">
-<div><a class="title"><h5>My Recipe Background</h5></a></div>
-<span class="sub-title">Added 4 hours ago</span>
-<span class="float-right"><a > <i  class="fa fa-chevron-down accordion-handle"></i></a></span>
-  <div class="margin-top-10 padding-top-10 comment-content collapse" >   <p>I love the recipe. I tried it once and all my kids enjoyed the taste and aroma</p>
-    <span>
-                <a>
-                  <i class="fa fa-spinner fa-spin"></i>
-                </a>
-            </span>
-     <a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10"> 24 </span></a>
-     <a class="reply-comment margin-left-10">
-         Reply
-         <div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
-     </a>
-     </div>
-</div>
-</div>
-</div>
-<div class="col-md-4 photo-album">
-	<div class="banner-block">
-	<div data-picturehover>
-<img src="images/recipe_3.jpg" title='<a class="" data-toggle="tooltip" title="click to edit recipe" data-placement="bottom"><i class="fa fa-edit fa-2x white"></i></a> 
-<a class=" margin-left-10" data-toggle="tooltip" title="click to delete recipe" data-placement="bottom"><i class="fa fa-trash fa-2x white"></i></a>
-'>
-</div>
-<div class="content">
-<div><a class="title"><h5>My Recipe Background</h5></a></div>
-<span class="sub-title">Added 4 hours ago</span>
-<span class="float-right"><a > <i  class="fa fa-chevron-down accordion-handle"></i></a></span>
-  <div class="margin-top-10 padding-top-10 comment-content collapse" >   <p>I love the recipe. I tried it once and all my kids enjoyed the taste and aroma</p>
-    <span>
-                <a>
-                  <i class="fa fa-spinner fa-spin"></i>
-                </a>
-            </span>
-     <a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10"> 24 </span></a>
-     <a class="reply-comment margin-left-10">
-         Reply
-         <div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
-     </a>
-     </div>
-</div>
-</div>
-</div>
-<div class="col-md-4 photo-album">
-	<div class="banner-block">
-	<div data-picturehover>
-<img src="images/recipe_6.jpg" title='<a class="" data-toggle="tooltip" title="click to edit recipe" data-placement="bottom"><i class="fa fa-edit fa-2x white"></i></a> 
-<a class=" margin-left-10" data-toggle="tooltip" title="click to delete recipe" data-placement="bottom"><i class="fa fa-trash fa-2x white"></i></a>
-'>
-</div>
-<div class="content">
-<div><a class="title"><h5>My Recipe Background</h5></a></div>
-<span class="sub-title">Added 4 hours ago</span>
-<span class="float-right"><a > <i  class="fa fa-chevron-down accordion-handle"></i></a></span>
-  <div class="margin-top-10 padding-top-10 comment-content collapse" >   <p>I love the recipe. I tried it once and all my kids enjoyed the taste and aroma</p>
-    <span>
-                <a>
-                  <i class="fa fa-spinner fa-spin"></i>
-                </a>
-            </span>
-     <a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10"> 24 </span></a>
-     <a class="reply-comment margin-left-10">
-         Reply
-         <div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
-     </a>
-     </div>
-</div>
-</div>
-</div>
-<div class="col-md-4 photo-album">
-	<div class="banner-block">
-	<div data-picturehover>
-<img src="images/recipe_4.jpg" title='<a class="" data-toggle="tooltip" title="click to edit recipe" data-placement="bottom"><i class="fa fa-edit fa-2x white"></i></a> 
-<a class=" margin-left-10" data-toggle="tooltip" title="click to delete recipe" data-placement="bottom"><i class="fa fa-trash fa-2x white"></i></a>
-'>
-</div>
-<div class="content">
-<div><a class="title"><h5>My Recipe Background</h5></a></div>
-<span class="sub-title">Added 4 minutes ago</span>
-<span class="float-right"><a > <i  class="fa fa-chevron-down accordion-handle"></i></a></span>
-  <div class="margin-top-10 padding-top-10 comment-content collapse" >   <p>I love the recipe. I tried it once and all my kids enjoyed the taste and aroma</p>
-    <span>
-                <a>
-                  <i class="fa fa-spinner fa-spin"></i>
-                </a>
-            </span>
-     <a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10"> 24 </span></a>
-     <a class="reply-comment margin-left-10">
-         Reply
-         <div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
-     </a>
-     </div>
-</div>
-</div>
-</div>
+
   </div>
   </div></div>
     <div id="add-recipe" class="tab-pane fade in active">
@@ -561,8 +431,8 @@ have​ ​invented​ ​or​ ​learnt.
 <script src="js/tooltip.js"></script>
 <script src="js/lightbox.js"></script>
 <script src="js/bootstrap-fileinput.js"></script>
-<script src="js/picturehover.js"></script>
 <script src="js/angular.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
+<script src="js/picturehover.js"></script>
 </body>
 </html>
