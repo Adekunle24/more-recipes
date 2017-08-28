@@ -258,7 +258,26 @@ function PushRandomActionValues()
     });
 }
 
+
+//Javascript for Responsiveness on Load
+function InitiateResponsiveness(){
+    //specific width for homepage/nav tabs
+var home_tab_width = 975;
+var window_width = $(window).width();
+if(window_width<home_tab_width)
+{
+$('.registration-nav').removeClass('nav-stacked');
+
+
+    
+}
+};
+
+//load methods after document is ready
 $(document).ready(function(){
 DisplayAddRecipeComment();
 PushRandomActionValues();
+InitiateResponsiveness();
 });
+
+
