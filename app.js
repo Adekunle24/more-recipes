@@ -1,5 +1,5 @@
 //using express framework
-var express = require('express');
+import express from 'express';
 var fs = require('fs');
 var path = require('path');
 const logger = require('morgan');
