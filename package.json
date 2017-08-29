@@ -11,14 +11,23 @@
     "morgan": "^1.8.2",
     "pg": "^7.2.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.7.1"
+    "sequelize": "^4.7.1",
+    "webpack": "^3.5.5"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "mocha": "^3.5.0"
+    "babel-plugin-inline-json-import": "^0.2.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "mocha": "^3.5.0",
+    "nodemon": "^1.11.0"
   },
   "scripts": {
-    "test": "mocha"
+    "start":"babel-node app.js  --presets es2015,stage-2",
+    "test": "mocha --compilers js:babel-core/register tests/test.js",
+    "build": "babel  -d  --presets es2015,stage-2",
+    "serve": "node app.js"
   },
   "repository": {
     "type": "git",
