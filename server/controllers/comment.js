@@ -14,5 +14,13 @@ const saveReviewToDb = (req,res) => {
     comment : req.params.reviewMessage
   }).then(output => res.send('Review posted successfully')).catch(error => res.send(error));
 };
-const allMethods = { 'postReview' : addReview, 'saveReviewToDb' : saveReviewToDb};
+
+const getAllReviews = (req,res) =>{
+  commentModel.findAll({
+    where : {
+      recipeId : req.params.recipeId
+    }
+  }).then(result => res.send(result)).catch(error => res.send(error));
+};
+const allMethods = { 'postReview' : addReview, 'saveReviewToDb' : saveReviewToDb, 'getAllReviews' : getAllReviews};
 export default allMethods;

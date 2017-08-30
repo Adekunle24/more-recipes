@@ -55,4 +55,6 @@ routes.post('/api/recipes/:recipeId/reviews', commentController.postReview);
 routes.post('/api/reviews/add/:recipeId/:userId/:reviewMessage',commentController.saveReviewToDb);
 
 // route show all reviews for a recipe
+routes.get('/api/recipes/:recipeId/reviews',commentController.getAllReviews);
+
 export default routes;
