@@ -46,5 +46,9 @@ const signIn = (req,res) => {
     }   
   });
 };
-const allMethods = { 'getTotalUsers' : getTotalUsers, 'signUp' : signUp, 'signIn' : signIn};
+
+const getAllFavoriteRecipes = (req,res) =>{
+  res.send('Api route to get all favourite recipes');
+};
+const allMethods = { 'getTotalUsers' : getTotalUsers, 'signUp' : signUp, 'signIn' : signIn, 'getAllFavoriteRecipe': getAllFavoriteRecipes};
 export default allMethods;

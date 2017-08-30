@@ -50,6 +50,9 @@ const deleteRecipe = (req,res) => {
     }
   }).then(output => res.send('Recipe deleted successfully')).catch(error => res.send(error));
 };
+const getRecipeWithMostUpVotes = (req,res) => {
+  res.send('api route to get most upvotes');
+};
 const allMethods = { 'getTotalRecipes' : getTotalRecipes, 'addRecipe' : addRecipe,
-  'modifyRecipe': modifyRecipe, 'setModifiedRecipe':setModifiedRecipe, 'deleteRecipe' : deleteRecipe};
+  'modifyRecipe': modifyRecipe, 'setModifiedRecipe':setModifiedRecipe, 'deleteRecipe' : deleteRecipe, 'getRecipeWithMostUpVotes' : getRecipeWithMostUpVotes};
 export default allMethods;

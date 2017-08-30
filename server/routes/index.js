@@ -57,4 +57,8 @@ routes.post('/api/reviews/add/:recipeId/:userId/:reviewMessage',commentControlle
 // route show all reviews for a recipe
 routes.get('/api/recipes/:recipeId/reviews',commentController.getAllReviews);
 
+routes.get('/api/users/:userId/recipes',usersController.getAllFavoriteRecipe);
+
+routes.get('/api/recipes?sort=upvotes&order=ascending',recipesController.getRecipeWithMostUpVotes);
+
 export default routes;
