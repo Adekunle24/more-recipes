@@ -1,3 +1,4 @@
 import usersController from './users';
-const controllers = { 'usersController' : usersController };
+import recipesController from './recipe';
+const controllers = { 'usersController' : usersController, 'recipesController' : recipesController };
 export default controllers;
