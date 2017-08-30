@@ -24,7 +24,7 @@
     "nodemon": "^1.11.0"
   },
   "scripts": {
-    "start":"babel-node app.js  --presets es2015,stage-2",
+    "start":"babel-node app.js --presets es2015,stage-2",
     "test": "mocha --compilers js:babel-core/register tests/test.js",
     "build": "babel  -d  --presets es2015,stage-2",
     "serve": "node app.js"

@@ -1,3 +1,1 @@
-let path = `${__dirname}/server/config/config.json`;
-import config from path;
-console.log(config);
+import routes from 'server/routes/index.js';

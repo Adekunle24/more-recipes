@@ -5,8 +5,10 @@ import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import Sequelize from 'sequelize';
-import Config from 'server/config/config.json';
-import fortune from 'lib/fortune.js';
+import routes from './server/routes';
+import Config from './server/config/config.json';
+
+// import fortune from 'lib/fortune.js';
 const config = Config['development'];
 const sequelize = new Sequelize(config.database,config.username, config.password,config.options);
 
@@ -25,7 +27,7 @@ app.set('port', 3000);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use('/',routes);
 
 // add homepage route
 app.get('/home',function(req,res)
@@ -146,7 +148,7 @@ app.get('/',function(req,res)
 	// res.render('home',data);
 });
 
-require(`${__dirname}/server/routes`)(app,fs,sequelize,express);
+
 
 
 

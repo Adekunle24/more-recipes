@@ -1,24 +1,24 @@
 
-module.exports = (app,fs,sequelize,express) =>
-{
-//add view-recipes route
+// contains all routes for the application
+import express from 'express';
+import Sequelize from 'sequelize';
+import Config from '../config/config.json';
+import controllers from '../controllers';
+const config = Config['development'];
+const routes = express.Router();
+new Sequelize(config.database,config.username, config.password,config.options);
+const usersController = controllers.usersController;
+
+// api routes messages
+const signUpMessage = 'Please provide username, email and password seperated by a forward slash e.g ..signup/andela/andela@yahoo.com/andelapassword to register';
 
 
-//Test api
-app.get('/api',function(req,res)
-{
-    var data = { username: "Adekunle"};
-sequelize.query('select count(*) as NumberOfUsers from users',{item:sequelize.QueryTypes.SELECT}).spread(function(results,metadata){
-var json_string = JSON.stringify(results);
-var json_obj = JSON.parse(json_string);
-res.send(json_obj[0].numberofusers);
-});
-   // res.render('home',data);
-});
+// test api
+routes.get('/api/totalUsers', usersController.getTotalUsers);
 
+// api-users-signup route
+routes.post('/api/users/signup/:username/:email/:password', usersController.signUp);
+routes.post('/api/users/signup', (req,res) => res.send(`This is the user-signup route.. ${signUpMessage}`));
+routes.get('/api/users/signup', (req,res) => res.send(`${signUpMessage}`));
 
- app.get("/api/name/:name",(req,res) =>
-        res.send(`My name is More-Recipes and  ${req.params.name}`)
-        );
-
-};
+export default routes;
