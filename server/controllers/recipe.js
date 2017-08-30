@@ -39,8 +39,17 @@ const modifyRecipe = (req,res) => {
 
 // this api submits the modified recipe and saves into the db
 const setModifiedRecipe = (req,res) => {
-  res.send(`Modifies recipe with id ${req.params.recipeId}`);
+  let recipeObject = req.params.modifiedRecipe;
+  res.send(recipeObject);
+
+};
+const deleteRecipe = (req,res) => {
+  recipeModel.destroy({
+    where : {
+      id : req.params.recipeId
+    }
+  }).then(output => res.send('Recipe deleted successfully')).catch(error => res.send(error));
 };
 const allMethods = { 'getTotalRecipes' : getTotalRecipes, 'addRecipe' : addRecipe,
-  'modifyRecipe': modifyRecipe, 'setModifiedRecipe':setModifiedRecipe};
+  'modifyRecipe': modifyRecipe, 'setModifiedRecipe':setModifiedRecipe, 'deleteRecipe' : deleteRecipe};
 export default allMethods;
