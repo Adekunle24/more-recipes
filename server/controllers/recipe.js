@@ -21,6 +21,18 @@ const addRecipe = (req,res) => {
   }).then(result => res.send('Recipe added successfully')).catch(error => res.send(error));
 };
 
+// this api enables users to modify recipe they added
+const modifyRecipe = (req,res) => {
+  recipeModel.findAll({
+    where: {
+      id : parseInt(req.params.recipeId)
+    }
+  }).then(result => { 
+    if(result.length==0) {
+      res.send('Specified recipe could not be found');
+    }
+  }).error(error => res.send(error));
+};
 
-const allMethods = { 'getTotalRecipes' : getTotalRecipes, 'addRecipe' : addRecipe};
+const allMethods = { 'getTotalRecipes' : getTotalRecipes, 'addRecipe' : addRecipe, 'modifyRecipe': modifyRecipe};
 export default allMethods;

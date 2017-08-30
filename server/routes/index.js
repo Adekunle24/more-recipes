@@ -38,4 +38,6 @@ routes.post('/api/recipes/:userId/:title/:ingredients/:procedures', recipesContr
 // api-recipes-totalrecipes route
 routes.get('/api/recipes',recipesController.getTotalRecipes);
 
+// api-edit-recipe route
+routes.put('/api/recipes/:recipeId', recipesController.modifyRecipe);
 export default routes;
