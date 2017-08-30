@@ -18,7 +18,7 @@ const addRecipe = (req,res) => {
     userId : req.params.userId,
     procedures : req.params.procedures,
     ingredients : req.params.ingredients
-  }).then(result => res.send('Recipe added successfully'));
+  }).then(result => res.send('Recipe added successfully')).catch(error => res.send(error));
 };
 
 

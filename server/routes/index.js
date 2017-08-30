@@ -31,9 +31,9 @@ routes.post('/api/users/signin/:username/:password', usersController.signIn);
 routes.post('/api/users/signin', (req,res) => res.send(`This is the user-signin route.. ${signInMessage}`));
 
 // api-recipes-add route
-routes.post('/api/recipes',(req,res) => res.send('This is the add-recipe route'));
+routes.post('/api/recipes',(req,res) => res.send(`This is the add-recipe route ${addRecipesMessage}`));
 // api to simulate recipes adding
-routes.post('/api/recipes/:userid/:title/:ingredients/:procedures', recipesController.addRecipe);
+routes.post('/api/recipes/:userId/:title/:ingredients/:procedures', recipesController.addRecipe);
 
 // api-recipes-totalrecipes route
 routes.get('/api/recipes',recipesController.getTotalRecipes);

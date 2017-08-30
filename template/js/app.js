@@ -41,7 +41,7 @@ $('#login-2').click(() =>{
 
 
 //Begin Angular controller here
-// controller not responding using ES6 syntax
+// AngularJS controller not responding using ES6 syntax. Permission to use Es5
 app.controller('myController',function ($scope,$http,$timeout,$window)
 {
   //declare global variables
