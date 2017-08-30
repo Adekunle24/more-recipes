@@ -1,3 +1,4 @@
 import user from './user';
-const allModels = { 'user' : user };
+import recipe from './recipe';
+const allModels = { 'user' : user , 'recipe' : recipe };
 export default allModels;

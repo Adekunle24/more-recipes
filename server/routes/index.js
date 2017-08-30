@@ -2,8 +2,12 @@
 // contains all routes for the application
 import express from 'express';
 import Sequelize from 'sequelize';
+// import configuration file 
 import Config from '../config/config.json';
+// import all controllers
 import controllers from '../controllers';
+
+// assign variable config to development configuration
 const config = Config['development'];
 const routes = express.Router();
 new Sequelize(config.database,config.username, config.password,config.options);
@@ -22,6 +26,8 @@ routes.post('/api/users/signup', (req,res) => res.send(`This is the user-signup 
 
 // api-users-signin route
 routes.post('/api/users/signin/:username/:password', usersController.signIn);
-routes.post('/api/users/signin', (req,res) => res.send(`This is the user-signin route.. ${signInMessage}`) );
+routes.post('/api/users/signin', (req,res) => res.send(`This is the user-signin route.. ${signInMessage}`));
 
+// api-recipes-add route
+routes.post('/api/recipes')
 export default routes;
