@@ -13,6 +13,7 @@ const routes = express.Router();
 new Sequelize(config.database,config.username, config.password,config.options);
 const usersController = controllers.usersController;
 const recipesController = controllers.recipesController;
+const commentController = controllers.commentsController;
 
 // api routes messages
 const signUpMessage = 'Please provide username, email and password seperated by a forward slash e.g ..signup/andela/andela@yahoo.com/andelapassword to register';
@@ -47,4 +48,11 @@ routes.put('/api/recipes/:recipeId/:modifiedRecipe',recipesController.setModifie
 // api-delete-recipe route
 routes.delete('/api/recipes/:recipeId',recipesController.deleteRecipe);
 
+// route that allows a logged in user to post a review for a recipe
+routes.post('/api/recipes/:recipeId/reviews', commentController.postReview);
+
+// route that saves review into db
+routes.post('/api/reviews/add/:recipeId/:userId/:reviewMessage',commentController.saveReviewToDb);
+
+// route show all reviews for a recipe
 export default routes;
