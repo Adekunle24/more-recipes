@@ -40,4 +40,7 @@ routes.get('/api/recipes',recipesController.getTotalRecipes);
 
 // api-edit-recipe route
 routes.put('/api/recipes/:recipeId', recipesController.modifyRecipe);
+
+// api-edit-recipe route that takes modified recipe
+routes.put('/api/recipes/:recipeId/:modifiedRecipe',recipesController.setModifiedRecipe);
 export default routes;

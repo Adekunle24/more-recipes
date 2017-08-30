@@ -25,14 +25,22 @@ const addRecipe = (req,res) => {
 const modifyRecipe = (req,res) => {
   recipeModel.findAll({
     where: {
-      id : parseInt(req.params.recipeId)
+      id : req.params.recipeId
     }
   }).then(result => { 
     if(result.length==0) {
       res.send('Specified recipe could not be found');
     }
-  }).error(error => res.send(error));
+    else{
+      res.send('You wish to modify this recipe: '+JSON.stringify(result));
+    }
+  }).catch(error => res.send(error));
 };
 
-const allMethods = { 'getTotalRecipes' : getTotalRecipes, 'addRecipe' : addRecipe, 'modifyRecipe': modifyRecipe};
+// this api submits the modified recipe and saves into the db
+const setModifiedRecipe = (req,res) => {
+  res.send(`Modifies recipe with id ${req.params.recipeId}`);
+};
+const allMethods = { 'getTotalRecipes' : getTotalRecipes, 'addRecipe' : addRecipe,
+  'modifyRecipe': modifyRecipe, 'setModifiedRecipe':setModifiedRecipe};
 export default allMethods;
