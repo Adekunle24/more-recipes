@@ -3,13 +3,14 @@ import allModels from '../models';
 import crypto from 'bcrypt-nodejs';
 
 // assign userModel to model user
-const userModel = allModels.user;
+const userModel = allModels.users;
 
 // this is a test api to display all registered users
 const getTotalUsers = (req,res) => {
   userModel.findAll().then(value => 
     res.send(value)
-  );
+  ).catch(error =>res.send(error));
+ 
 };
 
 // this method accepts username, email and password then creates a user account on the database

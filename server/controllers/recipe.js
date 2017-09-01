@@ -2,13 +2,13 @@
 import allModels from '../models';
 
 // assign recipeModel to model recipe
-const recipeModel = allModels.recipe;
+const recipeModel = allModels.recipes;
 
 // this is a test api to display all registered users
 const getTotalRecipes = (req,res) => {
   recipeModel.findAll().then(value => 
     res.send(value)
-  );
+  ).catch(error =>res.send(error));
 };
 
 // this api adds a new recipe to the database

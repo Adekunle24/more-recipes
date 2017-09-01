@@ -12,13 +12,16 @@ import crypto from 'bcrypt-nodejs';
 const config = Config['development'];
 const routes = express.Router();
 
-new Sequelize(config.database,config.username, config.password,config.options);
 const usersController = controllers.usersController;
 const recipesController = controllers.recipesController;
 const reviewsController = controllers.reviewsController;
 const favouriteRecipesController = controllers.favouriteRecipeController;
 
-// test api
+routes.get('/api/test',(req,res)=>res.send('hello'));
+// new Sequelize(config.database,config.username, config.password,config.options);
+// 
+
+// // test api
 routes.get('/api/users', usersController.getTotalUsers);
 
 // api-users-signup route

@@ -16,6 +16,9 @@ else{
   const configData = config[envData];
   sequelizeApp = new Sequelize(configData.database,configData.username, configData.password,configData.options);
 }
-const sequelizeObj = { 'sequelizeApp':sequelizeApp,'Sequelize':Sequelize };
+//const sequelizedUserModel =  sequelizeApp.import('../models/user.js');
+//const sequelizedRecipeModel = sequelizeApp.import('../models/recipe.js');
+const sequelizeObj = { 'sequelizeApp':sequelizeApp,'Sequelize':Sequelize
+};
 export default sequelizeObj;
 

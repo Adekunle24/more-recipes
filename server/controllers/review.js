@@ -1,6 +1,6 @@
 // import all the models
 import allModels from '../models';
-const reviewModel = allModels.review;
+const reviewModel = allModels.reviews;
 
 const saveReviewToDb = (req,res) => {
   reviewModel.create({
