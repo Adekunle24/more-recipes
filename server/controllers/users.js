@@ -1,5 +1,6 @@
 // import all the models
 import allModels from '../models';
+import crypto from 'bcrypt-nodejs';
 
 // assign userModel to model user
 const userModel = allModels.user;
@@ -11,23 +12,23 @@ const getTotalUsers = (req,res) => {
   );
 };
 
-// this method accepts username,email and password then creates a user account on the database
+// this method accepts username, email and password then creates a user account on the database
 const signUp = (req,res) => {
-  const usernameInput = req.params.username;
-  const emailInput = req.params.email;
-  const password = req.params.password;
+  const usernameInput = req.body.username;
+  const emailInput = req.body.email;
+  const passwordHash =  crypto.hashSync(req.body.password);
   userModel.create({
     email : emailInput,
     username : usernameInput,
-    passwordHash : password
-  }).then(output => res.send('Your account has been created successfully'));
+    password : passwordHash
+  }).then(output => res.send('Your account has been created successfully')).catch(error => res.send(error));
 };
 
 // this method accepts username and password and then perform authentication 
 const signIn = (req,res) => {
-  const usernameInput = req.params.username;
-  const passwordInput = req.params.password;
-  userModel.findAll({
+  const usernameInput = req.body.username;
+  const passwordInput = req.body.password;
+  userModel.findOne({
     where: {
       username : usernameInput
     }
@@ -36,19 +37,19 @@ const signIn = (req,res) => {
       res.send('Incorrect username or password');
     }
     else if (result.length === 1) {
-      if(passwordInput === result[0].passwordHash){
-        res.send('Login successful');
-      }
-      else{
-        res.send('Incorrect username or password');
-      }
+      crypto.compare(passwordInput, result[0].password, function(err, cryptResponse) {
+        if(cryptResponse){
+          res.send('Login successful');
+        }
+        else{
+          res.send('Incorrect username or password');
+        }
+      });
+      
 		
     }   
   });
 };
 
-const getAllFavoriteRecipes = (req,res) =>{
-  res.send('Api route to get all favourite recipes');
-};
-const allMethods = { 'getTotalUsers' : getTotalUsers, 'signUp' : signUp, 'signIn' : signIn, 'getAllFavoriteRecipe': getAllFavoriteRecipes};
+const allMethods = { 'getTotalUsers' : getTotalUsers, 'signUp' : signUp, 'signIn' : signIn};
 export default allMethods;

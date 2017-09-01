@@ -1,5 +1,8 @@
 import usersController from './users';
 import recipesController from './recipe';
-import commentController from './comment';
-const controllers = { 'usersController' : usersController, 'recipesController' : recipesController, 'commentsController' : commentController };
+import reviewController from './review';
+import favouriteRecipeController from './favouriteRecipe';
+const controllers = { 'usersController' : usersController, 'recipesController' : recipesController, 'reviewsController' : reviewController,
+  'favouriteRecipeController' : favouriteRecipeController
+};
 export default controllers;

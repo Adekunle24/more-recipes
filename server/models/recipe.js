@@ -1,10 +1,8 @@
-import Config from '../config/config.json';
-const config = Config['development'];
-import Sequelize from 'sequelize';
-const sequelize = new Sequelize(config.database,config.username, config.password,config.options);
-
+import sequelizeApp from '../config';
+const sequelize = sequelizeApp.sequelize;
+const Sequelize = sequelize.Sequelize;
 const recipe = sequelize.define('recipes',{
-  title : { type : Sequelize.STRING, allowNull : false, defaultValue : 'Unknown Title' },
+  title : { type : Sequelize.STRING, allowNull : false },
   createdAt : { type : Sequelize.TIME, allowNull : true },
   updatedAt : { type : Sequelize.TIME, allowNull : true },
   userId : { type : Sequelize.INTEGER, allowNull : false },

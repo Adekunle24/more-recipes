@@ -1,19 +1,17 @@
 // using express framework
 import express from 'express';
 import fs from 'fs';
-import path from 'path';
-import logger from 'morgan';
 import bodyParser from 'body-parser';
 import routes from './server/routes';
-import Config from './server/config/config.json';
+import env from 'dotenv';
+env.config;
 
-const config = Config['development'];
 
 // create express application
 const app = express();
 
 // set server listening port
-app.set('port', 3000);
+app.set('port', process.env.PORT || 3000);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,7 +20,6 @@ app.use('/',routes);
 // add homepage route
 app.get('/home',(req,res) =>
 {
-  var data = { username: 'Adekunle'};
   fs.readFile(__dirname+'/template/home.html',(err,data) =>{
     if(err)
     {
@@ -40,7 +37,6 @@ app.use(express.static(__dirname+'/template'));
 
 app.get('/view-recipes',(req,res)=>
 {
-  var data = { username: 'Adekunle'};
   fs.readFile(__dirname+'/template/view-recipes.html',(err,data) =>{
     if(err)
     {
@@ -56,7 +52,6 @@ app.get('/view-recipes',(req,res)=>
 
 app.get('/recipe-details',(req,res)=>
 {
-  var data = { username: 'Adekunle'};
   fs.readFile(__dirname+'/template/recipe-details.html',(err,data) => {
     if(err)
     {
@@ -70,7 +65,6 @@ app.get('/recipe-details',(req,res)=>
 });
 app.get('/favourite-recipes',(req,res) =>
 {
-  var data = { username: 'Adekunle'};
   fs.readFile(__dirname+'/template/favourite-recipes.html',(err,data) =>{ 
     if(err)
     {
@@ -84,7 +78,6 @@ app.get('/favourite-recipes',(req,res) =>
 });
 app.get('/user-profile',(req,res) =>
 {
-  var data = { username: 'Adekunle'};
   fs.readFile(__dirname+'/template/user-profile.html',(err,data) =>{
     if(err)
     {
@@ -98,7 +91,6 @@ app.get('/user-profile',(req,res) =>
 });
 app.get('/add-recipe',(req,res) =>
 {
-  var data = { username: 'Adekunle'};
   fs.readFile(__dirname+'/template/add-recipe.html',(err,data) => {
     if(err)
     {
@@ -166,3 +158,4 @@ app.use((err,req,res,next) =>{
 app.listen(app.get('port'),() =>{
   
 });
+export default app;

@@ -14,45 +14,65 @@ const getTotalRecipes = (req,res) => {
 // this api adds a new recipe to the database
 const addRecipe = (req,res) => {
   recipeModel.create({
-    title : req.params.title,
-    userId : req.params.userId,
-    procedures : req.params.procedures,
-    ingredients : req.params.ingredients
+    title : req.body.title,
+    userId : req.body.user,
+    procedures : req.body.procedures,
+    ingredients : req.body.ingredients
   }).then(result => res.send('Recipe added successfully')).catch(error => res.send(error));
 };
 
 // this api enables users to modify recipe they added
 const modifyRecipe = (req,res) => {
-  recipeModel.findAll({
-    where: {
-      id : req.params.recipeId
+  recipeModel.findById(
+    req.body.recipeId
+  ).then(result => {
+    if(result)
+    {
+    // call the method to save new recipe details
+      saveModifiedRecipe(req,res,result);
     }
-  }).then(result => { 
-    if(result.length==0) {
+    else{
+      res.send('Specified recipe could not be found');
+    }
+  }).catch(error =>res.send(error));
+
+ 
+};
+
+// this api submits the modified recipe and saves into the db
+const saveModifiedRecipe = (req,res,data) => {
+  data.update({
+    title : req.body.title || data.title,
+    procedures : req.body.procedures || data.procedures,
+    ingredients : req.body.ingredients || data.ingredients
+  }).then(output => {
+    if(output[0]==0)
+    {
       res.send('Specified recipe could not be found');
     }
     else{
-      res.send('You wish to modify this recipe: '+JSON.stringify(result));
+      res.send(data);
     }
   }).catch(error => res.send(error));
 };
 
-// this api submits the modified recipe and saves into the db
-const setModifiedRecipe = (req,res) => {
-  let recipeObject = req.params.modifiedRecipe;
-  res.send(recipeObject);
-
-};
 const deleteRecipe = (req,res) => {
-  recipeModel.destroy({
-    where : {
-      id : req.params.recipeId
+  recipeModel.findById(req.body.recipeId).then(recipe => {
+    if(!recipe)
+    {
+      res.send('Specified recipe could not be found');
     }
-  }).then(output => res.send('Recipe deleted successfully')).catch(error => res.send(error));
+    else{
+      recipe.destroy()
+        .then(output => res.send('Recipe deleted successfully')).catch(error => res.send(error));
+    }
+  }).catch(error => res.send(error));
+
+ 
 };
 const getRecipeWithMostUpVotes = (req,res) => {
   res.send('api route to get most upvotes');
 };
 const allMethods = { 'getTotalRecipes' : getTotalRecipes, 'addRecipe' : addRecipe,
-  'modifyRecipe': modifyRecipe, 'setModifiedRecipe':setModifiedRecipe, 'deleteRecipe' : deleteRecipe, 'getRecipeWithMostUpVotes' : getRecipeWithMostUpVotes};
+  'modifyRecipe': modifyRecipe, 'setModifiedRecipe':modifyRecipe, 'deleteRecipe' : deleteRecipe, 'getRecipeWithMostUpVotes' : getRecipeWithMostUpVotes};
 export default allMethods;

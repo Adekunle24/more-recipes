@@ -6,58 +6,48 @@ import Sequelize from 'sequelize';
 import Config from '../config/config.json';
 // import all controllers
 import controllers from '../controllers';
+import crypto from 'bcrypt-nodejs';
 
 // assign variable config to development configuration
 const config = Config['development'];
 const routes = express.Router();
+
 new Sequelize(config.database,config.username, config.password,config.options);
 const usersController = controllers.usersController;
 const recipesController = controllers.recipesController;
-const commentController = controllers.commentsController;
-
-// api routes messages
-const signUpMessage = 'Please provide username, email and password seperated by a forward slash e.g ..signup/andela/andela@yahoo.com/andelapassword to register';
-const signInMessage = 'use ..signin/your_username/your_password';
-const addRecipesMessage = 'use ..api/recipes/:userid/:title/:ingredients/:procedures';
+const reviewsController = controllers.reviewsController;
+const favouriteRecipesController = controllers.favouriteRecipeController;
 
 // test api
-routes.get('/api/totalUsers', usersController.getTotalUsers);
+routes.get('/api/users', usersController.getTotalUsers);
 
 // api-users-signup route
-routes.post('/api/users/signup/:username/:email/:password', usersController.signUp);
-routes.post('/api/users/signup', (req,res) => res.send(`This is the user-signup route.. ${signUpMessage}`));
+routes.post('/api/users/signup', usersController.signUp);
 
 // api-users-signin route
-routes.post('/api/users/signin/:username/:password', usersController.signIn);
-routes.post('/api/users/signin', (req,res) => res.send(`This is the user-signin route.. ${signInMessage}`));
+routes.post('/api/users/signin', usersController.signIn);
 
 // api-recipes-add route
-routes.post('/api/recipes',(req,res) => res.send(`This is the add-recipe route ${addRecipesMessage}`));
-// api to simulate recipes adding
-routes.post('/api/recipes/:userId/:title/:ingredients/:procedures', recipesController.addRecipe);
+routes.post('/api/recipes', recipesController.addRecipe);
+//routes.post('/api/recipes/:userId/:title/:ingredients/:procedures', recipesController.addRecipe);
 
 // api-recipes-totalrecipes route
 routes.get('/api/recipes',recipesController.getTotalRecipes);
 
 // api-edit-recipe route
-routes.put('/api/recipes/:recipeId', recipesController.modifyRecipe);
-
-// api-edit-recipe route that takes modified recipe
-routes.put('/api/recipes/:recipeId/:modifiedRecipe',recipesController.setModifiedRecipe);
+routes.put('/api/recipes', recipesController.modifyRecipe);
 
 // api-delete-recipe route
-routes.delete('/api/recipes/:recipeId',recipesController.deleteRecipe);
+routes.delete('/api/recipes',recipesController.deleteRecipe);
 
 // route that allows a logged in user to post a review for a recipe
-routes.post('/api/recipes/:recipeId/reviews', commentController.postReview);
+routes.post('/api/recipes/:recipeId/reviews', reviewsController.saveReviewToDb);
 
-// route that saves review into db
-routes.post('/api/reviews/add/:recipeId/:userId/:reviewMessage',commentController.saveReviewToDb);
 
 // route show all reviews for a recipe
-routes.get('/api/recipes/:recipeId/reviews',commentController.getAllReviews);
+routes.get('/api/recipes/:recipeId/reviews',reviewsController.getAllReviews);
 
-routes.get('/api/users/:userId/recipes',usersController.getAllFavoriteRecipe);
+routes.get('/api/users/:userId/recipes',favouriteRecipesController.getAllFavouriteRecipes);
 
 routes.get('/api/recipes?sort=upvotes&order=ascending',recipesController.getRecipeWithMostUpVotes);
 

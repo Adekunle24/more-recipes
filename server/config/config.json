@@ -1,9 +1,17 @@
-
- {
+{
   "development": {
     "username": "postgres",
     "password": "postgre",
     "database": "More-Recipes",
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres",
+    "options": {"dialect":"postgres","host":"localhost" }
+  },
+  "test": {
+    "username": "postgres",
+    "password": "postgre",
+    "database": "More-RecipesTest",
     "host": "localhost",
     "port": 5432,
     "dialect": "postgres",
