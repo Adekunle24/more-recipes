@@ -10,12 +10,11 @@ const User = (sequelize, DataTypes) => {
     username : { type : DataTypes.STRING, allowNull : false, validate : {   len: [5,50] } },
     createdAt : { type : DataTypes.DATE, allowNull : false },
     updatedAt : { type : DataTypes.DATE, allowNull : false },
-    userId : { type : DataTypes.INTEGER, allowNull : false, primaryKey : true, autoIncrement: true }
+    id : { type : DataTypes.INTEGER, allowNull : false, primaryKey : true, autoIncrement: true }
   });
   user.associate = (models) => {
     user.hasMany(models.recipes, {
-      foreignKey: 'userId',
-      as: 'recipes',
+      foreignKey: 'id'
     });
   };
   return user;

@@ -9,7 +9,7 @@ const Recipe = (sequelize, DataTypes) =>{
     ingredients : { type : DataTypes.JSON, allowNull : false, defaultValue : 'No ingredients'}
   });
   recipe.associate = (models) => {
-    recipe.hasOne(models.users, {
+    recipe.belongsTo(models.users, {
       foreignKey: 'userId',
       as: 'users',
     });
