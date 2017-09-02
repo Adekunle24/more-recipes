@@ -257,11 +257,19 @@ const PushRandomActionValues = () =>
 //Javascript for Responsiveness on Load
 const InitiateResponsiveness = () => {
   //specific width for homepage/nav tabs
-  var home_tab_width = 975;
+  var home_tab_width = 321;
   var window_width = $(window).width();
   if(window_width<home_tab_width)
   {
-    $('.registration-nav').removeClass('nav-stacked');
+    $('#page-tab').removeClass('flex-column').removeClass('height-300').removeClass('registration-nav').removeClass('float-left');
+    $('#page-tab .nav-link').addClass('inline');
+    $('#page-tab li').addClass('inline');
+    $('#footer-responsive').removeClass('container-fluid');
+  }
+  else{
+     $('#page-tab').addClass('flex-column').addClass('height-300').addClass('registration-nav').addClass('float-left');
+    $('#page-tab .nav-link').removeClass('inline');
+    $('#page-tab li').removeClass('inline');
   }
 };
 
@@ -270,4 +278,7 @@ $(document).ready(() =>{
   DisplayAddRecipeComment();
   PushRandomActionValues();
   InitiateResponsiveness();
+});
+$(window).resize(function(){
+ InitiateResponsiveness();
 });

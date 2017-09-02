@@ -546,3 +546,31 @@ text-align: center;
 .padding-right-30{
     padding-right:30px;
 }
+@media (max-width: 320px) {
+  .intro-title {
+    font-size:22px;
+  }
+  .registration-form{
+    border: 1px solid #e6ecf5;
+border-radius: 0 5px 5px 0;
+background-color: #fff;
+overflow: hidden;
+position: relative;
+padding-left: 10px;
+margin-bottom:20px;
+margin-top:10px;
+}
+footer{
+ width: calc(100%);
+margin: 0 auto;
+    margin-bottom: 0px;
+margin-bottom: 0px;
+padding: 20px 15px;
+background-color: #fff;
+box-shadow: 0 0 34px 0 rgba(63, 66, 87, 0.1);
+position: relative;   
+}
+.footer-quicklinks{
+    padding-top:10px;
+}
+}
