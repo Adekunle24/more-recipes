@@ -11,11 +11,3 @@ describe('Application start file', () => {
     });
   });
 });
-
-describe('Application routes', () => {
-  describe('Application Routes',() => {
-    it('You must define api users/signup',()=>{
-      assert.equal(routes.get('/api/users/signup'),'hello');
-    });
-  });
-});

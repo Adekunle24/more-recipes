@@ -1,27 +1,25 @@
-'use strict';
-module.exports = {
-  up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('socialValues', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      recipeId: {
-        type: Sequelize.INTEGER
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
-  },
-  down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('socialValues');
-  }
+
+module.exports = {  up : (queryInterface, Sequelize) => {
+  queryInterface.createTable('social_values', {
+    recipeId: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER
+    },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    },
+    upvotes : { type: Sequelize.INTEGER },
+    downvotes : { type : Sequelize.INTEGER},
+    replies : { type : Sequelize.INTEGER}
+  });
+},
+down : (queryInterface) =>
+  queryInterface.dropTable('social_values'),
 };

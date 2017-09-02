@@ -1,15 +1,27 @@
 // import all the models
 import allModels from '../models';
 import crypto from 'bcrypt-nodejs';
-
+import jwt from 'jsonwebtoken';
+import env from 'dotenv';
+env.config();
 // assign userModel to model user
 const userModel = allModels.users;
 
-// this is a test api to display all registered users
+
+const getToken = (req,res) =>{
+  const token = jwt.sign('',process.env.API_SECRET);
+  res.json({
+    success: true,
+    message: 'Enjoy your token!',
+    token: token
+  });
+};
+
+// this is an api to display all registered users
 const getTotalUsers = (req,res) => {
-  userModel.findAll().then(value => 
-    res.send(value)
-  ).catch(error =>res.send(error));
+  userModel.findAll().then(user => {
+    res.send(user);
+  }).catch(error =>res.send(error));
  
 };
 
@@ -52,5 +64,7 @@ const signIn = (req,res) => {
   });
 };
 
-const allMethods = { 'getTotalUsers' : getTotalUsers, 'signUp' : signUp, 'signIn' : signIn};
+const allMethods = { 'getTotalUsers' : getTotalUsers, 'signUp' : signUp, 'signIn' : signIn, 
+  'getToken': getToken
+};
 export default allMethods;

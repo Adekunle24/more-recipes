@@ -1,13 +1,18 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var socialValues = sequelize.define('socialValues', {
-    recipeId: DataTypes.INTEGER
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
+
+const socialValues = (sequelize, DataTypes) => {
+  const profile = sequelize.define('social_values', {
+    recipeId : { type : DataTypes.INTEGER, allowNull : false, primaryKey : true },
+    createdAt : { type : DataTypes.DATE, allowNull : false },
+    updatedAt : { type : DataTypes.DATE, allowNull : false },
+    upvotes : { type: DataTypes.INTEGER },
+    downvotes : { type : DataTypes.INTEGER},
+    replies : { type : DataTypes.INTEGER}
   });
-  return socialValues;
+  profile.associate = (models) => {
+    profile.belongsTo(models.recipes, {
+      foreignKey: 'id'
+    });
+  };
+  return profile;
 };
+export default socialValues;

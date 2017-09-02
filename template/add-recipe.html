@@ -19,65 +19,55 @@
 <link rel="stylesheet" type="text/css" href="css/site.css">
 </head>
 <body data-ng-controller="myController" data-ng-app="myApp" class="app-body">
-		<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    <a href="#"><img id="app-logo" src="images/logo.png" ></a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <span class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class=""><a href="#">Home <span class="sr-only">(current)</span></a></li>
-      <li class=""><a href="/view-recipes/top">Top Recipes</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Trending <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a class="" href="#">Most Popular Recipes</a></li>
-            <li><a href="#">Most Viewed Recipes</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Foreign Recipes</a></li>
-						
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="#page-top">MoreRecipes</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Top Recipes</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="#services">Latest Recipes</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="#services">Add Recipe</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" href="#services">More</a>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">FAQs</a>
+    <a class="dropdown-item" href="#">Feeback</a>
+    <a class="dropdown-item" href="#">Contact us</a> 
+		<a class="dropdown-item" href="#">Help & Support</a>
+  </div>
+            </li>
           </ul>
-        </li>
-				<li class=""><a href="#">Favourite Recipes</a></li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+            <form class="form-inline">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0 cursor-pointer" type="submit">Search</button>
+  </form>
+  <div> <div class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+				<span class="comment-author">Adekunle <img src="/images/avatar.jpg" class="float-left"  />
+        </span>
+             </a>
+          <div class="dropdown-menu" role="menu">
+					<a class="dropdown-item" href="#"><i class="fa fa-gear padding-right-10"></i>Add Recipe</a>
+						   <a class="dropdown-item" href="#"><i class="fa fa-gear padding-right-10"></i>Profile settings</a>
+							  <a class="dropdown-item" class="" href="#"><i class="padding-right-10"></i>Favourite Recipe</a>
+								 <a class="dropdown-item" class="" href="#"><i class="fa fa-lock padding-right-10"></i>Sign out</a>
+								  <a class="dropdown-item" class="" href="#"><i class=" padding-right-10"></i>Terms and condition</a>
+          </div>
         </div>
-        <button type="submit" class="btn btn-default"><i class="fa fa-search padding-5"></i>Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-					<span class="comment-author">  <img src="/images/avatar.jpg" class="float-left"  />
-				Olayinka Kemi
-				<div>Account &nbsp;</div>
-					</span>
-						 <span class="caret float-right"></span></a>
-          <ul class="dropdown-menu" role="menu">
-						<li><a href="#"><i class="fa fa-gear padding-right-10"></i>Add Recipe</a></li>
-						   <li class="active"><a href="#"><i class="fa fa-gear padding-right-10"></i>Profile settings</a></li>
-							  <li class=""><a class="" href="#"><i class="padding-right-10"></i>Favourite Recipe</a></li>
-								 <li class=""><a class="" href="#"><i class="fa fa-lock padding-right-10"></i>Sign out</a></li>
-								 <li class=" divider"></li>
-								  <li class=""><a class="" href="#"><i class=" padding-right-10"></i>Terms and condition</a></li>
-            <li><a href="#">Contact us</a></li>
-			  <li><a href="#">Feedback</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+        </div>
+        </div>
+      </div>
+    </nav>
 
 
 
@@ -424,9 +414,8 @@ have​ ​invented​ ​or​ ​learnt.
 
 <!--End Page Modal -->
 <script src="js/jquery.min.js"></script>
-<script src="js/tether.min.js"></script>
+<script src="js/popper.js"></script>
 <script src="js/bootstrap.js"></script>
-<script src= "js/jPinning.min.js"></script>
 <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
 <script src="js/tooltip.js"></script>
 <script src="js/lightbox.js"></script>

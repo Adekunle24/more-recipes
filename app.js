@@ -3,6 +3,7 @@ import express from 'express';
 import fs from 'fs';
 import bodyParser from 'body-parser';
 import routes from './server/routes';
+import jwt from 'jsonwebtoken';
 import env from 'dotenv';
 env.config;
 
@@ -12,7 +13,7 @@ const app = express();
 
 // set server listening port
 app.set('port', process.env.PORT || 3000);
-
+app.set('superSecret',env.API_SECRET);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/',routes);

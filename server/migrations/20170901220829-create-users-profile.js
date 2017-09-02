@@ -1,27 +1,36 @@
-'use strict';
-module.exports = {
-  up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('usersProfiles', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      firstName: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+
+module.exports = {  up : (queryInterface, Sequelize) => {
+  queryInterface.createTable('users_profile', {
+    userId: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'users',
+        key: 'id',
+        as: 'userId'
       }
-    });
-  },
-  down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('usersProfiles');
-  }
+    },
+    firstName: {
+      type: Sequelize.STRING
+    },
+    lastName: {
+      type: Sequelize.STRING
+    },
+    profilePicture:{
+      type:Sequelize.STRING
+    },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    }
+  });
+},
+down : (queryInterface) =>
+  queryInterface.dropTable('users_profile'),
 };
