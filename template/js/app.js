@@ -5,9 +5,6 @@
  * framework NodeJS, Express and PostgreDb
  */
 
-//Initiate JPinning 
-$('nav').jPinning();
-
 //Initiate DatePicker
 $(document).ready(() => {
   var date_input=$('input[name="date"]'); //our date input has the name "date"

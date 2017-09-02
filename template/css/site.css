@@ -45,7 +45,7 @@ text-decoration: none;
     padding:5px !important;
 }
 #body-container{
-    margin-top:80px;
+    margin-top:10px;
 }
 .intro-title{
     font-weight:300px;
@@ -225,7 +225,8 @@ text-decoration: none;
     margin:20px;
 }
 .recipe-gallery img{
-    width:80%;
+    width:90px;
+    height:70px;
 }
 .social-icons .fa-facebook,.social-icons .fa-facebook-square{background-color:#3C599F;}
 .social-icons .fa-pinterest,.social-icons .fa-pinterest-square{background-color:#CC2127;}  
