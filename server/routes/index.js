@@ -8,6 +8,8 @@ import Config from '../config/config.json';
 import controllers from '../controllers';
 import crypto from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
+import react from 'react';
+import {render} from 'react-dom';
 import env from 'dotenv';
 env.config();
 
@@ -19,13 +21,17 @@ const reviewsController = controllers.reviewsController;
 const favouriteRecipesController = controllers.favouriteRecipeController;
 
 
-
 // validate token below
 if(process.env.NODE_ENV != 'test')
 {
   routes.use(function(req, res, next) {
 
-  // check header or url parameters or post parameters for token
+    if(process.env.NODE_ENV==='development')
+    {
+      // simulate x-access-token header
+      req.headers['x-access-token'] = 'eyJhbGciOiJIUzI1NiJ9.bW9yZS1yZWNpcGVz.rzL_4i4ju1_SdZsk6b7l3RYCC3EDBFYX1Pb4WeDlHDc';
+    }
+    // check header or url parameters or post parameters for token
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
 
     // decode token
@@ -62,10 +68,13 @@ if(process.env.NODE_ENV != 'test')
 routes.get('/api/token',usersController.getToken);
 
 routes.get('/api/test',(req,res)=> res.json({success:true,data: 'hello'}));
-// new Sequelize(config.database,config.username, config.password,config.options);
-// 
 
-// // test api
+// test react connection
+routes.get('/react',(req,res) =>{
+ res.send('hello');
+});
+
+// test api
 routes.get('/api/users', usersController.getTotalUsers);
 
 // api-users-signup route
