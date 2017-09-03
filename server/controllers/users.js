@@ -27,41 +27,58 @@ const getTotalUsers = (req,res) => {
 
 // this method accepts username, email and password then creates a user account on the database
 const signUp = (req,res) => {
-  const usernameInput = req.body.username;
-  const emailInput = req.body.email;
-  const passwordHash =  crypto.hashSync(req.body.password);
-  userModel.create({
-    email : emailInput,
-    username : usernameInput,
-    password : passwordHash
-  }).then(output => res.send('Your account has been created successfully')).catch(error => res.send(error));
-};
 
+  // perform input validations
+  if(req.body.username&&req.body.email&&req.body.password)
+  {
+    const usernameInput = req.body.username;
+    const emailInput = req.body.email;
+    const passwordHash =  crypto.hashSync(req.body.password);
+    userModel.create({
+      email : emailInput,
+      username : usernameInput,
+      password : passwordHash
+    }).then(output => res.json({success:true,data:output,message:`Your account has been created successfully Username: ${output.username} Email: ${output.email}`})).catch(error => res.send(error));
+  }
+  else{
+    res.json({success:false,data:null,validations:false,message:'Please provide username,email and password'});
+  }
+
+
+};
 // this method accepts username and password and then perform authentication 
 const signIn = (req,res) => {
-  const usernameInput = req.body.username;
-  const passwordInput = req.body.password;
-  userModel.findOne({
-    where: {
-      username : usernameInput
-    }
-  }).then(result => { 
-    if(result.length==0) {
-      res.send('Incorrect username or password');
-    }
-    else if (result.length === 1) {
-      crypto.compare(passwordInput, result[0].password, function(err, cryptResponse) {
-        if(cryptResponse){
-          res.send('Login successful');
-        }
-        else{
-          res.send('Incorrect username or password');
-        }
-      });
-      
-		
-    }   
-  });
+  if(req.body.username&&req.body.password)
+  {
+    
+    const passwordInput = req.body.password;
+    userModel.findOne({
+      where: {
+        username : req.body.username
+      }
+    }).then(result => { 
+     
+      if(!result)
+      {
+        res.json({success:false,data:null,message:'Incorrect username or password'});  
+      }
+      else if (result) {
+        crypto.compare(passwordInput, result.password, function(err, cryptResponse) {
+          if(cryptResponse){
+            result.password = null;
+            res.json({success:true,data:result,message:`Welcome ${result.username}`});
+          }
+          else{
+            res.json({success:false,data:null,message:'Incorrect username or password'});
+          }
+        });
+
+      }   
+    }).catch(error => res.send(error));
+  }
+  else{
+    res.json({success:false,data:null,validations:false,message:'Provide username and password'});
+  }
 };
 
 const allMethods = { 'getTotalUsers' : getTotalUsers, 'signUp' : signUp, 'signIn' : signIn, 

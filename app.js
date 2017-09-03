@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import routes from './server/routes';
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
+import validate from 'express-validation';
 env.config;
 
 
