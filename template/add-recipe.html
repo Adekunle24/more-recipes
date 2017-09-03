@@ -90,7 +90,7 @@
 <!--top banner -->
 <section class=" top-banner margin-top-10"  id="subscribe">
 
-<div class="container">
+<div class="">
 <div class="row">
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <div class="banner-block">
@@ -160,16 +160,14 @@
 
 <!--Body content starts here -->
 <div class="main-header">
-<div class="row">
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <div class="banner-block">
 <div class="profile-tabs">
-<div class="row">
+
 <ul class="nav nav-pills profile-list" role="tablist">
 <li class="active"><a class="nav-link" data-toggle="pill" href="#my-recipes">My Recipes</a></li>
 <li class=""><a class="nav-link" data-toggle="pill" href="#add-recipe">Add a Recipe</a></li>
 </ul>
-</div>
 </div>
 <!--enter each tab content below-->
  <div class="tab-content">
@@ -192,10 +190,17 @@
                 </a>
             </span>
      <a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10"> 24 </span></a>
-     <a class="reply-comment margin-left-10">
         <span class="delete-recipe"> Reply </span>
-         <div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-warning "><i class="fa fa-send white"></i></a></form></div>
-     </a>
+         <div class="comment-container margin-top-10 hide">
+           <form>
+          <div class="input-group">
+           <input class="form-control" placeholder="comment"/>
+           <span clas="input-group-btn">
+           <a class="btn white btn-warning "><i class="fa fa-send white"></i></a>
+           </span>
+           </div>
+            </form>
+           </div>
      </div>
 </div>
 </div>
@@ -244,7 +249,7 @@
       <h4 class="black">Item</h4>
     <div class="margin-top-10">
         <input class="form-control input-search inline" data-ng-model="Item" placeholder="Item" type="text" />
-       <a data-ng-click="AddIngredient()" class="btn btn-info btn-lg btn-block margin-top-10">Add Ingredient</a>
+       <a data-ng-click="AddIngredient()" class="btn btn-warning btn-lg btn-block white margin-top-10">Add Ingredient</a>
     </div>
 </div>
 <div class="col-md-6">
@@ -264,7 +269,7 @@
                                                       <div class="text-center">     <h4 class="black">Procedures:</h4></div>
                                                            <textarea class="form-control" style="height:300px;" ></textarea>
                                                            </div>
-                                                        <a class="btn btn-success btn-lg btn-block margin-top-10" >Post Recipe</a>
+                                                        <a class="btn btn-primary white btn-lg btn-block margin-top-10" >Post Recipe</a>
 </div>
 </div>
         </div>
@@ -272,9 +277,6 @@
 </div>
 </div>
 </div>
-    </div>
-
-<!--Recipe Item Template 10 random entries -->
 
 
 
@@ -293,7 +295,7 @@
 <!--Body content ends here -->
 
 <footer class="">
-<div class="container-fluid">
+<div id="footer-responsive" class="container-fluid">
 <div class="row">
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 <div class="about-widget">

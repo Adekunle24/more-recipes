@@ -63,7 +63,7 @@ app.controller('myController',function($scope,$http,$timeout,$window)
   $scope.simulateLogin = function()
   {
     $scope.LoginLoader = true;
-    $('.master-notification').removeClass('hide');
+    $('.master-notification').removeClass('invisible');
     $timeout(function(){
       $scope.MasterNotifyMessage = 'This is a simulated login attempt. Adekunle, please initiate the sequelize connection';
       $scope.LoginLoader = false;
@@ -74,30 +74,30 @@ app.controller('myController',function($scope,$http,$timeout,$window)
   //simulate like attempt
   $scope.LikeRecipe = function(initial_value,loader)
   {
-    loader.removeClass('hide');
+    loader.removeClass('invisible');
     $timeout(function(){
       var tt = parseInt(initial_value.html());
       initial_value.html(tt+1);
-      loader.addClass('hide');
+      loader.addClass('invisible');
     },1000);
   };
   //simulate dislike attempt
   $scope.DisLikeRecipe = function(initial_value,loader)
   {
-    loader.removeClass('hide');
+    loader.removeClass('invisible');
     $timeout(function(){
       var tt = parseInt(initial_value.html());
       initial_value.html(tt+1);
-      loader.addClass('hide');
+      loader.addClass('invisible');
     },1000);
   };
   $scope.LoveRecipe = function(initial_value,loader)
   {
-    loader.removeClass('hide');
+    loader.removeClass('invisible');
     $timeout(function(){
       var tt = parseInt(initial_value.html());
       initial_value.html(tt+1);
-      loader.addClass('hide');
+      loader.addClass('invisible');
     },1000);
   };
   //add ingredient to table
@@ -164,10 +164,13 @@ function searchFor(_selector, _subject) {
 
 
 $('.recipe-item-comment').click(function(){
-  nextInDOM($(this), $('.comment-container')).toggleClass('hide');
+  nextInDOM($(this), $('.comment-container')).toggleClass('invisible');
+});
+$('.fav-recipe-comment').click(function(){
+  nextInDOM($(this), $('.toggle-comment')).toggleClass('invisible');
 });
 //hide all recipe-items spinner
-$('.recipe-actions .fa-spin, .fa-spin').addClass('hide');
+$('.recipe-actions .fa-spin, .fa-spin').addClass('invisible');
 
 //simulate liking attempt
 $('.fa-thumbs-up').click(
@@ -234,7 +237,7 @@ function DisplayAddRecipeComment(){
 //handle comment-reply textbox toggle-display
 $('.reply-comment').click(function(){
   var element = nextInDOM($(this),'.comment-container');
-  element.toggleClass('hide');
+  element.toggleClass('invisible');
 });
 
 //simulate random values for actions
@@ -266,11 +269,13 @@ function InitiateResponsiveness(){
     $('#page-tab .nav-link').addClass('inline');
     $('#page-tab li').addClass('inline');
     $('#footer-responsive').removeClass('container-fluid');
+    $('.fa-trash').removeClass('fa-2x');
   }
   else{
      $('#page-tab').addClass('flex-column').addClass('height-300').addClass('registration-nav').addClass('float-left');
     $('#page-tab .nav-link').removeClass('inline');
     $('#page-tab li').removeClass('inline');
+    $('.fa-trash').addClass('fa-2x');
 }
 };
 

@@ -18,55 +18,55 @@
 <link rel="stylesheet" type="text/css" href="css/site.css">
 </head>
 <body data-ng-controller="myController" data-ng-app="myApp" class="app-body">
-		<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    <a href="#"><img id="app-logo" src="images/logo.png" ></a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-      <li class=""><a href="/view-recipes/top">Top Recipes</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Trending <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a class="padding-5" href="#">Most Popular Recipes</a></li>
-            <li><a href="#">Most Viewed Recipes</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Foreign Recipes</a></li>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="#page-top">MoreRecipes</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Top Recipes</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="#services">Latest Recipes</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="#services">Add Recipe</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" href="#services">More</a>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">FAQs</a>
+    <a class="dropdown-item" href="#">Feeback</a>
+    <a class="dropdown-item" href="#">Contact us</a> 
+		<a class="dropdown-item" href="#">Help & Support</a>
+  </div>
+            </li>
           </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+            <form class="form-inline">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0 cursor-pointer" type="submit">Search</button>
+  </form>
+  <div> <div class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle hover-white" data-toggle="dropdown" aria-haspopup="true">
+				<span class="comment-author">Adekunle <img src="/images/avatar.jpg" class="float-left"  />
+        </span>
+             </a>
+          <div class="dropdown-menu" role="menu">
+					<a class="dropdown-item" href="#"><i class="fa fa-gear padding-right-10"></i>Add Recipe</a>
+						   <a class="dropdown-item" href="#"><i class="fa fa-gear padding-right-10"></i>Profile settings</a>
+							  <a class="dropdown-item" class="" href="#"><i class="padding-right-10"></i>Favourite Recipe</a>
+								 <a class="dropdown-item" class="" href="#"><i class="fa fa-lock padding-right-10"></i>Sign out</a>
+								  <a class="dropdown-item" class="" href="#"><i class=" padding-right-10"></i>Terms and condition</a>
+          </div>
         </div>
-        <button type="submit" class="btn btn-default"><i class="fa fa-search padding-5"></i>Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">FAQS</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Help & Support <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Contact us</a></li>
-			  <li><a href="#">Feedback</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-
+        </div>
+        </div>
+      </div>
+    </nav>
 
 <div class="container" id="body-container">
 
@@ -74,7 +74,7 @@
  <section class=" master-notification margin-bottom-10 hide"  id="subscribe">
         <div class="container">
             <div class="row">
-                <div class="col-md-offset-2 col-md-8 col-sm-12 text-center">
+                <div class="col-md-12 col-sm-12 text-center">
                     <span id="master-notify-close" data-ng-click="CloseMasterNotify()" class="white hover-black cursor-pointer float-left"><i class="fa fa-close"></i></span>
                     <p>{{MasterNotifyMessage}}</p>
                 </div>
@@ -86,13 +86,15 @@
 
 <!--top banner -->
 <section class=" top-banner"  id="subscribe">
-    <div class="container">
+     <div class="container">
 	<div class="row">
 		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="banner-block">
-				<div class="banner-block-title">
+				<div class="padding-top-10">
           <!--Begin Categories select -->
-					<div class="banner-select">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="banner-select">
 						<div class="title">Filter By:</div>
 						<fieldset class="form-group">
 							<select class="selectpicker form-control" size="auto">
@@ -103,31 +105,31 @@
 							</select>
 						</fieldset>
 					</div>
-
+</div>
+<div class="col-md-4">
 					<div class="banner-select">
-						<fieldset class="form-group">
+						<fieldset class="input-group">
 							<select class="selectpicker form-control" size="auto">
 								<option value="NU">Date (Descending)</option>
 								<option value="NU">Date (Ascending)</option>
 							</select>
+									<span class="input-group-btn">				<a href="#" data-toggle="modal" data-target="#create-photo-album" class="btn btn-primary btn-md-2 margin-right-10">Filter</a></span>
 						</fieldset>
 					</div>
-
-					<a href="#" data-toggle="modal" data-target="#create-photo-album" class="btn btn-primary btn-md-2 margin-right-10">Filter</a>
-
-					<form class="banner-search">
-						<div class="form-group">
-							<input class="form-control float-left width-250 margin-left-10" type="text" placeholder="Search Top Recipes from Nigeria......">
-							<button class="btn btn-flat">
-                <i class="fa fa-search"></i>
-							</button>
-						</div>
-					</form>
+</div>
+<div class="col-md-4">
+				 <form class="form-inline">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0 cursor-pointer" type="submit">Search</button>
+  </form>
+					</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
     </section>
 <!--Body content starts here -->
 <div class="main-header">
@@ -147,25 +149,25 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
 
-      <div class="item active">
+      <div class="carousel-item active">
         <img src="images/recipe_3.jpg" alt="Los Angeles" style="width:100%;">
-        <div class="carousel-caption bg-gray">
+        <div class="carousel-caption  d-none d-md-block bg-gray">
           <h2>Top Recipes for Today</h2>
           <p> Check out classic beef burgers, turkey burgers, veggie burgers, and lamb burgers.</p>
         </div>
       </div>
 
-      <div class="item">
+      <div class="carousel-item">
         <img src="images/recipe_2.jpg" alt="Chicago" style="width:100%;">
-        <div class="carousel-caption bg-gray">
+        <div class="carousel-caption  d-none d-md-block bg-gray">
           <h3>Top Recipes for Today</h3>
           <p>I came up with this after having a delicious caprese salad. Be sure to use fresh basil!</p>
         </div>
       </div>
     
-      <div class="item">
+      <div class="carousel-item">
         <img src="images/recipe_8.jpg" alt="New York" style="width:100%;">
-        <div class="carousel-caption bg-gray">
+        <div class="carousel-caption  d-none d-md-block bg-gray">
           <h3>Top Recipes for Today</h3>
           <p>Platillos mexicanos. Fried chicken, fried rice, and others</p>
         </div>
@@ -183,7 +185,7 @@
     </a>
   </div>
 <!--End Carousel -->
-<div class="container margin-top-10">
+<div class=" margin-top-10">
 	<div class="row">
     <!--Row 2 column 1 -->
 		<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12">
@@ -241,7 +243,13 @@
               </li>
 						</ul>
 						</div>
-<div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+<div class="comment-container margin-top-10 invisible"><form>	 <div class="input-group">
+           <input class="form-control" placeholder="comment"/>
+           <span clas="input-group-btn">
+           <a class="btn white btn-warning "><i class="fa fa-send white"></i></a>
+           </span>
+           </div>
+	</form></div>
 					</div>
 				</div>
 
@@ -305,7 +313,15 @@
               </li>
 						</ul>
 						</div>
-<div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+<div class="comment-container margin-top-10 invisible"><form>	
+	 <div class="input-group">
+           <input class="form-control" placeholder="comment"/>
+           <span clas="input-group-btn">
+           <a class="btn white btn-warning "><i class="fa fa-send white"></i></a>
+           </span>
+           </div>
+
+	</form></div>
 					</div>
 				</div>
 
@@ -368,7 +384,13 @@
               </li>
 						</ul>
 						</div>
-<div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+<div class="comment-container margin-top-10 invisible"><form> <div class="input-group">
+           <input class="form-control" placeholder="comment"/>
+           <span clas="input-group-btn">
+           <a class="btn white btn-warning "><i class="fa fa-send white"></i></a>
+           </span>
+           </div>
+	</form></div>
 					</div>
 				</div>
 
@@ -426,12 +448,18 @@
               <li>
                 <a  class="recipe-item-comment inline-items">
                 <i class="fa fa-comment-o"></i>
-								<span>100</span>
+								<span class="action-value">100</span>
 							</a>
               </li>
 						</ul>
 						</div>
-<div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+<div class="comment-container margin-top-10 invisible"><form> <div class="input-group">
+           <input class="form-control" placeholder="comment"/>
+           <span clas="input-group-btn">
+           <a class="btn white btn-warning "><i class="fa fa-send white"></i></a>
+           </span>
+           </div>
+	</form></div>
 					</div>
 				</div>
 
@@ -489,12 +517,18 @@
               <li>
                 <a  class="recipe-item-comment inline-items">
                 <i class="fa fa-comment-o"></i>
-								<span>100</span>
+								<span class="action-value">100</span>
 							</a>
               </li>
 						</ul>
 						</div>
-<div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+<div class="comment-container margin-top-10 invisible"><form><div class="input-group">
+           <input class="form-control" placeholder="comment"/>
+           <span clas="input-group-btn">
+           <a class="btn white btn-warning "><i class="fa fa-send white"></i></a>
+           </span>
+           </div>
+	</form></div>
 					</div>
 				</div>
 
@@ -557,7 +591,13 @@
               </li>
 						</ul>
 						</div>
-<div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+<div class="comment-container margin-top-10 invisible"><form><div class="input-group">
+           <input class="form-control" placeholder="comment"/>
+           <span clas="input-group-btn">
+           <a class="btn white btn-warning "><i class="fa fa-send white"></i></a>
+           </span>
+           </div>
+	</form></div>
 					</div>
 				</div>
 
@@ -593,7 +633,7 @@
 <!--Body content ends here -->
 
 <footer class="">
-<div class="container-fluid">
+<div id="footer-responsive" class="container-fluid">
 <div class="row">
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 <div class="about-widget">
@@ -628,42 +668,43 @@ have​ ​invented​ ​or​ ​learnt.
 				<li><a href="/recipe-filter/trending">Friends Recipe</a></li>
 </ul>
 	</div>
-	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 recipe-gallery">
-<h4 class="text-center">Recipe Gallery</h4>
+			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 recipe-gallery">
+<h4 class="text-center">Recipe Gallery</h4>   
 <div class="row">
-<div class="col-md-4 col-xs-6">
-<a  data-lightbox="gallery-lightbox" href="images/gallery01.png" data-title="Recipe gallery" >	<img src="images/gallery01.png" /></a>
+<div class="col-4 col-md-4 col-xs-6">
+<a  data-lightbox="gallery-lightbox" href="images/gallery01.png" data-title="Recipe gallery" >	<img src="images/gallery01.png" ></a>
 </div>
-<div class="col-md-4 col-xs-6">
-<a  data-lightbox="gallery-lightbox" href="images/gallery02.png" data-title="Recipe gallery" >	<img src="images/gallery02.png" /></a>
+<div class="col-4 col-md-4 col-xs-6 col-3">
+<a  data-lightbox="gallery-lightbox" href="images/gallery02.png" data-title="Recipe gallery" >	<img src="images/gallery02.png" ></a>
 </div>
-<div class="col-md-4 col-xs-6">
-<a  data-lightbox="gallery-lightbox" href="images/gallery03.png" data-title="Recipe gallery" >	<img src="images/gallery03.png" /></a>
-</div>
-</div>
-<div class="row">
-<div class="col-md-4 col-xs-6">
-	<a  data-lightbox="gallery-lightbox" href="images/gallery04.png" data-title="Recipe gallery" ><img src="images/gallery04.png" /></a>
-</div>
-<div class="col-md-4 col-lg-4 col-xs-4">
-<a  data-lightbox="gallery-lightbox" href="images/gallery05.png" data-title="Recipe gallery" >	<img src="images/gallery05.png" /></a>
-</div>
-<div class="col-md-4 col-lg-4 col-xs-4">
-<a  data-lightbox="gallery-lightbox" href="images/gallery06.png" data-title="Recipe gallery" >	<img src="images/gallery06.png" /></a>
+<div class="col-4 col-md-4 col-xs-6 col-3">
+<a  data-lightbox="gallery-lightbox" href="images/gallery03.png" data-title="Recipe gallery" >	<img src="images/gallery03.png" ></a>
 </div>
 </div>
 <div class="row">
-<div class="col-md-4 col-xs-6">
-	<a  data-lightbox="gallery-lightbox" href="images/gallery07.png" data-title="Recipe gallery" ><img src="images/gallery07.jpg" /></a>
+<div class="col-4 col-md-4 col-xs-6 col-3">
+	<a  data-lightbox="gallery-lightbox" href="images/gallery04.png" data-title="Recipe gallery" ><img src="images/gallery04.png" ></a>
 </div>
-<div class="col-md-4 col-lg-4 col-xs-4">
-<a  data-lightbox="gallery-lightbox" href="images/gallery08.png" data-title="Recipe gallery" >	<img src="images/gallery08.jpg" /></a>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery05.png" data-title="Recipe gallery" >	<img src="images/gallery05.png" ></a>
 </div>
-<div class="col-md-4 col-lg-4 col-xs-4">
-<a  data-lightbox="gallery-lightbox" href="images/gallery09.png" data-title="Recipe gallery" >	<img src="images/gallery09.jpg" />
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery06.png" data-title="Recipe gallery" >	<img src="images/gallery06.png" ></a>
+</div>
+</div>
+<div class="row">
+<div class="col-4 col-md-4 col-xs-6">
+	<a  data-lightbox="gallery-lightbox" href="images/gallery07.png" data-title="Recipe gallery" ><img src="images/gallery07.png" ></a>
+</div>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery08.png" data-title="Recipe gallery" >	<img src="images/gallery08.jpg"></a>
+</div>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery09.png" data-title="Recipe gallery" >	<img src="images/gallery09.jpg" ></a>
 </div>
 </div>
 	</div>
+
 	<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
 <h6 class="text-center">More Recipe</h6>
 <ul class="footer-links">
@@ -711,9 +752,8 @@ have​ ​invented​ ​or​ ​learnt.
 
 <!--End Page Modal -->
 <script src="js/jquery.min.js"></script>
-<script src="js/tether.min.js"></script>
+<script src="js/popper.js"></script>
 <script src="js/bootstrap.js"></script>
-<script src= "js/jPinning.min.js"></script>
 <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
 <script src="js/tooltip.js"></script>
 <script src="js/lightbox.js"></script>
