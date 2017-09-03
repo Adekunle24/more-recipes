@@ -546,6 +546,9 @@ text-align: center;
 .padding-right-30{
     padding-right:30px;
 }
+.hover-white:hover{
+    color:#fff !important;
+}
 @media (max-width: 320px) {
   .intro-title {
     font-size:22px;
@@ -559,6 +562,9 @@ position: relative;
 padding-left: 10px;
 margin-bottom:20px;
 margin-top:10px;
+}
+.user-header-picture{
+    position: relative;
 }
 footer{
  width: calc(100%);

@@ -52,7 +52,7 @@
     <button class="btn btn-outline-success my-2 my-sm-0 cursor-pointer" type="submit">Search</button>
   </form>
   <div> <div class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+          <a href="#" class="nav-link dropdown-toggle hover-white" data-toggle="dropdown" aria-haspopup="true">
 				<span class="comment-author">Adekunle <img src="/images/avatar.jpg" class="float-left"  />
         </span>
              </a>
@@ -77,7 +77,7 @@
  <section class=" master-notification margin-bottom-10 hide"  id="subscribe">
         <div class="container">
             <div class="row">
-                <div class="col-md-offset-2 col-md-8 col-sm-12 text-center">
+                <div class="col-12 col-sm-12 text-center">
                     <span id="master-notify-close" data-ng-click="CloseMasterNotify()" class="white hover-black cursor-pointer float-left"><i class="fa fa-close"></i></span>
                     <p>{{MasterNotifyMessage}}</p>
                 </div>
@@ -137,8 +137,8 @@
 </div>
 </div>
 <div class="user-header-picture">
-<a class="author-thumb">
-<img class="img-circle" src="/images/avatar.jpg" />
+<a class="">
+<img class="rounded-circle" src="/images/avatar.jpg" />
 </a>
  <div class="author-date">
             <a href="author-name" >Olayinka Kunle</a>
@@ -160,22 +160,20 @@
 
 <!--Body content starts here -->
 <div class="main-header">
-	<div class="container">
 <div class="row">
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <div class="banner-block">
 <div class="profile-tabs">
 <div class="row">
-<ul class="nav nav-pills profile-list">
-<li class=""><a data-toggle="pill" href="#my-recipes">My Recipes</a></li>
-<li class="active"><a data-toggle="pill" href="#add-recipe">Add a Recipe</a></li>
+<ul class="nav nav-pills profile-list" role="tablist">
+<li class="active"><a class="nav-link" data-toggle="pill" href="#my-recipes">My Recipes</a></li>
+<li class=""><a class="nav-link" data-toggle="pill" href="#add-recipe">Add a Recipe</a></li>
 </ul>
 </div>
 </div>
 <!--enter each tab content below-->
  <div class="tab-content">
-    <div id="my-recipes" class="tab-pane fade">
-		<div class="container">
+    <div id="my-recipes" class="tab-pane fade show active">
 <div class="row">
   <!--Simulate with Angular -->
 <div data-ng-repeat="recipe in TotalRecipes" class="col-md-4 photo-album">
@@ -196,7 +194,7 @@
      <a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10"> 24 </span></a>
      <a class="reply-comment margin-left-10">
         <span class="delete-recipe"> Reply </span>
-         <div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+         <div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-warning "><i class="fa fa-send white"></i></a></form></div>
      </a>
      </div>
 </div>
@@ -204,8 +202,8 @@
 </div>
 
   </div>
-  </div></div>
-    <div id="add-recipe" class="tab-pane fade in active">
+  </div>
+    <div id="add-recipe" class="tab-pane fade">
         <div class="container">
 <div class="row">
     <div class="col-md-6">
@@ -275,7 +273,6 @@
 </div>
 </div>
     </div>
-	</div>
 
 <!--Recipe Item Template 10 random entries -->
 
@@ -332,38 +329,38 @@ have​ ​invented​ ​or​ ​learnt.
 </ul>
 	</div>
 	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 recipe-gallery">
-<h4 class="text-center">Recipe Gallery</h4>
+<h4 class="text-center">Recipe Gallery</h4>   
 <div class="row">
-<div class="col-md-4 col-xs-6">
-<a  data-lightbox="gallery-lightbox" href="images/gallery01.png" data-title="Recipe gallery" >	<img src="images/gallery01.png" /></a>
+<div class="col-4 col-md-4 col-xs-6">
+<a  data-lightbox="gallery-lightbox" href="images/gallery01.png" data-title="Recipe gallery" >	<img src="images/gallery01.png" ></a>
 </div>
-<div class="col-md-4 col-xs-6">
-<a  data-lightbox="gallery-lightbox" href="images/gallery02.png" data-title="Recipe gallery" >	<img src="images/gallery02.png" /></a>
+<div class="col-4 col-md-4 col-xs-6 col-3">
+<a  data-lightbox="gallery-lightbox" href="images/gallery02.png" data-title="Recipe gallery" >	<img src="images/gallery02.png" ></a>
 </div>
-<div class="col-md-4 col-xs-6">
-<a  data-lightbox="gallery-lightbox" href="images/gallery03.png" data-title="Recipe gallery" >	<img src="images/gallery03.png" /></a>
-</div>
-</div>
-<div class="row">
-<div class="col-md-4 col-xs-6">
-	<a  data-lightbox="gallery-lightbox" href="images/gallery04.png" data-title="Recipe gallery" ><img src="images/gallery04.png" /></a>
-</div>
-<div class="col-md-4 col-lg-4 col-xs-4">
-<a  data-lightbox="gallery-lightbox" href="images/gallery05.png" data-title="Recipe gallery" >	<img src="images/gallery05.png" /></a>
-</div>
-<div class="col-md-4 col-lg-4 col-xs-4">
-<a  data-lightbox="gallery-lightbox" href="images/gallery06.png" data-title="Recipe gallery" >	<img src="images/gallery06.png" /></a>
+<div class="col-4 col-md-4 col-xs-6 col-3">
+<a  data-lightbox="gallery-lightbox" href="images/gallery03.png" data-title="Recipe gallery" >	<img src="images/gallery03.png" ></a>
 </div>
 </div>
 <div class="row">
-<div class="col-md-4 col-xs-6">
-	<a  data-lightbox="gallery-lightbox" href="images/gallery07.png" data-title="Recipe gallery" ><img src="images/gallery07.jpg" /></a>
+<div class="col-4 col-md-4 col-xs-6 col-3">
+	<a  data-lightbox="gallery-lightbox" href="images/gallery04.png" data-title="Recipe gallery" ><img src="images/gallery04.png" ></a>
 </div>
-<div class="col-md-4 col-lg-4 col-xs-4">
-<a  data-lightbox="gallery-lightbox" href="images/gallery08.png" data-title="Recipe gallery" >	<img src="images/gallery08.jpg" /></a>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery05.png" data-title="Recipe gallery" >	<img src="images/gallery05.png" ></a>
 </div>
-<div class="col-md-4 col-lg-4 col-xs-4">
-<a  data-lightbox="gallery-lightbox" href="images/gallery09.png" data-title="Recipe gallery" >	<img src="images/gallery09.jpg" />
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery06.png" data-title="Recipe gallery" >	<img src="images/gallery06.png" ></a>
+</div>
+</div>
+<div class="row">
+<div class="col-4 col-md-4 col-xs-6">
+	<a  data-lightbox="gallery-lightbox" href="images/gallery07.png" data-title="Recipe gallery" ><img src="images/gallery07.png" ></a>
+</div>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery08.png" data-title="Recipe gallery" >	<img src="images/gallery08.jpg"></a>
+</div>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery09.png" data-title="Recipe gallery" >	<img src="images/gallery09.jpg" ></a>
 </div>
 </div>
 	</div>

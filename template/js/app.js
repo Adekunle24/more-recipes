@@ -4,9 +4,8 @@
  * author adekunle
  * framework NodeJS, Express and PostgreDb
  */
-
 //Initiate DatePicker
-$(document).ready(() => {
+$(document).ready(function(){
   var date_input=$('input[name="date"]'); //our date input has the name "date"
   var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : 'body';
   date_input.datepicker({
@@ -26,20 +25,19 @@ var app = angular.module('myApp',[]);
 
 //Propagate register event
 $('#register-2').click(
-  () =>{
+  function(){
     $('a[href="#home"]').click();
   }
 );
 //Propage login event
-$('#login-2').click(() =>{
+$('#login-2').click(function(){
   $('a[href="#menu1"]').click();
 });
 
 
 
 //Begin Angular controller here
-// AngularJS controller not responding using ES6 syntax. Permission to use Es5
-app.controller('myController',function ($scope,$http,$timeout,$window)
+app.controller('myController',function($scope,$http,$timeout,$window)
 {
   //declare global variables
 
@@ -55,18 +53,18 @@ app.controller('myController',function ($scope,$http,$timeout,$window)
     {'poster':'images/recipe_7.jpg','recipe_title':'How to make Burger','comment':'I love the recipe. I tried it once and all my kids enjoyed the taste and aroma','likes_count':'287','timeline':'3 months ago'}
   ];
   //close master notification 
-  $scope.CloseMasterNotify = () =>{
+  $scope.CloseMasterNotify = function(){
     $('.master-notification').fadeOut(500);
   };
   //End Angular
 
 
   //simulate login attempt
-  $scope.simulateLogin = () =>
+  $scope.simulateLogin = function()
   {
     $scope.LoginLoader = true;
     $('.master-notification').removeClass('hide');
-    $timeout(() =>{
+    $timeout(function(){
       $scope.MasterNotifyMessage = 'This is a simulated login attempt. Adekunle, please initiate the sequelize connection';
       $scope.LoginLoader = false;
     },4000);
@@ -74,69 +72,70 @@ app.controller('myController',function ($scope,$http,$timeout,$window)
   //End login simulation
 
   //simulate like attempt
-  $scope.LikeRecipe = (initial_value,loader) =>
+  $scope.LikeRecipe = function(initial_value,loader)
   {
     loader.removeClass('hide');
-    $timeout(() =>{
+    $timeout(function(){
       var tt = parseInt(initial_value.html());
       initial_value.html(tt+1);
       loader.addClass('hide');
     },1000);
   };
   //simulate dislike attempt
-  $scope.DisLikeRecipe = (initial_value,loader) =>
+  $scope.DisLikeRecipe = function(initial_value,loader)
   {
     loader.removeClass('hide');
-    $timeout(() =>{
+    $timeout(function(){
       var tt = parseInt(initial_value.html());
       initial_value.html(tt+1);
       loader.addClass('hide');
     },1000);
   };
-  $scope.LoveRecipe = (initial_value,loader) =>
+  $scope.LoveRecipe = function(initial_value,loader)
   {
     loader.removeClass('hide');
-    $timeout(() =>{
+    $timeout(function(){
       var tt = parseInt(initial_value.html());
       initial_value.html(tt+1);
       loader.addClass('hide');
     },1000);
   };
   //add ingredient to table
-  $scope.AddIngredient = () =>{
+  $scope.AddIngredient = function(){
     var item_dic = { 'item': $scope.Item,'quantity':$scope.Quantity };
     $scope.Ingredients.push(item_dic);
   };
 
   //remove ingredient from table
-  $scope.RemoveIngredient = (index) =>{
+  $scope.RemoveIngredient = function(index){
     $scope.Ingredients.splice(index,1);
   };
 
   //remove posted recipe
-  $scope.DeletePostedRecipe = (index) =>{
+  $scope.DeletePostedRecipe = function(index){
     $scope.TotalRecipes.splice(index,1);
   };
 
 });
 
 //next element
-const nextInDOM = (_subject, _selector) => {
-  let next = getNext(_subject);
+function nextInDOM(_subject, _selector) {
+  var next = getNext(_subject);
   while(next.length != 0) {
     var found = searchFor(_selector, next);
     if(found != null) return found;
     next = getNext(next);
   }
   return null;
-};
-const getNext = (_subject) => {
+}
+function getNext(_subject) {
   if(_subject.next().length > 0) return _subject.next();
   return getNext(_subject.parent());
-};
+}
+
 //previous element
 //next element
-const prevInDOM = (_subject, _selector) => {
+function prevInDOM(_subject, _selector) {
   var previous = getPrev(_subject);
   while(previous.length != 0) {
     var found = searchFor(_selector, previous);
@@ -144,27 +143,27 @@ const prevInDOM = (_subject, _selector) => {
     previous = getPrev(previous);
   }
   return null;
-};
-const getPrev = (_subject) => {
+}
+function getPrev(_subject) {
   if(_subject.prev().length > 0) return _subject.prev();
   return getPrev(_subject.parent());
-};
+}
 
 
-const searchFor = (_selector, _subject) => {
+function searchFor(_selector, _subject) {
   if(_subject.is(_selector)) return _subject;
   else {
     var found = null;
-    _subject.children().each(() => {
+    _subject.children().each(function() {
       found = searchFor(_selector, $(this));
       if(found != null) return false;
     });
     return found;
   }
-};
+}
 
 
-$('.recipe-item-comment').click(() =>{
+$('.recipe-item-comment').click(function(){
   nextInDOM($(this), $('.comment-container')).toggleClass('hide');
 });
 //hide all recipe-items spinner
@@ -172,7 +171,7 @@ $('.recipe-actions .fa-spin, .fa-spin').addClass('hide');
 
 //simulate liking attempt
 $('.fa-thumbs-up').click(
-  () =>{
+  function(){
     var scope = angular.element($('.app-body')).scope();
     var initial_value =  nextInDOM($(this), $('.action-value'));
     var loader =  prevInDOM($(this), $('.fa-spin'));
@@ -182,7 +181,7 @@ $('.fa-thumbs-up').click(
 
 //simulate dislike attempt
 $('.fa-thumbs-down').click(
-  () =>{
+  function(){
     var scope = angular.element($('.app-body')).scope();
     var initial_value =  nextInDOM($(this), $('.action-value'));
     var loader =  prevInDOM($(this), $('.fa-spin'));
@@ -191,7 +190,7 @@ $('.fa-thumbs-down').click(
 );
 //simulate love attempt
 $('.fa-heart').click(
-  () =>{
+  function(){
     var scope = angular.element($('.app-body')).scope();
     var initial_value =  nextInDOM($(this), $('.action-value'));
     var loader =  prevInDOM($(this), $('.fa-spin'));
@@ -200,8 +199,8 @@ $('.fa-heart').click(
 );
 
 //handle comment content accordion
-const DisplayAddRecipeComment = () => {
-  $('.accordion-handle').click(() =>{
+function DisplayAddRecipeComment(){
+  $('.accordion-handle').click(function(){
     var initial_value = nextInDOM($(this),$('.comment-content'));
     if(initial_value.css('display')=='none')
     {
@@ -209,9 +208,9 @@ const DisplayAddRecipeComment = () => {
       initial_value.addClass('collapsing');
     
       $(this).addClass('fa-chevron-up');
-      setTimeout(() => {
+      var accordion_timeout = setTimeout(function() {
         initial_value.removeClass('collapsing');
-        initial_value.addClass('in');
+        initial_value.addClass('show');
         initial_value.addClass('collapse');
       }, 100);
       $(this).removeClass('fa-chevron-down');
@@ -220,26 +219,26 @@ const DisplayAddRecipeComment = () => {
       initial_value.removeClass('collapse');
       initial_value.addClass('collapsing');
       $(this).addClass('fa-chevron-down');
-      setTimeout(() => {
+      var accordion_timeout = setTimeout(function() {
         initial_value.removeClass('collapsing');
-        initial_value.removeClass('in');
+        initial_value.removeClass('show');
         initial_value.addClass('collapse');
       }, 100);
       $(this).removeClass('fa-chevron-up');
     }
     initial_value.toggleClass('in');
   });
-};
+}
 
 
 //handle comment-reply textbox toggle-display
-$('.reply-comment').click(() =>{
+$('.reply-comment').click(function(){
   var element = nextInDOM($(this),'.comment-container');
   element.toggleClass('hide');
 });
 
 //simulate random values for actions
-const PushRandomActionValues = () =>
+function PushRandomActionValues()
 {
   var array = [];
   var count = $('.action-value').length;
@@ -249,14 +248,16 @@ const PushRandomActionValues = () =>
     array.push(rnd);
   }
   var index = 0;
-  $('.action-value').each(() =>{
+  $('.action-value').each(function(){
     $(this).html(array[index]);
     index = index+1;
   });
-};
+}
+
+
 //Javascript for Responsiveness on Load
-const InitiateResponsiveness = () => {
-  //specific width for homepage/nav tabs
+function InitiateResponsiveness(){
+ //specific width for homepage/nav tabs
   var home_tab_width = 321;
   var window_width = $(window).width();
   if(window_width<home_tab_width)
@@ -270,11 +271,11 @@ const InitiateResponsiveness = () => {
      $('#page-tab').addClass('flex-column').addClass('height-300').addClass('registration-nav').addClass('float-left');
     $('#page-tab .nav-link').removeClass('inline');
     $('#page-tab li').removeClass('inline');
-  }
+}
 };
 
 //load methods after document is ready
-$(document).ready(() =>{
+$(document).ready(function(){
   DisplayAddRecipeComment();
   PushRandomActionValues();
   InitiateResponsiveness();
