@@ -76,7 +76,6 @@ routes.post('/api/users/signin', usersController.signIn);
 
 // api-recipes-add route
 routes.post('/api/recipes', recipesController.addRecipe);
-//routes.post('/api/recipes/:userId/:title/:ingredients/:procedures', recipesController.addRecipe);
 
 // api-recipes-totalrecipes route
 routes.get('/api/recipes',recipesController.getTotalRecipes);

@@ -13,18 +13,24 @@ const getTotalRecipes = (req,res) => {
     }]
   }
   ).then(value => 
-    res.send(value)
+    res.json({success:true,data:value})
   ).catch(error =>res.send(error));
 };
 
 // this api adds a new recipe to the database
 const addRecipe = (req,res) => {
-  recipeModel.create({
-    title : req.body.title,
-    userId : req.body.user,
-    procedures : req.body.procedures,
-    ingredients : req.body.ingredients
-  }).then(result => res.send('Recipe added successfully')).catch(error => res.send(error));
+  if(req.body.title&&req.body.user&&req.body.procedures&&req.body.ingredients)
+  {
+    recipeModel.create({
+      title : req.body.title,
+      userId : req.body.user,
+      procedures : req.body.procedures,
+      ingredients : req.body.ingredients
+    }).then(result => res.json({success:true,data:result,message:'Recipe added successfully'})).catch(error => res.send(error));
+  }
+  else{
+      res.json({success:false,data:null,validations:false,message:'Please provide title,procedures,userid and ingredients'});
+  }
 };
 
 // this api enables users to modify recipe they added

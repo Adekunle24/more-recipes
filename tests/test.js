@@ -123,4 +123,48 @@ describe('API : generate token',() =>{
         done();
       });
   });
+
+   // test api to retrieve all recipes
+  it('GET/ api/recipes should return array of recipes',(done) =>{
+    server
+      .get('/api/recipes')
+      .expect('Content-type',/json/)
+      .expect(200) // THis is HTTP response
+      .end((err,res) =>{
+      // HTTP status should be 200
+        assert.isArray(res.body.data);
+        assert.property(res.body,'data');
+        assert.property(res.body,'success');
+        done();
+      });
+  });
+   it('POST/ api/recipes should return validations false without data',(done) =>{
+    server
+      .post('/api/recipes')
+      .expect('Content-type',/json/)
+      .expect(200) // THis is HTTP response
+      .end((err,res) =>{
+      // HTTP status should be 200
+        assert.property(res.body,'data');
+        assert.property(res.body,'success');
+        assert.property(res.body,'message');
+        assert.property(res.body,'validations');
+        assert.isFalse(res.body.validations);
+        done();
+      });
+  });
+  it('POST/ api/recipes should return successful with data',(done) =>{
+    server
+      .post('/api/recipes').send({title:'How to make pizza',user:1,procedures:'Pour oil in fry pan.. Mix it with water',ingredients:{'item':'melon','quantity':'1 cup'}})
+      .expect('Content-type',/json/)
+      .expect(200) // THis is HTTP response
+      .end((err,res) =>{
+      // HTTP status should be 200
+        assert.property(res.body,'data');
+        assert.property(res.body,'success');
+        assert.property(res.body,'message');
+        assert.isTrue(res.body.success);
+        done();
+      });
+  });
 });
