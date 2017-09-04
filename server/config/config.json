@@ -20,7 +20,7 @@
    "production": {
     "username": "postgres",
     "password": "postgre",
-    "database": "More-RecipesTest",
+    "database": "More-Recipes",
     "host": "localhost",
     "port": 5432,
     "dialect": "postgres",

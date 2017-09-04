@@ -12,6 +12,7 @@ module.exports = {  up : (queryInterface, Sequelize) => {
     },
     username: {
       type: Sequelize.STRING,
+      unique: true
     },
     emailConfirmed: {
       type: Sequelize.INTEGER,

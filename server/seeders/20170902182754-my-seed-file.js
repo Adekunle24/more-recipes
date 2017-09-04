@@ -21,7 +21,7 @@ module.exports = {
     {
       email: 'andela@gmail.com',
       emailConfirmed : 0,
-      password : '$2a$10$ibbi.ll8eeeVLA0mhll9Lupv5XQa2dNBF701TNhbYUnWkG3M9LR6a',
+      password : '$2a$10$ibbi.ll8eeeVLA0mhll9Lupv5XQa2dNBF701TNhbYUnWkG3M9LR6a',//password
       phoneNumber : '',
       phoneNumberVerified : 0,
       accessFailedCount : 0,

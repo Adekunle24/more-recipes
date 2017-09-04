@@ -1,6 +1,6 @@
 
 module.exports = {  up : (queryInterface, Sequelize) => {
-  queryInterface.createTable('reviews', {
+  queryInterface.createTable('votes', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -25,8 +25,11 @@ module.exports = {  up : (queryInterface, Sequelize) => {
         as: 'userId'
       }
     },
-    review: {
-      type: Sequelize.STRING
+    upvote: {
+      type: Sequelize.INTEGER
+    },
+    downvote: {
+      type: Sequelize.INTEGER
     },
     createdAt: {
       allowNull: false,

@@ -8,27 +8,35 @@ module.exports = {
 9,"How to make Pizza with flour","2017-08-31 17:07:08.763+00","2017-09-01 11:02:09.894+00",11,"Grind the flour and mix with water and oil and allow to wait for an hour.. Allow to stay for an hour","""{\""item\"":\""melon\"",'quantity':'1 cup'}"""
 
 */
-    return queryInterface.bulkInsert('recipes', [{
-      title : 'How to make Pizza with flour',
-      userId : '2',
-      procedures : 'Grind the flour and mix with water and oil and allow to wait for an hour.. Allow to stay for an hour',
-      ingredients : '{ "item" :"flour","quantity":"1 cup"}',
-      createdAt : new Date(),
-      updatedAt : new Date()
-    },
-    {
-      title : 'How to make Melon Soup',
+    return queryInterface.bulkInsert('votes', [{
+      recipeId : '1',
       userId : '1',
-      procedures : 'Grind the melon seed and mix with water and oil.. Allow to stay for an hour',
-      ingredients : '[{ "item" :"melon","quantity":"1 cup"}]',
+      upvote : '1',
+      downvote : '0',
       createdAt : new Date(),
       updatedAt : new Date()
     },
     {
-      title : 'How to make Fried rice',
+      recipeId : '1',
+      userId : '1',
+      upvote : '0',
+      downvote : '1',
+      createdAt : new Date(),
+      updatedAt : new Date()
+    },
+    {
+      recipeId : '2',
       userId : '2',
-      procedures : 'Cook white rice as usual and mix with water and oil.. Allow to stay for an hour',
-      ingredients : '[{ "item" :"thyme","quantity":"1 cup"},{ "item" :"palmoil","quantity":"half litre"}]',
+      upvote : '1',
+      downvote : '0',
+      createdAt : new Date(),
+      updatedAt : new Date()
+    },
+    {
+      recipeId : '2',
+      userId : '2',
+      upvote : '0',
+      downvote : '1',
       createdAt : new Date(),
       updatedAt : new Date()
     }

@@ -3,9 +3,10 @@ import express from 'express';
 import fs from 'fs';
 import bodyParser from 'body-parser';
 import routes from './server/routes';
-import jwt from 'jsonwebtoken';
+import favicon from 'serve-favicon';
+import path from 'path';
 import env from 'dotenv';
-import validate from 'express-validation';
+import logger from 'morgan';
 env.config;
 
 
@@ -15,14 +16,25 @@ const app = express();
 // set server listening port
 app.set('port', process.env.PORT || 3000);
 app.set('superSecret',env.API_SECRET);
+app.use(favicon(path.join(__dirname, 'public/images', 'logo.png')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(logger('dev'));
+app.get('/test',(req,res)=>{
+  res.send('test');
+});
 app.use('/',routes);
+
+
+// path to resources
+app.get(['*.png','*.jpg','*.css','*.js','*.map'],(req,res)=>{
+  res.sendFile(`${__dirname}/public/${req.path}`);
+});
 
 // add homepage route
 app.get('/home',(req,res) =>
 {
-  fs.readFile(__dirname+'/template/home.html',(err,data) =>{
+  fs.readFile(__dirname+'/public/home.html',(err,data) =>{
     if(err)
     {
       res.send('error occured');
@@ -35,11 +47,11 @@ app.get('/home',(req,res) =>
 });
 
 // directory for static files
-app.use(express.static(__dirname+'/template'));
+app.use(express.static(__dirname+'/public'));
 
 app.get('/view-recipes',(req,res)=>
 {
-  fs.readFile(__dirname+'/template/view-recipes.html',(err,data) =>{
+  fs.readFile(__dirname+'/public/view-recipes.html',(err,data) =>{
     if(err)
     {
       res.send('error occured '+err);
@@ -54,7 +66,7 @@ app.get('/view-recipes',(req,res)=>
 
 app.get('/recipe-details',(req,res)=>
 {
-  fs.readFile(__dirname+'/template/recipe-details.html',(err,data) => {
+  fs.readFile(__dirname+'/public/recipe-details.html',(err,data) => {
     if(err)
     {
       res.send('error occured '+err);
@@ -67,7 +79,7 @@ app.get('/recipe-details',(req,res)=>
 });
 app.get('/favourite-recipes',(req,res) =>
 {
-  fs.readFile(__dirname+'/template/favourite-recipes.html',(err,data) =>{ 
+  fs.readFile(__dirname+'/public/favourite-recipes.html',(err,data) =>{ 
     if(err)
     {
       res.send('error occured '+err);
@@ -80,7 +92,7 @@ app.get('/favourite-recipes',(req,res) =>
 });
 app.get('/user-profile',(req,res) =>
 {
-  fs.readFile(__dirname+'/template/user-profile.html',(err,data) =>{
+  fs.readFile(__dirname+'/public/user-profile.html',(err,data) =>{
     if(err)
     {
       res.send('error occured '+err);
@@ -93,7 +105,7 @@ app.get('/user-profile',(req,res) =>
 });
 app.get('/add-recipe',(req,res) =>
 {
-  fs.readFile(__dirname+'/template/add-recipe.html',(err,data) => {
+  fs.readFile(__dirname+'/public/add-recipe.html',(err,data) => {
     if(err)
     {
       res.send('error occured '+err);
@@ -114,22 +126,10 @@ app.use((req,res,next) =>{
 });
 
 
-// add startup route
-app.get('/',(req,res) =>
-{
-  let data = { username: 'Adekunle'};
-  fs.readFile(__dirname+'/template/home.html',(err,data) =>{
-    if(err)
-    {
-      res.send('error occured');
-    }
-    else{
-      res.end(data);
-    }
-       
-  });
+// Always return the main index.html, so react-router render the route in the client
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
-
 
 
 

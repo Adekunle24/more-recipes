@@ -50,7 +50,6 @@ const signUp = (req,res) => {
 const signIn = (req,res) => {
   if(req.body.username&&req.body.password)
   {
-    
     const passwordInput = req.body.password;
     userModel.findOne({
       where: {
@@ -66,7 +65,15 @@ const signIn = (req,res) => {
         crypto.compare(passwordInput, result.password, function(err, cryptResponse) {
           if(cryptResponse){
             result.password = null;
-            res.json({success:true,data:result,message:`Welcome ${result.username}`});
+            let newToken;
+            if(process.env.NODE_ENV != 'test')
+            {
+              newToken = jwt.sign(result,process.env.API_SECRET);
+            }
+            else{
+              newToken = null;
+            }
+            res.json({success:true,data:result,message:`Welcome ${result.username}`, token : newToken});
           }
           else{
             res.json({success:false,data:null,message:'Incorrect username or password'});

@@ -10,6 +10,7 @@ import crypto from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 import react from 'react';
 import {render} from 'react-dom';
+import App from '../../lib/App';
 import env from 'dotenv';
 env.config();
 
@@ -20,6 +21,13 @@ const recipesController = controllers.recipesController;
 const reviewsController = controllers.reviewsController;
 const favouriteRecipesController = controllers.favouriteRecipeController;
 
+routes.get('/api/test',(req,res)=> res.json({success:true,data: 'hello'}));
+
+// api-users-signup route
+routes.post('/api/users/signup', usersController.signUp);
+
+// api-users-signin route
+routes.post('/api/users/signin', usersController.signIn);
 
 // validate token below
 if(process.env.NODE_ENV != 'test')
@@ -29,7 +37,7 @@ if(process.env.NODE_ENV != 'test')
     if(process.env.NODE_ENV==='development')
     {
       // simulate x-access-token header
-      req.headers['x-access-token'] = 'eyJhbGciOiJIUzI1NiJ9.bW9yZS1yZWNpcGVz.rzL_4i4ju1_SdZsk6b7l3RYCC3EDBFYX1Pb4WeDlHDc';
+    //  req.headers['x-access-token'] = 'eyJhbGciOiJIUzI1NiJ9.bW9yZS1yZWNpcGVz.rzL_4i4ju1_SdZsk6b7l3RYCC3EDBFYX1Pb4WeDlHDc';
     }
     // check header or url parameters or post parameters for token
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -52,12 +60,9 @@ if(process.env.NODE_ENV != 'test')
 
     // if there is no token
     // return an error
-      const newToken = jwt.sign('more-recipes',process.env.API_SECRET);
       return res.status(403).send({ 
-        
         success: false, 
-        message: 'use the token below for authentication. Add it to headers e.g x-access-token/token',
-        token : newToken
+        message: 'Signin on /api/signin to generate token for authentication. Add it to headers e.g x-access-token = token',
       });
 
     }
@@ -67,21 +72,16 @@ if(process.env.NODE_ENV != 'test')
 // generate token for authentication
 routes.get('/api/token',usersController.getToken);
 
-routes.get('/api/test',(req,res)=> res.json({success:true,data: 'hello'}));
-
+routes.get('/api/displaytoken',(req,res)=>{
+ res.send(req.decoded);
+});
 // test react connection
 routes.get('/react',(req,res) =>{
- res.send('hello');
+res.send('react');
 });
 
 // test api
 routes.get('/api/users', usersController.getTotalUsers);
-
-// api-users-signup route
-routes.post('/api/users/signup', usersController.signUp);
-
-// api-users-signin route
-routes.post('/api/users/signin', usersController.signIn);
 
 // api-recipes-add route
 routes.post('/api/recipes', recipesController.addRecipe);

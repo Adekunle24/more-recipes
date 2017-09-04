@@ -4,19 +4,34 @@ import allModels from '../models';
 // assign recipeModel to model recipe
 const recipeModel = allModels.recipes;
 const userModel = allModels.users;
+const voteModel = allModels.votes;
+const socialValuesModel = allModels.social_values;
 // this is a test api to display all registered users
 const getTotalRecipes = (req,res) => {
-  recipeModel.findAll({
-    include: [{
-      model: userModel,
-      as: 'users',
-    }]
+  if(req.query.sort && req.query.order)
+  {
+    socialValuesModel.findAll({
+      order: [
+        ['upvotes', 'DESC'],
+      ],
+      include: [{
+        model: recipeModel,
+      }
+      ]
+    }).then(value => res.send(value));
   }
-  ).then(value => 
-    res.json({success:true,data:value})
-  ).catch(error =>res.send(error));
+  else{
+    recipeModel.findAll({
+      include: [{
+        model: userModel,
+        as: 'users',
+      }]
+    }
+    ).then(value => 
+      res.json({success:true,data:value})
+    ).catch(error =>res.send(error));
+  }
 };
-
 // this api adds a new recipe to the database
 const addRecipe = (req,res) => {
   if(req.body.title&&req.body.user&&req.body.procedures&&req.body.ingredients)
@@ -29,7 +44,7 @@ const addRecipe = (req,res) => {
     }).then(result => res.json({success:true,data:result,message:'Recipe added successfully'})).catch(error => res.send(error));
   }
   else{
-      res.json({success:false,data:null,validations:false,message:'Please provide title,procedures,userid and ingredients'});
+    res.json({success:false,data:null,validations:false,message:'Please provide title,procedures,userid and ingredients'});
   }
 };
 

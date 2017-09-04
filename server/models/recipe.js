@@ -14,6 +14,11 @@ const Recipe = (sequelize, DataTypes) =>{
       as: 'users',
     });
   };
+  recipe.associate = (models) => {
+    recipe.belongsTo(models.social_values, {
+      foreignKey: 'id',
+    });
+  };
   return recipe;
 };
 export default Recipe;
