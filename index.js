@@ -1,4 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './lib/App';
-render(<App/>, document.getElementById('app'));
+import Header from './src/components/Header';
+
+render(
+    <Header cat={5} ></Header>, document.getElementById('app')
+    );

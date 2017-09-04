@@ -30,7 +30,7 @@
 
 // module.exports = config;
 var path = require('path');
-var nodeExternals = require('webpack-node-externals');
+//var nodeExternals = require('webpack-node-externals');
 let BUILD_DIR = path.join(__dirname, '/public');
 module.exports = {
   entry:

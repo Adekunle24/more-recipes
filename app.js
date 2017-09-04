@@ -20,10 +20,19 @@ app.use(favicon(path.join(__dirname, 'public/images', 'logo.png')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
+
+// directory for static files
+app.use(express.static(__dirname+'/public'));
 app.get('/test',(req,res)=>{
   res.send('test');
 });
-app.use('/',routes);
+// Always return the main index.html, so react-router render the route in the client
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+});
+
+
+app.use('/api',routes);
 
 
 // path to resources
@@ -46,8 +55,6 @@ app.get('/home',(req,res) =>
   // res.render('home',data);
 });
 
-// directory for static files
-app.use(express.static(__dirname+'/public'));
 
 app.get('/view-recipes',(req,res)=>
 {
@@ -124,15 +131,6 @@ app.use((req,res,next) =>{
   res.locals.showTests = app.get('env') !== 'production' && req.query.text ==='1';
   next();
 });
-
-
-// Always return the main index.html, so react-router render the route in the client
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-});
-
-
-
 
 // add dashboard route
 app.get('/dashboard',(req,res) =>

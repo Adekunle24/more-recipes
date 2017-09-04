@@ -532,6 +532,9 @@ background-color: #FDFBEE;
 .padding-bottom-20{
     padding-bottom: 20px;
 }
+.padding-bottom-0{
+    padding-bottom: 0px;
+}
 .control-block-button a {
     padding:10px;
 }

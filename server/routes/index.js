@@ -8,9 +8,6 @@ import Config from '../config/config.json';
 import controllers from '../controllers';
 import crypto from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
-import react from 'react';
-import {render} from 'react-dom';
-import App from '../../lib/App';
 import env from 'dotenv';
 env.config();
 
