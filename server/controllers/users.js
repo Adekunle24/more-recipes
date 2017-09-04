@@ -68,7 +68,7 @@ const signIn = (req,res) => {
             let newToken;
             if(process.env.NODE_ENV != 'test')
             {
-              newToken = jwt.sign(result,process.env.API_SECRET);
+              newToken = jwt.sign(JSON.stringify(result),process.env.API_SECRET);
             }
             else{
               newToken = null;

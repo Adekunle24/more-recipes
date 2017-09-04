@@ -47,7 +47,7 @@ describe('API : generate token',() =>{
       .end((err,res) =>{
       // HTTP status should be 200
         assert.isArray(res.body);
-        assert.isAbove(res.body.length,2);
+        assert.isAbove(res.body.length,1);
         done();
       });
   });
@@ -91,7 +91,7 @@ describe('API : generate token',() =>{
   });
   // test api/users/signin with true data
   it('api/users/signin should sign in successfully',(done) =>{
-    server.post('/api/users/signin').send({username:'Adekunle',password:'alpha24'}).expect('Content-type',/json/)
+    server.post('/api/users/signin').send({username:'andela',password:'password'}).expect('Content-type',/json/)
       .expect(200).end((err,res) =>{
         assert.property(res.body,'data');
         assert.property(res.body,'success');
@@ -102,7 +102,7 @@ describe('API : generate token',() =>{
   });
   // test api/users/signin with true data and password is hidden from output
   it('api/users/signin should sign in and output should hide password',(done) =>{
-    server.post('/api/users/signin').send({username:'Adekunle',password:'alpha24'}).expect('Content-type',/json/)
+    server.post('/api/users/signin').send({username:'andela',password:'password'}).expect('Content-type',/json/)
       .expect(200).end((err,res) =>{
         assert.property(res.body,'data');
         assert.property(res.body,'success');
