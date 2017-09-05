@@ -2,13 +2,10 @@
 // contains all routes for the application
 import express from 'express';
 import Sequelize from 'sequelize';
-
-// import all controllers
-import controllers from '../controllers';
 import crypto from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
-
+import controllers from '../controllers';
 env.config();
 
 const routes = express.Router();
@@ -17,8 +14,6 @@ const usersController = controllers.usersController;
 const recipesController = controllers.recipesController;
 const reviewsController = controllers.reviewsController;
 const favouriteRecipesController = controllers.favouriteRecipeController;
-
-
 routes.get('/api/test', (req, res) => res.json({ success: true, data: 'hello' }));
 
 // api generates test token
@@ -98,7 +93,12 @@ routes.post('/api/recipes/:recipeId/reviews', reviewsController.saveReviewToDb);
 // route show all reviews for a recipe
 routes.get('/api/recipes/:recipeId/reviews', reviewsController.getAllReviews);
 
-routes.get('/api/users/:userId/recipes', favouriteRecipesController.getAllFavouriteRecipes);
+// route to get all favourite recipes for a user
+routes.get('/api/users/:userId/recipes', favouriteRecipesController.getFavouriteRecipes);
+
+// route for a user to add recipe to favourites list
+routes.post('/api/recipes/:recipeId/favourites', favouriteRecipesController.addFavourite);
+routes.delete('/api/recipes/:recipeId/favourites', favouriteRecipesController.removeFavourite);
 
 routes.get('/api/recipes?sort=upvotes&order=ascending', recipesController.getRecipeWithMostUpVotes);
 
