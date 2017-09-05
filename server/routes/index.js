@@ -2,13 +2,13 @@
 // contains all routes for the application
 import express from 'express';
 import Sequelize from 'sequelize';
-// import configuration file 
-import Config from '../config/config.json';
+
 // import all controllers
 import controllers from '../controllers';
 import crypto from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
+
 env.config();
 
 const routes = express.Router();
@@ -19,17 +19,17 @@ const reviewsController = controllers.reviewsController;
 const favouriteRecipesController = controllers.favouriteRecipeController;
 
 
-routes.get('/api/test',(req,res)=> res.json({success:true,data: 'hello'}));
+routes.get('/api/test', (req, res) => res.json({ success: true, data: 'hello' }));
 
 // api generates test token
-routes.get('/api/token',(req,res)=>{
-  const token = jwt.sign('a',process.env.API_SECRET);
+routes.get('/api/token', (req, res) => {
+  const token = jwt.sign('a', process.env.API_SECRET);
   res.json({
     success: true,
     message: 'Enjoy your token!',
-    token: token
+    token
   });
-}); 
+});
 
 // api-users-signup route
 routes.post('/api/users/signup', usersController.signUp);
@@ -38,33 +38,32 @@ routes.post('/api/users/signup', usersController.signUp);
 routes.post('/api/users/signin', usersController.signIn);
 
 // validate token below
-if(process.env.NODE_ENV != 'test')
-{
-  routes.use((req, res, next) =>{
+if (process.env.NODE_ENV != 'test') {
+  routes.use((req, res, next) => {
     // check header or url parameters or post parameters for token
-    let token = req.body.token || req.query.token || req.headers['x-access-token'];
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
     // decode token
     if (token) {
 
     // verifies secret and checks exp
-      jwt.verify(token,process.env.API_SECRET, (err, decoded) => {      
+      jwt.verify(token, process.env.API_SECRET, (err, decoded) => {
         if (err) {
-          return res.json({ success: false, message: 'Failed to authenticate token.' });    
-        } else {
-        // if everything is good, save to request for use in other routes
-          req.decoded = decoded;    
-          next();
+          return res.json({ success: false, message: 'Failed to authenticate token.' });
         }
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;
+        next();
+
       });
 
     } else {
 
     // if there is no token
     // return an error
-      return res.status(403).send({ 
-        success: false, 
-        tokenVerification : false,
+      return res.status(403).send({
+        success: false,
+        tokenVerification: false,
         message: 'Signin on /api/signin to generate token for authentication. Add it to headers e.g x-access-token = token',
       });
 
@@ -73,9 +72,9 @@ if(process.env.NODE_ENV != 'test')
 }
 // api get all users
 routes.get('/api/users', usersController.getTotalUsers);
-routes.delete('/api/users',usersController.removeUser);
+routes.delete('/api/users', usersController.removeUser);
 
-routes.get('/api/displaytoken',(req,res)=>{
+routes.get('/api/displaytoken', (req, res) => {
   res.send(req.decoded);
 });
 
@@ -84,23 +83,23 @@ routes.get('/api/displaytoken',(req,res)=>{
 routes.post('/api/recipes', recipesController.addRecipe);
 
 // api-recipes-totalrecipes route
-routes.get('/api/recipes',recipesController.getTotalRecipes);
+routes.get('/api/recipes', recipesController.getTotalRecipes);
 
 // api-edit-recipe route
 routes.put('/api/recipes', recipesController.modifyRecipe);
 
 // api-delete-recipe route
-routes.delete('/api/recipes',recipesController.deleteRecipe);
+routes.delete('/api/recipes', recipesController.deleteRecipe);
 
 // route that allows a logged in user to post a review for a recipe
 routes.post('/api/recipes/:recipeId/reviews', reviewsController.saveReviewToDb);
 
 
 // route show all reviews for a recipe
-routes.get('/api/recipes/:recipeId/reviews',reviewsController.getAllReviews);
+routes.get('/api/recipes/:recipeId/reviews', reviewsController.getAllReviews);
 
-routes.get('/api/users/:userId/recipes',favouriteRecipesController.getAllFavouriteRecipes);
+routes.get('/api/users/:userId/recipes', favouriteRecipesController.getAllFavouriteRecipes);
 
-routes.get('/api/recipes?sort=upvotes&order=ascending',recipesController.getRecipeWithMostUpVotes);
+routes.get('/api/recipes?sort=upvotes&order=ascending', recipesController.getRecipeWithMostUpVotes);
 
 export default routes;

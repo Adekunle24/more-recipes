@@ -5,6 +5,7 @@ import allModels from '../models';
 const recipeModel = allModels.recipes;
 const userModel = allModels.users;
 const voteModel = allModels.votes;
+const reviewModel = allModels.reviews;
 const socialValuesModel = allModels.social_values;
 // this is a test api to display all registered users
 const getTotalRecipes = (req,res) => {
@@ -90,16 +91,32 @@ const saveModifiedRecipe = (req,res,data) => {
 const deleteRecipe = (req,res) => {
   if(req.body.recipeId)
   {
-    recipeModel.findById(req.body.recipeId).then(recipe => {
-      if(!recipe)
-      {
-        res.json({message:'Specified recipe could not be found',success:false});
+    reviewModel.destroy({
+      where :{
+        recipeId : req.body.recipeId
       }
-      else{
-        recipe.destroy()
-          .then(output => res.json({success:true,message:'Recipe deleted successfully'})).catch(error => res.send(error));
-      }
-    }).catch(error => res.send(error));
+    }).then(response =>{
+      voteModel.destroy({
+        where : {
+          recipeId : req.body.recipeId
+        }
+      }).then(response =>{
+        recipeModel.findById(req.body.recipeId).then(recipe => {
+          if(!recipe)
+          {
+            res.json({message:'Specified recipe could not be found',success:false});
+          }
+          else{
+            recipe.destroy()
+              .then(output => res.json({success:true,message:'Recipe deleted successfully'})).catch(error => res.send(error));
+          }
+        }).catch(error => res.send(error));
+
+      }).catch(error => res.send(error));
+    
+    }).catch(error =>res.send(error));
+   
+
   }
   else{
     res.json({message:'Please provide a recipe Id',validations:false,success:false});

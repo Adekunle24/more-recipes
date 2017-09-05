@@ -1,15 +1,8 @@
-// import user from './user';
-// import recipe from './recipe';
-// import review from './review';
-// import favouriteRecipe from './favouriteRecipe';
-// const allModels = { 'user' : user , 'recipe' : recipe, 'review' : review, 'favouriteRecipe': favouriteRecipe };
-
 
 import env from 'dotenv';
 env.config();
 import fs from 'fs';
 import Sequelize from 'sequelize';
-import config from '../config/config.json';
 import path from 'path';
 const basename = path.basename(module.filename);
 const db = {};
@@ -18,12 +11,15 @@ let sequelizeApp;
 
 if(envData==='production')
 {
-  sequelizeApp = new Sequelize(envData.DB_NAME,envData.DB_USERNAME,envData.DB_PASSWORD,{'dialect':envData.DIALECT,'host':envData.HOST });
+  sequelizeApp = new Sequelize(process.env.DB_NAME,process.env.DB_USERNAME, process.env.DB_PASSWORD,{dialect:process.env.DB_DIALECT,host:process.env.DB_HOST});
 }
-else{
-  const configData = config[envData];
-  sequelizeApp = new Sequelize(configData.database,configData.username, configData.password,configData.options);
+else if(envData==='test'){
+   sequelizeApp = new Sequelize(process.env.DB_NAME_TEST,process.env.DB_USERNAME, process.env.DB_PASSWORD,{dialect:process.env.DB_DIALECT,host:process.env.DB_HOST});
 }
+else {
+  sequelizeApp = new Sequelize(process.env.DB_NAME,process.env.DB_USERNAME, process.env.DB_PASSWORD,{dialect:process.env.DB_DIALECT,host:process.env.DB_HOST});
+}
+
 fs
   .readdirSync(__dirname)
   .filter(file =>
@@ -43,12 +39,4 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelizeApp;
 db.Sequelize = Sequelize;
-//const sequelizedUserModel =  sequelizeApp.import('../models/user.js');
-//const sequelizedRecipeModel = sequelizeApp.import('../models/recipe.js');
-// const sequelizeObj = { 'sequelizeApp':sequelizeApp,'Sequelize':Sequelize
-// };
-// export default sequelizeObj;
-
-
-// export default allModels;
 export default db;

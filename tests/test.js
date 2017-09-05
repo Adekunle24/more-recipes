@@ -168,6 +168,7 @@ describe('API routes that manage recipes',() =>{
         done();
       });
   });
+  let testRecipeId;
   it('POST/ api/recipes should return successful with data',(done) =>{
     server
       .post('/api/recipes').set({'x-access-token': authenticationToken}).send({title:'How to make pizza',user:1,procedures:'Pour oil in fry pan.. Mix it with water',ingredients:{'item':'melon','quantity':'1 cup'}})
@@ -177,6 +178,59 @@ describe('API routes that manage recipes',() =>{
       // HTTP status should be 200
         assert.property(res.body,'data');
         assert.property(res.body,'success');
+        assert.property(res.body,'message');
+        assert.isTrue(res.body.success);
+        testRecipeId = res.body.data.id;
+        done();
+      });
+  });
+  it('PUT api/recipes should return validations false without recipe ID',(done) =>{
+    server
+      .put('/api/recipes').set({'x-access-token': authenticationToken}).send({title:'How to make pizza without flour',user:1,procedures:'Pour oil in fry pan.. Mix it with water',ingredients:{'item':'melon','quantity':'1 cup'}})
+      .expect('Content-type',/json/)
+      .expect(200) // THis is HTTP response
+      .end((err,res) =>{
+      // HTTP status should be 200
+        assert.property(res.body,'validations');
+        assert.property(res.body,'success');
+        assert.property(res.body,'message');
+        assert.isFalse(res.body.success);
+        done();
+      });
+  });
+  it('PUT api/recipes should modify the recipe successfully',(done) =>{
+    server
+      .put('/api/recipes').set({'x-access-token': authenticationToken}).send({recipeId:testRecipeId,title:'How to make pizza without flour and yeast'})
+      .expect('Content-type',/json/)
+      .expect(200) // THis is HTTP response
+      .end((err,res) =>{
+      // HTTP status should be 200
+        assert.property(res.body,'data');
+        assert.isTrue(res.body.success);
+        assert.include(res.body.data.title,'yeast');
+        done();
+      });
+  });
+ it('DELETE api/recipes should return validations false without recipe ID',(done) =>{
+    server
+      .delete('/api/recipes').set({'x-access-token': authenticationToken})
+      .expect('Content-type',/json/)
+      .expect(200) // THis is HTTP response
+      .end((err,res) =>{
+      // HTTP status should be 200
+        assert.property(res.body,'message');
+        assert.property(res.body,'validations');
+        assert.isFalse(res.body.success);
+        done();
+      });
+  });
+   it('DELETE api/recipes should delete recipe successfully',(done) =>{
+    server
+      .delete('/api/recipes').set({'x-access-token': authenticationToken}).send({'recipeId':testRecipeId})
+      .expect('Content-type',/json/)
+      .expect(200) // THis is HTTP response
+      .end((err,res) =>{
+      // HTTP status should be 200
         assert.property(res.body,'message');
         assert.isTrue(res.body.success);
         done();

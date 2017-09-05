@@ -8,7 +8,7 @@ import path from 'path';
 import env from 'dotenv';
 import engine from 'ejs';
 import logger from 'morgan';
-env.config;
+env.config();
 
 
 // create express application
