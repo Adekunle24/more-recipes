@@ -18,7 +18,18 @@ const recipesController = controllers.recipesController;
 const reviewsController = controllers.reviewsController;
 const favouriteRecipesController = controllers.favouriteRecipeController;
 
+
 routes.get('/api/test',(req,res)=> res.json({success:true,data: 'hello'}));
+
+// api generates test token
+routes.get('/api/token',(req,res)=>{
+  const token = jwt.sign('a',process.env.API_SECRET);
+  res.json({
+    success: true,
+    message: 'Enjoy your token!',
+    token: token
+  });
+}); 
 
 // api-users-signup route
 routes.post('/api/users/signup', usersController.signUp);
@@ -29,13 +40,7 @@ routes.post('/api/users/signin', usersController.signIn);
 // validate token below
 if(process.env.NODE_ENV != 'test')
 {
-  routes.use(function(req, res, next) {
-
-    if(process.env.NODE_ENV==='development')
-    {
-      // simulate x-access-token header
-    //  req.headers['x-access-token'] = 'eyJhbGciOiJIUzI1NiJ9.bW9yZS1yZWNpcGVz.rzL_4i4ju1_SdZsk6b7l3RYCC3EDBFYX1Pb4WeDlHDc';
-    }
+  routes.use((req, res, next) =>{
     // check header or url parameters or post parameters for token
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
 
@@ -59,26 +64,21 @@ if(process.env.NODE_ENV != 'test')
     // return an error
       return res.status(403).send({ 
         success: false, 
+        tokenVerification : false,
         message: 'Signin on /api/signin to generate token for authentication. Add it to headers e.g x-access-token = token',
       });
 
     }
   });
 }
-
-// generate token for authentication
-routes.get('/api/token',usersController.getToken);
+// api get all users
+routes.get('/api/users', usersController.getTotalUsers);
+routes.delete('/api/users',usersController.removeUser);
 
 routes.get('/api/displaytoken',(req,res)=>{
- res.send(req.decoded);
-});
-// test react connection
-routes.get('/react',(req,res) =>{
-res.send('react');
+  res.send(req.decoded);
 });
 
-// test api
-routes.get('/api/users', usersController.getTotalUsers);
 
 // api-recipes-add route
 routes.post('/api/recipes', recipesController.addRecipe);

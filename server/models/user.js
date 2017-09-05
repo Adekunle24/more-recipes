@@ -14,7 +14,8 @@ const User = (sequelize, DataTypes) => {
   });
   user.associate = (models) => {
     user.hasMany(models.recipes, {
-      foreignKey: 'id'
+      foreignKey: 'id',
+      onDelete: 'cascade', hooks: true
     });
   };
   return user;

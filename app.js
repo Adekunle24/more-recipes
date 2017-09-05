@@ -6,6 +6,7 @@ import routes from './server/routes';
 import favicon from 'serve-favicon';
 import path from 'path';
 import env from 'dotenv';
+import engine from 'ejs';
 import logger from 'morgan';
 env.config;
 
@@ -32,7 +33,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.use('/api',routes);
+app.use('/',routes);
 
 
 // path to resources
@@ -143,7 +144,7 @@ app.get('/dashboard',(req,res) =>
 app.use((req,res) =>{
   res.type('text/plain');
   res.status(404);
-  res.send('404 - Not found');
+  res.send('404 - Page cannot be found');
 });
 
 // custom 505 page

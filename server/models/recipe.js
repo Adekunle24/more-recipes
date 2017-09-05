@@ -12,6 +12,7 @@ const Recipe = (sequelize, DataTypes) =>{
     recipe.belongsTo(models.users, {
       foreignKey: 'userId',
       as: 'users',
+      onDelete: 'cascade'
     });
   };
   return recipe;

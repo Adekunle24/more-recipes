@@ -8,6 +8,12 @@ const Reviews = (sequelize, DataTypes) => {
     createdAt : { type : DataTypes.DATE, allowNull : false },
     updatedAt : { type : DataTypes.DATE, allowNull : false }
   });
+  review.associate = (models) => {
+    review.belongsTo(models.recipes, {
+      foreignKey: 'recipeId',
+      onDelete: 'cascade'
+    });
+  };
   return review;
 };
 export default Reviews;
