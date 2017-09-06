@@ -1,14 +1,12 @@
 
-import env from 'dotenv';
-env.config();
+import dotenv from 'dotenv';
+dotenv.config();
 import fs from 'fs';
 import Sequelize from 'sequelize';
 import path from 'path';
 const basename = path.basename(module.filename);
 const db = {};
-let sequelizeApp;
-
-  sequelizeApp = new Sequelize(process.env.DB_NAME+'-'+process.env.NODE_ENV.toLowerCase(),process.env.DB_USERNAME,
+let sequelizeApp = new Sequelize(`${process.env.DB_NAME}-${process.env.NODE_ENV.toLowerCase()}`,process.env.DB_USERNAME,
    process.env.DB_PASSWORD,{dialect:process.env.DB_DIALECT,host:process.env.DB_HOST});
 fs
   .readdirSync(__dirname)
