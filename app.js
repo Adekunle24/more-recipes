@@ -6,7 +6,6 @@ import routes from './server/routes';
 import favicon from 'serve-favicon';
 import path from 'path';
 import env from 'dotenv';
-import engine from 'ejs';
 import logger from 'morgan';
 env.config();
 

@@ -13,6 +13,7 @@ services:
   - postgresql
 before_script:
 - createdb More-Recipes-development --username=postgres
+- sequelize init
 - sequelize db:migrate
 notifications:
   webhooks: https://coveralls.io/webhook 
