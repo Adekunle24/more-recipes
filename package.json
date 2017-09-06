@@ -50,7 +50,7 @@
     "start": "babel-watch app.js",
     "develop": "babel-node app.js",
     "build": "babel ./more-recipes -d ./more-recipes",
-    "test": "mocha --compilers js:babel-core/register tests/test.js"
+    "test": "nyc mocha --timeout 10000 tests/test.js"
     
   },
   "nyc": {
