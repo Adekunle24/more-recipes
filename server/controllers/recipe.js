@@ -33,7 +33,16 @@ const addRecipe = (req, res) => {
       userId: req.decoded.id,
       procedures: req.body.procedures,
       ingredients: req.body.ingredients
-    }).then(result => res.json({ success: true, data: result, message: 'Recipe added successfully' })).catch(error => res.send(error));
+    }).then((result) => {
+      socialValuesModel.create({
+        recipeId: result.id,
+        upvotes: 0,
+        downvotes: 0,
+        replies: 0
+      }).then((social) => {
+        res.json({ success: true, data: { recipes: result, socialValues: social }, message: 'Recipe added successfully' });
+      }).catch(error => res.send(error.toString()));
+    }).catch(error => res.send(error.toString()));
   } else {
     res.json({
       success: false, data: null, validations: false, message: 'Please provide title,procedures, and ingredients'

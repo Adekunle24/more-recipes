@@ -1,5 +1,13 @@
-language: node_js
-services:
-  - postgresql
-before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+language: node_jsnode_js: "7"install:
+- npm installscript:
+- npm testenv:
+- NODE_ENV=testcache:
+ directories:
+ - "node_modules"services:
+- postgresqlbefore_script:
+- createuser more-postgres -s -U postgres
+- createdb More-Recipes --username=postgres
+- sequelize db:migratenotifications:
+ webhooks: https://coveralls.io/webhook repo_token=: AkyDA6kofzdIYNKaC3ncj7wTDsYwTpMEq
+
+
