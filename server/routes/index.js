@@ -6,14 +6,10 @@ import crypto from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
 import controllers from '../controllers';
+import middlewares from '../middleware';
 env.config();
 
 const routes = express.Router();
-
-const usersController = controllers.usersController;
-const recipesController = controllers.recipesController;
-const reviewsController = controllers.reviewsController;
-const favouriteRecipesController = controllers.favouriteRecipeController;
 routes.get('/api/test', (req, res) => res.json({ success: true, data: 'hello' }));
 
 // api generates test token
@@ -27,47 +23,17 @@ routes.get('/api/token', (req, res) => {
 });
 
 // api-users-signup route
-routes.post('/api/users/signup', usersController.signUp);
+routes.post('/api/users/signup', controllers.usersController.signUp);
 
 // api-users-signin route
-routes.post('/api/users/signin', usersController.signIn);
+routes.post('/api/users/signin', controllers.usersController.signIn);
 
-// validate token below
-if (process.env.NODE_ENV != 'test') {
-  routes.use((req, res, next) => {
-    // check header or url parameters or post parameters for token
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+const MiddleWares = new middlewares();
+MiddleWares.verifyJsonWebToken(routes);
 
-    // decode token
-    if (token) {
-
-    // verifies secret and checks exp
-      jwt.verify(token, process.env.API_SECRET, (err, decoded) => {
-        if (err) {
-          return res.json({ success: false, message: 'Failed to authenticate token.' });
-        }
-        // if everything is good, save to request for use in other routes
-        req.decoded = decoded;
-        next();
-
-      });
-
-    } else {
-
-    // if there is no token
-    // return an error
-      return res.status(403).send({
-        success: false,
-        tokenVerification: false,
-        message: 'Signin on /api/signin to generate token for authentication. Add it to headers e.g x-access-token = token',
-      });
-
-    }
-  });
-}
 // api get all users
-routes.get('/api/users', usersController.getTotalUsers);
-routes.delete('/api/users', usersController.removeUser);
+routes.get('/api/users', controllers.usersController.getTotalUsers);
+routes.delete('/api/users', controllers.usersController.removeUser);
 
 routes.get('/api/displaytoken', (req, res) => {
   res.send(req.decoded);
@@ -75,31 +41,36 @@ routes.get('/api/displaytoken', (req, res) => {
 
 
 // api-recipes-add route
-routes.post('/api/recipes', recipesController.addRecipe);
+routes.post('/api/recipes', controllers.recipesController.addRecipe);
 
 // api-recipes-totalrecipes route
-routes.get('/api/recipes', recipesController.getTotalRecipes);
+routes.get('/api/recipes', controllers.recipesController.getTotalRecipes);
 
 // api-edit-recipe route
-routes.put('/api/recipes', recipesController.modifyRecipe);
+routes.put('/api/recipes', controllers.recipesController.modifyRecipe);
 
 // api-delete-recipe route
-routes.delete('/api/recipes', recipesController.deleteRecipe);
+routes.delete('/api/recipes', controllers.recipesController.deleteRecipe);
 
 // route that allows a logged in user to post a review for a recipe
-routes.post('/api/recipes/:recipeId/reviews', reviewsController.saveReviewToDb);
+routes.post('/api/recipes/:recipeId/reviews', controllers.reviewsController.saveReviewToDb);
 
 
 // route show all reviews for a recipe
-routes.get('/api/recipes/:recipeId/reviews', reviewsController.getAllReviews);
+routes.get('/api/recipes/:recipeId/reviews', controllers.reviewsController.getAllReviews);
 
 // route to get all favourite recipes for a user
-routes.get('/api/users/:userId/recipes', favouriteRecipesController.getFavouriteRecipes);
+routes.get('/api/users/:userId/recipes', controllers.favouriteRecipeController.getFavouriteRecipes);
 
 // route for a user to add recipe to favourites list
-routes.post('/api/recipes/:recipeId/favourites', favouriteRecipesController.addFavourite);
-routes.delete('/api/recipes/:recipeId/favourites', favouriteRecipesController.removeFavourite);
+routes.post('/api/recipes/:recipeId/favourites', controllers.favouriteRecipeController.addFavourite);
+routes.delete('/api/recipes/:recipeId/favourites', controllers.favouriteRecipeController.removeFavourite);
+routes.get('/api/recipes?sort=upvotes&order=ascending', controllers.recipesController.getRecipeWithMostUpVotes);
 
-routes.get('/api/recipes?sort=upvotes&order=ascending', recipesController.getRecipeWithMostUpVotes);
+// routes that handles voting: upvote and downvote action
+// this api handles upvoting
+routes.post('/api/vote/:recipeId/up', controllers.votesController.upVote);
+// this api handles downvoting
+routes.post('/api/vote/:recipeId/down', controllers.votesController.downVote);
 
 export default routes;

@@ -9,9 +9,12 @@ const getAllFavoriteRecipes = (req, res) => {
     {
       where: {
         userId: req.params.userId
-      }
+      },
+      include: [
+        { model: recipeModel }
+      ],
     }
-  ).then(output => res.json({ status: 'success', data: output })).catch(error => res.send(error));
+  ).then(output => res.json({ status: 'success', data: output })).catch(error => res.json(error.toString()));
 };
 
 const addFavoriteRecipe = (req, res) => {

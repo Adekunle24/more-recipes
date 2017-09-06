@@ -11,10 +11,8 @@ const favouriteRecipes = (sequelize, DataTypes) => {
       foreignKey: 'recipeId',
       onDelete: 'cascade'
     });
-  };
-  favourites.associate = (models) => {
-    favourites.belongsTo(models.users, {
-      foreignKey: 'userId',
+    favourites.hasOne(models.users, {
+      foreignKey: 'id',
       onDelete: 'cascade'
     });
   };
