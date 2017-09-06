@@ -51,7 +51,7 @@
     "develop": "babel-node app.js",
     "build": "babel ./more-recipes -d ./more-recipes",
     "test": "nyc mocha --timeout 10000 tests/test.js",
-    "travis-test":"cross-env NODE_ENV=test nyc _mocha --report lcovonly --reporter spec --timeout 10000 tests/test && cat ./coverage/lcov.info | coveralls"
+    "travis-test":"nyc _mocha --report lcovonly --reporter spec --timeout 10000 tests/test && cat ./coverage/lcov.info | coveralls"
   },
   "nyc": {
     "require": [
