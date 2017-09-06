@@ -28,7 +28,7 @@ const Wares = class MiddleWares {
           // if there is no token
           // return an error
             return res.status(403).send({
-              success: false,
+              status: 'fail',
               tokenVerification: false,
               message: 'Signin on /api/signin to generate token for authentication. Add it to headers e.g x-access-token = token',
             });
