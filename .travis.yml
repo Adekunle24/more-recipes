@@ -12,7 +12,7 @@ cache:
 services:
   - postgresql
 before_script:
-- createdb More-Recipes-development --username=postgres
+- createdb More-Recipes-test --username=postgres
 - sequelize db:migrate
 notifications:
   webhooks: https://coveralls.io/webhook 
