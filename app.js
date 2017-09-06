@@ -15,7 +15,9 @@ env.config();
 const app = express();
 
 // set server listening port
+
 app.set('port', process.env.PORT || 3000);
+
 app.set('superSecret',env.API_SECRET);
 app.use(favicon(path.join(__dirname, 'public/images', 'logo.png')));
 app.use(bodyParser.json());

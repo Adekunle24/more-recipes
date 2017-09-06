@@ -10,7 +10,7 @@ import middlewares from '../middleware';
 env.config();
 
 const routes = express.Router();
-routes.get('/api/test', (req, res) => res.json({ success: true, data: 'hello' }));
+routes.get('/api/test', (req, res) => res.json({ status: 'success', data: 'hello' }));
 
 // api generates test token
 routes.get('/api/token', (req, res) => {

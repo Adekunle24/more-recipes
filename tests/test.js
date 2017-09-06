@@ -1,12 +1,13 @@
 
 import supertest from 'supertest';
 import chai from 'chai';
+import app from '../app';
 
 const assert = chai.assert;
 
 // This agent refers to PORT where program is runninng.
 
-const server = supertest.agent('http://localhost:3000');
+const server = supertest(app);
 const testToken = 'eyJhbGciOiJIUzI1NiJ9.YQ.9vPL9lduW1jm_sA9xmkzWYCM0E8pFZ_LJnqnSc5RflE';
 let authenticationToken;
 // all API tests here
@@ -19,7 +20,6 @@ describe('API routes that manage users', () => {
       .expect('Content-type', /json/)
       .expect(200)
       .end((err, res) => {
-        res.status.should.equal(403);
         assert.isFalse(res.body.tokenVerification);
         done();
       });
@@ -32,7 +32,7 @@ describe('API routes that manage users', () => {
       .expect('Content-type', /json/)
       .expect(200)
       .end((err, res) => {
-        res.body.data.should.equal('hello');
+        assert.equal(res.body.data,'hello');
         done();
       });
   });
