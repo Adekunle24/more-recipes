@@ -48,9 +48,8 @@
     "serve": "babel app.js --out-file dist/compiled.js && node dist/compiled.js ",
     "start": "babel-watch app.js",
     "develop": "babel-node app.js",
-    "test": "mocha --compilers js:babel-core/register tests/test.js",
     "build": "babel ./more-recipes -d ./more-recipes",
-    "test-local": "nyc mocha --timeout 10000 tests/test.js"
+    "test": "nyc mocha --timeout 10000 tests/test.js"
   },
   "nyc": {
     "require": [
