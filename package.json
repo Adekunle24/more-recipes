@@ -54,12 +54,11 @@
   },
   "scripts": {
     "babel": "babel --presets es2015 app.js -o public/bundle.js",
-    "start": "webpack-dev-server --content-base ./ --port 3000 --progress --colors",
     "webpack": "webpack --d --watch",
+     "serve": "babel-watch app.js",
     "develop": "babel-node app.js",
     "test": "mocha --compilers js:babel-core/register tests/test.js",
-    "build": "babel ./more-recipes -d ./more-recipes",
-    "serve": "babel-watch app.js"
+    "build": "babel ./more-recipes -d ./more-recipes"
   },
   "repository": {
     "type": "git",
