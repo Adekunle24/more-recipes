@@ -12,7 +12,6 @@ cache:
 services:
   - postgresql
 before_script:
-- createuser postgres
 - createdb More-Recipes-development --username=postgres
 - sequelize db:migrate
 notifications:
