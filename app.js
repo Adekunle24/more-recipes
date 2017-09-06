@@ -1,134 +1,164 @@
-//using express framework
-var express = require('express');
-var fs = require('fs');
-
-const logger = require('morgan');
-const bodyParser = require('body-parser');
-var Sequelize = require('sequelize');
-var option = {"dialect":"postgres","host":"localhost"};
-var sequelize = new Sequelize("recipes", "postgres", "postgre",option);
-//create express application
-var app = express();
-
-//set up handlebars view engine
-// var handlebars = require('express3-handlebars').create({defaultLayout:'main'});
-
-// app.engine('handlebars',handlebars.engine);
-// app.set('view engine','handlebars');
+// using express framework
+import express from 'express';
+import fs from 'fs';
+import bodyParser from 'body-parser';
+import routes from './server/routes';
+import favicon from 'serve-favicon';
+import path from 'path';
+import env from 'dotenv';
+import engine from 'ejs';
+import logger from 'morgan';
+env.config();
 
 
-//set server listening port 
-app.set('port',process.env.PORT || 3000);
+// create express application
+const app = express();
 
+// set server listening port
+
+app.set('port', process.env.PORT || 3000);
+
+app.set('superSecret',env.API_SECRET);
+app.use(favicon(path.join(__dirname, 'public/images', 'logo.png')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(logger('dev'));
 
-
-//directory for static files
-app.use(express.static(__dirname+'/template'));
-
-//load fortune library
-var fortune = require('./lib/fortune.js');
-
-//manage test
-app.use(function(req,res,next){
-res.locals.showTests = app.get('env') !== 'production' && req.query.text ==='1';
-next();
+// directory for static files
+app.use(express.static(__dirname+'/public'));
+app.get('/test',(req,res)=>{
+  res.send('test');
+});
+// Always return the main index.html, so react-router render the route in the client
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
 
-//add startup route
-app.get('/',function(req,res)
-{
-    var data = { username: "Adekunle"};
-    fs.readFile(__dirname+'/template/home.html',function(err,data){
-        if(err)
-        {
-            res.send("error occured");
-        }
-        else{
-            res.end(data);
-  //res.end(data);
-        }
-       
-    });
-   // res.render('home',data);
+app.use('/',routes);
+
+
+// path to resources
+app.get(['*.png','*.jpg','*.css','*.js','*.map'],(req,res)=>{
+  res.sendFile(`${__dirname}/public/${req.path}`);
 });
 
-//add homepage route
-app.get('/home',function(req,res)
+// add homepage route
+app.get('/home',(req,res) =>
 {
-    var data = { username: "Adekunle"};
-    fs.readFile(__dirname+'/template/home.html',function(err,data){
-        if(err)
-        {
-            res.send("error occured");
-        }
-        else{
-            res.end(data);
-  //res.end(data);
-        }
-       
-    });
-   // res.render('home',data);
-});
-
-//add view-recipes route
-app.get('/view-recipes',function(req,res)
-{
-    var data = { username: "Adekunle"};
-    fs.readFile(__dirname+'/template/view-recipes.html',function(err,data){
-        if(err)
-        {
-            res.send("error occured");
-        }
-        else{
-            res.end(data);
-  //res.end(data);
-        }
-       
-    });
-   // res.render('home',data);
-});
-
-app.get('/api',function(req,res)
-{
-    var data = { username: "Adekunle"};
-sequelize
-  .authenticate()
-  .then(() => {
-    res.end('Connection has been established successfully.');
-  })
-  .catch(err => {
-    res.end('Unable to connect to the database:', err);
+  fs.readFile(__dirname+'/public/home.html',(err,data) =>{
+    if(err)
+    {
+      res.send('error occured');
+    }
+    else{
+      res.end(data);
+    }
   });
-   // res.render('home',data);
+  // res.render('home',data);
 });
 
-//add dashboard route
-app.get('/dashboard',function(req,res)
+
+app.get('/view-recipes',(req,res)=>
 {
-res.type('text/plain');
-res.send('My TeaserPlus application dashboard');
-});
-
-//custom 404 page
-app.use(function(req,res){
-res.type('text/plain');
-res.status(404);
-res.send('404 - Not found');
-});
-
-//custom 505 page
-app.use(function(err,req,res,next){
-console.log(err.stack);
-res.type('text/plain');
-res.status(500);
-res.send('500 - server error');
+  fs.readFile(__dirname+'/public/view-recipes.html',(err,data) =>{
+    if(err)
+    {
+      res.send('error occured '+err);
+    }
+    else{
+      res.end(data);
+    }
+       
+  });
 });
 
 
-//start node JS Server
-app.listen(app.get('port'),function(){
-console.log('Express started on http://localhost: '+app.get('port')+ '; press Ctrl  - c to terminate.');
+app.get('/recipe-details',(req,res)=>
+{
+  fs.readFile(__dirname+'/public/recipe-details.html',(err,data) => {
+    if(err)
+    {
+      res.send('error occured '+err);
+    }
+    else{
+      res.end(data);
+    }
+       
+  });
 });
+app.get('/favourite-recipes',(req,res) =>
+{
+  fs.readFile(__dirname+'/public/favourite-recipes.html',(err,data) =>{ 
+    if(err)
+    {
+      res.send('error occured '+err);
+    }
+    else{
+      res.end(data);
+    }
+       
+  });
+});
+app.get('/user-profile',(req,res) =>
+{
+  fs.readFile(__dirname+'/public/user-profile.html',(err,data) =>{
+    if(err)
+    {
+      res.send('error occured '+err);
+    }
+    else{
+      res.end(data);
+    }
+       
+  });
+});
+app.get('/add-recipe',(req,res) =>
+{
+  fs.readFile(__dirname+'/public/add-recipe.html',(err,data) => {
+    if(err)
+    {
+      res.send('error occured '+err);
+    }
+    else{
+      res.end(data);
+    }
+       
+  });
+});
+
+
+
+// manage test
+app.use((req,res,next) =>{
+  res.locals.showTests = app.get('env') !== 'production' && req.query.text ==='1';
+  next();
+});
+
+// add dashboard route
+app.get('/dashboard',(req,res) =>
+{
+  res.type('text/plain');
+  res.send('My TeaserPlus application dashboard');
+});
+
+// custom 404 page
+app.use((req,res) =>{
+  res.type('text/plain');
+  res.status(404);
+  res.send('404 - Page cannot be found');
+});
+
+// custom 505 page
+app.use((err,req,res,next) =>{
+  res.type('text/plain');
+  res.status(500);
+  res.send('500 - server error');
+});
+
+
+// start node JS Server
+app.listen(app.get('port'),() =>{
+  
+});
+export default app;
