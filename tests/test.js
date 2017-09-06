@@ -1,5 +1,5 @@
+
 import supertest from 'supertest';
-import should from 'should';
 import chai from 'chai';
 
 const assert = chai.assert;

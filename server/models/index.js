@@ -6,19 +6,10 @@ import Sequelize from 'sequelize';
 import path from 'path';
 const basename = path.basename(module.filename);
 const db = {};
-const envData = process.env.NODE_ENV || 'production';
 let sequelizeApp;
 
-if(envData==='production')
-{
-  sequelizeApp = new Sequelize(process.env.DB_NAME,process.env.DB_USERNAME, process.env.DB_PASSWORD,{dialect:process.env.DB_DIALECT,host:process.env.DB_HOST});
-}
-else if(envData==='test'){
-   sequelizeApp = new Sequelize(process.env.DB_NAME_TEST,process.env.DB_USERNAME, process.env.DB_PASSWORD,{dialect:process.env.DB_DIALECT,host:process.env.DB_HOST});
-}
-else {
-  sequelizeApp = new Sequelize(process.env.DB_NAME,process.env.DB_USERNAME, process.env.DB_PASSWORD,{dialect:process.env.DB_DIALECT,host:process.env.DB_HOST});
-}
+  sequelizeApp = new Sequelize(process.env.DB_NAME+'-'+process.env.NODE_ENV.toLowerCase(),process.env.DB_USERNAME,
+   process.env.DB_PASSWORD,{dialect:process.env.DB_DIALECT,host:process.env.DB_HOST});
 fs
   .readdirSync(__dirname)
   .filter(file =>
