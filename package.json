@@ -49,6 +49,9 @@
     "serve": "babel app.js --out-file dist/compiled.js && node dist/compiled.js ",
     "start": "babel-watch app.js",
     "develop": "babel-node app.js",
+    "db-destroy":"node_modules/.bin/sequelize db:migrate:undo",
+    "db-create":"node_modules/.bin/sequelize db:migrate",
+    "db-seed":"node_modules/.bin/sequelize db:seed:all",
     "build": "babel ./more-recipes -d ./more-recipes",
     "test": "nyc mocha --timeout 10000 tests/test.js"
   },
