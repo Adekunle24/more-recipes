@@ -10,6 +10,7 @@ module.exports = {
         references: {
           model: 'recipes',
           key: 'id',
+          onDelete: 'CASCADE',
           as: 'recipeId',
         }
       },
