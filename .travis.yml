@@ -3,7 +3,7 @@ node_js: "7"
 install:
 - npm install
 script:
-- npm run travis-test
+- npm test
 env:
 - NODE_ENV=test
 cache:
@@ -12,6 +12,8 @@ cache:
 services:
   - postgresql
 before_script:
+- npm install nyc -g
+- npm install mocha -g
 - createdb More-Recipes-test --username=postgres
 - sequelize db:migrate
 notifications:
