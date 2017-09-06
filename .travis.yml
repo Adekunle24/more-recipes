@@ -13,9 +13,6 @@ services:
   - postgresql
 before_script:
 - createdb More-Recipes-development --username=postgres
-- npm run db-destroy
-- npm run db-create
-- npm run db-seed
 - sequelize db:migrate
 notifications:
   webhooks: https://coveralls.io/webhook 
