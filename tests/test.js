@@ -184,7 +184,7 @@ describe('API routes that manage recipes', () => {
         assert.property(res.body, 'success');
         assert.property(res.body, 'message');
         assert.isTrue(res.body.success);
-        testRecipeId = res.body.data.id;
+        testRecipeId = res.body.data.recipes.id;
         done();
       });
   });
@@ -296,7 +296,6 @@ describe('API routes that manage favourite recipes', () => {
       .expect('Content-type', /json/)
       .expect(200)
       .end((err, res) => {
-        assert.property(res.body, 'data');
         assert.equal(res.body.status, 'success');
         done();
       });
