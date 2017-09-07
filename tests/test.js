@@ -12,6 +12,7 @@ const testToken = 'eyJhbGciOiJIUzI1NiJ9.YQ.9vPL9lduW1jm_sA9xmkzWYCM0E8pFZ_LJnqnS
 const ingredientString = JSON.stringify({ data : [{ item: 'melon', quantity: '1 cup' },{ item: 'oil', quantity: '2 litres' }]});
 let authenticationToken;
  let testRecipeId;
+ const recipeObj = {title: 'How to make pizza', procedures: 'Pour oil in fry pan.. Mix it with water', ingredients: ingredientString};
 // all API tests here
 
 describe('API routes that manage users', () => {
@@ -167,9 +168,7 @@ describe('API routes that manage recipes', () => {
   });
   it('POST/ api/recipes should return successful with data', (done) => {
     server
-      .post('/api/recipes').set({ 'x-access-token': authenticationToken }).send({
-        title: 'How to make pizza', procedures: 'Pour oil in fry pan.. Mix it with water', ingredients: ingredientString
-      })
+      .post('/api/recipes').set({ 'x-access-token': authenticationToken }).send(recipeObject).send(recipeObject)
       .expect('Content-type', /json/)
       .expect(200)
       .end((err, res) => {
