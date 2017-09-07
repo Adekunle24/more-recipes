@@ -13,14 +13,7 @@ const routes = express.Router();
 routes.get('/api/test', (req, res) => res.json({ status: 'success', data: 'hello' }));
 
 // api generates test token
-routes.get('/api/token', (req, res) => {
-  const token = jwt.sign('a', process.env.API_SECRET);
-  res.json({
-    success: true,
-    message: 'Enjoy your token!',
-    token
-  });
-});
+routes.post('/api/token', new middlewares().encrypt);
 
 // api-users-signup route
 routes.post('/api/users/signup', controllers.usersController.signUp);

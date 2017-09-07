@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var votes = sequelize.define('votes', {
+  var favourite - recipes = sequelize.define('favourite-recipes', {
     id: DataTypes.INTEGER
   }, {
     classMethods: {
@@ -9,5 +9,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return votes;
+  return favourite - recipes;
 };

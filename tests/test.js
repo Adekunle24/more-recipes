@@ -36,11 +36,13 @@ describe('API routes that manage users', () => {
         done();
       });
   });
+ 
   // DELETE api/users input validations with right data
   it('This api should delete the user successfully ', (done) => {
     server.delete('/api/users').set({ 'x-access-token': testToken }).send({ username: 'Adekunle' }).expect('Content-type', /json/)
       .expect(200)
       .end((err, res) => {
+         console.log(testToken);
         assert.property(res.body, 'success');
         assert.property(res.body, 'message');
         done();

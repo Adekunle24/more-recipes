@@ -10,7 +10,8 @@ const socialValues = (sequelize, DataTypes) => {
   });
   socialvalues.associate = (models) => {
     socialvalues.belongsTo(models.recipes, {
-      foreignKey: 'recipeId'
+      foreignKey: 'recipeId',
+      onDelete : 'CASCADE'
     });
   };
   return socialvalues;

@@ -1,34 +1,38 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    queryInterface.createTable('recipes', {
+    queryInterface.createTable('reviews', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      recipeId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'recipes',
+          key: 'id',
+          as: 'recipeId',
+        }
+      },
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
           model: 'users',
-          onDelete: 'CASCADE',
           key: 'id',
-          as: 'userId',
+          as: 'userId'
         }
       },
-      title: {
-        type: Sequelize.STRING,
-        allowNull: false
+      review: {
+        type: Sequelize.STRING
       },
-      procedures: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      ingredients: {
-        type: Sequelize.JSON,
-        allowNull: false
+      replies: {
+        type: Sequelize.JSON
       },
       createdAt: {
         allowNull: false,
@@ -41,7 +45,8 @@ module.exports = {
     });
   },
   down: queryInterface =>
-    queryInterface.dropTable('recipes',{
-        force: true,
-        cascade: false}),
+    queryInterface.dropTable('reviews',{
+      force: true,
+        cascade: false,
+    }),
 };

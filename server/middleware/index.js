@@ -1,6 +1,5 @@
 
 import jwt from 'jsonwebtoken';
-
 /** This Class holds methods for all my middlewares */
 const Wares = class MiddleWares {
   /**
@@ -34,6 +33,16 @@ const Wares = class MiddleWares {
             });
           }
         });
+      }
+    };
+    this.encrypt = (req,res) => {
+      if(req.body.key)
+      {
+          const token = jwt.sign(req.body.key,process.env.API_SECRET);
+          res.json({status:'success',data:{result:token}});
+      }
+      else{
+        res.json({status:'fail',message:'Please provide a key to encrypt'});
       }
     };
   }

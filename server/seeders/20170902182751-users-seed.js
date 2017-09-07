@@ -4,22 +4,22 @@ module.exports = {
     return queryInterface.bulkInsert('users', [{
       email: 'hellorecipes@gmail.com',
       emailConfirmed : 0,
-      password : '$2a$10$9HA26AuOA3/BQXEynwhN6.Y6o9G7tivQG.hJA0whDv8RZ1IXQv4ka',
+      password : 'eyJhbGciOiJIUzI1NiJ9.YWxwaGE.E5KN2A9IGGQm0jJEptGoZQJPUCoroCNpAdF5vCd0z70',//alpha
       phoneNumber : '',
       phoneNumberVerified : 0,
       accessFailedCount : 0,
-      username : 'makevalidations',
+      username : 'Adekunle',
       createdAt : new Date(),
       updatedAt : new Date()
     },
     {
       email: 'andela@gmail.com',
       emailConfirmed : 0,
-      password : '$2a$10$ibbi.ll8eeeVLA0mhll9Lupv5XQa2dNBF701TNhbYUnWkG3M9LR6a',//password
+      password : 'eyJhbGciOiJIUzI1NiJ9.b21lZ2E.wNvC1fS2A09FZOq4cg8gRcAQqujJHFATVxFWgIfu8fQ',//omega
       phoneNumber : '',
       phoneNumberVerified : 0,
       accessFailedCount : 0,
-      username : 'andela',
+      username : 'Andela',
       createdAt : new Date(),
       updatedAt : new Date()
     }

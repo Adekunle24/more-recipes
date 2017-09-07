@@ -1,19 +1,19 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('social_values', [{
-      recipeId : '1',
-      upvotes : '0',
-      downvotes : '0',
-      replies : '0',
+    return queryInterface.bulkInsert('users_profile', [{
+      userId : 1,
+      firstName : '',
+      lastName : '',
+      profilePicture: '',
       createdAt : new Date(),
       updatedAt : new Date()
     },
     {
-      recipeId : '2',
-      upvotes : '0',
-      downvotes : '0',
-      replies : '0',
+      userId : 2,
+      firstName : '',
+      lastName : '',
+      profilePicture: '',
       createdAt : new Date(),
       updatedAt : new Date()
     }
@@ -22,6 +22,5 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-   
   }
 };

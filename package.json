@@ -54,7 +54,8 @@
     "develop": "babel-node app.js",
     "build": "babel ./more-recipes -d ./more-recipes",
     "old-test": "mocha --compilers js:babel-core/register tests/test.js",
-    "test": "nyc mocha report --timeout 10000 tests/test.js"
+    "clean" : "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
+    "test": "npm run clean && nyc mocha --timeout 10000 tests/test.js"
   },
   "nyc": {
     "check-coverage": true,
