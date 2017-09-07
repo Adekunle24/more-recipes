@@ -22,6 +22,7 @@ describe('API routes that manage users', () => {
       .expect('Content-type', /json/)
       .expect(200)
       .end((err, res) => {
+        console.log(JSON.stringify(res.body));
         assert.isFalse(res.body.tokenVerification);
         done();
       });
