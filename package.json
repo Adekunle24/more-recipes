@@ -31,10 +31,12 @@
     "sequelize": "^4.7.1",
     "sequelize-cli": "^2.8.0",
     "serve-favicon": "^2.4.3",
-    "toastr": "^2.1.2"
+    "toastr": "^2.1.2",
+    "nyc": "^11.2.1",
+    "chai-http": "^3.0.0",
+    "supertest": "^3.0.0"
   },
   "devDependencies": {
-    "chai-http": "^3.0.0",
     "colors": "^1.1.2",
     "coveralls": "^2.13.1",
     "eslint-config-airbnb-base": "^12.0.0",
@@ -42,10 +44,8 @@
     "http-server": "^0.10.0",
     "mocha": "^3.5.0",
     "nodemon": "^1.11.0",
-    "nyc": "^11.2.1",
     "should": "^12.0.0",
-    "source-map-support": "^0.4.17",
-    "supertest": "^3.0.0"
+    "source-map-support": "^0.4.17"
   },
   "scripts": {
     "babel": "babel --presets es2015 app.js -o public/bundle.js",
@@ -58,7 +58,7 @@
     "old-test": "mocha --compilers js:babel-core/register tests/test.js",
     "clean": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
     "clean-start": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "test": "npm run clean && nyc mocha --timeout 10000 tests/**/*.js"
+    "test": "npm run clean && nyc mocha tests/**/*.js"
   },
   "nyc": {
     "check-coverage": true,
