@@ -12,12 +12,12 @@ const Recipe = (sequelize, DataTypes) => {
     recipe.belongsTo(models.users, {
       foreignKey: 'userId',
       as: 'users',
-      onDelete: 'cascade'
+      onDelete: 'CASCADE'
     });
     recipe.hasOne(models.social_values, {
       foreignKey: 'recipeId',
       as: 'socialValues',
-      onDelete: 'cascade'
+      onDelete: 'CASCADE'
     });
   };
   return recipe;

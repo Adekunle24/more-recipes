@@ -38,5 +38,8 @@ module.exports = {
     });
   },
   down: queryInterface =>
-    queryInterface.dropTable('favourite_recipes'),
+    queryInterface.dropTable('favourite_recipes',{
+      force: true,
+        cascade: false,
+    }),
 };

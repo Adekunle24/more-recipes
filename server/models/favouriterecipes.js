@@ -9,11 +9,11 @@ const favouriteRecipes = (sequelize, DataTypes) => {
   favourites.associate = (models) => {
     favourites.belongsTo(models.recipes, {
       foreignKey: 'recipeId',
-      onDelete: 'cascade'
+      onDelete: 'CASCADE'
     });
     favourites.hasOne(models.users, {
       foreignKey: 'id',
-      onDelete: 'cascade'
+      onDelete: 'CASCADE'
     });
   };
   return favourites;

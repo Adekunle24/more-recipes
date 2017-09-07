@@ -41,5 +41,7 @@ module.exports = {
     });
   },
   down: queryInterface =>
-    queryInterface.dropTable('recipes'),
+    queryInterface.dropTable('recipes',{
+        force: true,
+        cascade: false}),
 };

@@ -28,5 +28,7 @@ module.exports = {
     });
   },
   down: queryInterface =>
-    queryInterface.dropTable('social_values'),
+    queryInterface.dropTable('social_values',{
+      force: true,
+        cascade: false,}),
 };

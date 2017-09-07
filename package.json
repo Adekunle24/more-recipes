@@ -17,6 +17,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "chai": "^4.1.1",
+    "cross-env": "^5.0.5",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
     "express3-handlebars": "^0.5.2",
@@ -34,6 +35,7 @@
   "devDependencies": {
     "chai-http": "^3.0.0",
     "colors": "^1.1.2",
+    "coveralls": "^2.13.1",
     "eslint-config-airbnb-base": "^12.0.0",
     "eslint-plugin-import": "^2.7.0",
     "http-server": "^0.10.0",
@@ -41,6 +43,7 @@
     "nodemon": "^1.11.0",
     "nyc": "^11.2.1",
     "should": "^12.0.0",
+    "source-map-support": "^0.4.17",
     "supertest": "^3.0.0"
   },
   "scripts": {
@@ -50,9 +53,16 @@
     "start": "babel-watch app.js",
     "develop": "babel-node app.js",
     "build": "babel ./more-recipes -d ./more-recipes",
-    "test": "nyc mocha --timeout 10000 tests/test.js"
+    "old-test": "mocha --compilers js:babel-core/register tests/test.js",
+    "test": "nyc mocha report --timeout 10000 tests/test.js"
   },
   "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 99,
+    "statements": 99,
+    "functions": 99,
+    "branches": 99,
     "require": [
       "babel-register"
     ],
