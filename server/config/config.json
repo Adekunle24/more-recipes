@@ -18,13 +18,7 @@
     "options": {"dialect":"postgres","host":"localhost" }
   },
    "production": {
-    "username": "postgres",
-    "password": "postgre",
-    "database": "More-Recipes",
-    "host": "localhost",
-    "port": 5432,
-    "dialect": "postgres",
-    "options": {"dialect":"postgres","host":"localhost" }
+    "use_env_variable": "DATABASE_URL"
   },
   "secret": "andela"
 }
