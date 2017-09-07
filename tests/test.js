@@ -15,18 +15,6 @@ let authenticationToken;
 // all API tests here
 
 describe('API routes that manage users', () => {
-  it('It should reject the request because token is absent ', (done) => {
-    // calling home page api
-    server
-      .get('/api/users')
-      .expect('Content-type', /json/)
-      .expect(200)
-      .end((err, res) => {
-        console.log(JSON.stringify(res.body));
-        assert.isFalse(res.body.tokenVerification);
-        done();
-      });
-  });
   // test api that returns hello
   it('This api/test should return hello', (done) => {
     // calling test api
@@ -180,11 +168,12 @@ describe('API routes that manage recipes', () => {
   it('POST/ api/recipes should return successful with data', (done) => {
     server
       .post('/api/recipes').set({ 'x-access-token': authenticationToken }).send({
-        title: 'How to make pizza', procedures: 'Pour oil in fry pan.. Mix it with water', ingredients: JSON.stringify([{ item: 'melon', quantity: '1 cup' }])
+        title: 'How to make pizza', procedures: 'Pour oil in fry pan.. Mix it with water', ingredients: ingredientString
       })
       .expect('Content-type', /json/)
       .expect(200)
       .end((err, res) => {
+        console.log(JSON.stringify(res.body));
         assert.property(res.body, 'data');
         assert.property(res.body, 'message');
         assert.equal(res.body.status,'success');
@@ -195,7 +184,7 @@ describe('API routes that manage recipes', () => {
   it('PUT api/recipes should return validations false without recipe ID', (done) => {
     server
       .put('/api/recipes').set({ 'x-access-token': authenticationToken }).send({
-        title: 'How to make pizza without flour', user: 1, procedures: 'Pour oil in fry pan.. Mix it with water', ingredients: JSON.stringify([{ item: 'melon', quantity: '1 cup' }])
+        title: 'How to make pizza without flour', user: 1, procedures: 'Pour oil in fry pan.. Mix it with water', ingredients: ingredientString
       })
       .expect('Content-type', /json/)
       .expect(200)
