@@ -70,6 +70,7 @@ describe('API routes that manage users', () => {
     server.post('/api/users/signin').send({ username: 'Master', password: 'alpha' }).expect('Content-type', /json/)
       .expect(200)
       .end((err, res) => {
+        console.log(JSON.stringify(res.body));
         assert.property(res.body, 'data');
         assert.property(res.body, 'status');
         assert.property(res.body, 'message');
