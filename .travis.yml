@@ -1,5 +1,5 @@
 language: node_js
-node_js: "7"
+node_js: "8.4"
 install:
 - npm install
 script:
@@ -15,8 +15,6 @@ before_script:
 - npm install nyc -g
 - npm install mocha -g
 - createdb More-Recipes-test --username=postgres
-- sequelize db:migrate
-- sequelize db:seed:all
 notifications:
   webhooks: https://coveralls.io/webhook 
   repo_token: AkyDA6kofzdIYNKaC3ncj7wTDsYwTpMEq

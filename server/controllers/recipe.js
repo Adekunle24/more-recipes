@@ -45,7 +45,7 @@ const addRecipe = (req, res) => {
     }).catch(error => res.send(error.toString()));
   } else {
     res.json({
-      success: false, data: null, validations: false, message: 'Please provide title,procedures, and ingredients'
+      status: 'fail', data: null, validations: false, message: 'Please provide title,procedures, and ingredients'
     });
   }
 };
