@@ -1,18 +1,12 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    queryInterface.createTable('users-profile', {
+    queryInterface.createTable('users_profile', {
       userId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
-         onDelete: 'CASCADE',
-        references: {
-          model: 'users',
-          key: 'id',
-          as: 'user'
-        }
+        type: Sequelize.INTEGER
       },
       firstName: {
         type: Sequelize.STRING
@@ -34,7 +28,7 @@ module.exports = {
     });
   },
   down: queryInterface =>
-    queryInterface.dropTable('users-profile',{
+    queryInterface.dropTable('users_profile',{
         force: true,
         cascade: false}),
 };

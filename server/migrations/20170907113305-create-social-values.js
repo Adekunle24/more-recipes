@@ -1,16 +1,16 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    queryInterface.createTable('social-values', {
+    queryInterface.createTable('social_values', {
       recipeId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
+         onDelete: 'CASCADE',
          references: {
           model: 'recipes',
-          key: 'id',
-          as: 'recipes',
+          key: 'id'
         }
       },
       createdAt: {
@@ -27,7 +27,7 @@ module.exports = {
     });
   },
   down: queryInterface =>
-    queryInterface.dropTable('social-values',{
+    queryInterface.dropTable('social_values',{
       force: true,
         cascade: false,}),
 };

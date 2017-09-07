@@ -50,12 +50,12 @@
     "babel": "babel --presets es2015 app.js -o public/bundle.js",
     "webpack": "webpack --d --watch",
     "serve": "babel app.js --out-file dist/compiled.js && node dist/compiled.js ",
-    "start": "babel-watch app.js",
+    "start": "npm run clean && babel-watch app.js",
     "develop": "babel-node app.js",
     "build": "babel ./more-recipes -d ./more-recipes",
     "old-test": "mocha --compilers js:babel-core/register tests/test.js",
-    "clean" : "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "test": "npm run clean && nyc mocha --timeout 10000 tests/test.js"
+    "clean" : "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
+    "test": "npm run clean && nyc mocha --timeout 10000 tests/**/*.js"
   },
   "nyc": {
     "check-coverage": true,

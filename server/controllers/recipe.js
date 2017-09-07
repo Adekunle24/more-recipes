@@ -22,7 +22,7 @@ const getTotalRecipes = (req, res) => {
         as: 'socialValues',
       }]
     }
-    ).then(value => res.json({ success: true, data: value })).catch(error => res.send(error.toString()));
+    ).then(value => res.json({ status: 'success', data: value })).catch(error => res.send(error.toString()));
   }
 };
 // this api adds a new recipe to the database
@@ -40,7 +40,7 @@ const addRecipe = (req, res) => {
         downvotes: 0,
         replies: 0
       }).then((social) => {
-        res.json({ success: true, data: { recipes: result, socialValues: social }, message: 'Recipe added successfully' });
+        res.json({ status: 'success', data: { recipes: result, socialValues: social }, message: 'Recipe added successfully' });
       }).catch(error => res.send(error.toString()));
     }).catch(error => res.send(error.toString()));
   } else {
@@ -58,9 +58,9 @@ const saveModifiedRecipe = (req, res, data) => {
     ingredients: req.body.ingredients || data.ingredients
   }).then((output) => {
     if (output[0] === 0) {
-      res.json({ success: false, message: 'Specified recipe could not be found' });
+      res.json({ status: 'fail', message: 'Specified recipe could not be found' });
     } else {
-      res.json({ success: true, data: output });
+      res.json({ status: 'success', data: output });
     }
   }).catch(error => res.send(error));
 };
@@ -75,11 +75,11 @@ const modifyRecipe = (req, res) => {
         // call the method to save new recipe details
         saveModifiedRecipe(req, res, result);
       } else {
-        res.send('Specified recipe could not be found');
+        res.json({status:'fail',message:'Specified recipe could not be found'});
       }
     }).catch(error => res.send(error));
   } else {
-    res.json({ success: false, validations: false, message: 'Please provide a Recipe Id' });
+    res.json({ status: 'fail', validations: false, message: 'Please provide a Recipe Id' });
   }
 };
 
@@ -98,20 +98,35 @@ const deleteRecipe = (req, res) => {
       }).then((response) => {
         recipeModel.findById(req.body.recipeId).then((recipe) => {
           if (!recipe) {
-            res.json({ message: 'Specified recipe could not be found', success: false });
+            res.json({ message: 'Specified recipe could not be found', status: 'fail' });
           } else {
             recipe.destroy()
-              .then(output => res.json({ success: true, message: 'Recipe deleted successfully' })).catch(error => res.send(error));
+              .then(output => res.json({ status: 'success', message: 'Recipe deleted successfully' })).catch(error => res.send(error));
           }
         }).catch(error => res.send(error));
       }).catch(error => res.send(error));
     }).catch(error => res.send(error));
   } else {
-    res.json({ message: 'Please provide a recipe Id', validations: false, success: false });
+    res.json({ message: 'Please provide a recipe Id', validations: false, status: 'fail' });
   }
 };
 const getRecipeWithMostUpVotes = (req, res) => {
   res.send('api route to get most upvotes');
+};
+const searchRecipeUsingIngredient = (req,res) =>{
+  if(req.query.keyword)
+  {
+    recipeModel.findAll({
+       where: {
+    $or: [
+      { 'title': { like: '%' + req.query.keyword + '%' } },
+    ]
+  }
+    }).then(result => res.json({status:'success',data:result})).catch(error => res.send(error.toString()));
+  }
+  else{
+    res.json({status:'fail',message:'Please specify a keyword',data:null});
+  }
 };
 const allMethods = {
   getTotalRecipes,
@@ -119,6 +134,7 @@ const allMethods = {
   modifyRecipe,
   setModifiedRecipe: modifyRecipe,
   deleteRecipe,
-  getRecipeWithMostUpVotes
+  getRecipeWithMostUpVotes,
+  searchRecipeUsingIngredient
 };
 export default allMethods;

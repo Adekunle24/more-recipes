@@ -12,7 +12,7 @@ module.exports = {
       title : 'How to make Pounded yam',
       userId : '2',
       procedures : 'Peel the yam, and boil for 30 minutes. Wash your mortar and pestle then pound',
-      ingredients : '{ "item" :"yam","quantity":"3 pieces"}',
+      ingredients : '[{ "item" :"yam","quantity":"3 pieces"}]',
       createdAt : new Date(),
       updatedAt : new Date()
     },
@@ -36,7 +36,7 @@ module.exports = {
       title : 'How to make Pizza with flour',
       userId : '1',
       procedures : 'Grind the flour and mix with water and oil and allow to wait for an hour.. Allow to stay for an hour',
-      ingredients : '{ "item" :"flour","quantity":"1 cup"}',
+      ingredients : '[{ "item" :"flour","quantity":"1 cup"}]',
       createdAt : new Date(),
       updatedAt : new Date()
     }

@@ -41,11 +41,12 @@ const signUp = (req, res) => {
       phoneNumber: ''
     }).then((output) => {
       output.password = null;
-      res.json({ success: true, data: output, message: `Your account has been created successfully Username: ${output.username} Email: ${output.email}` });
+       let  newToken = jwt.sign(JSON.stringify(output), process.env.API_SECRET);
+      res.json({ status: 'success', data: {token : newToken}, message: `Your account has been created successfully Username: ${output.username} Email: ${output.email}` });
     }).catch(error => res.send(error));
   } else {
     res.json({
-      success: false, data: null, validations: false, message: 'Please provide username,email and password'
+      status: 'fail', data: null, validations: false, message: 'Please provide username,email and password'
     });
   }
 };
@@ -104,29 +105,24 @@ const signIn = (req, res) => {
       }
     }).then((result) => {
       if (!result) {
-        res.json({ success: false, data: null, message: 'Incorrect username or password' });
+        res.json({ status: 'fail', data: null, message: 'Incorrect username or password' });
       } else if (result) {
         crypto.compare(passwordInput, result.password, (err, cryptResponse) => {
           if (cryptResponse) {
             result.password = null;
-            let newToken;
-            if (process.env.NODE_ENV != 'test') {
-              newToken = jwt.sign(JSON.stringify(result), process.env.API_SECRET);
-            } else {
-              newToken = null;
-            }
+            let  newToken = jwt.sign(JSON.stringify(result), process.env.API_SECRET);
             res.json({
- success: true, data: result, message: `Welcome ${result.username}`, token: newToken, info: 'add this token to your header with key x-access-token for authentication' 
+ status: 'success', data: result, message: `Welcome ${result.username}`, token: newToken, info: 'add this token to your header with key x-access-token for authentication' 
 });
           } else {
-            res.json({ success: false, data: null, message: 'Incorrect username or password' });
+            res.json({ status: 'fail', data: null, message: 'Incorrect username or password' });
           }
         });
       }
     }).catch(error => res.send(error));
   } else {
     res.json({
-      success: false, data: null, validations: false, message: 'Provide username and password'
+      status: 'fail', data: null, validations: false, message: 'Provide username and password'
     });
   }
 };

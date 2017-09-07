@@ -12,6 +12,17 @@ env.config();
 const routes = express.Router();
 routes.get('/api/test', (req, res) => res.json({ status: 'success', data: 'hello' }));
 
+routes.post('/api/encrypt',(req,res)=>{
+  if(req.body.key)
+  {
+    const passwordHash = crypto.hashSync(req.body.key);
+    res.send(passwordHash);
+  }
+  else{
+    res.json({'status':'fail',message:'please provide key to hash'})
+  }
+});
+
 // api generates test token
 routes.post('/api/token', new middlewares().encrypt);
 
@@ -28,11 +39,11 @@ MiddleWares.verifyJsonWebToken(routes);
 routes.get('/api/users', controllers.usersController.getTotalUsers);
 routes.delete('/api/users', controllers.usersController.removeUser);
 
+
+
 routes.get('/api/displaytoken', (req, res) => {
   res.send(req.decoded);
 });
-
-
 // api-recipes-add route
 routes.post('/api/recipes', controllers.recipesController.addRecipe);
 
@@ -44,6 +55,9 @@ routes.put('/api/recipes', controllers.recipesController.modifyRecipe);
 
 // api-delete-recipe route
 routes.delete('/api/recipes', controllers.recipesController.deleteRecipe);
+
+// api to search for recipes based on ingredient
+routes.get('/api/recipes/search',controllers.recipesController.searchRecipeUsingIngredient);
 
 // route that allows a logged in user to post a review for a recipe
 routes.post('/api/recipes/:recipeId/reviews', controllers.reviewsController.saveReviewToDb);
