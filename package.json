@@ -50,7 +50,7 @@
     "babel": "babel --presets es2015 app.js -o public/bundle.js",
     "webpack": "webpack --d --watch",
     "serve": "babel app.js --out-file dist/compiled.js && node dist/compiled.js ",
-    "start": "npm run clean-start && babel-watch app.js",
+    "start": "npm run clean-start && babel-node app.js",
     "develop": "babel-node app.js",
     "build": "babel ./more-recipes -d ./more-recipes",
     "old-test": "mocha --compilers js:babel-core/register tests/test.js",
