@@ -21,6 +21,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
     "express3-handlebars": "^0.5.2",
+    "heroku-cli": "^6.14.20",
     "jsonwebtoken": "^7.4.3",
     "morgan": "^1.8.2",
     "node-gyp": "^3.6.2",
@@ -50,12 +51,12 @@
     "babel": "babel --presets es2015 app.js -o public/bundle.js",
     "webpack": "webpack --d --watch",
     "serve": "babel app.js --out-file dist/compiled.js && node dist/compiled.js ",
-    "start": "npm run clean-start && babel-node app.js",
+    "start": "babel-node app.js",
     "develop": "babel-node app.js",
     "build": "babel ./more-recipes -d ./more-recipes",
     "old-test": "mocha --compilers js:babel-core/register tests/test.js",
-    "clean" : "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
-    "clean-start" : "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
+    "clean": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
+    "clean-start": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
     "test": "npm run clean && nyc mocha --timeout 10000 tests/**/*.js"
   },
   "nyc": {
