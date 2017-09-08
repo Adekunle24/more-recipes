@@ -1,7 +1,7 @@
 # More-Recipes
 
-[![Coverage Status](https://coveralls.io/repos/github/Adekunle24/more-recipes/badge.svg?branch=develop)](https://coveralls.io/github/Adekunle24/more-recipes?branch=develop)
 [![Build Status](https://travis-ci.org/Adekunle24/more-recipes.svg?branch=develop)](https://travis-ci.org/Adekunle24/more-recipes)
+[![Coverage Status](https://coveralls.io/repos/github/Adekunle24/more-recipes/badge.svg?branch=develop)](https://coveralls.io/github/Adekunle24/more-recipes?branch=develop)
 [![Code Climate](https://codeclimate.com/github/Adekunle24/more-recipes/badges/gpa.svg)](https://codeclimate.com/github/Adekunle24/more-recipes)
 [![Test Coverage](https://codeclimate.com/github/Adekunle24/more-recipes/badges/coverage.svg)](https://codeclimate.com/github/Adekunle24/more-recipes/coverage)
 [![Issue Count](https://codeclimate.com/github/Adekunle24/more-recipes/badges/issue_count.svg)]
@@ -15,28 +15,28 @@
  ```FontAwesome```
  ```Bootstrap```
  ```Express```
- ### Installing
+ ### Installing  
 Install NodeJS
-```Download it from their website```
-Install NPM
-```Should be installed alongside NodeJS```
-Install Sequelize
-```$ npm install --save sequelize```
-Install PostgreSQL
-```$ npm install --save pg pg-hstore```
-Install Express
-```$ npm install express```
-###Application Installation
-```cd into a directory```
-```clone this repository```
-### Other dependencies
-Install other application dependencies by running the code below
-```$ npm install```
-##How to start the application
-```npm start```
-##Running the test
-Enter the command below
-```npm test```
+```Download it from their website```  
+Install NPM  
+```Should be installed alongside NodeJS```  
+Install Sequelize  
+```$ npm install --save sequelize```  
+Install PostgreSQL  
+```$ npm install --save pg pg-hstore```  
+Install Express  
+```$ npm install express```  
+###Application Installation  
+```cd into a directory```  
+```clone this repository```  
+### Other dependencies  
+Install other application dependencies by running the code below  
+```$ npm install```  
+##How to start the application  
+```npm start```  
+##Running the test  
+Enter the command below  
+```npm test```  
 ### Endpoints
 * POST: /api/v1/users/signup
 * POST: /api/v1/users/signin
