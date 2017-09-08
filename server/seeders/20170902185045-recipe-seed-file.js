@@ -39,6 +39,14 @@ module.exports = {
       ingredients : '[{ "item" :"flour","quantity":"1 cup"}]',
       createdAt : new Date(),
       updatedAt : new Date()
+    },
+    {
+      title : 'How to make Pizza with flour',
+      userId : '1',
+      procedures : 'Grind the flour and mix with water and oil and allow to wait for an hour.. Allow to stay for an hour',
+      ingredients : '[{ "item" :"flour","quantity":"1 cup"}]',
+      createdAt : new Date(),
+      updatedAt : new Date()
     }
     ], {});
     
