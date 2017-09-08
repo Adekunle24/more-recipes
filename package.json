@@ -54,7 +54,7 @@
     "heroku-postbuild": "npm run clean-start",
     "start": "babel-node app.js",
     "develop": "babel-node app.js",
-    "build": "babel ./more-recipes -d ./more-recipes",
+    "build": "babel -d ./**/*.js ./dist/compiled.js -s",
     "old-test": "mocha --compilers js:babel-core/register tests/**/*.js",
     "clean": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
     "clean-start": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
@@ -62,7 +62,8 @@
     "controllers-test": "mocha --compilers js:babel-core/register tests/controllers.js",
     "models-test": "mocha --compilers js:babel-core/register tests/models.js",
     "middlewares-test": "mocha --compilers js:babel-core/register tests/middlewares.js",
-    "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls",
+    "use-build":"node ./dist/compiled.js "
   },
   "nyc": {
     "check-coverage": true,
