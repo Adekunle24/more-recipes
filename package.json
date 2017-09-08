@@ -51,7 +51,7 @@
     "babel": "babel --presets es2015 app.js -o public/bundle.js",
     "webpack": "webpack --d --watch",
     "serve": "babel app.js --out-file dist/compiled.js && node dist/compiled.js ",
-    "heroku-postbuild": "createdb More-Recipes-production --username=postgres && npm run clean-start",
+    "heroku-postbuild": "npm run clean-start",
     "start": "babel-node app.js",
     "develop": "babel-node app.js",
     "build": "babel -d ./**/*.js ./dist/compiled.js -s",

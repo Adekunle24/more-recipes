@@ -270,23 +270,23 @@ describe('API routes that manage recipes', () => {
 
   describe('API routes that manage favourite recipes', () => {
     let recipeIdForFavourites = 2;
-  it('POST/ api/recipes should add recipe success to favourites list', (done) => {
-    server
-      .post(`/api/v1/recipes/${recipeIdForFavourites}/favourites`).set({ 'x-access-token': authenticationToken })
-      .end((err, res) => {
-        assert.property(res.body, 'data');
-        assert.equal(res.body.status,'success');
-        recipeIdForFavourites = res.body.data.recipe.id;
-        done();
-      });
-  });
-  it('DELETE /api/v1/recipes/:recipeId/favourites should remove a recipe from favourites list for a user', (done) => {
-    server
-      .delete(`/api/v1/recipes/${recipeIdForFavourites}/favourites`).set({ 'x-access-token': authenticationToken })
-      .end((err, res) => {
-        assert.property(res.body, 'message');
-        assert.equal(res.body.status, 'success');
-        done();
-      });
-  });
+  // it('POST/ api/recipes should add recipe success to favourites list', (done) => {
+  //   server
+  //     .post(`/api/v1/recipes/${recipeIdForFavourites}/favourites`).set({ 'x-access-token': authenticationToken })
+  //     .end((err, res) => {
+  //       assert.property(res.body, 'data');
+  //       assert.equal(res.body.status,'success');
+  //       recipeIdForFavourites = res.body.data.recipe.id;
+  //       done();
+  //     });
+  // });
+  // it('DELETE /api/v1/recipes/:recipeId/favourites should remove a recipe from favourites list for a user', (done) => {
+  //   server
+  //     .delete(`/api/v1/recipes/${recipeIdForFavourites}/favourites`).set({ 'x-access-token': authenticationToken })
+  //     .end((err, res) => {
+  //       assert.property(res.body, 'message');
+  //       assert.equal(res.body.status, 'success');
+  //       done();
+  //     });
+  // });
 });
