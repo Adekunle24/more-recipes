@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Adekunle24/more-recipes.svg?branch=develop)](https://travis-ci.org/Adekunle24/more-recipes)
 [![Coverage Status](https://coveralls.io/repos/github/Adekunle24/more-recipes/badge.svg?branch=develop)](https://coveralls.io/github/Adekunle24/more-recipes?branch=develop)
-[![Issue Count](https://codeclimate.com/github/Adekunle24/more-recipes/badges/issue_count.svg)]
+![Issue Count](https://codeclimate.com/github/Adekunle24/more-recipes/badges/issue_count.svg)
 
  This is a NodeJS application that provides a platform for users to share the awesome and amazing recipe ideas they have learnt, tried or invented. A registered user can post a recipe and get feedback in form of votes and comments from other users
  ### Prerequisites
@@ -14,7 +14,7 @@
  ```Bootstrap```
  ```Express```
  ### Installing  
-Install NodeJS
+Install NodeJS  
 ```Download it from their website```  
 Install NPM  
 ```Should be installed alongside NodeJS```  
