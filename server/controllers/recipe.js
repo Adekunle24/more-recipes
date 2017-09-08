@@ -1,13 +1,17 @@
-// import all the models
+
 import allModels from '../models';
 import allControllers from '../controllers';
-// assign recipeModel to model recipe
+
 const recipeModel = allModels.recipes;
 const userModel = allModels.users;
 const voteModel = allModels.votes;
 const reviewModel = allModels.reviews;
 const socialValuesModel = allModels.social_values;
-// this is a test api to display all registered users
+/**
+ * Get total recipes in the application
+ * @param  {} req
+ * @param  {} res
+ */
 const getTotalRecipes = (req, res) => {
   if (req.query.sort && req.query.order) {
     allControllers.socialValueController.getValuesInDesc(req, res);
@@ -25,7 +29,11 @@ const getTotalRecipes = (req, res) => {
     ).then(value => res.json({ status: 'success', data: value })).catch(error => res.send(error.toString()));
   }
 };
-// this api adds a new recipe to the database
+/**
+ * Add a recipe to the application
+ * @param  {} req
+ * @param  {} res
+ */
 const addRecipe = (req, res) => {
   if (req.body.title && req.body.procedures && req.body.ingredients && req.decoded) {
     recipeModel.create({
@@ -49,8 +57,12 @@ const addRecipe = (req, res) => {
     });
   }
 };
-
-// this api submits the modified recipe and saves into the db
+/**
+ * Saves modified recipe to db
+ * @param  {} req
+ * @param  {} res
+ * @param  {} data
+ */
 const saveModifiedRecipe = (req, res, data) => {
   data.update({
     title: req.body.title || data.title,
@@ -64,8 +76,10 @@ const saveModifiedRecipe = (req, res, data) => {
     }
   }).catch(error => res.send(error));
 };
-
-// this api enables users to modify recipe they added
+/**Modify a recipe
+ * @param  {} req
+ * @param  {} res
+ */
 const modifyRecipe = (req, res) => {
   if (req.body.recipeId) {
     recipeModel.findById(
@@ -82,8 +96,11 @@ const modifyRecipe = (req, res) => {
     res.json({ status: 'fail', validations: false, message: 'Please provide a Recipe Id' });
   }
 };
-
-
+/**
+ * Delete a recipe
+ * @param  {} req
+ * @param  {} res
+ */
 const deleteRecipe = (req, res) => {
   if (req.body.recipeId) {
     reviewModel.destroy({
@@ -113,16 +130,15 @@ const deleteRecipe = (req, res) => {
 const getRecipeWithMostUpVotes = (req, res) => {
   res.send('api route to get most upvotes');
 };
+/**
+ * Search List of recipes using ingredient
+ * @param  {} req
+ * @param  {} res
+ */
 const searchRecipeUsingIngredient = (req,res) =>{
   if(req.query.keyword)
   {
-    recipeModel.findAll({
-       where: {
-    $or: [
-      { 'title': { like: '%' + req.query.keyword + '%' } },
-    ]
-  }
-    }).then(result => res.json({status:'success',data:result})).catch(error => res.send(error.toString()));
+    recipeModel.query(`select * from recipes where title like '%${req.query.keyword}%'`).then(result => res.json({status:'success',data:result})).catch(error => res.send(error.toString()));
   }
   else{
     res.json({status:'fail',message:'Please specify a keyword',data:null});

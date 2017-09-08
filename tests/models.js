@@ -25,5 +25,4 @@ describe('Tests for all Models',() =>{
         assert.isDefined(models.users_profile);
     });
     });
-   
 });

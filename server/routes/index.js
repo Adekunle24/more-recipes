@@ -7,19 +7,18 @@ import jwt from 'jsonwebtoken';
 import env from 'dotenv';
 import controllers from '../controllers';
 import middlewares from '../middleware';
+
 env.config();
 
 const routes = express.Router();
 routes.get('/api/v1/test', (req, res) => res.json({ status: 'success', data: 'hello' }));
 
-routes.post('/api/v1/encrypt',(req,res)=>{
-  if(req.body.key)
-  {
+routes.post('/api/v1/encrypt', (req, res) => {
+  if (req.body.key) {
     const passwordHash = crypto.hashSync(req.body.key);
     res.send(passwordHash);
-  }
-  else{
-    res.json({'status':'fail',message:'please provide key to hash'})
+  } else {
+    res.json({ status: 'fail', message: 'please provide key to hash' });
   }
 });
 
@@ -36,24 +35,15 @@ const MiddleWares = new middlewares();
 MiddleWares.verifyJsonWebToken(routes);
 
 // api get all users
-routes.route('/api/v1/users').get( controllers.usersController.getTotalUsers)
-.delete(controllers.usersController.removeUser);
+routes.route('/api/v1/users').get(controllers.usersController.getTotalUsers)
+  .delete(controllers.usersController.removeUser);
 
-
-/**
- * This api decodes the token passed via the header and display it
- * @param  {} '/api/v1/displaytoken'
- * @param  {} (req request object from the api
- * @param  {} res response object to send
- */
 routes.get('/api/v1/displaytoken', (req, res) => {
   res.send(req.decoded);
 });
 
-routes.post('/api/v1/recipes', controllers.recipesController.addRecipe);
-
-// api-recipes-totalrecipes route
-routes.get('/api/v1/recipes', controllers.recipesController.getTotalRecipes);
+routes.route('/api/v1/recipes').post(controllers.recipesController.addRecipe)
+  .get(controllers.recipesController.getTotalRecipes);
 
 // api-edit-recipe route
 routes.put('/api/v1/recipes', controllers.recipesController.modifyRecipe);
@@ -62,7 +52,7 @@ routes.put('/api/v1/recipes', controllers.recipesController.modifyRecipe);
 routes.delete('/api/v1/recipes', controllers.recipesController.deleteRecipe);
 
 // api to search for recipes based on ingredient
-routes.get('/api/v1/recipes/search',controllers.recipesController.searchRecipeUsingIngredient);
+routes.get('/api/v1/recipes/search', controllers.recipesController.searchRecipeUsingIngredient);
 
 // route that allows a logged in user to post a review for a recipe
 routes.post('/api/v1/recipes/:recipeId/reviews', controllers.reviewsController.saveReviewToDb);
