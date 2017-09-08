@@ -1,17 +1,19 @@
 
 import usersController from './users';
 import recipesController from './recipe';
-import reviewController from './review';
+import reviewsController from './review';
 import favouriteRecipeController from './favouriteRecipe';
 import votesController from './votes';
 import socialValueController from './socialValues';
+import usersProfileController from './usersProfile';
 
 const controllers = {
   usersController,
   recipesController,
-  reviewsController: reviewController,
+  reviewsController,
   favouriteRecipeController,
   votesController,
-  socialValueController
+  socialValueController,
+  usersProfileController
 };
 export default controllers;

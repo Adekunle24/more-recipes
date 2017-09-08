@@ -37,6 +37,8 @@
   "devDependencies": {
     "colors": "^1.1.2",
     "coveralls": "^2.13.1",
+     "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-plugin-import": "^2.7.0",
     "http-server": "^0.10.0",
     "mocha": "^3.5.0",
     "nodemon": "^1.11.0",
@@ -54,7 +56,10 @@
     "old-test": "mocha --compilers js:babel-core/register tests/test.js",
     "clean": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
     "clean-start": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "test": "npm run clean && nyc mocha tests/**/*.js"
+    "test": "npm run clean && nyc mocha tests/**/*.js",
+    "controllers-test" : "mocha --compilers js:babel-core/register tests/controllers.js",
+     "models-test" : "mocha --compilers js:babel-core/register tests/models.js",
+      "middlewares-test" : "mocha --compilers js:babel-core/register tests/middlewares.js"
   },
   "nyc": {
     "check-coverage": true,
