@@ -52,6 +52,11 @@ const addFavoriteRecipe = (req, res) => {
     res.json({ status: 'fail', data: { message: 'please provide a recipe ID' }, validations: false });
   }
 };
+/**
+ * Remove recipe from favourite recipes list
+ * @param  {} req
+ * @param  {} res
+ */
 const removeFromFavoriteRecipes = (req, res) => {
   favouriteRecipeModel.destroy(
     {

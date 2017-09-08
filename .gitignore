@@ -2,3 +2,4 @@ thumbs.db
 node_modules
 .env
 config.json
+npm-debug.log

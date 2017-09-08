@@ -33,19 +33,12 @@ routes.post('/api/v1/users/signin', controllers.usersController.signIn);
 routes.post('/api/v1/token', new middlewares().encrypt);
 
 const MiddleWares = new middlewares();
-//MiddleWares.verifyJsonWebToken(routes);
+MiddleWares.verifyJsonWebToken(routes);
 
 // api get all users
 routes.route('/api/v1/users').get( controllers.usersController.getTotalUsers)
 .delete(controllers.usersController.removeUser);
 
-
-/**
- * This api decodes the token passed via the header and display it
- * @param  {} '/api/v1/displaytoken'
- * @param  {} (req request object from the api
- * @param  {} res response object to send
- */
 routes.get('/api/v1/displaytoken', (req, res) => {
   res.send(req.decoded);
 });
