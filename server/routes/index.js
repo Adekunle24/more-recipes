@@ -50,10 +50,8 @@ routes.get('/api/v1/displaytoken', (req, res) => {
   res.send(req.decoded);
 });
 
-routes.post('/api/v1/recipes', controllers.recipesController.addRecipe);
-
-// api-recipes-totalrecipes route
-routes.get('/api/v1/recipes', controllers.recipesController.getTotalRecipes);
+routes.route('/api/v1/recipes').post(controllers.recipesController.addRecipe)
+.get(controllers.recipesController.getTotalRecipes);
 
 // api-edit-recipe route
 routes.put('/api/v1/recipes', controllers.recipesController.modifyRecipe);

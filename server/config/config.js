@@ -9,4 +9,7 @@ module.exports = {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   options: { dialect: process.env.DB_DIALECT, host: process.env.DB_HOST },
+  production: {
+    use_env_variable: process.env.DATABASE_URL
+  }
 };

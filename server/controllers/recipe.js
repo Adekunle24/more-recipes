@@ -119,7 +119,9 @@ const searchRecipeUsingIngredient = (req,res) =>{
     recipeModel.findAll({
        where: {
     $or: [
-      { 'title': { like: '%' + req.query.keyword + '%' } },
+      { 'ingredients': { like: '%' + req.query.keyword + '%' },
+      'title' : { like: '%' + req.query.keyword + '%' }
+   },
     ]
   }
     }).then(result => res.json({status:'success',data:result})).catch(error => res.send(error.toString()));
