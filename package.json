@@ -52,7 +52,7 @@
     "webpack": "webpack --d --watch",
     "serve": "babel app.js --out-file dist/compiled.js && node dist/compiled.js ",
     "heroku-postbuild": "npm run clean-start",
-    "start": "babel-watch app.js",
+    "start": "babel-node app.js",
     "develop": "babel-node app.js",
     "build": "babel ./more-recipes -d ./more-recipes",
     "old-test": "mocha --compilers js:babel-core/register tests/**/*.js",
