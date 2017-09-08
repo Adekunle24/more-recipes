@@ -33,7 +33,7 @@ routes.post('/api/v1/users/signin', controllers.usersController.signIn);
 routes.post('/api/v1/token', new middlewares().encrypt);
 
 const MiddleWares = new middlewares();
-MiddleWares.verifyJsonWebToken(routes);
+//MiddleWares.verifyJsonWebToken(routes);
 
 // api get all users
 routes.route('/api/v1/users').get( controllers.usersController.getTotalUsers)
