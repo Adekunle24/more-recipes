@@ -62,6 +62,8 @@ routes.get('/api/recipes/search',controllers.recipesController.searchRecipeUsing
 // route that allows a logged in user to post a review for a recipe
 routes.post('/api/recipes/:recipeId/reviews', controllers.reviewsController.saveReviewToDb);
 
+routes.put('/api/recipes/:recipeId/reviews', controllers.reviewsController.saveReviewToDb);
+
 
 // route show all reviews for a recipe
 routes.get('/api/recipes/:recipeId/reviews', controllers.reviewsController.getAllReviews);
@@ -71,6 +73,7 @@ routes.get('/api/users/:userId/recipes', controllers.favouriteRecipeController.g
 
 // route for a user to add recipe to favourites list
 routes.post('/api/recipes/:recipeId/favourites', controllers.favouriteRecipeController.addFavourite);
+routes.put('/api/recipes/:recipeId/favourites', controllers.favouriteRecipeController.addFavourite);
 routes.delete('/api/recipes/:recipeId/favourites', controllers.favouriteRecipeController.removeFavourite);
 routes.get('/api/recipes?sort=upvotes&order=ascending', controllers.recipesController.getRecipeWithMostUpVotes);
 

@@ -223,7 +223,7 @@ describe('API routes that manage recipes', () => {
   describe('API routes that manage reviews', () => {
   it('POST /api/recipes/:recipeId/reviews should post review successfully', (done) => {
     server
-      .post(`/api/recipes/${testRecipeId}/reviews`).set({ 'x-access-token': authenticationToken }).send({ review: 'I love your recipe and all my family enjoyed it' })
+      .put(`/api/recipes/${testRecipeId}/reviews`).set({ 'x-access-token': authenticationToken }).send({ review: 'I love your recipe and all my family enjoyed it' })
       
       
       .end((err, res) => {
@@ -235,7 +235,7 @@ describe('API routes that manage recipes', () => {
   });
   it('POST /api/recipes/:recipeId/reviews should fail to post review', (done) => {
     server
-      .post(`/api/recipes/${testRecipeId}/reviews`).set({ 'x-access-token': authenticationToken })
+      .put(`/api/recipes/${testRecipeId}/reviews`).set({ 'x-access-token': authenticationToken })
       
       
       .end((err, res) => {
@@ -259,9 +259,7 @@ describe('API routes that manage recipes', () => {
   });
 it('POST /api/recipes/:recipeId/favourites should add a recipe to favourites list for a user', (done) => {
     server
-      .post(`/api/recipes/${testRecipeId}/favourites`).set({ 'x-access-token': authenticationToken })
-      
-      
+      .put(`/api/recipes/${testRecipeId}/favourites`).set({ 'x-access-token': authenticationToken })
       .end((err, res) => {
         console.log(JSON.stringify(res.body));
         assert.equal(res.body.status, 'success');
@@ -286,7 +284,7 @@ it('POST /api/recipes/:recipeId/favourites should add a recipe to favourites lis
     let recipeIdForFavourites = 2;
   it('POST/ api/recipes should add recipe success to favourites list', (done) => {
     server
-      .post(`/api/recipes/${recipeIdForFavourites}/favourites`).set({ 'x-access-token': authenticationToken })
+      .put(`/api/recipes/${recipeIdForFavourites}/favourites`).set({ 'x-access-token': authenticationToken })
       .end((err, res) => {
         assert.property(res.body, 'data');
         assert.equal(res.body.status,'success');
