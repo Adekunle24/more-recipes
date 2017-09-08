@@ -1,180 +1,163 @@
 // using express framework
 import express from 'express';
 import fs from 'fs';
-import path from 'path';
-import logger from 'morgan';
 import bodyParser from 'body-parser';
-import Sequelize from 'sequelize';
-import Config from 'server/config/config.json';
-import fortune from 'lib/fortune.js';
-const config = Config['development'];
-const sequelize = new Sequelize(config.database,config.username, config.password,config.options);
+import routes from './server/routes';
+import favicon from 'serve-favicon';
+import path from 'path';
+import env from 'dotenv';
+import logger from 'morgan';
+env.config();
+
 
 // create express application
 const app = express();
 
-// set up handlebars view engine
-// var handlebars = require('express3-handlebars').create({defaultLayout:'main'});
+// set server listening port
 
-// app.engine('handlebars',handlebars.engine);
-// app.set('view engine','handlebars');
+app.set('port', process.env.PORT || 3000);
 
-
-// set server listening port 
-app.set('port', 3000);
-
+app.set('superSecret',env.API_SECRET);
+app.use(favicon(path.join(__dirname, 'public/images', 'logo.png')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-
-// add homepage route
-app.get('/home',function(req,res)
-{
-	var data = { username: 'Adekunle'};
-	fs.readFile(__dirname+'/template/home.html',function(err,data){
-		if(err)
-		{
-			res.send('error occured');
-		}
-		else{
-			res.end(data);
-		}
-	});
-	// res.render('home',data);
-});
+app.use(logger('dev'));
 
 // directory for static files
-app.use(express.static(__dirname+'/template'));
+app.use(express.static(__dirname+'/public'));
+app.get('/test',(req,res)=>{
+  res.send('test');
+});
+// Always return the main index.html, so react-router render the route in the client
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+});
+
+
+app.use('/',routes);
+
+
+// path to resources
+app.get(['*.png','*.jpg','*.css','*.js','*.map'],(req,res)=>{
+  res.sendFile(`${__dirname}/public/${req.path}`);
+});
+
+// add homepage route
+app.get('/home',(req,res) =>
+{
+  fs.readFile(__dirname+'/public/home.html',(err,data) =>{
+    if(err)
+    {
+      res.send('error occured');
+    }
+    else{
+      res.end(data);
+    }
+  });
+  // res.render('home',data);
+});
+
 
 app.get('/view-recipes',(req,res)=>
 {
-	var data = { username: 'Adekunle'};
-	fs.readFile(__dirname+'/template/view-recipes.html',function(err,data){
-		if(err)
-		{
-			res.send('error occured '+err);
-		}
-		else{
-			res.end(data);
-		}
+  fs.readFile(__dirname+'/public/view-recipes.html',(err,data) =>{
+    if(err)
+    {
+      res.send('error occured '+err);
+    }
+    else{
+      res.end(data);
+    }
        
-	});
+  });
 });
 
 
 app.get('/recipe-details',(req,res)=>
 {
-	var data = { username: 'Adekunle'};
-	fs.readFile(__dirname+'/template/recipe-details.html',function(err,data){
-		if(err)
-		{
-			res.send('error occured '+err);
-		}
-		else{
-			res.end(data);
-		}
+  fs.readFile(__dirname+'/public/recipe-details.html',(err,data) => {
+    if(err)
+    {
+      res.send('error occured '+err);
+    }
+    else{
+      res.end(data);
+    }
        
-	});
+  });
 });
-app.get('/favourite-recipes',function(req,res)
+app.get('/favourite-recipes',(req,res) =>
 {
-	var data = { username: 'Adekunle'};
-	fs.readFile(__dirname+'/template/favourite-recipes.html',function(err,data){
-		if(err)
-		{
-			res.send('error occured '+err);
-		}
-		else{
-			res.end(data);
-		}
+  fs.readFile(__dirname+'/public/favourite-recipes.html',(err,data) =>{ 
+    if(err)
+    {
+      res.send('error occured '+err);
+    }
+    else{
+      res.end(data);
+    }
        
-	});
+  });
 });
-app.get('/user-profile',function(req,res)
+app.get('/user-profile',(req,res) =>
 {
-	var data = { username: 'Adekunle'};
-	fs.readFile(__dirname+'/template/user-profile.html',function(err,data){
-		if(err)
-		{
-			res.send('error occured '+err);
-		}
-		else{
-			res.end(data);
-		}
+  fs.readFile(__dirname+'/public/user-profile.html',(err,data) =>{
+    if(err)
+    {
+      res.send('error occured '+err);
+    }
+    else{
+      res.end(data);
+    }
        
-	});
+  });
 });
-app.get('/add-recipe',function(req,res)
+app.get('/add-recipe',(req,res) =>
 {
-	var data = { username: 'Adekunle'};
-	fs.readFile(__dirname+'/template/add-recipe.html',function(err,data){
-		if(err)
-		{
-			res.send('error occured '+err);
-		}
-		else{
-			res.end(data);
-		}
+  fs.readFile(__dirname+'/public/add-recipe.html',(err,data) => {
+    if(err)
+    {
+      res.send('error occured '+err);
+    }
+    else{
+      res.end(data);
+    }
        
-	});
+  });
 });
 
 
 
 // manage test
-app.use(function(req,res,next){
-	res.locals.showTests = app.get('env') !== 'production' && req.query.text ==='1';
-	next();
+app.use((req,res,next) =>{
+  res.locals.showTests = app.get('env') !== 'production' && req.query.text ==='1';
+  next();
 });
-
-
-// add startup route
-app.get('/',function(req,res)
-{
-	var data = { username: 'Adekunle'};
-	fs.readFile(__dirname+'/template/home.html',function(err,data){
-		if(err)
-		{
-			res.send('error occured');
-		}
-		else{
-			res.end(data);
-			// res.end(data);
-		}
-       
-	});
-	// res.render('home',data);
-});
-
-require(`${__dirname}/server/routes`)(app,fs,sequelize,express);
-
-
 
 // add dashboard route
-app.get('/dashboard',function(req,res)
+app.get('/dashboard',(req,res) =>
 {
-	res.type('text/plain');
-	res.send('My TeaserPlus application dashboard');
+  res.type('text/plain');
+  res.send('My TeaserPlus application dashboard');
 });
 
 // custom 404 page
-app.use(function(req,res){
-	res.type('text/plain');
-	res.status(404);
-	res.send('404 - Not found');
+app.use((req,res) =>{
+  res.type('text/plain');
+  res.status(404);
+  res.send('404 - Page cannot be found');
 });
 
 // custom 505 page
-app.use(function(err,req,res,next){
-	console.log(err.stack);
-	res.type('text/plain');
-	res.status(500);
-	res.send('500 - server error');
+app.use((err,req,res,next) =>{
+  res.type('text/plain');
+  res.status(500);
+  res.send('500 - server error');
 });
 
 
 // start node JS Server
-app.listen(app.get('port'),function(){
-	console.log('Express started on http://localhost: '+app.get('port')+ '; press Ctrl  - c to terminate.');
+app.listen(app.get('port'),() =>{
+  
 });
-// "start": "babel-node app.js --presets es2015,stage-2",
+export default app;
