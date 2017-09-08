@@ -1,13 +1,16 @@
 
 import supertest from 'supertest';
 import chai from 'chai';
+import chaiHttp from 'chai-http';
 import app from '../app';
 
 const assert = chai.assert;
+chai.use(chaiHttp);
 
 // This agent refers to PORT where program is runninng.
 
-const server = supertest(app);
+//const server = supertest(app);
+const server = chai.request(app);
 const testToken = 'eyJhbGciOiJIUzI1NiJ9.YQ.9vPL9lduW1jm_sA9xmkzWYCM0E8pFZ_LJnqnSc5RflE';
 const ingredientString = JSON.stringify({ data : [{ item: 'melon', quantity: '1 cup' },{ item: 'oil', quantity: '2 litres' }]});
 let authenticationToken;
@@ -21,8 +24,6 @@ describe('API routes that manage users', () => {
     // calling test api
     server
       .get('/api/test')
-      .expect('Content-type', /json/)
-      .expect(200)
       .end((err, res) => {
         assert.equal(res.body.data,'hello');
         done();
@@ -31,8 +32,8 @@ describe('API routes that manage users', () => {
  
   // DELETE api/users input validations with right data
   it('This api should delete the user successfully ', (done) => {
-    server.delete('/api/users').set({ 'x-access-token': testToken }).send({ username: 'TestUser' }).expect('Content-type', /json/)
-      .expect(200)
+    server.delete('/api/users').set({ 'x-access-token': testToken }).send({ username: 'TestUser' })
+      
       .end((err, res) => {
          console.log(testToken);
         assert.property(res.body, 'success');
@@ -43,8 +44,8 @@ describe('API routes that manage users', () => {
 
   // test api/users/signup input validations with right data
   it('This api should signup user and return validations : true ', (done) => {
-    server.post('/api/users/signup').send({ username: 'TestUser', email: 'testuser.com@gmail.com', password: 'alpha' }).expect('Content-type', /json/)
-      .expect(200)
+    server.post('/api/users/signup').send({ username: 'TestUser', email: 'testuser.com@gmail.com', password: 'alpha' })
+      
       .end((err, res) => {
         assert.property(res.body, 'data');
         assert.property(res.body, 'status');
@@ -56,8 +57,8 @@ describe('API routes that manage users', () => {
 
   // test api/users/signin with true data
   it('api/users/signin should sign in successfully', (done) => {
-    server.post('/api/users/signin').send({ username: 'TestUser', password: 'alpha' }).expect('Content-type', /json/)
-      .expect(200)
+    server.post('/api/users/signin').send({ username: 'TestUser', password: 'alpha' })
+      
       .end((err, res) => {
         console.log(JSON.stringify(res.body));
         assert.property(res.body, 'data');
@@ -74,8 +75,8 @@ describe('API routes that manage users', () => {
   it('This api/test should return array of users', (done) => {
     server
       .get('/api/users').set({ 'x-access-token': authenticationToken })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         assert.isArray(res.body);
         assert.isAbove(res.body.length, 1);
@@ -85,8 +86,8 @@ describe('API routes that manage users', () => {
 
   // test api/users/signup input validations without data
   it('api/users/signup should return validations : false without data', (done) => {
-    server.post('/api/users/signup').set({ 'x-access-token': authenticationToken }).expect('Content-type', /json/)
-      .expect(200)
+    server.post('/api/users/signup').set({ 'x-access-token': authenticationToken })
+      
       .end((err, res) => {
         assert.property(res.body, 'validations');
         assert.isFalse(res.body.validations);
@@ -99,8 +100,8 @@ describe('API routes that manage users', () => {
 
   // test api/users/signin input validations without data
   it('api/users/signin should return validations false ', (done) => {
-    server.post('/api/users/signin').set({ 'x-access-token': authenticationToken }).expect('Content-type', /json/)
-      .expect(200)
+    server.post('/api/users/signin').set({ 'x-access-token': authenticationToken })
+      
       .end((err, res) => {
         assert.property(res.body, 'validations');
         assert.isFalse(res.body.validations);
@@ -113,8 +114,8 @@ describe('API routes that manage users', () => {
 
   // test api/users/signin with true data and password is hidden from output
   it('api/users/signin should sign in and output should hide password', (done) => {
-    server.post('/api/users/signin').set({ 'x-access-token': authenticationToken }).send({ username: 'TestUser', password: 'alpha' }).expect('Content-type', /json/)
-      .expect(200)
+    server.post('/api/users/signin').set({ 'x-access-token': authenticationToken }).send({ username: 'TestUser', password: 'alpha' })
+      
       .end((err, res) => {
         assert.property(res.body, 'data');
         assert.property(res.body, 'status');
@@ -126,8 +127,8 @@ describe('API routes that manage users', () => {
   });
   // test api/users/signin with false data
   it('api/users/signin should not sign in with false username or password', (done) => {
-    server.post('/api/users/signin').send({ username: 'recipes', password: 'alpha24' }).expect('Content-type', /json/)
-      .expect(200)
+    server.post('/api/users/signin').send({ username: 'recipes', password: 'alpha24' })
+      
       .end((err, res) => {
         assert.property(res.body, 'data');
         assert.property(res.body, 'status');
@@ -141,8 +142,8 @@ describe('API routes that manage users', () => {
   it('GET/ api/recipes should return array of recipes', (done) => {
     server
       .get('/api/recipes').set({ 'x-access-token': authenticationToken })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         assert.isArray(res.body.data);
         assert.property(res.body, 'data');
@@ -156,8 +157,8 @@ describe('API routes that manage recipes', () => {
   it('POST/ api/recipes should return validations false without data', (done) => {
     server
       .post('/api/recipes').set({ 'x-access-token': authenticationToken })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         assert.property(res.body, 'data');
         assert.property(res.body, 'message');
@@ -168,9 +169,9 @@ describe('API routes that manage recipes', () => {
   });
   it('POST/ api/recipes should return successful with data', (done) => {
     server
-      .post('/api/recipes').set({ 'x-access-token': authenticationToken }).send(recipeObject).send(recipeObject)
-      .expect('Content-type', /json/)
-      .expect(200)
+      .post('/api/recipes').set({ 'x-access-token': authenticationToken }).send(recipeObject)
+      
+      
       .end((err, res) => {
         console.log(JSON.stringify(res.body));
         assert.property(res.body, 'data');
@@ -185,8 +186,8 @@ describe('API routes that manage recipes', () => {
       .put('/api/recipes').set({ 'x-access-token': authenticationToken }).send({
         title: 'How to make pizza without flour', user: 1, procedures: 'Pour oil in fry pan.. Mix it with water', ingredients: ingredientString
       })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         assert.property(res.body, 'validations');
         assert.isFalse(res.body.validations);
@@ -198,8 +199,8 @@ describe('API routes that manage recipes', () => {
   it('PUT api/recipes should modify the recipe successfully', (done) => {
     server
       .put('/api/recipes').set({ 'x-access-token': authenticationToken }).send({ recipeId: testRecipeId, title: 'How to make pizza without flour and yeast',ingredients: ingredientString })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         console.log(JSON.stringify(res.body));
         assert.property(res.body, 'data');
@@ -211,8 +212,8 @@ describe('API routes that manage recipes', () => {
   it('DELETE api/recipes should return validations false without recipe ID', (done) => {
     server
       .delete('/api/recipes').set({ 'x-access-token': authenticationToken })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         assert.property(res.body, 'message');
         assert.property(res.body, 'validations');
@@ -225,8 +226,8 @@ describe('API routes that manage recipes', () => {
   it('POST /api/recipes/:recipeId/reviews should post review successfully', (done) => {
     server
       .post(`/api/recipes/${testRecipeId}/reviews`).set({ 'x-access-token': authenticationToken }).send({ review: 'I love your recipe and all my family enjoyed it' })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         assert.property(res.body, 'message');
         assert.property(res.body, 'status');
@@ -237,8 +238,8 @@ describe('API routes that manage recipes', () => {
   it('POST /api/recipes/:recipeId/reviews should fail to post review', (done) => {
     server
       .post(`/api/recipes/${testRecipeId}/reviews`).set({ 'x-access-token': authenticationToken })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         assert.property(res.body, 'validations');
         assert.equal(res.body.status, 'fail');
@@ -250,8 +251,8 @@ describe('API routes that manage recipes', () => {
   it('GET /api/recipes/:recipeId/reviews should get reviews successfully for a recipe', (done) => {
     server
       .get(`/api/recipes/${testRecipeId}/reviews`).set({ 'x-access-token': authenticationToken })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         assert.isArray(res.body.data);
         assert.equal(res.body.status, 'success');
@@ -261,8 +262,8 @@ describe('API routes that manage recipes', () => {
 it('POST /api/recipes/:recipeId/favourites should add a recipe to favourites list for a user', (done) => {
     server
       .post(`/api/recipes/${testRecipeId}/favourites`).set({ 'x-access-token': authenticationToken })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         console.log(JSON.stringify(res.body));
         assert.equal(res.body.status, 'success');
@@ -273,8 +274,8 @@ it('POST /api/recipes/:recipeId/favourites should add a recipe to favourites lis
  it('DELETE api/recipes should delete recipe successfully', (done) => {
     server
       .delete('/api/recipes').set({ 'x-access-token': authenticationToken }).send({ recipeId: testRecipeId })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         assert.property(res.body, 'message');
         assert.equal(res.body.status,'success');
@@ -290,8 +291,8 @@ it('POST/ api/recipes should return successful with data', (done) => {
       .post('/api/recipes').set({ 'x-access-token': authenticationToken }).send({
         title: 'How to make pizza without flour', procedures: 'Pour oil in fry pan.. Mix it with water', ingredients: JSON.stringify([{ item: 'melon', quantity: '1 cup' }])
       })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         assert.property(res.body, 'data');
         assert.property(res.body, 'message');
@@ -304,8 +305,8 @@ it('POST/ api/recipes should return successful with data', (done) => {
   it('POST/ api/recipes should add recipe success to favourites list', (done) => {
     server
       .post(`/api/recipes/${recipeIdForFavourites}/favourites`).set({ 'x-access-token': authenticationToken })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         assert.property(res.body, 'data');
         assert.equal(res.body.status,'success');
@@ -316,8 +317,8 @@ it('POST/ api/recipes should return successful with data', (done) => {
   it('DELETE /api/recipes/:recipeId/favourites should remove a recipe from favourites list for a user', (done) => {
     server
       .delete(`/api/recipes/${recipeIdForFavourites}/favourites`).set({ 'x-access-token': authenticationToken })
-      .expect('Content-type', /json/)
-      .expect(200)
+      
+      
       .end((err, res) => {
         assert.property(res.body, 'message');
         assert.equal(res.body.status, 'success');
