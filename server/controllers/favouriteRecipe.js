@@ -3,7 +3,11 @@ import allModels from '../models';
 
 const favouriteRecipeModel = allModels.favourite_recipes;
 const recipeModel = allModels.recipes;
-
+/**
+ * get all favourites recipes of a user
+ * @param  {} req
+ * @param  {} res
+ */
 const getAllFavoriteRecipes = (req, res) => {
   favouriteRecipeModel.findAll(
     {
@@ -16,7 +20,11 @@ const getAllFavoriteRecipes = (req, res) => {
     }
   ).then(output => res.json({ status: 'success', data: output })).catch(error => res.json(error.toString()));
 };
-
+/**
+ * Add a recipe to favourites list of a user
+ * @param  {} req
+ * @param  {} res
+ */
 const addFavoriteRecipe = (req, res) => {
   if (req.params.recipeId) {
     favouriteRecipeModel.findAndCountAll({
