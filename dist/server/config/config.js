@@ -11,5 +11,8 @@ module.exports = {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   options: { dialect: process.env.DB_DIALECT, host: process.env.DB_HOST },
-  DATABASE_URL: 'postgres://qakfltqmtcyvka:e9d49c0ed540948dcc8d1a0c08fee855ae3ae79eed480acedee823b2424418bf@ec2-54-163-249-237.compute-1.amazonaws.com:5432/d1vuq5a3scngfe'
+  production: {
+    use_env_variable: 'DATABASE_URL',
+    dialect: 'postgres'
+  }
 };

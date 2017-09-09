@@ -26,7 +26,12 @@ _dotenv2.default.config();
 
 var basename = _path2.default.basename(module.filename);
 var db = {};
-var sequelizeApp = new _sequelize2.default(process.env.DB_NAME + '-' + process.env.NODE_ENV.toLowerCase(), process.env.DB_USERNAME, process.env.DB_PASSWORD, { dialect: process.env.DB_DIALECT, host: process.env.DB_HOST });
+var sequelizeApp = void 0;
+if (process.env.NODE_ENV !== 'production') {
+  sequelizeApp = new _sequelize2.default(process.env.DB_NAME + '-' + process.env.NODE_ENV.toLowerCase(), process.env.DB_USERNAME, process.env.DB_PASSWORD, { dialect: process.env.DB_DIALECT, host: process.env.DB_HOST });
+} else {
+  sequelizeApp = new _sequelize2.default(process.env.DATABASE_URL);
+}
 _fs2.default.readdirSync(__dirname).filter(function (file) {
   return file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js';
 }).forEach(function (file) {
