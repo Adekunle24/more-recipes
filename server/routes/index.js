@@ -1,9 +1,6 @@
 
 // contains all routes for the application
 import express from 'express';
-import Sequelize from 'sequelize';
-import crypto from 'bcrypt-nodejs';
-import jwt from 'jsonwebtoken';
 import env from 'dotenv';
 import controllers from '../controllers';
 import middlewares from '../middleware';
@@ -11,25 +8,7 @@ import middlewares from '../middleware';
 env.config();
 
 const routes = express.Router();
-routes.get('/api/v1/test', (req, res) => res.json({ status: 'success', data: 'hello' }));
 
-routes.post('/api/v1/encrypt', (req, res) => {
-  if (req.body.key) {
-    const passwordHash = crypto.hashSync(req.body.key);
-    res.send(passwordHash);
-  } else {
-    res.json({ status: 'fail', message: 'please provide key to hash' });
-  }
-});
-
-// api-users-signup route
-routes.post('/api/v1/users/signup', controllers.usersController.signUp);
-
-// api-users-signin route
-routes.post('/api/v1/users/signin', controllers.usersController.signIn);
-
-// api generates test token
-routes.post('/api/v1/token', new middlewares().encrypt);
 
 const MiddleWares = new middlewares();
 MiddleWares.verifyJsonWebToken(routes);
@@ -38,12 +17,13 @@ MiddleWares.verifyJsonWebToken(routes);
 routes.route('/api/v1/users').get(controllers.usersController.getTotalUsers)
   .delete(controllers.usersController.removeUser);
 
-routes.get('/api/v1/displaytoken', (req, res) => {
+routes.post('/api/v1/displaytoken', (req, res) => {
   res.send(req.decoded);
 });
 
-routes.route('/api/v1/recipes').post(controllers.recipesController.addRecipe)
-  .get(controllers.recipesController.getTotalRecipes);
+
+routes.get('/api/v1/recipes', controllers.recipesController.getTotalRecipes);
+routes.post('/api/v1/recipes', controllers.recipesController.addRecipe);
 
 // api-edit-recipe route
 routes.put('/api/v1/recipes', controllers.recipesController.modifyRecipe);

@@ -10,18 +10,18 @@ const Recipe = (sequelize, DataTypes) => {
   });
   recipe.associate = (models) => {
     recipe.belongsTo(models.users, {
-      foreignKey: 'id',
+      foreignKey: 'userId',
       as: 'users'
     });
     recipe.hasOne(models.social_values, {
       foreignKey: 'recipeId',
       as: 'socialValues'
     });
-     recipe.hasMany(models.favourite_recipes, {
+    recipe.hasMany(models.favourite_recipes, {
       foreignKey: 'id',
       as: 'favourites'
     });
-      recipe.hasMany(models.votes, {
+    recipe.hasMany(models.votes, {
       foreignKey: 'id',
       as: 'votes'
     });

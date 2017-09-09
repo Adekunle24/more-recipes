@@ -69,11 +69,9 @@ describe('API routes that manage users', () => {
   it('This api/test should return array of users', (done) => {
     server
       .get('/api/v1/users').set({ 'x-access-token': authenticationToken })
-
-
       .end((err, res) => {
-        assert.isArray(res.body);
-        assert.isAbove(res.body.length, 1);
+        assert.isArray(res.body.data);
+        assert.isAbove(res.body.data.length, 1);
         done();
       });
   });

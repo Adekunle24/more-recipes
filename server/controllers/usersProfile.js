@@ -1,10 +1,13 @@
 import allModels from '../models';
+import Middleware from '../middleware';
+
+const middleware = new Middleware();
 const usersProfileModel = allModels.users_profile;
-const getUserProfile = (req,res) =>{
-    usersProfileModel.findOne({
-        where : {
-            userId : req.params.userId
-        }
-}).then(profile => res.json({status: 'success',data:profile}).catch(error => res.send(error.toString())));
+const getUserProfile = (req, res) => {
+  usersProfileModel.findOne({
+    where: {
+      userId: req.params.userId
+    }
+  }).then(profile => res.json({ status: 'success', data: profile }).catch(error => middleware.parseSequelizeError(res, error)));
 };
-export default {getUserProfile};
+export default { getUserProfile };

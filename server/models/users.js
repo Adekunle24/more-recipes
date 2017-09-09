@@ -2,10 +2,10 @@
 const User = (sequelize, DataTypes) => {
   const user = sequelize.define('users', {
     email: { type: DataTypes.STRING, allowNull: false, validate: { isEmail: true } },
-    emailConfirmed: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+    emailConfirmed: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
     password: { type: DataTypes.STRING, allowNull: false, validate: { len: [6, 100] } },
     phoneNumber: { type: DataTypes.STRING, allowNull: true },
-    phoneNumberVerified: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+    phoneNumberVerified: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
     accessFailedCount: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
     username: { type: DataTypes.STRING, allowNull: false, validate: { len: [5, 50] } },
     createdAt: { type: DataTypes.DATE, allowNull: false },
@@ -15,15 +15,15 @@ const User = (sequelize, DataTypes) => {
     }
   });
   user.associate = (models) => {
-    user.hasOne(models.users_profile,{
-      foreignKey : 'id'
+    user.hasOne(models.users_profile, {
+      foreignKey: 'id'
     });
-    user.hasMany(models.recipes,{
-      foreignKey : 'id'
+    user.hasMany(models.recipes, {
+      foreignKey: 'id'
     });
-     user.hasMany(models.votes,{
-       foreignKey : 'id'
-     });
+    user.hasMany(models.votes, {
+      foreignKey: 'id'
+    });
   };
   return user;
 };
