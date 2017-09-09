@@ -46,7 +46,7 @@ var getToken = function getToken(req, res) {
 
 // this is an api to display all registered users
 var getTotalUsers = function getTotalUsers(req, res) {
-  userModel.findAll({
+  return userModel.findAll({
     attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
     include: [{
       model: recipeModel,

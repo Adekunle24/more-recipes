@@ -31,11 +31,13 @@ var saveReviewToDb = function saveReviewToDb(req, res) {
       res.json({
         status: 'fail', validations: false, success: false, message: 'Review content contains disallowed characters'
       });
+      return;
     }
     if (!middleware.validateStringIsNumber(req.params.recipeId)) {
       res.json({
         status: 'fail', validations: false, success: false, message: 'Recipe Id must be a number'
       });
+      return;
     }
     reviewModel.create({
       recipeId: req.params.recipeId,

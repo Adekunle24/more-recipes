@@ -9,10 +9,6 @@ import routes from './server/routes';
 import openRoutes from './server/routes/open';
 
 env.config();
-
-/**
- * create ann express application
- */
 const app = express();
 
 

@@ -23,7 +23,14 @@ const getToken = (req, res) => {
   });
 };
 
-// this is an api to display all registered users
+
+/**
+ * Retrieves total users in the application
+ *
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {null} returns null
+ */
 const getTotalUsers = (req, res) => {
   userModel.findAll({
     attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
@@ -37,7 +44,13 @@ const getTotalUsers = (req, res) => {
   }).catch(error => middleware.parseSequelizeError(res, error));
 };
 
-// this method accepts username, email and password then creates a user account on the database
+/**
+ * Creates a user account in the application
+ *
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {null} returns null
+ */
 const signUp = (req, res) => {
   // perform input validations
   if (req.body.username && req.body.email && req.body.password) {
@@ -68,7 +81,13 @@ const signUp = (req, res) => {
     });
   }
 };
-
+/**
+ * deletes a user from the application
+ *
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {null} returns null
+ */
 const removeUser = (req, res) => {
   if (req.body.username) {
     userModel.findOne({
@@ -113,8 +132,13 @@ const removeUser = (req, res) => {
   }
 };
 
-// this method accepts username and password and then perform authentication
-const signIn = (req, res) => {
+/**
+ * authenticates and signin a registered user in the application
+ *
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {null} returns null
+ */const signIn = (req, res) => {
   if (req.body.username && req.body.password) {
     const passwordInput = req.body.password;
     userModel.findOne({

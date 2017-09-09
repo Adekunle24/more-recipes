@@ -40,7 +40,13 @@ const saveReviewToDb = (req, res) => {
     });
   }
 };
-
+/**
+ * Retrieves all reviews posted for a recipe
+ *
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {null} returns null
+ */
 const getAllReviews = (req, res) => {
   if (req.params.recipeId) {
     reviewModel.findAll({

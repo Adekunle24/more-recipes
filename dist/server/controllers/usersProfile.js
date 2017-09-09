@@ -19,7 +19,7 @@ var usersProfileModel = _models2.default.users_profile;
 var getUserProfile = function getUserProfile(req, res) {
   usersProfileModel.findOne({
     where: {
-      userId: req.params.userId
+      userId: req.decoded.id
     }
   }).then(function (profile) {
     return res.json({ status: 'success', data: profile }).catch(function (error) {

@@ -8,8 +8,6 @@ import middlewares from '../middleware';
 env.config();
 
 const routes = express.Router();
-
-
 const MiddleWares = new middlewares();
 MiddleWares.verifyJsonWebToken(routes);
 
@@ -20,7 +18,6 @@ routes.route('/api/v1/users').get(controllers.usersController.getTotalUsers)
 routes.post('/api/v1/displaytoken', (req, res) => {
   res.send(req.decoded);
 });
-
 
 routes.get('/api/v1/recipes', controllers.recipesController.getTotalRecipes);
 routes.post('/api/v1/recipes', controllers.recipesController.addRecipe);
@@ -38,7 +35,6 @@ routes.get('/api/v1/recipes/search', controllers.recipesController.searchRecipeU
 routes.post('/api/v1/recipes/:recipeId/reviews', controllers.reviewsController.saveReviewToDb);
 
 routes.put('/api/v1/recipes/:recipeId/reviews', controllers.reviewsController.saveReviewToDb);
-
 
 // route show all reviews for a recipe
 routes.get('/api/v1/recipes/:recipeId/reviews', controllers.reviewsController.getAllReviews);

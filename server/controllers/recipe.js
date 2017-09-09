@@ -121,7 +121,13 @@ const modifyRecipe = (req, res) => {
     res.json({ status: 'fail', validations: false, message: 'Please provide a Recipe Id' });
   }
 };
-
+/**
+ * Deletes a recipe from the application
+ *
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {null} returns null
+ */
 const deleteRecipe = (req, res) => {
   if (req.body.recipeId) {
     if (!middleware.validateStringIsNumber(req.body.recipeId)) {
@@ -144,7 +150,13 @@ const deleteRecipe = (req, res) => {
 const getRecipeWithMostUpVotes = (req, res) => {
   res.send('api route to get most upvotes');
 };
-
+/**
+ * Searches for a recipe using title,ingredients or procedures
+ *
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {null} returns null
+ */
 const searchRecipeUsingIngredient = (req, res) => {
   if (req.query.keyword) {
     recipeModel.findAndCountAll({

@@ -3,6 +3,13 @@ import Middleware from '../middleware';
 
 const middleware = new Middleware();
 const usersProfileModel = allModels.users_profile;
+/**
+ * Retrieves user profile
+ *
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {null} returns null
+ */
 const getUserProfile = (req, res) => {
   usersProfileModel.findOne({
     where: {

@@ -4,6 +4,13 @@ import Middleware from '../middleware';
 
 const middleware = new Middleware();
 const voteModel = allModels.votes;
+/**
+ * Performs an upvoting action on a recipe
+ *
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {null} returns null
+ */
 const upVoteRecipe = (req, res) => {
   if (req.params.recipeId && req.decoded) {
     if (!middleware.validateStringIsNumber(req.params.recipeId)) {
@@ -88,6 +95,13 @@ const upVoteRecipe = (req, res) => {
   }
 };
 
+/** Downvotes a recipe
+ *
+ *
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {null} returns null
+ */
 const downVoteRecipe = (req, res) => {
   if (req.params.recipeId && req.decoded) {
     if (!middleware.validateStringIsNumber(req.params.recipeId)) {
