@@ -13,7 +13,6 @@ module.exports = {
     options: { dialect: process.env.DB_DIALECT, host: process.env.DB_HOST }
   },
   production: {
-    use_env_variable: 'DATABASE_URL',
-    dialect: 'postgres',
+    use_env_variable: 'DATABASE_URL'
   },
 };
