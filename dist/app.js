@@ -53,8 +53,9 @@ app.set('superSecret', _dotenv2.default.API_SECRET);
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 
-app.use((0, _morgan2.default)('dev'));
-
+if (process.env.NODE_ENV !== 'test') {
+  app.use((0, _morgan2.default)('dev'));
+}
 app.use(_express2.default.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
