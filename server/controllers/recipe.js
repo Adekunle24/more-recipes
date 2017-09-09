@@ -37,11 +37,13 @@ const addRecipe = (req, res) => {
         validations: false,
         message: 'Title,procedures, and ingredients must be equal to or greater than 10 characters in length'
       });
+      return;
     }
     if (!middleware.validateRecipeTitle(req.body.title)) {
       res.json({
         status: 'fail', data: null, validations: false, message: 'Title contains disallowed character(s). Please try again'
       });
+      return;
     }
     recipeModel.create({
       title: req.body.title,
@@ -105,6 +107,7 @@ const modifyRecipe = (req, res) => {
   if (req.body.recipeId) {
     if (!middleware.validateStringIsNumber(req.body.recipeId)) {
       res.json({ message: 'Recipe id must be a number', validations: false, status: 'fail' });
+      return;
     }
     recipeModel.findById(req.body.recipeId).then((result) => {
       if (result) {
@@ -123,6 +126,7 @@ const deleteRecipe = (req, res) => {
   if (req.body.recipeId) {
     if (!middleware.validateStringIsNumber(req.body.recipeId)) {
       res.json({ message: 'Recipe id must be a number', validations: false, status: 'fail' });
+      return;
     }
     recipeModel.findById(req.body.recipeId).then((recipe) => {
       if (!recipe) {

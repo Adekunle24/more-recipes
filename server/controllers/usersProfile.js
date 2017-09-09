@@ -6,7 +6,7 @@ const usersProfileModel = allModels.users_profile;
 const getUserProfile = (req, res) => {
   usersProfileModel.findOne({
     where: {
-      userId: req.params.userId
+      userId: req.decoded.id
     }
   }).then(profile => res.json({ status: 'success', data: profile }).catch(error => middleware.parseSequelizeError(res, error)));
 };

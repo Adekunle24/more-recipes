@@ -66,9 +66,11 @@ var signUp = function signUp(req, res) {
   if (req.body.username && req.body.email && req.body.password) {
     if (!middleware.validateUsername(req, res)) {
       res.json({ status: 'fail', validations: false, message: 'invalid character(s) in input' });
+      return;
     }
     if (!middleware.validatePasswordLength(req)) {
       res.json({ status: 'fail', validations: false, message: 'password must be greater than 5 characters in length' });
+      return;
     }
     var usernameInput = req.body.username;
     var emailInput = req.body.email;

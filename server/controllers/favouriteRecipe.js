@@ -26,6 +26,7 @@ const addFavoriteRecipe = (req, res) => {
   if (req.params.recipeId) {
     if (!middleware.validateStringIsNumber(req.params.recipeId)) {
       res.json({ status: 'fail', message: 'recipe id must be a number' });
+      return;
     }
     favouriteRecipeModel.findAndCountAll({
       where: {
@@ -63,6 +64,7 @@ const addFavoriteRecipe = (req, res) => {
 const removeFromFavoriteRecipes = (req, res) => {
   if (!middleware.validateStringIsNumber(req.params.recipeId)) {
     res.json({ status: 'fail', message: 'recipe id must be a number' });
+    return;
   }
   favouriteRecipeModel.destroy({
     where: {
