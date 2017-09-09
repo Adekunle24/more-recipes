@@ -1,5 +1,6 @@
 
 import jwt from 'jsonwebtoken';
+import config from '../config/config';
 /**
  * A middleware class to house all utility functions
  *
