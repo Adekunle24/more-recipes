@@ -8,6 +8,7 @@
     "babel-core": "^6.26.0",
     "babel-istanbul": "^0.12.2",
     "babel-plugin-inline-json-import": "^0.2.1",
+    "babel-plugin-istanbul": "^4.1.4",
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
@@ -54,10 +55,10 @@
     "babel": "babel --presets es2015 app.js -o public/bundle.js",
     "webpack": "webpack --d --watch",
     "serve": "babel app.js --out-file dist/compiled.js && node dist/compiled.js ",
-    "heroku-postbuild": "npm run clean-start",
-    "start": "babel-watch app.js",
-    "develop": "babel-node app.js",
-    "build": "babel -d ./**/*.js ./dist/compiled.js -s",
+    "heroku-postbuild": "sequelize db:migrate",
+    "start": "npm run build && node dist/app.js",
+    "develop": "npm run build && node dist/app.js",
+    "build": "babel ./ --out-dir dist --ignore .nyc_output,bin,build,coverage,lib,node_modules,dist,lib,public,src,tests,client.js,webpack.config.js",
     "old-test": "mocha --compilers js:babel-core/register tests/**/*.js",
     "clean": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
     "clean-start": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
@@ -66,7 +67,7 @@
     "models-test": "mocha --compilers js:babel-core/register tests/models.js",
     "middlewares-test": "mocha --compilers js:babel-core/register tests/middlewares.js",
     "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls",
-    "use-build": "node ./dist/compiled.js "
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "nyc": {
     "check-coverage": true,

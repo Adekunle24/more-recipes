@@ -23,8 +23,9 @@ app.set('superSecret', env.API_SECRET);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(logger('dev'));
-
+if (process.env.NODE_ENV !== 'test') {
+  app.use(logger('dev'));
+}
 app.use(express.static(`${__dirname}/public`));
 
 
