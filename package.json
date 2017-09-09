@@ -59,15 +59,15 @@
     "start": "npm run build && node dist/app.js",
     "develop": "npm run build && node dist/app.js",
     "build": "babel ./ --out-dir dist --ignore .nyc_output,bin,build,coverage,lib,node_modules,dist,lib,public,src,tests,client.js,webpack.config.js",
-    "old-test": "mocha --compilers js:babel-core/register tests/**/*.js",
+    "old-test": "",
     "clean": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
     "clean-start": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "test": "npm run clean && nyc mocha --compilers js:babel-core/register  tests/**/*.js",
+    "test": "npm run clean && mocha --compilers js:babel-core/register  tests/**/*.js",
     "controllers-test": "mocha --compilers js:babel-core/register tests/controllers.js",
     "models-test": "mocha --compilers js:babel-core/register tests/models.js",
     "middlewares-test": "mocha --compilers js:babel-core/register tests/middlewares.js",
     "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js"
   },
   "nyc": {
     "check-coverage": true,
