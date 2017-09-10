@@ -8,16 +8,16 @@ const Votes = (sequelize, DataTypes) => {
     createdAt: { type: DataTypes.DATE, allowNull: false },
     updatedAt: { type: DataTypes.DATE, allowNull: false }
   });
-    votes.associate = (models) => {
-   votes.belongsTo(models.users, {
-      foreignKey: 'id',
+  votes.associate = (models) => {
+    votes.belongsTo(models.users, {
+      foreignKey: 'userId',
       as: 'users'
     });
-     votes.belongsTo(models.recipes, {
+    votes.belongsTo(models.recipes, {
       foreignKey: 'recipeId',
       as: 'recipes'
     });
-    }
+  };
   return votes;
 };
 export default Votes;

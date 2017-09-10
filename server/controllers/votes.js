@@ -1,9 +1,23 @@
 // import all the models
 import allModels from '../models';
+import Middleware from '../middleware';
 
+const middleware = new Middleware();
 const voteModel = allModels.votes;
+/**
+ * Performs an upvoting action on a recipe
+ *
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {null} returns null
+ */
 const upVoteRecipe = (req, res) => {
   if (req.params.recipeId && req.decoded) {
+    if (!middleware.validateStringIsNumber(req.params.recipeId)) {
+      res.json({
+        status: 'fail', validations: false, success: false, message: 'Recipe Id must be a number'
+      });
+    }
     voteModel.find({
       where: {
         userId: req.decoded.id,
@@ -21,10 +35,16 @@ const upVoteRecipe = (req, res) => {
           allModels.social_values.find({
             where: {
               recipeId: req.params.recipeId
-            }
-          }).then(social => social.increment('upvotes').then(increment => res.json({ status: 'success', data: output, message: 'You have successfully upvoted this recipe' })).catch(error => res.send(error.toString()))).catch(error => res.send(error.toString()));
-        }
-        ).catch(error => res.send(error));
+            },
+          }).then(social => social.increment('upvotes').then(increment => res.json({
+            status: 'success',
+            data: output,
+            socialValue: social,
+            message: 'You have successfully upvoted this recipe'
+          }))
+            .catch(error => middleware.parseSequelizeError(res, error)))
+            .catch(error => middleware.parseSequelizeError(res, error));
+        }).catch(error => middleware.parseSequelizeError(res, error));
       }
       if (result.upvote === 1) {
         // Undo upvote on second click when upvote is 1
@@ -34,9 +54,12 @@ const upVoteRecipe = (req, res) => {
               recipeId: req.params.recipeId
             }
           }).then(social => social.decrement('upvotes').then(decrement => res.json({
-            status: 'fail', data: { social_values: decrement, votes: fromVotes }, message: 'You have successfully reversed your upvoting for this recipe'
-          })).catch(error => res.send(error.toString()))).catch(error => res.send(error.toString()));
-        }).catch(error => res.send(error.toString()));
+            status: 'fail',
+            data: { social_values: decrement, votes: fromVotes },
+            message: 'You have successfully reversed your upvoting for this recipe'
+          })).catch(error => middleware.parseSequelizeError(res, error)))
+            .catch(error => middleware.parseSequelizeError(res, error));
+        }).catch(error => middleware.parseSequelizeError(res, error));
       } else {
         // Redo upvote when upvote is 0
         result.increment('upvote').then((fromVotes) => {
@@ -49,27 +72,43 @@ const upVoteRecipe = (req, res) => {
               result.decrement('downvote').then((downvoteResult) => {
                 social.decrement('downvotes').then((downVotesResult) => {
                   res.json({
-                    status: 'success', data: { social_values: decrement, votes: fromVotes }, message: 'You have successfully upvoted this recipe'
+                    status: 'success',
+                    data: { social_values: decrement, votes: fromVotes },
+                    message: 'You have successfully upvoted this recipe'
                   });
                 });
               });
             } else {
               res.json({
-                status: 'success', data: { social_values: decrement, votes: fromVotes }, message: 'You have successfully upvoted this recipe'
+                status: 'success',
+                data: { social_values: decrement, votes: fromVotes },
+                message: 'You have successfully upvoted this recipe'
               });
             }
-          }
-          ).catch(error => res.send(error.toString()))).catch(error => res.send(error.toString()));
-        }).catch(error => res.send(error.toString()));
+          }).catch(error => middleware.parseSequelizeError(res, error)))
+            .catch(error => middleware.parseSequelizeError(res, error));
+        }).catch(error => middleware.parseSequelizeError(res, error));
       }
-    }).catch(error => res.send(error.toString()));
+    }).catch(error => middleware.parseSequelizeError(res, error));
   } else {
     res.json({ status: 'success' });
   }
 };
 
+/** Downvotes a recipe
+ *
+ *
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {null} returns null
+ */
 const downVoteRecipe = (req, res) => {
   if (req.params.recipeId && req.decoded) {
+    if (!middleware.validateStringIsNumber(req.params.recipeId)) {
+      res.json({
+        status: 'fail', validations: false, success: false, message: 'Recipe Id must be a number'
+      });
+    }
     voteModel.find({
       where: {
         userId: req.decoded.id,
@@ -88,9 +127,13 @@ const downVoteRecipe = (req, res) => {
             where: {
               recipeId: req.params.recipeId
             }
-          }).then(social => social.increment('downvotes').then(increment => res.json({ status: 'success', data: output, message: 'You have successfully downvoted this recipe' })).catch(error => res.send(error.toString()))).catch(error => res.send(error.toString()));
-        }
-        ).catch(error => res.send(error));
+          }).then(social => social.increment('downvotes').then(increment => res.json({
+            status: 'success',
+            data: output,
+            message: 'You have successfully downvoted this recipe'
+          })).catch(error => middleware.parseSequelizeError(res, error)))
+            .catch(error => middleware.parseSequelizeError(res, error));
+        }).catch(error => middleware.parseSequelizeError(res, error));
       } else if (result.downvote === 1) {
         // Undo upvote on second click when upvote is 1
         result.decrement('downvote').then((fromVotes) => {
@@ -103,18 +146,22 @@ const downVoteRecipe = (req, res) => {
               result.decrement('upvote').then((downvoteResult) => {
                 social.decrement('upvotes').then((downVotesResult) => {
                   res.json({
-                    status: 'fail', data: { social_values: decrement, votes: fromVotes }, message: 'You have successfully reversed your downvoting for this recipe'
+                    status: 'fail',
+                    data: { social_values: decrement, votes: fromVotes },
+                    message: 'You have successfully reversed your downvoting for this recipe'
                   });
                 });
               });
             } else {
               res.json({
-                status: 'fail', data: { social_values: decrement, votes: fromVotes }, message: 'You have successfully reversed your downvoting for this recipe'
+                status: 'fail',
+                data: { social_values: decrement, votes: fromVotes },
+                message: 'You have successfully reversed your downvoting for this recipe'
               });
             }
-          }
-          ).catch(error => res.send(error.toString()))).catch(error => res.send(error.toString()));
-        }).catch(error => res.send(error.toString()));
+          }).catch(error => middleware.parseSequelizeError(res, error)))
+            .catch(error => middleware.parseSequelizeError(res, error));
+        }).catch(error => middleware.parseSequelizeError(res, error));
       } else {
         // Redo downvote when downvote is 0
         result.increment('downvote').then((fromVotes) => {
@@ -127,19 +174,24 @@ const downVoteRecipe = (req, res) => {
               result.decrement('upvote').then((upvoteResult) => {
                 social.decrement('upvotes').then((upVotesResult) => {
                   res.json({
-                    status: 'success', data: { social_values: decrement, votes: fromVotes }, message: 'You have successfully downvoted this recipe'
+                    status: 'success',
+                    data: { social_values: decrement, votes: fromVotes },
+                    message: 'You have successfully downvoted this recipe'
                   });
                 });
               });
             } else {
               res.json({
-                status: 'success', data: { social_values: decrement, votes: fromVotes }, message: 'You have successfully downvoted this recipe'
+                status: 'success',
+                data: { social_values: decrement, votes: fromVotes },
+                message: 'You have successfully downvoted this recipe'
               });
             }
-          }).catch(error => res.send(error.toString()))).catch(error => res.send(error.toString()));
-        }).catch(error => res.send(error.toString()));
+          }).catch(error => middleware.parseSequelizeError(res, error)))
+            .catch(error => middleware.parseSequelizeError(res, error));
+        }).catch(error => middleware.parseSequelizeError(res, error));
       }
-    }).catch(error => res.send(error.toString()));
+    }).catch(error => middleware.parseSequelizeError(res, error));
   } else {
     res.json({ status: 'success' });
   }

@@ -10,15 +10,15 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-         unique: true
+        unique: true
       },
       username: {
         type: Sequelize.STRING,
         unique: true
       },
       emailConfirmed: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       password: {
         type: Sequelize.STRING,
@@ -29,8 +29,8 @@ module.exports = {
         allowNull: false,
       },
       phoneNumberVerified: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       accessFailedCount: {
         type: Sequelize.INTEGER,
@@ -47,7 +47,8 @@ module.exports = {
     });
   },
   down: queryInterface =>
-    queryInterface.dropTable('users',{
-        force: true,
-        cascade: false}),
+    queryInterface.dropTable('users', {
+      force: true,
+      cascade: false
+    }),
 };

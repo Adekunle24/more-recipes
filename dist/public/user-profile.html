@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>More Recipes</title>
+
+	<!-- Required meta tags always come first -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"  />
+	<link rel="stylesheet" href="css/bootstrap-extend.min.css"/>
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/jPinning.min.css"  />
+	<link rel="stylesheet" href="css/bootstrap-datepicker3.css"/>
+<link rel="stylesheet" href="css/buttons.min.css"/>
+<link rel="stylesheet" href="css/lightbox.css"/>
+<link rel="stylesheet" href="css/bootstrap-fileinput.css">
+<link rel="stylesheet" type="text/css" href="css/site.css">
+</head>
+<body data-ng-controller="myController" data-ng-app="myApp" class="app-body">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="#page-top">MoreRecipes</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Top Recipes</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="#services">Latest Recipes</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="#services">Add Recipe</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" href="#services">More</a>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">FAQs</a>
+    <a class="dropdown-item" href="#">Feeback</a>
+    <a class="dropdown-item" href="#">Contact us</a> 
+		<a class="dropdown-item" href="#">Help & Support</a>
+  </div>
+            </li>
+          </ul>
+            <form class="form-inline">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0 cursor-pointer" type="submit">Search</button>
+  </form>
+  <div> <div class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle hover-white" data-toggle="dropdown" aria-haspopup="true">
+				<span class="comment-author">Adekunle <img src="/images/avatar.jpg" class="float-left"  />
+        </span>
+             </a>
+          <div class="dropdown-menu" role="menu">
+					<a class="dropdown-item" href="#"><i class="fa fa-gear padding-right-10"></i>Add Recipe</a>
+						   <a class="dropdown-item" href="#"><i class="fa fa-gear padding-right-10"></i>Profile settings</a>
+							  <a class="dropdown-item" class="" href="#"><i class="padding-right-10"></i>Favourite Recipe</a>
+								 <a class="dropdown-item" class="" href="#"><i class="fa fa-lock padding-right-10"></i>Sign out</a>
+								  <a class="dropdown-item" class="" href="#"><i class=" padding-right-10"></i>Terms and condition</a>
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+<div class="container" id="body-container">
+
+	<!--Begin Master Notification Container -->
+ <section class=" master-notification margin-bottom-10 hide"  id="subscribe">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 text-center">
+                    <span id="master-notify-close" data-ng-click="CloseMasterNotify()" class="white hover-black cursor-pointer float-left"><i class="fa fa-close"></i></span>
+                    <p>{{MasterNotifyMessage}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!--End Master Notification Container -->
+
+<!--top banner -->
+<section class=" top-banner margin-top-10"  id="subscribe">
+
+<div class="">
+<div class="row">
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="banner-block">
+<div class="top-header">
+
+<div class="top-header-thumb">
+<img src="/images/cover_photo.jpg" class="image-full"/>
+</div>
+<div class="profile-section">
+<div class="row">
+<div class="col-lg-5 col-md-5">
+<ul class="profile-list">
+<li>My Recent Recipes</li>
+<li>Friends Recipes</li>
+</ul>
+</div>
+<div class="col-lg-5 offset-2 col-md-5 ">
+<ul class="profile-list">
+<li class="active">My Profile</li>
+<li>Add Recipe</li>
+ <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Edit Profile</a></li>
+			  <li><a href="#">Feedback</a></li>
+          </ul>
+        </li>
+</ul>
+</div>
+
+</div>
+<div class="control-block-button">
+<a href="" class=" social-icons icon-circle " ><i class="fa fa-book bg-orange"></i></a>
+<a href="" class="social-icons icon-circle" ><i class="fa fa-comment-o"></i></a>
+<a href="" class="social-icons icon-circle dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-gear bg-pink-800"></i></a>
+ <ul class="dropdown-menu dropdown-menu-danger" role="menu">
+            <li><a class="" href="#">Update Profile Photo</a></li>
+            <li><a href="#">Update Cover Photo</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Account settings</a></li>
+						
+          </ul>
+
+</div>
+</div>
+<div class="user-header-picture">
+<a class="">
+<img class="rounded-circle" src="/images/avatar.jpg" />
+</a>
+ <div class="author-date">
+            <a href="author-name" >Olayinka Kunle</a>
+            <div class="comment-date country">Lagos, Nigeria </div>
+    </div>
+</div>
+</div>
+</div>
+	</div>
+</div>
+</div></section>
+
+
+
+
+
+
+
+<!--Body content starts here -->
+<div class="main-header">
+	<div class="container">
+<div class="row">
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="banner-block">
+<div class="profile-tabs">
+<div class="row">
+<ul class="nav nav-pills profile-list">
+<li class=""><a class="nav-link active" data-toggle="pill" href="#profile-info">Personal Information</a></li>
+<li><a class="nav-link" data-toggle="pill" href="#profile-about">About</a></li>
+<li><a class="nav-link" data-toggle="pill" href="#profile-photos">Photos</a></li>
+</ul>
+</div>
+</div>
+<!--enter each tab content below-->
+ <div class="tab-content">
+    <div id="profile-info" class="tab-pane fade show active">
+        <div class="banner-block-title">Personal Information</div>
+        <div class="banner-block-content">
+            <form>
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+								<div class="form-group ">
+									<label class="control-label">First Name</label>
+									<input class="form-control" placeholder="" type="text" value="Adekunle">
+								</div>
+
+								<div class="form-group ">
+									<label class="control-label">Your Email</label>
+									<input class="form-control" placeholder="" type="email" value="olayinkakunle24@gmail.com">
+								</div>
+
+								<div class="form-group date-time-picker ">
+									<label class="control-label">Your Birthday</label>
+									<input name="date" value="" />
+								</div>
+							</div>
+
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+								<div class="form-group ">
+									<label class="control-label">Last Name</label>
+									<input class="form-control" placeholder="" type="text" value="Olayinka">
+								</div>
+
+								<div class="form-group ">
+									<label class="control-label">Your Website</label>
+									<input class="form-control" placeholder="" type="email" value="andela.com">
+								</div>
+
+
+								<div class="form-group">
+									<label class="control-label">Your Phone Number</label>
+									<input class="form-control" placeholder="" type="text">
+								</div>
+							</div>
+
+							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+								<div class="form-group  is-select">
+									<label class="control-label">Your Country</label>
+									<select class="selectpicker form-control" size="auto">
+                                        <option value="NG">Nigeria</option>
+										<option value="US">United States</option>
+										<option value="AU">Australia</option>
+                                        <option value="AU">Canada</option>
+                                        <option value="AU">Germany</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+								<div class="form-group  is-select">
+									<label class="control-label">Your State / Province</label>
+									<select class="selectpicker form-control" size="auto">
+                                        <option value="CA">Lagos</option>
+										<option value="CA">Oyo</option>
+										<option value="TE">Kwara</option>
+                                        <option value="AU">FCT</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+								<div class="form-group  is-select">
+									<label class="control-label">Your City</label>
+									<select class="selectpicker form-control" size="auto">
+                                        <option value="SF">Ibadan</option>
+										<option value="SF">Lagos Mainland</option>
+										<option value="NY">Ilorin</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+								<div class="form-group ">
+									<label class="control-label">Write a little description about you</label>
+									<textarea class="form-control" placeholder="">Hi, I’m adekunle, I’m 99 years old and I work as a Developer for Andela community in Lagos</textarea>
+								</div>
+
+								<div class="form-group  is-select">
+									<label class="control-label">Your Gender</label>
+									<select class="selectpicker form-control" size="auto">
+										<option value="MA">Male</option>
+										<option value="FE">Female</option>
+									</select>
+								</div>
+
+								<div class="form-group  is-empty">
+									<label class="control-label">Religious Beliefs</label>
+									<input class="form-control" placeholder="" type="text">
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+								<div class="form-group  is-empty">
+									<label class="control-label">Your Birthplace</label>
+									<input class="form-control" placeholder="" type="text">
+								</div>
+
+								<div class="form-group ">
+									<label class="control-label">Your Occupation</label>
+									<input class="form-control" placeholder="" type="text" value="Web Developer">
+								</div>
+
+								<div class="form-group  is-select">
+									<label class="control-label">Status</label>
+									<select class="selectpicker form-control" size="auto">
+										<option value="SI">Single</option>
+										<option value="FE">Married</option>
+                                        	<option value="FE">Divorced/Separated</option>
+									</select>
+								</div>
+
+								<div class="form-group ">
+									<label class="control-label">Political Incline</label>
+									<input class="form-control" placeholder="" type="text" value="Democrat">
+								</div>
+							</div>
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div class="form-group">
+									<label class="control-label">Your Facebook Account</label>
+									<input class="form-control" type="text" value="www.facebook.com/olayinka01">
+								</div>
+								<div class="form-group">
+									<label class="control-label">Your Twitter Account</label>
+									<input class="form-control" type="text" value="www.twitter.com/kunlewaves24">
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+								<button class="btn btn-secondary btn-lg full-width">Restore all Attributes</button>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+								<button class="btn btn-primary btn-lg full-width">Save all Changes</button>
+							</div>
+
+						</div>
+					</form>
+        </div>
+  </div>
+   <div id="profile-about" class="tab-pane fade" role="tabpanel">
+	   <div class="row">
+			   <div class="col-xl-4 col-lg-4  col-md-12 col-sm-12 col-xs-12">
+		<div class="banner-block padding-bottom-20">
+<div class="banner-block-title">
+<h4 class="title font-weight-600 black">Personal Information</h4>
+<div class="more"><i class="fa fa-edit"></i></div>
+</div>
+<ul class="profile-widget padding-left-10">
+	<li>
+		<div>
+		<span class="title">	About Me: </span>
+				<span class="title-content">	Hi, I’m Adekunle, I’m 99 and I work as a Developer for the Andela Community in Lagos</span>
+			</div>
+	</li>
+	
+	<li>
+		<div>
+		<span class="title">	Birthday: </span>
+				<span class="title-content">	February 30th, 1900</span>
+			</div>
+	</li>
+	<li>
+		<div>
+		<span class="title">	Birthplace: : </span>
+				<span class="title-content">	Ibadan, Oyo State, Nigeria</span>
+			</div>
+	</li>
+	<li>
+		<div>
+		<span class="title">	Resident: </span>
+				<span class="title-content">Ajah, Lagos State, Nigeria</span>
+			</div>
+	</li>
+	<li>
+		<div>
+		<span class="title">	Joined: </span>
+				<span class="title-content">August 28th, 2017</span>
+			</div>
+	</li>
+		<li>
+		<div>
+		<span class="title">	Email: </span>
+				<span class="title-content">olayinkakunle24@gmail.com</span>
+			</div>
+	</li>
+	<li>
+		<div>
+		<span class="title">	Phone Number: </span>
+				<span class="title-content">(234) 816 - 739 - 7293</span>
+			</div>
+	</li>
+</ul>
+</div>
+</div>
+<div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12">
+<div class="banner-block">
+<div class="banner-block-content">
+<div class="row">
+<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+<ul class="profile-widget padding-left-10">
+	<li>
+		<div>
+		<div class="title">	Hobbies: </div>
+				<span class="">I like to ride the bike , swimming, play piano and working out.
+					 I also like reading design magazines, go to museums, and binge watching a good tv show while it’s raining outside. </span>
+			</div>
+	</li>
+	
+	<li>
+		<div>
+		<div class="title">	Favourite TV Shows: </div>
+				<span class="">
+					Breaking Bad, RedDevil, Power, The Walking Dead, Game of Thrones.
+				</span>
+			</div>
+	</li>
+		<li>
+		<div>
+		<div class="title">	Favourite Movies: </div>
+				<span class="">Superman,Spiderman, Fast and Furious series	</span>
+			</div>
+	</li>
+		<li>
+		<div>
+		<div class="title">	Favourite Games: </div>
+				<span class=""> Assassin’s Creed, Pes, NFS, Grand Theft Auto</span>
+			</div>
+	</li>
+</ul>
+</div>
+<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+<ul class="profile-widget padding-left-10">
+	<li>
+		<div>
+		<div class="title">	Favourite Music Bands / Artists: </div>
+				<span class="">Tekno, Olamide, Dbanj, Lil Wayne, Wizkid</span>
+			</div>
+	</li>
+	
+	<li>
+		<div>
+		<div class="title">	Other Interests: </div>
+				<span class="">	Swimming, Surfing, Photography, Electronics.</span>
+			</div>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+		</div>
+		</div>
+		</div>
+    <div id="profile-photos" class="tab-pane fade" role="tabpanel">
+		<div class="container">
+<div class="row">
+<div class="col-md-4 photo-album">
+	<div class="banner-block">
+	<div data-picturehover>
+<img src="images/cover_photo.jpg" title="My background">
+</div>
+<div class="content">
+<a class="title"><h5>My Recipe Background</h5></a>
+<span class="sub-title">Added 4 hours ago</span>
+</div>
+</div>
+</div>
+<div class="col-md-4 photo-album">
+	<div class="banner-block">
+	<div data-picturehover>
+<img src="images/cover_photo.jpg" title="My background">
+</div>
+<div class="content">
+<a class="title"><h5>My Recipe Background</h5></a>
+<span class="sub-title">Added 4 hours ago</span>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<h5 class="black">Change profile or cover photo below</h5>
+<select class="form-control margin-top-10 margin-bottom-10">
+<option>Cover Photo</option>
+<option>Profile Picture</option>
+</select>
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;border: 1px solid antiquewhite;"> </div>
+                                                            <div>
+                                                                <span class="btn red btn-outline btn-file">
+                                                                    <span class="fileinput-new"> Select image </span>
+                                                                    <span class="fileinput-exists"> Change </span>
+                                                                    <input type="file" name="..."> </span>
+                                                                <a href="javascript:;" class="btn btn-danger fileinput-exists" data-dismiss="fileinput"> Remove </a>
+																<a href="" class="fileinput-exists btn-block btn btn-success margin-top-10" >Upload <i class="fa fa-upload"></i></a>
+                                                            </div>
+                                                        </div>
+														</di>
+
+  </div>
+  </div></div>
+  </div>
+</div>
+</div>
+</div>
+    </div>
+	</div>
+
+<!--Recipe Item Template 10 random entries -->
+
+
+
+
+
+
+
+
+</div>
+
+<!-- Body content ends here -->
+</div>
+<!--End Row 1 -->
+
+</div>
+<!--Body content ends here -->
+
+<footer class="">
+<div id="footer-responsive" class="container-fluid">
+<div class="row">
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+<div class="about-widget">
+<a href="#" class="logo">
+						<img src="images/logo.png" alt="MoreRecipes">
+						<h6 class="logo-title">MoreRecipes</h6>
+						RECIPE LIBRARY
+					</a>
+					<p>
+						More-Recipes​ provides​ ​a​ ​platform​ ​for​ ​users​ ​to​ ​share​ ​the​ ​awesome​ ​and​ ​exciting​ ​​ ​recipe​ ​ideas​ ​they
+have​ ​invented​ ​or​ ​learnt.
+							</p>
+														<div style="padding-bottom:0px;" class='full-tile column col-xs-12 social-links'>
+<div class="social-links-title margin-top-10">Go ahead and follow us on social media.</div>
+<ul class="icons inline social-icons icon-circle margin-top-20">
+<li class="pinterest" data-toggle="tooltip" title="Pinterest"><a href="" class="elegant-" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+<li class="facebook" data-toggle="tooltip" title="Facebook"><a href="" class="elegant-" target="_blank"><i class="fa fa-facebook"></i></a></li>
+<li class="twitter" data-toggle="tooltip" title="Twitter"><a href="" class="" target="_blank"><i class="fa fa-twitter"></i></a></li>
+<li class="googleplus" data-toggle="tooltip" title="GooglePlus"><a href="" class="social-icon icon-google_plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+<li class="instagram" class="tooltip" title="Instagram" ><a href="" target="_blank"><i class="fa fa-instagram"></i></a></li>
+</ul>
+</div>
+</div>
+	</div>
+	<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+<h6 class="text-center">Quick Links</h6>
+<ul class="footer-links">
+				<li><a href="/view-recipes/latest">Latest Recipe</a></li>
+					<li><a href="/view-recipes/most-view">Most Viewed Recipe</a></li>
+					<li><a href="/recipe-user/photos">Photos</a></li>
+			<li><a href="/recipe-filter/trending">Trending</a></li>
+				<li><a href="/recipe-filter/trending">Friends Recipe</a></li>
+</ul>
+	</div>
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 recipe-gallery">
+<h4 class="text-center">Recipe Gallery</h4>   
+<div class="row">
+<div class="col-4 col-md-4 col-xs-6">
+<a  data-lightbox="gallery-lightbox" href="images/gallery01.png" data-title="Recipe gallery" >	<img src="images/gallery01.png" ></a>
+</div>
+<div class="col-4 col-md-4 col-xs-6 col-3">
+<a  data-lightbox="gallery-lightbox" href="images/gallery02.png" data-title="Recipe gallery" >	<img src="images/gallery02.png" ></a>
+</div>
+<div class="col-4 col-md-4 col-xs-6 col-3">
+<a  data-lightbox="gallery-lightbox" href="images/gallery03.png" data-title="Recipe gallery" >	<img src="images/gallery03.png" ></a>
+</div>
+</div>
+<div class="row">
+<div class="col-4 col-md-4 col-xs-6 col-3">
+	<a  data-lightbox="gallery-lightbox" href="images/gallery04.png" data-title="Recipe gallery" ><img src="images/gallery04.png" ></a>
+</div>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery05.png" data-title="Recipe gallery" >	<img src="images/gallery05.png" ></a>
+</div>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery06.png" data-title="Recipe gallery" >	<img src="images/gallery06.png" ></a>
+</div>
+</div>
+<div class="row">
+<div class="col-4 col-md-4 col-xs-6">
+	<a  data-lightbox="gallery-lightbox" href="images/gallery07.png" data-title="Recipe gallery" ><img src="images/gallery07.png" ></a>
+</div>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery08.png" data-title="Recipe gallery" >	<img src="images/gallery08.jpg"></a>
+</div>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery09.png" data-title="Recipe gallery" >	<img src="images/gallery09.jpg" ></a>
+</div>
+</div>
+	</div>
+	<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+<h6 class="text-center">More Recipe</h6>
+<ul class="footer-links">
+				<li><a href="/legal/privacy">Privacy</a></li>
+					<li><a href="/legal/terms-conditions">Terms and Conditions</a></li>
+					<li><a href="/social/forums">Forums</a></li>
+			<li><a href="/others/statistics">Statistics</a></li>
+				<li><a href="/developer/api/download">Web Developer API</a></li>
+</ul>
+	</div>
+</div>
+</div>
+</footer>
+<!--Begin Page Modal -->
+<!--Terms and Conditions -->
+    <div class="modal fade modal-rotate-from-left" id="modalTermsAndConditions" aria-hidden="false" aria-labelledby="modalSignIn"
+                  role="dialog" tabindex="-1">
+                    <div class="modal-dialog" >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                          <h4 class="modal-title" id="modalSignUpTitle">Terms & Conditions</h4>
+                        </div>
+                        <div class="modal-body">
+            <!-- Form -->
+           By using MoreRecipe services you are agreeing to be bound by the following terms and conditions (“Terms of Service”). 
+           MoreRecipe reserves the right to update and change the Terms of Service by posting updates and changes to this website.
+            You are advised to check the Terms of Service oftenly for any updates.
+            <div><h6>1. Account Terms</h6></div>
+            <div>1. Recipes are published for publish use and we do not guaranty that your expectations will be met </div>
+              <div>
+                2. We are not liable for any harm or inconvenience trying this Recipe might cause. Users discretion is advised
+              </div>
+<div><h6>3. MoreRecipe Rights</h6></div>
+<div>We reserve the right to modify or terminate the Service for any reason, without notice at any time.</div>
+<div>We reserve the right to refuse service to anyone for any reason at any time</div>
+               </div>
+                          <div class="modal-footer">
+                          <button type="button" class="btn btn-success margin-0" data-dismiss="modal">Close</button>
+                        </div>
+                        </div></div></div>
+                        <!--End Terms and Conditions -->
+
+<!--End Page Modal -->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+<script src="js/tooltip.js"></script>
+<script src="js/lightbox.js"></script>
+<script src="js/bootstrap-fileinput.js"></script>
+<script src="js/picturehover.js"></script>
+<script src="js/angular.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>

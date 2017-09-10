@@ -6,7 +6,9 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-istanbul": "^0.12.2",
     "babel-plugin-inline-json-import": "^0.2.1",
+    "babel-plugin-istanbul": "^4.1.4",
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
@@ -45,6 +47,7 @@
     "http-server": "^0.10.0",
     "mocha": "^3.5.0",
     "mocha-lcov-reporter": "^1.3.0",
+    "node-mocks-http": "^1.6.4",
     "nodemon": "^1.11.0",
     "should": "^12.0.0",
     "source-map-support": "^0.4.17"
@@ -54,18 +57,17 @@
     "webpack": "webpack --d --watch",
     "serve": "babel app.js --out-file dist/compiled.js && node dist/compiled.js ",
     "heroku-postbuild": "npm run clean-start",
-    "start": "babel-node app.js",
-    "develop": "babel-node app.js",
-    "build": "babel -d ./**/*.js ./dist/compiled.js -s",
-    "old-test": "mocha --compilers js:babel-core/register tests/**/*.js",
+    "start": "npm run build && node dist/app.js",
+    "develop": "npm run build && node dist/app.js",
+    "build": "babel ./ --out-dir dist --ignore .nyc_output,bin,build,coverage,lib,node_modules,dist,lib,public,src,tests,client.js,webpack.config.js",
+    "old-test": "",
     "clean": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
     "clean-start": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "test": "npm run clean && nyc mocha --compilers js:babel-core/register  tests/**/*.js",
+    "test": "npm run clean && mocha --compilers js:babel-core/register  tests/**/*.js",
     "controllers-test": "mocha --compilers js:babel-core/register tests/controllers.js",
-    "models-test": "mocha --compilers js:babel-core/register tests/models.js",
     "middlewares-test": "mocha --compilers js:babel-core/register tests/middlewares.js",
     "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls",
-    "use-build": "node ./dist/compiled.js "
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js"
   },
   "nyc": {
     "check-coverage": true,

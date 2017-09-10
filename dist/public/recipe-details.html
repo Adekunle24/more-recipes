@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>More Recipes</title>
+
+	<!-- Required meta tags always come first -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"  />
+	<link rel="stylesheet" href="css/bootstrap-extend.min.css"/>
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/jPinning.min.css"  />
+	<link rel="stylesheet" href="css/bootstrap-datepicker3.css"/>
+<link rel="stylesheet" href="css/buttons.min.css"/>
+<link rel="stylesheet" href="css/lightbox.css"/>
+<link rel="stylesheet" type="text/css" href="css/site.css">
+</head>
+<body data-ng-controller="myController" data-ng-app="myApp" class="app-body">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="#page-top">MoreRecipes</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Top Recipes</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="#services">Latest Recipes</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="#services">Add Recipe</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" href="#services">More</a>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">FAQs</a>
+    <a class="dropdown-item" href="#">Feeback</a>
+    <a class="dropdown-item" href="#">Contact us</a> 
+		<a class="dropdown-item" href="#">Help & Support</a>
+  </div>
+            </li>
+          </ul>
+            <form class="form-inline">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0 cursor-pointer" type="submit">Search</button>
+  </form>
+  <div> <div class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle hover-white" data-toggle="dropdown" aria-haspopup="true">
+				<span class="comment-author">Adekunle <img src="/images/avatar.jpg" class="float-left"  />
+        </span>
+             </a>
+          <div class="dropdown-menu" role="menu">
+					<a class="dropdown-item" href="#"><i class="fa fa-gear padding-right-10"></i>Add Recipe</a>
+						   <a class="dropdown-item" href="#"><i class="fa fa-gear padding-right-10"></i>Profile settings</a>
+							  <a class="dropdown-item" class="" href="#"><i class="padding-right-10"></i>Favourite Recipe</a>
+								 <a class="dropdown-item" class="" href="#"><i class="fa fa-lock padding-right-10"></i>Sign out</a>
+								  <a class="dropdown-item" class="" href="#"><i class=" padding-right-10"></i>Terms and condition</a>
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+
+<div class="container" id="body-container">
+
+	<!--Begin Master Notification Container -->
+ <section class=" master-notification margin-bottom-10"  id="subscribe">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8 col-sm-12 text-center">
+                    <span id="master-notify-close" data-ng-click="CloseMasterNotify()" class="white hover-black cursor-pointer float-left"><i class="fa fa-close"></i></span>
+                    <p>{{MasterNotifyMessage}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!--End Master Notification Container -->
+<!--Body content starts here -->
+<div class="container">
+<div class="row">
+<div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12">
+<div class="banner-block">
+		<article class="recipe-post single-recipe single-post-v3">
+	<a href="#" class="recipe-category bg-orange">TOP RECIPES</a>
+	<div class="recipe-actions inline-items">
+<span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+						<ul class="action-items icons inline social-icons icon-circle">
+							<li>
+								<a >
+								<i class="fa fa-thumbs-up"></i>
+             <span class="action-value">      50 </span>
+								</a>
+							</li>
+              	<li>
+								<a >
+								<i class="fa fa-thumbs-down"></i>
+             <span class="action-value">      5</span>
+								</a>
+							</li>
+							<li>
+								<a >
+								<i class="fa fa-heart"></i>
+              <span class="action-value">     	26</span>
+								</a>
+							</li>
+              <li>
+                <a class=" inline-items">
+                <i class="fa fa-comment-o"></i>
+								<span class="action-value">100</span>
+							</a>
+              </li>
+						</ul>
+						</div>
+                        	<h2>		<a href="#" class="recipe-title black">Here’s the featured recipe of August! </a></h2>
+	<div class="recipe-author padding-20">
+						by &nbsp;
+						<a class="" href="#">Olayinka Kunle</a>
+						<div class="recipe-date inline-block">
+							<time class="published">
+								- 2 weeks ago
+							</time>
+						</div>
+					</div>
+
+				<div class="recipe-thumb">
+					<img src="images/single_recipe.jpg" alt="photo">
+				</div>
+                <div class="single-recipe-content">
+
+                    <h5 class="black">
+ I can't imagine Christmas Eve without this zippy Italian seafood cioppino on the table. 
+Loaded with shrimp, crab, clams, and haddock, this hearty stew is a seafood lovers dream come true! 
+This stew is made in the slow cooker, making it a great option for special occasions or busy weeknights. 
+Serve with crusty bread or oyster crackers.
+							</h5>
+
+							<p>
+                        <h3>Ingredients</h3>
+							</p>
+                    <table class="table table-striped table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Item 1</th>
+                            <th>Item 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><input type="checkbox" /> &nbsp; 28 ounce can diced tomatoes</td>
+                            <td><input type="checkbox" /> 6.5 ounce cans minced clams in clam juice</td>
+                        </tr>
+                          <tr>
+                            <td>2</td>
+                            <td><input type="checkbox" /> &nbsp; 1 yellow onion, diced</td>
+                            <td><input type="checkbox" /> &nbsp; 8 ounce bottle clam juice</td>
+                        </tr>
+                          <tr>
+                            <td>3</td>
+                            <td><input type="checkbox" /> &nbsp; 3 tablespoons tomato paste</td>
+                            <td><input type="checkbox" /> &nbsp; 1/2 cup dry white wine</td>
+                        </tr>
+                          <tr>
+                            <td>4</td>
+                            <td><input type="checkbox" /> &nbsp; 6 garlic cloves, minced</td>
+                            <td><input type="checkbox" /> &nbsp; 1 pound haddock fillets, cut into 1 inch pieces  </td>
+                        </tr>
+                          <tr>
+                            <td>5</td>
+                            <td><input type="checkbox" /> &nbsp; 2 tablespoons olive oil </td>
+                            <td><input type="checkbox" /> &nbsp; 1/2 cup fresh parsley, chopped</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                        <div class="steps">
+                            <div class="header">
+                                   <h3> Step 1:</h3>
+                            </div>
+                            <p>
+                                In a 4-quart slow cooker combine the tomatoes, onions, celery, clam juice, tomato paste, white wine, 
+                                garlic, vinegar, olive oil, Italian seasoning, bay leaves and salt. Cook, covered, on low heat for 6 hours
+                            </p>
+                        </div>
+ <div class="steps">
+                            <div class="header">
+                                   <h3> Step 2:</h3>
+                            </div>
+                            <p>
+                                Stir in the haddock, shrimp, clams and crab meat. Continue cooking for 45 minutes, or 
+                                until the shrimp are pink and the haddock flakes easily when poked with a fork. Remove bay leaves and stir in parsley.     
+                                        </p>
+                        </div> <div class="steps">
+                            <div class="header">
+                                   <h3> Step 3:</h3>
+                            </div>
+                            <p>
+                             Ladle the seafood cioppino into bowls and serve warm
+                            </p>
+                        </div>
+
+                </div>
+            </article>
+            
+<!--Display comments below -->
+<ul class="single-recipe-comments-list padding-left-0">
+    <li>
+        <h3>Comments</h3>
+    </li>
+<li>
+    <div class="comment-author margin-bottom-10 inline-items">
+        <img src="/images/author1.jpg" class="float-left"  />
+    <div class="more-comment float-right"><a > <i  class="fa fa-chevron-down accordion-handle"></i></a> </div>
+    <div class="author-date">
+            <a href="author-name" >Olayinka Kunle</a>
+            <div class="comment-date">3 mins ago </div>
+    </div>
+    </div>
+     <div class="margin-top-10 padding-top-10 comment-content collapse" >   <p>I love the recipe. I tried it once and all my kids enjoyed the taste and aroma</p>
+    <span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+     <a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10"> 24 </span></a>
+     <a class="reply-comment margin-left-10">
+         Reply
+         <div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+     </a>
+     </div>
+</li>
+<li>
+    <div class="comment-author margin-bottom-10 inline-items">
+        <img src="/images/author2.jpg" class="float-left"  />
+    <div class="more-comment float-right"><a > <i class="fa fa-chevron-down accordion-handle"></i></a> </div>
+    <div class="author-date">
+            <a href="author-name" >Olayinka Tobi</a>
+            <div class="comment-date">3 mins ago </div>
+    </div>
+    </div>
+     <div class="margin-top-10 padding-top-10 comment-content collapse" >   <p>I love the recipe. I tried it once and all my kids enjoyed the taste and aroma</p>
+    <span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+     <a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10"> 24 </span></a>
+     <a class="reply-comment margin-left-10">
+         Reply
+         <div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+     </a>
+     </div>
+</li>
+<li>
+    <div class="comment-author margin-bottom-10 inline-items">
+        <img src="/images/author3.jpg" class="float-left"  />
+    <div class="more-comment float-right"><a > <i class="fa fa-chevron-down accordion-handle"></i></a> </div>
+    <div class="author-date">
+            <a href="author-name" >Olayinka Kemi</a>
+            <div class="comment-date">3 minutes ago </div>
+    </div>
+    </div>
+     <div class="margin-top-10 padding-top-10 comment-content collapse" >   <p>I love the recipe. I tried it once and all my kids enjoyed the taste and aroma</p>
+    <span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+     <a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10"> 24 </span></a>
+     <a class="reply-comment margin-left-10">
+         Reply
+         <div class="comment-container margin-top-10 hide"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+     </a>
+     </div>
+</li>
+</ul>
+<div class="load-more-comments text-center margin-top-20">
+<a class="" href="javascript:void(0)">Load more comments</a>
+</div>
+       <div class="input-group">
+           <input class="form-control" placeholder="comment"/>
+           <span clas="input-group-btn">
+           <a class="btn white btn-warning "><i class="fa fa-send white"></i></a>
+           </span>
+           </div>
+</div>
+</div>
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
+<aside>
+ <div class="banner-block">
+     <div class="">
+<h5 class="black">More Recipes by Adekunle</h5>
+     </div>
+    </div>
+    
+     <div class="banner-block">
+         <article class="recipe-post">
+				<div class="recipe-thumb margin-bottom-5">
+					<img src="images/recipe_item_aside_1.jpg" alt="photo">
+                    <a href="#" class="recipe-category recipe-category-overlay bg-orange">TOP RECIPES</a>
+				</div>
+				<div class="recipe-content">
+					<div class="recipe-author">
+						by &nbsp;
+						<a class="" href="#">Olayinka Kunle</a>
+						<div class="recipe-date inline-block">
+							<time class="published">
+								- 2 weeks ago
+							</time>
+						</div>
+					</div>
+			<h5>		<a href="#" class=" recipe-title black">Here’s the featured recipe of August! </a></h5>
+
+					
+
+					<div class="recipe-actions padding-top-10">
+<span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+						<ul class="action-items icons inline social-icons icon-circle">
+							<li>
+								<a >
+								<i class="fa fa-thumbs-up"></i>
+             <span class="action-value">    5</span>
+								</a>
+							</li>
+              	<li>
+								<a >
+								<i class="fa fa-thumbs-down"></i>
+          <span class="action-value">       5</span>
+								</a>
+							</li>
+							<li>
+								<a >
+								<i class="fa fa-heart"></i>
+             <span class="action-value">    	26</span>
+								</a>
+							</li>
+              <li>
+                <a id=""  class="fav-recipe-comment inline-items">
+                <i class="fa fa-comment-o"></i>
+								<span class="action-value">100</span>
+							</a>
+              </li>
+						</ul>
+						</div>
+<div class="margin-top-10 toggle-comment invisible"><form>
+	 <div class="input-group">
+           <input class="form-control" placeholder="comment"/>
+           <span clas="input-group-btn">
+           <a class="btn white btn-warning "><i class="fa fa-send white"></i></a>
+           </span>
+           </div>
+	</form></div>
+					</div>
+                    </article>
+				</div>
+
+     <div class="banner-block">
+          <article class="recipe-post">
+				<div class="recipe-thumb margin-bottom-5">
+					<img src="images/recipe_item_aside_3.jpg" alt="photo">
+                    <a href="#" class="recipe-category recipe-category-overlay bg-indigo-600">LATEST RECIPES</a>
+				</div>
+				<div class="recipe-content">
+					<div class="recipe-author">
+						by &nbsp;
+						<a class="" href="#">Olayinka Kunle</a>
+						<div class="recipe-date inline-block">
+							<time class="published">
+								- 2 weeks ago
+							</time>
+						</div>
+					</div>
+			<h5>		<a href="#" class=" recipe-title black">Here’s the featured recipe of August! </a></h5>
+
+					
+
+					<div class="recipe-actions padding-top-10">
+<span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+						<ul class="action-items icons inline social-icons icon-circle">
+							<li>
+								<a >
+								<i class="fa fa-thumbs-up"></i>
+             <span class="action-value">    5</span>
+								</a>
+							</li>
+              	<li>
+								<a >
+								<i class="fa fa-thumbs-down"></i>
+          <span class="action-value">       5</span>
+								</a>
+							</li>
+							<li>
+								<a >
+								<i class="fa fa-heart"></i>
+             <span class="action-value">    	26</span>
+								</a>
+							</li>
+              <li>
+                <a  class=" fav-recipe-comment inline-items">
+                <i class="fa fa-comment-o"></i>
+								<span class="action-value">100</span>
+							</a>
+              </li>
+						</ul>
+						</div>
+<div class="toggle-comment margin-top-10 invisible"><form><input class="form-control inline" placeholder="comment" style="width:80%;height:40px;" /><a class="btn btn-lg btn-success "><i class="fa fa-send "></i></a></form></div>
+					</div>
+                    </article>
+				</div>
+      <div class="banner-block">
+           <article class="recipe-post">
+				<div class="recipe-thumb margin-bottom-5">
+					<img src="images/recipe_item_aside_4.jpg" alt="photo">
+                    <a href="#" class="recipe-category recipe-category-overlay  bg-indigo-800">FEATURED RECIPES</a>
+				</div>
+				<div class="recipe-content">
+					<div class="recipe-author">
+						by &nbsp;
+						<a class="" href="#">Olayinka Kunle</a>
+						<div class="recipe-date inline-block">
+							<time class="published">
+								- 2 weeks ago
+							</time>
+						</div>
+					</div>
+			<h5>		<a href="#" class=" recipe-title black">Here’s the featured recipe of August! </a></h5>
+
+					
+
+					<div class="recipe-actions padding-top-10">
+<span>
+                <a>
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+            </span>
+						<ul class="action-items icons inline social-icons icon-circle">
+							<li>
+								<a >
+								<i class="fa fa-thumbs-up"></i>
+             <span class="action-value">    5</span>
+								</a>
+							</li>
+              	<li>
+								<a >
+								<i class="fa fa-thumbs-down"></i>
+          <span class="action-value">       5</span>
+								</a>
+							</li>
+							<li>
+								<a >
+								<i class="fa fa-heart"></i>
+             <span class="action-value">    	26</span>
+								</a>
+							</li>
+              <li>
+                <a  class=" fav-recipe-comment inline-items">
+                <i class="fa fa-comment-o"></i>
+								<span class="action-value">100</span>
+							</a>
+              </li>
+						</ul>
+						</div>
+<div class="toggle-comment margin-top-10 invisible"><form>
+	 <div class="input-group">
+           <input class="form-control" placeholder="comment"/>
+           <span clas="input-group-btn">
+           <a class="btn white btn-warning "><i class="fa fa-send white"></i></a>
+           </span>
+           </div>
+	</form></div>
+					</div>
+                    </article>
+				</div>
+</aside>
+    </div>
+</div>
+</div>
+
+
+
+<!--Body content ends here -->
+</div>
+</div>
+
+
+<footer class="">
+<div id="footer-responsive" class="container-fluid">
+<div class="row">
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+<div class="about-widget">
+<a href="#" class="logo">
+						<img src="images/logo.png" alt="MoreRecipes">
+						<h6 class="logo-title">MoreRecipes</h6>
+						RECIPE LIBRARY
+					</a>
+					<p>
+						More-Recipes​ provides​ ​a​ ​platform​ ​for​ ​users​ ​to​ ​share​ ​the​ ​awesome​ ​and​ ​exciting​ ​​ ​recipe​ ​ideas​ ​they
+have​ ​invented​ ​or​ ​learnt.
+							</p>
+														<div style="padding-bottom:0px;" class='full-tile column col-xs-12 social-links'>
+<div class="social-links-title margin-top-10">Go ahead and follow us on social media.</div>
+<ul class="icons inline social-icons icon-circle margin-top-20">
+<li class="pinterest" data-toggle="tooltip" title="Pinterest"><a href="" class="elegant-" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+<li class="facebook" data-toggle="tooltip" title="Facebook"><a href="" class="elegant-" target="_blank"><i class="fa fa-facebook"></i></a></li>
+<li class="twitter" data-toggle="tooltip" title="Twitter"><a href="" class="" target="_blank"><i class="fa fa-twitter"></i></a></li>
+<li class="googleplus" data-toggle="tooltip" title="GooglePlus"><a href="" class="social-icon icon-google_plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+<li class="instagram" class="tooltip" title="Instagram" ><a href="" target="_blank"><i class="fa fa-instagram"></i></a></li>
+</ul>
+</div>
+</div>
+	</div>
+	<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+<h6 class="text-center">Quick Links</h6>
+<ul class="footer-links">
+				<li><a href="/view-recipes/latest">Latest Recipe</a></li>
+					<li><a href="/view-recipes/most-view">Most Viewed Recipe</a></li>
+					<li><a href="/recipe-user/photos">Photos</a></li>
+			<li><a href="/recipe-filter/trending">Trending</a></li>
+				<li><a href="/recipe-filter/trending">Friends Recipe</a></li>
+</ul>
+	</div>
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 recipe-gallery">
+<h4 class="text-center">Recipe Gallery</h4>   
+<div class="row">
+<div class="col-4 col-md-4 col-xs-6">
+<a  data-lightbox="gallery-lightbox" href="images/gallery01.png" data-title="Recipe gallery" >	<img src="images/gallery01.png" ></a>
+</div>
+<div class="col-4 col-md-4 col-xs-6 col-3">
+<a  data-lightbox="gallery-lightbox" href="images/gallery02.png" data-title="Recipe gallery" >	<img src="images/gallery02.png" ></a>
+</div>
+<div class="col-4 col-md-4 col-xs-6 col-3">
+<a  data-lightbox="gallery-lightbox" href="images/gallery03.png" data-title="Recipe gallery" >	<img src="images/gallery03.png" ></a>
+</div>
+</div>
+<div class="row">
+<div class="col-4 col-md-4 col-xs-6 col-3">
+	<a  data-lightbox="gallery-lightbox" href="images/gallery04.png" data-title="Recipe gallery" ><img src="images/gallery04.png" ></a>
+</div>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery05.png" data-title="Recipe gallery" >	<img src="images/gallery05.png" ></a>
+</div>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery06.png" data-title="Recipe gallery" >	<img src="images/gallery06.png" ></a>
+</div>
+</div>
+<div class="row">
+<div class="col-4 col-md-4 col-xs-6">
+	<a  data-lightbox="gallery-lightbox" href="images/gallery07.png" data-title="Recipe gallery" ><img src="images/gallery07.png" ></a>
+</div>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery08.png" data-title="Recipe gallery" >	<img src="images/gallery08.jpg"></a>
+</div>
+<div class="col-4 col-md-4 col-lg-4 col-xs-4">
+<a  data-lightbox="gallery-lightbox" href="images/gallery09.png" data-title="Recipe gallery" >	<img src="images/gallery09.jpg" ></a>
+</div>
+</div>
+	</div>
+	<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+<h6 class="text-center">More Recipe</h6>
+<ul class="footer-links">
+				<li><a href="/legal/privacy">Privacy</a></li>
+					<li><a href="/legal/terms-conditions">Terms and Conditions</a></li>
+					<li><a href="/social/forums">Forums</a></li>
+			<li><a href="/others/statistics">Statistics</a></li>
+				<li><a href="/developer/api/download">Web Developer API</a></li>
+</ul>
+	</div>
+</div>
+</div>
+</footer>
+<!--Begin Page Modal -->
+<!--Terms and Conditions -->
+    <div class="modal fade modal-rotate-from-left" id="modalTermsAndConditions" aria-hidden="false" aria-labelledby="modalSignIn"
+                  role="dialog" tabindex="-1">
+                    <div class="modal-dialog" >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                          <h4 class="modal-title" id="modalSignUpTitle">Terms & Conditions</h4>
+                        </div>
+                        <div class="modal-body">
+            <!-- Form -->
+           By using MoreRecipe services you are agreeing to be bound by the following terms and conditions (“Terms of Service”). 
+           MoreRecipe reserves the right to update and change the Terms of Service by posting updates and changes to this website.
+            You are advised to check the Terms of Service oftenly for any updates.
+            <div><h6>1. Account Terms</h6></div>
+            <div>1. Recipes are published for publish use and we do not guaranty that your expectations will be met </div>
+              <div>
+                2. We are not liable for any harm or inconvenience trying this Recipe might cause. Users discretion is advised
+              </div>
+<div><h6>3. MoreRecipe Rights</h6></div>
+<div>We reserve the right to modify or terminate the Service for any reason, without notice at any time.</div>
+<div>We reserve the right to refuse service to anyone for any reason at any time</div>
+               </div>
+                          <div class="modal-footer">
+                          <button type="button" class="btn btn-success margin-0" data-dismiss="modal">Close</button>
+                        </div>
+                        </div></div></div>
+                        <!--End Terms and Conditions -->
+
+<!--End Page Modal -->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+<script src="js/tooltip.js"></script>
+<script src="js/lightbox.js"></script>
+<script src="js/angular.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
