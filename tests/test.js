@@ -110,20 +110,6 @@ describe('API routes that manage users', () => {
         done();
       });
   });
-
-  // test api/users/signin with true data and password is hidden from output
-  it('api/users/signin should sign in and output should hide password', (done) => {
-    server.post('/api/v1/users/signin').set({ 'x-access-token': authenticationToken })
-      .send({ username: 'TestUser', password: 'alphaomega' })
-      .end((err, res) => {
-        assert.property(res.body, 'data');
-        assert.property(res.body, 'status');
-        assert.property(res.body, 'message');
-        assert.equal(res.body.status, 'success');
-        assert.isNull(res.body.data.password);
-        done();
-      });
-  });
   // test api/users/signin with false data
   it('api/users/signin should not sign in with false username or password', (done) => {
     server.post('/api/v1/users/signin').send({ username: 'recipes', password: 'alpha24' })
