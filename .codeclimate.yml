@@ -1,9 +1,9 @@
 engines:
  csslint:
-   enabled: false
- duplication:
-   enabled: true
-   config:
+  enabled: false
+duplication:
+  enabled: true
+config:
      languages:
      - javascript
  eslint:
@@ -13,9 +13,9 @@ engines:
 ratings:
  paths:
  - "server/**/*.js"
-
 exclude_paths:
  - "node_modules/"
  - "public/*"
  - "server/test"
  - "dist/*"
+ - "tests/"

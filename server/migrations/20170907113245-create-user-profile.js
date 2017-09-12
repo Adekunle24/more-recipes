@@ -28,7 +28,8 @@ module.exports = {
     });
   },
   down: queryInterface =>
-    queryInterface.dropTable('users_profile',{
-        force: true,
-        cascade: false}),
+    queryInterface.dropTable('users_profile', {
+      force: true,
+      cascade: false
+    }),
 };

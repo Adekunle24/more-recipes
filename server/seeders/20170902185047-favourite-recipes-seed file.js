@@ -1,34 +1,33 @@
 
 module.exports = {
-  up: function (queryInterface, Sequelize) {
+  up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('favourite_recipes', [{
-      recipeId : '1',
-      userId : '1',
-      createdAt : new Date(),
-      updatedAt : new Date()
+      recipeId: '1',
+      userId: '1',
+      createdAt: new Date(),
+      updatedAt: new Date()
     },
     {
-      recipeId : '1',
-      userId : '1',
-      createdAt : new Date(),
-      updatedAt : new Date()
+      recipeId: '1',
+      userId: '1',
+      createdAt: new Date(),
+      updatedAt: new Date()
     },
     {
-      recipeId : '2',
-      userId : '2',
-      createdAt : new Date(),
-      updatedAt : new Date()
+      recipeId: '2',
+      userId: '2',
+      createdAt: new Date(),
+      updatedAt: new Date()
     },
     {
-      recipeId : '2',
-      userId : '2',
-      createdAt : new Date(),
-      updatedAt : new Date()
+      recipeId: '2',
+      userId: '2',
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
     ], {});
-    
   },
 
-  down: function (queryInterface, Sequelize) {
+  down(queryInterface, Sequelize) {
   }
 };

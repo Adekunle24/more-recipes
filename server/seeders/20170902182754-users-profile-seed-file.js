@@ -1,26 +1,25 @@
 
 module.exports = {
-  up: function (queryInterface, Sequelize) {
+  up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('users_profile', [{
-      userId : 1,
-      firstName : '',
-      lastName : '',
+      userId: 1,
+      firstName: '',
+      lastName: '',
       profilePicture: '',
-      createdAt : new Date(),
-      updatedAt : new Date()
+      createdAt: new Date(),
+      updatedAt: new Date()
     },
     {
-      userId : 2,
-      firstName : '',
-      lastName : '',
+      userId: 2,
+      firstName: '',
+      lastName: '',
       profilePicture: '',
-      createdAt : new Date(),
-      updatedAt : new Date()
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
     ], {});
-    
   },
 
-  down: function (queryInterface, Sequelize) {
+  down(queryInterface, Sequelize) {
   }
 };

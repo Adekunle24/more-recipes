@@ -7,8 +7,8 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-         onDelete: 'CASCADE',
-         references: {
+        onDelete: 'CASCADE',
+        references: {
           model: 'recipes',
           key: 'id'
         }
@@ -27,7 +27,8 @@ module.exports = {
     });
   },
   down: queryInterface =>
-    queryInterface.dropTable('social_values',{
+    queryInterface.dropTable('social_values', {
       force: true,
-        cascade: false,}),
+      cascade: false,
+    }),
 };

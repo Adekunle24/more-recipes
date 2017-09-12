@@ -45,8 +45,8 @@ module.exports = {
     });
   },
   down: queryInterface =>
-    queryInterface.dropTable('reviews',{
+    queryInterface.dropTable('reviews', {
       force: true,
-        cascade: false,
+      cascade: false,
     }),
 };
