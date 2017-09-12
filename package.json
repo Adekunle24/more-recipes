@@ -65,7 +65,7 @@
     "old-test": "",
     "clean": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
     "clean-start": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "test": "nyc mocha tests/*.js",
+    "test": "npm run clean && nyc mocha tests/*.js",
     "test:demo": "tap tests/basic.js --cov",
     "controllers-test": "mocha --compilers js:babel-core/register tests/controllers.js",
     "middlewares-test": "mocha --compilers js:babel-core/register tests/middlewares.js",
