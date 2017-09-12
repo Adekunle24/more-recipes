@@ -11,8 +11,8 @@ module.exports = {
       recipeId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-         onDelete: 'CASCADE',
-          references: {
+        onDelete: 'CASCADE',
+        references: {
           model: 'recipes',
           key: 'id',
           as: 'recipes',
