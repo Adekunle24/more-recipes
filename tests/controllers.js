@@ -1,11 +1,7 @@
 import chai from 'chai';
-import mock from 'node-mocks-http';
-import should from 'should';
 import controllers from '../server/controllers';
-import events from 'events';
 
-const buildResponse = () => mock.createResponse({ eventEmitter: events.EventEmitter });
-const assert = chai.assert;
+const { assert } = chai;
 describe('Tests for all controllers', () => {
   describe('All controllers must be defined', () => {
     it('UsersController should be defined', () => {

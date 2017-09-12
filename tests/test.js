@@ -3,7 +3,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
 
-const assert = chai.assert;
+const { assert } = chai;
 chai.use(chaiHttp);
 
 // This agent refers to PORT where program is runninng.

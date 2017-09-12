@@ -1,6 +1,5 @@
 // using express framework
 import express from 'express';
-import fs from 'fs';
 import bodyParser from 'body-parser';
 import path from 'path';
 import env from 'dotenv';
