@@ -18,3 +18,4 @@ exclude_paths:
  - "node_modules/"
  - "public/*"
  - "server/test"
+ - "dist/*"
