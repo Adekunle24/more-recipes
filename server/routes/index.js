@@ -25,7 +25,7 @@ routes.post('/api/v1/recipes', controllers.recipesController.addRecipe);
 // api-edit-recipe route
 routes.put('/api/v1/recipes', controllers.recipesController.modifyRecipe);
 
-// api-delete-recipe route
+// api-delete-recipe route`
 routes.delete('/api/v1/recipes', controllers.recipesController.deleteRecipe);
 
 // api to search for recipes based on ingredient

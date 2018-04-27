@@ -12,7 +12,7 @@ const db = {};
 let sequelizeApp;
 if (process.env.NODE_ENV !== 'production') {
   sequelizeApp = new Sequelize(
-    `${process.env.DB_NAME}-${process.env.NODE_ENV.toLowerCase()}`, process.env.DB_USERNAME,
+    `${process.env.DB_NAME}_${process.env.NODE_ENV.toLowerCase()}`, process.env.DB_USERNAME,
     process.env.DB_PASSWORD, { dialect: process.env.DB_DIALECT, host: process.env.DB_HOST }
   );
 } else {

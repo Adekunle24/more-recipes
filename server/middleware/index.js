@@ -68,9 +68,9 @@ class MiddleWares {
    */
   parseSequelizeError(res, error) {
     if (error.errors) {
-      res.json({ status: 'fail', data: { message: error.errors[0].message, type: error.errors[0].type, field: error.fields } });
+      res.json({ status: 'fail@sequelizeError', data: { message: error.errors[0].message, type: error.errors[0].type, field: error.fields } });
     } else if (error.parent) {
-      res.json({ status: 'fail', data: { message: error.parent.detail } });
+      res.json({ status: 'fail@sequelizeError', data: { message: error.parent.name, error: error.name } });
     }
     return this;
   }

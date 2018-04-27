@@ -1,4 +1,5 @@
 
+
 const UserProfile = (sequelize, DataTypes) => {
   const profile = sequelize.define('users_profile', {
     firstName: { type: DataTypes.STRING, allowNull: true },

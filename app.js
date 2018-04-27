@@ -1,6 +1,5 @@
 // using express framework
 import express from 'express';
-import fs from 'fs';
 import bodyParser from 'body-parser';
 import path from 'path';
 import env from 'dotenv';
@@ -17,7 +16,9 @@ app.set('port', process.env.PORT || 3000);
 app.set('superSecret', env.API_SECRET);
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 if (process.env.NODE_ENV !== 'test') {
   app.use(logger('dev'));
@@ -39,17 +40,23 @@ app.get(['*.png', '*.jpg', '*.css', '*.js', '*.map'], (req, res) => {
 });
 
 app.use((req, res) => {
-  res.type('text/plain');
+  res.type('application/json');
   res.status(404);
-  res.json({ status: 'fail', message: '404 - Page cannot be found' });
+  res.json({
+    status: 'fail',
+    message: '404 - Page cannot be found'
+  });
 });
 
 app.use((err, req, res, next) => {
   res.type('text/plain');
   res.status(500);
-  res.json({ status: 'fail', message: '500 - server error' });
+  res.json({
+    status: 'fail',
+    message: '500 - server error'
+  });
 });
 app.listen(app.get('port'), () => {
-
+  console.log(`App started at port ${app.get('port')}`);
 });
 export default app;
