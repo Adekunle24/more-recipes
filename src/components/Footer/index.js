@@ -1,4 +1,5 @@
 import React from 'react';
+import Local from '../../local';
 
 class Footer extends React.Component{
 
@@ -85,11 +86,12 @@ have​ ​invented​ ​or​ ​learnt.
 	<div className="col-lg-2 col-md-4 col-sm-6 col-xs-12">
 <h6 className="text-center">More Recipe</h6>
 <ul className="footer-links">
-				<li><a href="/legal/privacy">Privacy</a></li>
-					<li><a href="/legal/terms-conditions">Terms and Conditions</a></li>
-					<li><a href="/social/forums">Forums</a></li>
-			<li><a href="/others/statistics">Statistics</a></li>
-				<li><a href="/developer/api/download">Web Developer API</a></li>
+{
+	Local.quicklinks.map((item,index)=>
+	<li><a key={item.key} href={item.url}>{item.caption}</a></li>
+	)
+}
+				
 </ul>
 	</div>
 </div>

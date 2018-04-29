@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Footer from '../Footer';
 class Header extends React.Component{
     constructor(){
@@ -9,14 +10,13 @@ class Header extends React.Component{
         this.action = this.action.bind(this);
     }
     update(e){
-        this.setState({txt: e.target.value})
+        this.setState({txt: e.target.value});
     }
     action(e){
         this.setState({txt: e.type});
     }
     render(){
         return (
-            <div>
                <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" id="mainNav">
       <div className="container">
         <a className="navbar-brand" href="#page-top">MoreRecipes</a>
@@ -52,14 +52,12 @@ class Header extends React.Component{
         </div>
       </div>
     </nav>
-    <div>{this.state.txt}</div>
-    <Footer></Footer>
-           </div>
-        )}
+        );
+      }
 }
 Header.propTypes = {
-    txt: React.PropTypes.string,
-    cat: React.PropTypes.number.isRequired
+    txt: PropTypes.string,
+    cat: PropTypes.number.isRequired
 }
 Header.defaultProps = {
     txt : "default message"

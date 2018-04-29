@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Header from './src/components/Header';
+import Home from './src/components/Home';
 
 render(
-    <Header cat={5} ></Header>, document.getElementById('app')
-    );
+  <Home></Home>, document.getElementById('app')
+);
