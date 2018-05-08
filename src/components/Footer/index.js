@@ -1,12 +1,18 @@
 import React from 'react';
 import Local from '../../local';
+import {connect} from 'react-redux';
 
+const mapStateToProps = state =>{
+	return {articles: state.articles };
+};
 class Footer extends React.Component{
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      name : 'footer'
+	  name : 'footer',
+	  quicklinks:Local.quicklinks,
+	  articles:props.articles,
     };
   }
   render(){
@@ -26,7 +32,7 @@ class Footer extends React.Component{
 have​ ​invented​ ​or​ ​learnt.
 							</p>
 														<div className="padding-bottom-0" className='full-tile column col-xs-12 social-links'>
-<div className="social-links-title margin-top-10">Go ahead and follow us on social media.</div>
+<div className="social-links-title margin-top-10">Go ahead and follow us on social media.{this.props.articles.length}</div>
 <ul className="icons inline social-icons icon-circle margin-top-20">
 <li className="pinterest" data-toggle="tooltip" title="Pinterest"><a href="" className="elegant-" target="_blank"><i className="fa fa-pinterest"></i></a></li>
 <li className="facebook" data-toggle="tooltip" title="Facebook"><a href="" className="elegant-" target="_blank"><i className="fa fa-facebook"></i></a></li>
@@ -87,8 +93,8 @@ have​ ​invented​ ​or​ ​learnt.
 <h6 className="text-center">More Recipe</h6>
 <ul className="footer-links">
 {
-	Local.quicklinks.map((item,index)=>
-	<li><a key={item.key} href={item.url}>{item.caption}</a></li>
+	this.state.quicklinks.map((item)=>
+	<li key={item.key}><a  href={item.url}>{item.caption}</a></li>
 	)
 }
 				
@@ -100,4 +106,4 @@ have​ ​invented​ ​or​ ​learnt.
       )
   }
 }
-export default Footer;
+export default connect(mapStateToProps)(Footer);

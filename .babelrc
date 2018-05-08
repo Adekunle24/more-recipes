@@ -1,6 +1,7 @@
 {
-  "presets": ["env","es2015", "stage-2"],
+  "presets": ["env","es2015", "stage-2","react"],
   "plugins": [
-    ["inline-json-import", {}]
+    ["inline-json-import", {}],
+    ["transform-object-rest-spread", { "useBuiltIns": true }]
   ]
 }

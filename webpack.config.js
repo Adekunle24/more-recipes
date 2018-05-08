@@ -1,20 +1,37 @@
-
-
 // module.exports = config;
 const path = require('path');
+// const webpack = require('webpack');
 // var nodeExternals = require('webpack-node-externals');
 const BUILD_DIR = path.join(__dirname, '/public');
 module.exports = {
-  entry:
-   './client.js',
+  entry: './src/App.js',
   output: {
     path: path.join(BUILD_DIR, '/js'),
     filename: 'bundle.js',
     publicPath: BUILD_DIR
   },
   module: {
-    loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader?presets[]=es2015&presets[]=react' }
-    ]
+    rules: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: [{
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            ['react'],
+            ['es2015'] // IMPORTANT
+          ]
+        }
+      }]
+      // loader: 'babel-loader?presets[]=es2015&presets[]=react'
+    }]
   },
+  plugins: [
+    // new webpack.DefinePlugin({
+    //   'process.env.NODE_ENV': JSON.stringify('production')
+    // }),
+    // new webpack.optimize.UglifyJsPlugin({
+    // sourceMap: true,
+    // })
+  ]
 };
