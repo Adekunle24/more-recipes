@@ -1,4 +1,3 @@
-
 import jwt from 'jsonwebtoken';
 import config from '../config/config';
 /**
@@ -23,7 +22,10 @@ class MiddleWares {
         // verifies secret and checks exp
         jwt.verify(token, process.env.API_SECRET, (err, decoded) => {
           if (err) {
-            return res.json({ success: false, message: 'Failed to authenticate token.' });
+            return res.json({
+              success: false,
+              message: 'Failed to authenticate token.'
+            });
           }
           // if everything is good, save to request for use in other routes
           req.decoded = decoded;
@@ -52,9 +54,17 @@ class MiddleWares {
   encrypt(req, res) {
     if (req.body.key) {
       const token = jwt.sign(req.body.key, process.env.API_SECRET);
-      res.json({ status: 'success', data: { result: token } });
+      res.json({
+        status: 'success',
+        data: {
+          result: token
+        }
+      });
     } else {
-      res.json({ status: 'fail', message: 'Please provide a key to encrypt' });
+      res.json({
+        status: 'fail',
+        message: 'Please provide a key to encrypt'
+      });
       return this;
     }
   }
@@ -68,9 +78,22 @@ class MiddleWares {
    */
   parseSequelizeError(res, error) {
     if (error.errors) {
-      res.json({ status: 'fail@sequelizeError', data: { message: error.errors[0].message, type: error.errors[0].type, field: error.fields } });
+      res.json({
+        status: 'fail@sequelizeError0',
+        data: {
+          message: error.errors[0].message,
+          type: error.errors[0].type,
+          field: error.fields
+        }
+      });
     } else if (error.parent) {
-      res.json({ status: 'fail@sequelizeError', data: { message: error.parent.name, error: error.name } });
+      res.json({
+        status: 'fail@sequelizeError2',
+        data: {
+          message: JSON.stringify(error),
+          error: error.name
+        }
+      });
     }
     return this;
   }
@@ -83,7 +106,8 @@ class MiddleWares {
    */
   validateUsername(req) {
     const invalidCharacters = ['!', '`', '@', '\\', '?', '#', '$', '%', '^', '&', '*',
-      ',', '(', ')', '-', '+', '=', '{', '}', '<', '>', '/', 'null'];
+      ',', '(', ')', '-', '+', '=', '{', '}', '<', '>', '/', 'null'
+    ];
     for (const char of invalidCharacters) {
       if (req.body.username.includes(char)) {
         return false;

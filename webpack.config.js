@@ -1,6 +1,6 @@
 // module.exports = config;
 const path = require('path');
-// const webpack = require('webpack');
+const webpack = require('webpack');
 // var nodeExternals = require('webpack-node-externals');
 const BUILD_DIR = path.join(__dirname, '/public');
 module.exports = {
@@ -24,7 +24,15 @@ module.exports = {
         }
       }]
       // loader: 'babel-loader?presets[]=es2015&presets[]=react'
-    }]
+    },
+    {
+      test: /\.css$/,
+      use: [
+        { loader: 'style-loader' },
+        { loader: 'css-loader' },
+      ],
+    }
+    ]
   },
   plugins: [
     // new webpack.DefinePlugin({

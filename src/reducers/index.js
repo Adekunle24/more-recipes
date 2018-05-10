@@ -1,10 +1,14 @@
 /* jshint esnext:true */
 
-import ADD_ARTICLE from './../constants/action-types';
+import ADD_ARTICLE, {
+  ADD_USER,
+  USER_IS_REGISTERING
+} from './../constants/action-types';
 
 
 const initialState = {
-  articles: []
+  articles: [],
+  isUserRegistering: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -13,7 +17,10 @@ const rootReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         articles: [...state.articles, action.payload]
       });
-
+    case USER_IS_REGISTERING:
+      return Object.assign({}, state, {
+        isUserRegistering: true,
+      });
     default:
       return state;
   }

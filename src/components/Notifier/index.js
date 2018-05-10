@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import addArticle from './../../actions/index';
+import {addArticle,testThunk} from './../../actions/index';
 
 
 const mapStateToProps = state =>{
     return { articles :  state.articles };
 };
 
-const mapDispatchToProps = dispatch =>{
-    return {addArticle : article => dispatch(addArticle(article))};
+const mapDispatchToProps = dispatch => {
+    return {
+        addArticle: article => dispatch(addArticle(article)),
+       testThunk: item => dispatch(testThunk(item))
+    };
 };
 
 class Notifier extends React.Component{
@@ -29,9 +32,8 @@ class Notifier extends React.Component{
         }));
     }
     onClick(){
-        console.log('log on click is called@NotifierComponent');
         let newArticle = {name:'React-Redux',id:123,author:'Adekunle',created_at: Date()}
-        this.props.addArticle(newArticle);
+        this.props.testThunk(newArticle);
         this.setState(prevState=>({
             articles: [...prevState.articles,newArticle]
         }));
@@ -46,7 +48,7 @@ class Notifier extends React.Component{
                         <div className="row">
                             <div className="col-md-12 col-sm-12 text-center">
                                 <span id="master-notify-close" onClick={this.hideNotifier} className="white hover-black cursor-pointer float-left"><i className="fa fa-close"></i></span>
-                                <p>{this.state.message}{this.state.articles.length} <button className="btn btn-info " onClick={this.onClick}>Click Here</button></p>
+                                <p>{this.state.message}</p>
                             </div>
                         </div>
                     </div>

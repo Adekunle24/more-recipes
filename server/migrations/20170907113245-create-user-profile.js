@@ -1,7 +1,6 @@
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    queryInterface.createTable('users_profile', {
+    queryInterface.createTable('user_profiles', {
       userId: {
         allowNull: false,
         autoIncrement: true,
@@ -13,6 +12,15 @@ module.exports = {
       },
       lastName: {
         type: Sequelize.STRING
+      },
+      birthDay: {
+        allowNull: true,
+        type: Sequelize.DATE
+      },
+      gender: {
+        allowNull: false,
+        defaultValue: 'Female',
+        type: Sequelize.ENUM('Male', 'Female')
       },
       profilePicture: {
         type: Sequelize.STRING
@@ -28,7 +36,8 @@ module.exports = {
     });
   },
   down: queryInterface =>
-    queryInterface.dropTable('users_profile',{
-        force: true,
-        cascade: false}),
+    queryInterface.dropTable('users_profile', {
+      force: true,
+      cascade: false
+    }),
 };

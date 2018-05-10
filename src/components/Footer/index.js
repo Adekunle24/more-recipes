@@ -32,7 +32,8 @@ class Footer extends React.Component{
 have​ ​invented​ ​or​ ​learnt.
 							</p>
 														<div className="padding-bottom-0" className='full-tile column col-xs-12 social-links'>
-<div className="social-links-title margin-top-10">Go ahead and follow us on social media.{this.props.articles.length}</div>
+<div className="social-links-title margin-top-10">Go ahead and follow us on social media.
+</div>
 <ul className="icons inline social-icons icon-circle margin-top-20">
 <li className="pinterest" data-toggle="tooltip" title="Pinterest"><a href="" className="elegant-" target="_blank"><i className="fa fa-pinterest"></i></a></li>
 <li className="facebook" data-toggle="tooltip" title="Facebook"><a href="" className="elegant-" target="_blank"><i className="fa fa-facebook"></i></a></li>

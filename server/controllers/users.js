@@ -1,8 +1,7 @@
-
 import crypto from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
-import allModels from '../models';
+import allModels, { userProfile } from '../models';
 import MiddleWare from '../middleware';
 
 env.config();
@@ -33,14 +32,21 @@ const getToken = (req, res) => {
  */
 const getTotalUsers = (req, res) => {
   userModel.findAll({
-    attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
+    attributes: {
+      exclude: ['password', 'createdAt', 'updatedAt']
+    },
     include: [{
       model: recipeModel,
       as: 'recipes',
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      attributes: {
+        exclude: ['createdAt', 'updatedAt']
+      },
     }]
   }).then((user) => {
-    res.json({ status: 'success', data: user });
+    res.json({
+      status: 'success',
+      data: user
+    });
   }).catch(error => middleware.parseSequelizeError(res, error));
 };
 
@@ -55,11 +61,19 @@ const signUp = (req, res) => {
   // perform input validations
   if (req.body.username && req.body.email && req.body.password) {
     if (!middleware.validateUsername(req, res)) {
-      res.json({ status: 'fail', validations: false, message: 'invalid character(s) in input' });
+      res.json({
+        status: 'fail',
+        validations: false,
+        message: 'invalid character(s) in input'
+      });
       return;
     }
     if (!middleware.validatePasswordLength(req)) {
-      res.json({ status: 'fail', validations: false, message: 'password must be greater than 5 characters in length' });
+      res.json({
+        status: 'fail',
+        validations: false,
+        message: 'password must be greater than 5 characters in length'
+      });
       return;
     }
     const usernameInput = req.body.username;
@@ -71,13 +85,30 @@ const signUp = (req, res) => {
       password: passwordHash,
       phoneNumber: ''
     }).then((output) => {
-      output.password = null;
-      const newToken = jwt.sign(JSON.stringify(output), process.env.API_SECRET);
-      res.json({ status: 'success', data: { token: newToken }, message: `Your account has been created successfully Username: ${output.username} Email: ${output.email}` });
+      userProfile.create({
+        userId: output.id,
+        firstName: req.body.firstname,
+        lastName: req.body.lastname,
+        birthDay: req.body.birthday,
+        gender: req.body.gender
+      }).then((profile) => {
+        output.password = null;
+        const newToken = jwt.sign(JSON.stringify(output), process.env.API_SECRET);
+        res.json({
+          status: 'success',
+          data: {
+            token: newToken
+          },
+          message: `Your account has been created successfully Username: ${output.username} Email: ${output.email}`
+        });
+      }).catch(error => middleware.parseSequelizeError(res, error));
     }).catch(error => middleware.parseSequelizeError(res, error));
   } else {
     res.json({
-      status: 'fail', data: null, validations: false, message: 'Please provide username,email and password'
+      status: 'fail',
+      data: null,
+      validations: false,
+      message: 'Please provide username,email and password'
     });
   }
 };
@@ -96,7 +127,10 @@ const removeUser = (req, res) => {
       }
     }).then((user) => {
       if (!user) {
-        res.json({ success: false, message: 'Specified user could not be found' });
+        res.json({
+          success: false,
+          message: 'Specified user could not be found'
+        });
       } else {
         // drop user reviews
         reviewModel.destroy({
@@ -118,7 +152,10 @@ const removeUser = (req, res) => {
             }).then((output) => {
               // drop user
               user.destroy()
-                .then(output => res.json({ message: 'User deleted successfully', success: true })).catch(error => middleware.parseSequelizeError(res, error));
+                .then(output => res.json({
+                  message: 'User deleted successfully',
+                  success: true
+                })).catch(error => middleware.parseSequelizeError(res, error));
             }).catch(error => middleware.parseSequelizeError(res, error));
           }).catch(error => middleware.parseSequelizeError(res, error));
         });
@@ -138,7 +175,8 @@ const removeUser = (req, res) => {
  * @param {object} req request object
  * @param {object} res response object
  * @returns {null} returns null
- */const signIn = (req, res) => {
+ */
+const signIn = (req, res) => {
   if (req.body.username && req.body.password) {
     const passwordInput = req.body.password;
     userModel.findOne({
@@ -147,24 +185,39 @@ const removeUser = (req, res) => {
       }
     }).then((result) => {
       if (!result) {
-        res.json({ status: 'fail', data: null, message: 'Incorrect username or password' });
+        res.json({
+          status: 'fail',
+          data: null,
+          message: 'Incorrect username or password'
+        });
       } else if (result) {
         crypto.compare(passwordInput, result.password, (err, cryptResponse) => {
           if (cryptResponse) {
             result.password = null;
             const newToken = jwt.sign(JSON.stringify(result), process.env.API_SECRET);
             res.json({
-              status: 'success', data: result, message: `Welcome ${result.username}`, token: newToken, info: 'add this token to your header with key x-access-token for authentication'
+              status: 'success',
+              data: result,
+              message: `Welcome ${result.username}`,
+              token: newToken,
+              info: 'add this token to your header with key x-access-token for authentication'
             });
           } else {
-            res.json({ status: 'fail', data: null, message: 'Incorrect username or password' });
+            res.json({
+              status: 'fail',
+              data: null,
+              message: 'Incorrect username or password'
+            });
           }
         });
       }
     }).catch(error => middleware.parseSequelizeError(res, error));
   } else {
     res.json({
-      status: 'fail', data: null, validations: false, message: 'Provide username and password'
+      status: 'fail',
+      data: null,
+      validations: false,
+      message: 'Provide username and password'
     });
   }
 };

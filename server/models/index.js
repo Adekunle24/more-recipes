@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import Sequelize from 'sequelize';
 import path from 'path';
+import UserProfile from './user-profile';
 
 dotenv.config();
 
@@ -37,4 +38,5 @@ Object.keys(db).forEach((modelName) => {
 
 db.sequelize = sequelizeApp;
 db.Sequelize = Sequelize;
+export const userProfile = UserProfile(db.sequelize, db.Sequelize);
 export default db;

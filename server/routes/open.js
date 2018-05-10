@@ -2,17 +2,35 @@ import express from 'express';
 import crypto from 'bcrypt-nodejs';
 import controllers from '../controllers';
 import Middleware from '../middleware';
+import { userProfile } from '../models';
 
 const routes = express.Router();
 
-routes.get('/api/v1/test', (req, res) => res.json({ status: 'success', data: 'hello' }));
+const middleware = new Middleware();
+routes.post('/api/v1/test', (req, res) => {
+  userProfile.create({
+    userId: 1,
+    firstName: req.body.firstname,
+    lastName: req.body.lastname,
+  }).then((profile) => {
+    res.json({
+      status: 'success',
+      data: profile
+    });
+  }).catch((error) => {
+    middleware.parseSequelizeError(res, error);
+  });
+});
 
 routes.post('/api/v1/encrypt', (req, res) => {
   if (req.body.key) {
     const passwordHash = crypto.hashSync(req.body.key);
     res.send(passwordHash);
   } else {
-    res.json({ status: 'fail', message: 'please provide key to hash' });
+    res.json({
+      status: 'fail',
+      message: 'please provide key to hash'
+    });
   }
 });
 
