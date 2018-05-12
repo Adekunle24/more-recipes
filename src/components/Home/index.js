@@ -4,18 +4,32 @@ import Footer from '../Footer';
 import Notifier from '../Notifier';
 import HomeCarousel from './carousel';
 import HomeForm from './form';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+
+const mapStateToProps = state =>{
+    return{
+        isAuthenticated: state.userReducer.isAuthenticated
+    };
+};
 
 class Home extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
     }
     
     render(){
+        if(this.props.isAuthenticated){
+            const {from} = this.props.location.state || {from:{pathname:'/home'}};
+            console.log(this.props.location.state);
+            return <Redirect to={from} />
+        }
         return (
             <div>
             <Header cat={123} ></Header>
             <div className="container" id="body-container">
-            <Notifier> </Notifier>
+            <Notifier show={false}> </Notifier>
             <div className="row">
             <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <HomeCarousel>
@@ -41,4 +55,4 @@ class Home extends React.Component{
         );
     }
 }
-export default Home;
+export default connect(mapStateToProps)(Home);

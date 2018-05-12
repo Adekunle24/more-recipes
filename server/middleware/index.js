@@ -37,6 +37,7 @@ class MiddleWares {
         return res.status(403).send({
           status: 'fail',
           tokenVerification: false,
+          extra: JSON.stringify(req),
           message: 'Signin on /api/signin to generate token for authentication. Add it to headers e.g x-access-token = token',
         });
       }

@@ -4,13 +4,12 @@
  * author adekunle
  * framework NodeJS, Express and PostgreDb
  */
-
 // Initiate DatePicker
 $(document).ready(() => {
-  const date_input = $('input[name="date"]'); // our date input has the name "date"
-  const container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : 'body';
+  let date_input = $('input[name="date"]'); // our date input has the name "date"
+  let container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : 'body';
   date_input.datepicker({
-    format: 'dd/mm/yyyy',
+    format: 'mm/dd/yyyy',
     container,
     todayHighlight: true,
     autoclose: true,
@@ -22,7 +21,7 @@ $(document).ready(() => {
 $('[data-toggle="tooltip"]').tooltip();
 
 // Initiate Angular
-// const app = angular.module('myApp', []);
+const app = angular.module('myApp', []);
 
 // Propagate register event
 $('#register-2').click(() => {
@@ -34,87 +33,93 @@ $('#login-2').click(() => {
 });
 
 
-// //Begin Angular controller here
-// app.controller('myController',function($scope,$http,$timeout,$window)
-// {
-//   //declare global variables
+// Begin Angular controller here
+app.controller('myController', ($scope, $http, $timeout, $window) => {
+  // declare global variables
 
-//   $scope.LoginLoader = false;    //login loader gif
-//   $scope.MasterNotify= true;      //master notification display
-//   $scope.MasterNotifyMessage = 'You have a new notification message'; //notification message
-//   $scope.Ingredients = [{ 'item':'Andela Oil','quantity':'1 cup' }];
-//   $scope.TotalRecipes = [{'poster':'images/recipe_2.jpg','recipe_title':'How to make Okro soup','comment':'I love the recipe. I tried it once and all my kids enjoyed the taste and aroma','likes_count':'56','timeline':'4 minutes ago'},
-//     {'poster':'images/recipe_3.jpg','recipe_title':'How to make Homemade Pizza','comment':'I love the recipe. I tried it once and all my kids enjoyed the taste and aroma','likes_count':'22','timeline':'3 weeks ago'},
-//     {'poster':'images/recipe_5.jpg','recipe_title':'How to make Burger','comment':'I love the recipe. I tried it once and all my kids enjoyed the taste and aroma','likes_count':'24','timeline':'7 days ago'},
-//     {'poster':'images/recipe_4.jpg','recipe_title':'How to make Burger','comment':'I love the recipe. I tried it once and all my kids enjoyed the taste and aroma','likes_count':'50','timeline':'50 seconds ago'},
-//     {'poster':'images/recipe_6.jpg','recipe_title':'How to make Burger','comment':'I love the recipe. I tried it once and all my kids enjoyed the taste and aroma','likes_count':'20','timeline':'2 days ago'},
-//     {'poster':'images/recipe_7.jpg','recipe_title':'How to make Burger','comment':'I love the recipe. I tried it once and all my kids enjoyed the taste and aroma','likes_count':'287','timeline':'3 months ago'}
-//   ];
-//   //close master notification
-//   $scope.CloseMasterNotify = function(){
-//     $('.master-notification').fadeOut(500);
-//   };
-//   //End Angular
+  $scope.LoginLoader = false; // login loader gif
+  $scope.MasterNotify = true; // master notification display
+  $scope.MasterNotifyMessage = 'You have a new notification message'; // notification message
+  $scope.Ingredients = [{ item: 'Andela Oil', quantity: '1 cup' }];
+  $scope.TotalRecipes = [{ 
+poster: 'images/recipe_2.jpg', recipe_title: 'How to make Okro soup', comment: 'I love the recipe. I tried it once and all my kids enjoyed the taste and aroma', likes_count: '56', timeline: '4 minutes ago' 
+},
+    { 
+poster: 'images/recipe_3.jpg', recipe_title: 'How to make Homemade Pizza', comment: 'I love the recipe. I tried it once and all my kids enjoyed the taste and aroma', likes_count: '22', timeline: '3 weeks ago'
+ },
+    {
+ poster: 'images/recipe_5.jpg', recipe_title: 'How to make Burger', comment: 'I love the recipe. I tried it once and all my kids enjoyed the taste and aroma', likes_count: '24', timeline: '7 days ago' 
+},
+    { 
+poster: 'images/recipe_4.jpg', recipe_title: 'How to make Burger', comment: 'I love the recipe. I tried it once and all my kids enjoyed the taste and aroma', likes_count: '50', timeline: '50 seconds ago'
+ },
+    {
+ poster: 'images/recipe_6.jpg', recipe_title: 'How to make Burger', comment: 'I love the recipe. I tried it once and all my kids enjoyed the taste and aroma', likes_count: '20', timeline: '2 days ago' 
+},
+    { 
+poster: 'images/recipe_7.jpg', recipe_title: 'How to make Burger', comment: 'I love the recipe. I tried it once and all my kids enjoyed the taste and aroma', likes_count: '287', timeline: '3 months ago' 
+}
+  ];
+  // close master notification
+  $scope.CloseMasterNotify = function () {
+    $('.master-notification').fadeOut(500);
+  };
+  // End Angular
 
 
-//   //simulate login attempt
-//   $scope.simulateLogin = function()
-//   {
-//     $scope.LoginLoader = true;
-//     $('.master-notification').removeClass('invisible');
-//     $timeout(function(){
-//       $scope.MasterNotifyMessage = 'This is a simulated login attempt. Adekunle, please initiate the sequelize connection';
-//       $scope.LoginLoader = false;
-//     },4000);
-//   };
-//   //End login simulation
+  // simulate login attempt
+  $scope.simulateLogin = function () {
+    $scope.LoginLoader = true;
+    $('.master-notification').removeClass('invisible');
+    $timeout(() => {
+      $scope.MasterNotifyMessage = 'This is a simulated login attempt. Adekunle, please initiate the sequelize connection';
+      $scope.LoginLoader = false;
+    }, 4000);
+  };
+  // End login simulation
 
-//   //simulate like attempt
-//   $scope.LikeRecipe = function(initial_value,loader)
-//   {
-//     loader.removeClass('invisible');
-//     $timeout(function(){
-//       var tt = parseInt(initial_value.html());
-//       initial_value.html(tt+1);
-//       loader.addClass('invisible');
-//     },1000);
-//   };
-//   //simulate dislike attempt
-//   $scope.DisLikeRecipe = function(initial_value,loader)
-//   {
-//     loader.removeClass('invisible');
-//     $timeout(function(){
-//       var tt = parseInt(initial_value.html());
-//       initial_value.html(tt+1);
-//       loader.addClass('invisible');
-//     },1000);
-//   };
-//   $scope.LoveRecipe = function(initial_value,loader)
-//   {
-//     loader.removeClass('invisible');
-//     $timeout(function(){
-//       var tt = parseInt(initial_value.html());
-//       initial_value.html(tt+1);
-//       loader.addClass('invisible');
-//     },1000);
-//   };
-//   //add ingredient to table
-//   $scope.AddIngredient = function(){
-//     var item_dic = { 'item': $scope.Item,'quantity':$scope.Quantity };
-//     $scope.Ingredients.push(item_dic);
-//   };
+  // simulate like attempt
+  $scope.LikeRecipe = function (initial_value, loader) {
+    loader.removeClass('invisible');
+    $timeout(() => {
+      var tt = parseInt(initial_value.html());
+      initial_value.html(tt+1);
+      loader.addClass('invisible');
+    }, 1000);
+  };
+  // simulate dislike attempt
+  $scope.DisLikeRecipe = function (initial_value, loader) {
+    loader.removeClass('invisible');
+    $timeout(() => {
+      var tt = parseInt(initial_value.html());
+      initial_value.html(tt+1);
+      loader.addClass('invisible');
+    }, 1000);
+  };
+  $scope.LoveRecipe = function (initial_value, loader) {
+    loader.removeClass('invisible');
+    $timeout(() => {
+      var tt = parseInt(initial_value.html());
+      initial_value.html(tt+1);
+      loader.addClass('invisible');
+    }, 1000);
+  };
+  // add ingredient to table
+  $scope.AddIngredient = function () {
+    let item_dic = { item: $scope.Item, quantity: $scope.Quantity };
+    $scope.Ingredients.push(item_dic);
+  };
 
-//   //remove ingredient from table
-//   $scope.RemoveIngredient = function(index){
-//     $scope.Ingredients.splice(index,1);
-//   };
+  // remove ingredient from table
+  $scope.RemoveIngredient = function (index) {
+    $scope.Ingredients.splice(index, 1);
+  };
 
-//   //remove posted recipe
-//   $scope.DeletePostedRecipe = function(index){
-//     $scope.TotalRecipes.splice(index,1);
-//   };
-
-// });
+  // remove posted recipe
+  $scope.DeletePostedRecipe = function (index) {
+    $scope.TotalRecipes.splice(index, 1);
+  };
+});
 
 // next element
 function nextInDOM(_subject, _selector) {
@@ -126,7 +131,6 @@ function nextInDOM(_subject, _selector) {
   }
   return null;
 }
-
 function getNext(_subject) {
   if (_subject.next().length > 0) return _subject.next();
   return getNext(_subject.parent());
@@ -143,7 +147,6 @@ function prevInDOM(_subject, _selector) {
   }
   return null;
 }
-
 function getPrev(_subject) {
   if (_subject.prev().length > 0) return _subject.prev();
   return getPrev(_subject.parent());

@@ -33,10 +33,21 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+    }).then(() => {
+      queryInterface.addConstraint('user_profiles', ['userId'], {
+        type: 'foreign key',
+        name: 'user_fkey_constraint_name',
+        references: {
+          table: 'users',
+          field: 'id'
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
+      });
     });
   },
   down: queryInterface =>
-    queryInterface.dropTable('users_profile', {
+    queryInterface.dropTable('user_profiles', {
       force: true,
       cascade: false
     }),

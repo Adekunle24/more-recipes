@@ -4,14 +4,15 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Home from './components/Home';
 import {Provider} from 'react-redux';
 import Store from './store/index';
-import AuthHome from './components/Auth/index';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 
 render(
     <Provider store={Store}>
     <Router>
     <div>
-    <Route exact path="/" component={Home} />
-    <Route path="/home" component={AuthHome} />
+    <PublicRoute/>
+    <PrivateRoute/>
     </div>
     </Router>
     </Provider>

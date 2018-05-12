@@ -97,7 +97,8 @@ const signUp = (req, res) => {
         res.json({
           status: 'success',
           data: {
-            token: newToken
+            token: newToken,
+            user: output,
           },
           message: `Your account has been created successfully Username: ${output.username} Email: ${output.email}`
         });

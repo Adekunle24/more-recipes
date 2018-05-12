@@ -39,10 +39,14 @@ class Notifier extends React.Component{
         }));
     }
     render(){
+        if(!this.props.show){
+            return null;
+        }
         if(!this.state.show){
             return null;
         }
         return (
+                
                 <section className=" master-notification margin-bottom-10"  id="subscribe">
                     <div className="container">
                         <div className="row">
@@ -52,12 +56,13 @@ class Notifier extends React.Component{
                             </div>
                         </div>
                     </div>
-                </section>        
+                </section>      
         );
     }
 }
 Notifier.propTypes = {
     message:PropTypes.string,
     articles:PropTypes.array,
+    show : PropTypes.bool.isRequired,
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Notifier); 

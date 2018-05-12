@@ -1,0 +1,16 @@
+
+<svg width="300" height="150">
+<circle id="c" cx="150" cy="75" r="10" />
+</svg>
+let c = document.getElementById('c');
+
+let currentAnimationTime = 0;
+const centreY = 75;
+
+animate();
+function animate() {
+  c.setAttribute('cy', centreY + (Math.sin(currentAnimationTime)));
+  
+  currentAnimationTime += 0.15;
+  requestAnimationFrame(animate);
+}
