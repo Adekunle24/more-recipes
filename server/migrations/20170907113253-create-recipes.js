@@ -1,4 +1,3 @@
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     queryInterface.createTable('recipes', {
@@ -40,7 +39,8 @@ module.exports = {
     });
   },
   down: queryInterface =>
-    queryInterface.dropTable('recipes',{
-        force: true,
-        cascade: false}),
+    queryInterface.dropTable('recipes', {
+      force: true,
+      cascade: false
+    }),
 };

@@ -32,12 +32,12 @@ class MiddleWares {
           next();
         });
       } else {
+        console.log('verify token');
         // if there is no token
         // return an error
         return res.status(403).send({
           status: 'fail',
           tokenVerification: false,
-          extra: JSON.stringify(req),
           message: 'Signin on /api/signin to generate token for authentication. Add it to headers e.g x-access-token = token',
         });
       }

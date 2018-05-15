@@ -646,5 +646,8 @@ padding-left: 1px;
     opacity: 1;
     transition: opacity .5s ease-in;
   }
-  
-  
+.fileinput-preview.thumbnail {
+    width: 200px;
+    height: 150px;
+    border: 1px solid antiquewhite
+}

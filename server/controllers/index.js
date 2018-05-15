@@ -6,6 +6,7 @@ import favouriteRecipeController from './favouriteRecipe';
 import votesController from './votes';
 import socialValueController from './socialValues';
 import usersProfileController from './usersProfile';
+import uploadController from './uploads';
 
 const controllers = {
   usersController,
@@ -14,6 +15,7 @@ const controllers = {
   favouriteRecipeController,
   votesController,
   socialValueController,
-  usersProfileController
+  usersProfileController,
+  uploadController
 };
 export default controllers;

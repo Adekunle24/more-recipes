@@ -3,26 +3,20 @@ import crypto from 'bcrypt-nodejs';
 import controllers from '../controllers';
 import Middleware from '../middleware';
 import { userProfile } from '../models';
+import uuidv1 from 'uuid/v1';
 
 const routes = express.Router();
 
 const middleware = new Middleware();
-routes.post('/api/v1/test', (req, res) => {
-  userProfile.create({
-    userId: 1,
-    firstName: req.body.firstname,
-    lastName: req.body.lastname,
-  }).then((profile) => {
-    res.json({
-      status: 'success',
-      data: profile
-    });
-  }).catch((error) => {
-    middleware.parseSequelizeError(res, error);
+routes.get('/test', (req, res) => {
+  res.json({
+    message: 'hello',
+    status: 'success',
+    uuid: uuidv1()
   });
 });
 
-routes.post('/api/v1/encrypt', (req, res) => {
+routes.post('/encrypt', (req, res) => {
   if (req.body.key) {
     const passwordHash = crypto.hashSync(req.body.key);
     res.send(passwordHash);
@@ -35,11 +29,11 @@ routes.post('/api/v1/encrypt', (req, res) => {
 });
 
 // api-users-signup route
-routes.post('/api/v1/users/signup', controllers.usersController.signUp);
+routes.post('/users/signup', controllers.usersController.signUp);
 
 // api-users-signin route
-routes.post('/api/v1/users/signin', controllers.usersController.signIn);
+routes.post('/users/signin', controllers.usersController.signIn);
 
 // api generates test token
-routes.post('/api/v1/token', new Middleware().encrypt);
+routes.post('/token', new Middleware().encrypt);
 export default routes;

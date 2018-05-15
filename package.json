@@ -20,9 +20,11 @@
     "chai": "^4.1.1",
     "chai-http": "^3.0.0",
     "dotenv": "^4.0.0",
+    "dropzone": "^5.4.0",
     "eslint-plugin-react": "^7.3.0",
     "express": "^4.15.4",
     "express3-handlebars": "^0.5.2",
+    "formidable": "^1.2.1",
     "heroku-cli": "^6.14.20",
     "istanbul": "^0.4.5",
     "jquery": "^3.3.1",
@@ -37,6 +39,7 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-content-loader": "^3.1.1",
     "react-dom": "^16.3.2",
+    "react-dropzone-component": "^3.2.0",
     "react-router-dom": "^4.2.2",
     "react-spinkit": "^3.0.0",
     "react-toastify": "^4.0.1",
@@ -47,7 +50,8 @@
     "sequelize-cli": "^2.8.0",
     "serve-favicon": "^2.4.3",
     "supertest": "^3.0.0",
-    "toastr": "^2.1.2"
+    "toastr": "^2.1.2",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "babel-loader": "^7.1.4",

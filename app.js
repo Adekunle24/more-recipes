@@ -6,6 +6,7 @@ import env from 'dotenv';
 import logger from 'morgan';
 import routes from './server/routes';
 import openRoutes from './server/routes/open';
+import fs from 'fs';
 
 env.config();
 const app = express();
@@ -25,14 +26,12 @@ if (process.env.NODE_ENV !== 'test') {
 }
 app.use(express.static(`${__dirname}/public`));
 
+app.use('/api/v1', openRoutes);
+app.use('/api/v1', routes);
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
-
-app.use('/', openRoutes);
-app.use('/', routes);
-
 
 // path to resources
 app.get(['*.png', '*.jpg', '*.css', '*.js', '*.map'], (req, res) => {

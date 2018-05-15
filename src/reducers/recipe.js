@@ -1,9 +1,11 @@
 import {
-  ADD_RECIPE
+  ADD_RECIPE,
+  GET_USER_RECIPE_POSTERS
 } from '../constants/action-types';
 
 const initialState = {
   recipes: [],
+  myRecipePosters: [],
 };
 
 const recipeReducer = (state = initialState, action) => {
@@ -12,7 +14,10 @@ const recipeReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         recipes: [...state.recipes, action.payload.data]
       });
-
+    case GET_USER_RECIPE_POSTERS:
+      return Object.assign({}, state, {
+        myRecipePosters: [...state.myRecipePosters, ...action.payload]
+      });
     default:
       return state;
   }
