@@ -6,4 +6,5 @@ export const addUser = `${apiVersion}users/signup`;
 export const loginUser = `${apiVersion}users/signin`;
 export const testApi = 'api/v1/test';
 export const getRecipePostersApi = `${apiVersion}upload/posters`;
+export const addRecipeApi = `${apiVersion}recipes`;
 export default rootUrl;

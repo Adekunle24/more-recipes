@@ -5,16 +5,28 @@ import * as Dropzone from 'dropzone';
 import { displayAppNotification } from '../../actions';
 import CubePortfolio from './../CubePortfolio/index';
 import Modal from './../Modal/index';
+import axios from 'axios';
+import * as NProgress from 'nprogress';
+import { resetNoMoreRecipeOnAddRecipe,setSelectedPoster } from './../../actions/recipe';
+import showSwalNotification,{ showSwalCallbackNotification } from '../../local/swal';
+import { isNull } from 'util';
+import { validateAddRecipe } from './../../local/validators';
+import { addRecipeApi } from '../../api';
+
 
 function mapStateToProps(state) {
     return {
-        userToken: state.userReducer.userToken
+        userToken: state.userReducer.userToken,
+        selectedPoster: state.recipeReducer.selectedPoster
     };
 }
 function mapDispatchToProps(dispatch){
     return {
-        displayAppNotification: data=>dispatch(displayAppNotification(data))
-    }
+        displayAppNotification: data=>dispatch(displayAppNotification(data)),
+        resetNoMoreRecipeOnAddRecipe: data => dispatch(resetNoMoreRecipeOnAddRecipe(data)),
+        setSelectedPoster: data => dispatch(setSelectedPoster(data)),
+        
+    };
 }
 class Content extends Component {
     
@@ -23,7 +35,16 @@ class Content extends Component {
       this.state ={
         uploadedPosters: [],
         showCubePortfolio: true,
+        ingredients: [],
+        recipeTitle:'',
+        ingredientQuantity:'1/2 cup',
+        ingredientItem:'',
+        recipeProcedures: '',
       };
+      this.addIngredient = this.addIngredient.bind(this);
+      this.onChangeHandler = this.onChangeHandler.bind(this);
+      this.removeIngredient = this.removeIngredient.bind(this);
+      this.postRecipe = this.postRecipe.bind(this);
   }
   componentDidMount() {
       const self = this;
@@ -49,14 +70,83 @@ class Content extends Component {
             self.setState((prevState)=>{
                 uploadedPosters: [...prevState.uploadedPosters,response.media]
             });
+            self.props.resetNoMoreRecipeOnAddRecipe(false);
         });
       },
     headers:{
     'x-access-token': self.props.userToken
     }
   };
+   $("#addIngredientForm").validate({
+    submitHandler:function(form){
+        self.addIngredient();
+    }
+   });
   }
-  
+  addIngredient(){
+    let newIngredient = {item:this.state.ingredientItem,quantity:this.state.ingredientQuantity};
+    this.setState((prevState)=>({
+        ingredients: [...prevState.ingredients,newIngredient],
+        ingredientItem:'',
+    }));
+  }
+  removeIngredient(index){
+    let tempArray = [...this.state.ingredients];
+    tempArray.splice(index,1);
+    this.setState((prevState)=>({
+        ingredients: tempArray
+    }));
+  }
+  postRecipe(){
+    const recipeTitle = this.state.recipeTitle;
+    const ingredients = this.state.ingredients;
+    const poster = this.props.selectedPoster;
+    const procedures = this.state.recipeProcedures;
+    if(validateAddRecipe(recipeTitle,ingredients,poster,procedures)){
+       this.submitRecipe();
+    }
+  }
+  submitRecipe(){
+      const self = this;
+    NProgress.start();
+    axios.defaults.headers['x-access-token'] = this.props.userToken;
+    axios.post(addRecipeApi,{
+        title: this.state.recipeTitle,
+        procedures: this.state.recipeProcedures,
+        ingredients: JSON.stringify(self.state.ingredients),
+        poster: this.props.selectedPoster.id
+    }).then((response)=>{
+        NProgress.done();
+        if(response.data.status == 'success'){
+            showSwalNotification('success','Add Recipe',response.data.message);
+        }
+        else{
+            showSwalNotification('error','Add Recipe',response.data.message);
+        }
+        this.resetState();
+    }).catch((error)=>{
+        NProgress.done();
+        this.props.displayAppNotification({
+            message: 'Oops! Recipe could not be added',
+            type: 'error',
+            updateState: {}
+          });
+    });
+  }
+  resetState(){
+      this.setState({
+        title: '',
+        recipeProcedures: '',
+        ingredients: [],
+      });
+      this.props.setSelectedPoster(null);
+  }
+  onChangeHandler(e){
+      const target = e.target;
+      this.setState({
+        [target.name]: target.value
+      });
+  }
     render() {
         return (
             <div>
@@ -112,7 +202,7 @@ class Content extends Component {
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <h4 className="black text-center">Recipe Title</h4>
-                                                <input type="text" placeholder="Recipe Title" className="form-control" />
+                                                <input type="text" value={this.state.recipeTitle} name="recipeTitle" onChange={this.onChangeHandler} placeholder="Recipe Title" className="form-control" />
                                                 <h4 className="black text-center">Ingredients List</h4>
                                                 <table className="table table-bordered table-responsive table-striped">
                                                     <thead>
@@ -124,12 +214,14 @@ class Content extends Component {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {/* <tr data-ng-repeat="x in Ingredients">
-        <td>{{$index+1}}</td>
-          <td>{{x.item}}</td>
-        <td>{{x.quantity}}</td>
-        <td><a className="" data-ng-click="RemoveIngredient($index)" style="padding-left:50%;padding-right:50%;" ><i className="fa fa-trash"></i></a></td>
-    </tr> */}
+                                                    {this.state.ingredients.map((item,index)=>
+                                                         <tr key={index}>
+        <td>{index+1}</td>
+          <td>{item.item}</td>
+        <td>{item.quantity}</td>
+        <td><a className="" onClick={this.removeIngredient.bind(this,index)} style={{paddingLeft:'50%',paddingRight:'50%'}} ><i className="fa fa-trash"></i></a></td>
+    </tr>
+                                                    )}
                                                         <tr>
                                                             <td></td>
                                                             <td></td>
@@ -137,8 +229,9 @@ class Content extends Component {
                                                         </tr>
                                                     </tbody>
                                                 </table>
+                                                <form id="addIngredientForm">
                                                 <h4 className="black">Quantity</h4>
-                                                <select className="form-control">
+                                                <select required name="ingredientQuantity" value={this.state.ingredientQuantity} onChange={this.onChangeHandler} className="form-control">
                                                     <option>None</option>
                                                     <option>1 quantity</option>
                                                     <option>2 quantities</option>
@@ -149,30 +242,30 @@ class Content extends Component {
                                                     <option>2 litres</option>
                                                     <option>2 cups</option>
                                                     <option>little</option>
-                                                    <option>1/2 cup</option>
+                                                    <option value="1/2 cup">1/2 cup</option>
                                                     <option>1/2 litre</option>
                                                 </select>
                                                 <h4 className="black">Item</h4>
                                                 <div className="margin-top-10">
-                                                    <input className="form-control input-search inline" placeholder="Item" type="text" />
+                                                    <input required className="form-control" name="ingredientItem" value={this.state.ingredientItem} onChange={this.onChangeHandler} placeholder="Item" type="text" />
                                                 </div>
-                                                <a className="btn btn-danger white margin-top-10">Add Ingredient</a>
-
+                                                <input className="btn btn-danger white margin-top-10" type="submit" value="Add Ingredient" />
+                                                <div className="margin-top-10">
+                                               {this.props.selectedPoster!=null ? <img src={this.props.selectedPoster.source} width="200" height="100" /> : null} 
+                                                </div>
+                                                </form>
                                             </div>
                                             <div className="col-md-6">
                                                 {/* Dropzone JS */}
                                                 <form action="/api/v1/upload/recipe-photo"
                                                     className="dropzone"
                                                     id="my-awesome-dropzone"></form>
-                                                <a data-toggle="modal" data-target="#cubePortfolioOnAddRecipe" className="btn btn-info white margin-top-10" >Select Poster</a>
-                                                <Modal id={"cubePortfolioOnAddRecipe"}>
-                                                <CubePortfolio show={this.state.showCubePortfolio} />
-                                                </Modal>
+                                                <CubePortfolio modalId={"cubePortfolioOnAddRecipe"} show={this.state.showCubePortfolio} />
                                                 <div>
                                                     <div className="text-center">     <h4 className="black">Procedures:</h4></div>
-                                                    <textarea className="form-control" rows={10} ></textarea>
+                                                    <textarea name="recipeProcedures" value={this.state.recipeProcedures} onChange={this.onChangeHandler} className="form-control" rows={10} ></textarea>
                                                 </div>
-                                                <a className="btn btn-dark white margin-bottom-10 margin-top-10" >Post Recipe</a>
+                                                <a onClick={this.postRecipe} className="btn btn-dark white margin-bottom-10 margin-top-10" >Post Recipe</a>
                                             </div>
                                         </div>
                                     </div>

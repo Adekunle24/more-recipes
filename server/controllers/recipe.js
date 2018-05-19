@@ -29,7 +29,7 @@ const getTotalRecipes = (req, res) => {
 };
 
 const addRecipe = (req, res) => {
-  if (req.body.title && req.body.procedures && req.body.ingredients && req.decoded) {
+  if (req.body.title && req.body.procedures && req.body.ingredients && req.decoded && req.body.poster) {
     if (!middleware.validateAddRecipePropertiesLength(req)) {
       res.json({
         status: 'fail',
@@ -46,10 +46,12 @@ const addRecipe = (req, res) => {
       return;
     }
     recipeModel.create({
+      mediaId: req.body.poster,
       title: req.body.title,
       userId: req.decoded.id,
       procedures: req.body.procedures,
-      ingredients: req.body.ingredients
+      ingredients: req.body.ingredients,
+
     }).then((result) => {
       socialValuesModel.create({
         recipeId: result.id,
@@ -69,7 +71,7 @@ const addRecipe = (req, res) => {
       status: 'fail',
       data: null,
       validations: false,
-      message: 'Please provide title,procedures, and ingredients'
+      message: 'Please provide title, procedures, poster and ingredients'
     });
   }
 };

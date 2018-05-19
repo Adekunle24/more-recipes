@@ -29,11 +29,11 @@ const initialState = {
     phoneNumberVerified: false,
     accessFailedCount: 0,
     username: 'Kimberly',
-    createdAt: '2018-05-11T11:41:45.300Z',
-    updatedAt: '2018-05-11T11:41:45.300Z',
+    createdAt: '2018-05-18T20:24:39.007Z',
+    updatedAt: '2018-05-18T20:24:39.007Z',
     id: 1
   },
-  userToken: 'eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImtpbWJlcmx5QGdtYWlsLmNvbSIsImVtYWlsQ29uZmlybWVkIjpmYWxzZSwicGFzc3dvcmQiOm51bGwsInBob25lTnVtYmVyIjoiIiwicGhvbmVOdW1iZXJWZXJpZmllZCI6ZmFsc2UsImFjY2Vzc0ZhaWxlZENvdW50IjowLCJ1c2VybmFtZSI6IktpbWJlcmx5IiwiY3JlYXRlZEF0IjoiMjAxOC0wNS0xMVQxMTo0MTo0NS4zMDBaIiwidXBkYXRlZEF0IjoiMjAxOC0wNS0xMVQxMTo0MTo0NS4zMDBaIiwiaWQiOjF9.GX5aeGZ7NNXzm-petgp8IUw_KfVjcBAtAmcu___jhSg',
+  userToken: 'eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImtpbWJlcmx5QGdtYWlsLmNvbSIsImVtYWlsQ29uZmlybWVkIjpmYWxzZSwicGFzc3dvcmQiOm51bGwsInBob25lTnVtYmVyIjoiIiwicGhvbmVOdW1iZXJWZXJpZmllZCI6ZmFsc2UsImFjY2Vzc0ZhaWxlZENvdW50IjowLCJ1c2VybmFtZSI6IktpbWJlcmx5IiwiY3JlYXRlZEF0IjoiMjAxOC0wNS0xOFQyMDoyNDozOS4wMDdaIiwidXBkYXRlZEF0IjoiMjAxOC0wNS0xOFQyMDoyNDozOS4wMDdaIiwiaWQiOjF9.sFTxBnlRTOde_BTnEKGqIr7z7VwD7Vjpk3gK1Q5GSIg',
 };
 
 const rootReducer = (state = initialState, action) => {

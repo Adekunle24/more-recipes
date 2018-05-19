@@ -25,18 +25,27 @@ class Toast extends Component {
     }
     
     showAppNotification(){
+        const self = this;
         switch (this.props.appNotificationType) {
             case 'success':
-                toast.success(this.props.appNotificationMessage);
+                toast.success(this.props.appNotificationMessage,{onOpen:(obj)=>{
+                    self.props.toggleAppNotification();
+                }});
                 break;
             case 'info':
-                toast.info(this.props.appNotificationMessage);
+                toast.info(this.props.appNotificationMessage,{onOpen:(obj)=>{
+                    self.props.toggleAppNotification();
+                }});
                 break;
             case 'error':
-                toast.error(this.props.appNotificationMessage);
+                toast.error(this.props.appNotificationMessage,{onOpen:(obj)=>{
+                    self.props.toggleAppNotification();
+                }});
                 break;
             default:
-                toast(this.props.appNotificationMessage);
+                toast(this.props.appNotificationMessage,{onOpen:(obj)=>{
+                    self.props.toggleAppNotification();
+                }});
                 break;
         }
     }

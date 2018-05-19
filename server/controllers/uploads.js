@@ -22,6 +22,7 @@ const uploadPoster = (req, res) => {
     const ext = path.extname(originalFilename);
     const newpath = path.join(directory, `${uuid + ext}`);
     poster = `${uuid + ext}`;
+    const fileSize = files.poster.size;
     fs.rename(oldpath, newpath, (err) => {
       if (err) {
         throw err;
@@ -30,6 +31,7 @@ const uploadPoster = (req, res) => {
         userId: req.decoded.id,
         source: `uploads/recipes/${poster}`,
         filename: originalFilename,
+        filesize: fileSize
       }).then((output) => {
         res.json({
           status: 'success',
@@ -42,10 +44,19 @@ const uploadPoster = (req, res) => {
   });
 };
 const getAllMedia = (req, res) => {
+  let defaultOffset = 0;
+  if (req.query.offset) {
+    defaultOffset = req.query.offset;
+  }
   media.findAll({
     where: {
-      userId: req.decoded.id
-    }
+      userId: req.decoded.id,
+    },
+    limit: 8,
+    offset: defaultOffset,
+    order: [
+      ['createdAt', 'ASC'],
+    ]
   }).then((response) => {
     res.json({
       status: 'success',

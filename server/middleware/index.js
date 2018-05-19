@@ -137,7 +137,7 @@ class MiddleWares {
    * @memberof MiddleWares
    */
   validateAddRecipePropertiesLength(req) {
-    if (req.body.title.length < 10 || req.body.ingredients.length < 10 || req.body.procedures.length < 10) {
+    if (req.body.title.length < 4 || req.body.ingredients.length < 10 || req.body.procedures.length < 10) {
       return false;
     }
     return this;

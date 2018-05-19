@@ -4,9 +4,8 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import env from 'dotenv';
 import logger from 'morgan';
-import routes from './server/routes';
+import routes from './server/routes/index';
 import openRoutes from './server/routes/open';
-import fs from 'fs';
 
 env.config();
 const app = express();

@@ -16,6 +16,15 @@ module.exports = {
           key: 'id',
         }
       },
+      mediaId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        onDelete: 'RESTRICT',
+        references: {
+          model: 'media',
+          key: 'id',
+        }
+      },
       title: {
         type: Sequelize.STRING,
         allowNull: false
