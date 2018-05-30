@@ -1,30 +1,23 @@
 
-const User = (sequelize, DataTypes) => {
-  const user = sequelize.define('users', {
-    email: { type: DataTypes.STRING, allowNull: false, validate: { isEmail: true } },
-    emailConfirmed: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
-    password: { type: DataTypes.STRING, allowNull: false, validate: { len: [6, 100] } },
-    phoneNumber: { type: DataTypes.STRING, allowNull: true },
-    phoneNumberVerified: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
-    accessFailedCount: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
-    username: { type: DataTypes.STRING, allowNull: false, validate: { len: [5, 50] } },
-    createdAt: { type: DataTypes.DATE, allowNull: false },
-    updatedAt: { type: DataTypes.DATE, allowNull: false },
+import Sequelize from 'sequelize';
+
+const User = (sequelize) => {
+  const model = sequelize.define('users', {
+    email: { type: Sequelize.STRING, allowNull: false, validate: { isEmail: true } },
+    emailConfirmed: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: 0 },
+    password: { type: Sequelize.STRING, allowNull: false, validate: { len: [6, 100] } },
+    phoneNumber: { type: Sequelize.STRING, allowNull: true },
+    phoneNumberVerified: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: 0 },
+    accessFailedCount: { type: Sequelize.INTEGER, allowNull: false, defaultValue: 0 },
+    username: { type: Sequelize.STRING, allowNull: false, validate: { len: [5, 50] } },
+    createdAt: { type: Sequelize.DATE, allowNull: false },
+    updatedAt: { type: Sequelize.DATE, allowNull: false },
     id: {
-      type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true
+      type: Sequelize.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true
     }
   });
-  user.associate = (models) => {
-    // user.hasOne(models.users_profile, {
-    //   foreignKey: 'id'
-    // });
-    user.hasMany(models.recipes, {
-      foreignKey: 'id'
-    });
-    user.hasMany(models.votes, {
-      foreignKey: 'id'
-    });
-  };
-  return user;
+
+  return model;
 };
+
 export default User;

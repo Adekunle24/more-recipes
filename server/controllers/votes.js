@@ -1,9 +1,8 @@
 // import all the models
-import allModels from '../models';
+import allModels, { VoteModel } from '../models';
 import Middleware from '../middleware';
 
 const middleware = new Middleware();
-const voteModel = allModels.votes;
 /**
  * Performs an upvoting action on a recipe
  *
@@ -18,7 +17,7 @@ const upVoteRecipe = (req, res) => {
         status: 'fail', validations: false, success: false, message: 'Recipe Id must be a number'
       });
     }
-    voteModel.find({
+    VoteModel.find({
       where: {
         userId: req.decoded.id,
         recipeId: req.params.recipeId
@@ -27,7 +26,7 @@ const upVoteRecipe = (req, res) => {
       // if this is the first upvote, save to db
       if (!result) {
         // add a row to votes table
-        voteModel.create({
+        VoteModel.create({
           recipeId: req.params.recipeId,
           userId: req.decoded.id
         }).then((output) => {
@@ -109,7 +108,7 @@ const downVoteRecipe = (req, res) => {
         status: 'fail', validations: false, success: false, message: 'Recipe Id must be a number'
       });
     }
-    voteModel.find({
+    VoteModel.find({
       where: {
         userId: req.decoded.id,
         recipeId: req.params.recipeId

@@ -1,15 +1,11 @@
 import crypto from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
-import allModels, { userProfile } from '../models';
 import MiddleWare from '../middleware';
+import { UserModel, RecipeModel } from './../models/index';
 
 env.config();
-// assign all models to a constant
-const userModel = allModels.users;
-const reviewModel = allModels.reviews;
-const votesModel = allModels.votes;
-const recipeModel = allModels.recipes;
+
 
 const middleware = new MiddleWare();
 
@@ -31,12 +27,12 @@ const getToken = (req, res) => {
  * @returns {null} returns null
  */
 const getTotalUsers = (req, res) => {
-  userModel.findAll({
+  UserModel.findAll({
     attributes: {
       exclude: ['password', 'createdAt', 'updatedAt']
     },
     include: [{
-      model: recipeModel,
+      model: RecipeModel,
       as: 'recipes',
       attributes: {
         exclude: ['createdAt', 'updatedAt']
@@ -122,7 +118,7 @@ const signUp = (req, res) => {
  */
 const removeUser = (req, res) => {
   if (req.body.username) {
-    userModel.findOne({
+    UserModel.findOne({
       where: {
         username: req.body.username
       }
@@ -180,7 +176,7 @@ const removeUser = (req, res) => {
 const signIn = (req, res) => {
   if (req.body.username && req.body.password) {
     const passwordInput = req.body.password;
-    userModel.findOne({
+    UserModel.findOne({
       where: {
         username: req.body.username
       }

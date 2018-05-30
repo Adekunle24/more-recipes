@@ -44,7 +44,7 @@ class Header extends React.Component{
             <Link className="nav-link" to="/home">Home <span className="sr-only">(current)</span></Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#services">Top Recipes</a>
+              <Link className="nav-link" to="/top-recipes">Top Recipes</Link>
             </li>
              <li className="nav-item">
               <a className="nav-link" href="#services">Latest Recipes</a>

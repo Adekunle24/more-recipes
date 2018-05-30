@@ -1,18 +1,13 @@
+import Sequelize from 'sequelize';
 
-const Reviews = (sequelize, DataTypes) => {
-  const review = sequelize.define('reviews', {
-    recipeId: { type: DataTypes.INTEGER, allowNull: false },
-    userId: { type: DataTypes.INTEGER, allowNull: false },
-    replies: { type: DataTypes.STRING, allowNull: true },
-    review: { type: DataTypes.STRING, allowNull: false },
-    createdAt: { type: DataTypes.DATE, allowNull: false },
-    updatedAt: { type: DataTypes.DATE, allowNull: false }
-  });
-  review.associate = (models) => {
-    review.belongsTo(models.recipes, {
-      foreignKey: 'recipeId'
-    });
-  };
-  return review;
-};
-export default Reviews;
+const Review = sequelize => sequelize.define('reviews', {
+  recipeId: { type: Sequelize.INTEGER, allowNull: false },
+  userId: { type: Sequelize.INTEGER, allowNull: false },
+  replies: { type: Sequelize.STRING, allowNull: true },
+  review: { type: Sequelize.STRING, allowNull: false },
+  createdAt: { type: Sequelize.DATE, allowNull: false },
+  updatedAt: { type: Sequelize.DATE, allowNull: false }
+});
+
+
+export default Review;

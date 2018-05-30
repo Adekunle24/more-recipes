@@ -7,17 +7,22 @@ import CubePortfolio from './../CubePortfolio/index';
 import Modal from './../Modal/index';
 import axios from 'axios';
 import * as NProgress from 'nprogress';
-import { resetNoMoreRecipeOnAddRecipe,setSelectedPoster } from './../../actions/recipe';
+import { resetNoMoreRecipeOnAddRecipe,setSelectedPoster,getMyRecipesThunk, addRecipe } from './../../actions/recipe';
 import showSwalNotification,{ showSwalCallbackNotification } from '../../local/swal';
 import { isNull } from 'util';
 import { validateAddRecipe } from './../../local/validators';
 import { addRecipeApi } from '../../api';
-
+import { Facebook } from 'react-content-loader';
+import moment from 'moment';
+import initPictureHover from './../../static/js/picturehover';
+window.moment = moment;
 
 function mapStateToProps(state) {
     return {
         userToken: state.userReducer.userToken,
-        selectedPoster: state.recipeReducer.selectedPoster
+        selectedPoster: state.recipeReducer.selectedPoster,
+        myRecipes: state.recipeReducer.myRecipes,
+        retrievingMyRecipes: state.recipeReducer.retrievingMyRecipes,
     };
 }
 function mapDispatchToProps(dispatch){
@@ -25,7 +30,8 @@ function mapDispatchToProps(dispatch){
         displayAppNotification: data=>dispatch(displayAppNotification(data)),
         resetNoMoreRecipeOnAddRecipe: data => dispatch(resetNoMoreRecipeOnAddRecipe(data)),
         setSelectedPoster: data => dispatch(setSelectedPoster(data)),
-        
+        getMyRecipesThunk: data => dispatch(getMyRecipesThunk()),
+        addRecipe: data => dispatch(addRecipe(data))
     };
 }
 class Content extends Component {
@@ -82,6 +88,7 @@ class Content extends Component {
         self.addIngredient();
     }
    });
+   this.props.getMyRecipesThunk();
   }
   addIngredient(){
     let newIngredient = {item:this.state.ingredientItem,quantity:this.state.ingredientQuantity};
@@ -123,7 +130,14 @@ class Content extends Component {
         else{
             showSwalNotification('error','Add Recipe',response.data.message);
         }
+        let addedRecipe = [{
+            ...response.data.data.recipe,
+            socialValues: response.data.data.socialValues,
+            media: self.props.selectedPoster
+        }];
+        this.props.addRecipe(addedRecipe);
         this.resetState();
+        initPictureHover();
     }).catch((error)=>{
         NProgress.done();
         this.props.displayAppNotification({
@@ -163,43 +177,45 @@ class Content extends Component {
                             <div className="tab-content">
                                 <div id="my-recipes" className="tab-pane fade show active">
                                     <div className="row">
-                                        {/* <div data-ng-repeat="recipe in TotalRecipes" className="col-md-4 photo-album">
+                                    {
+                                    this.props.retrievingMyRecipes ?
+                                        [1,2,3].map((item) =>
+                                        <div key={item} className="col-md-4">
+                                        <Facebook/>
+                                        </div>
+                                        )
+                                        : null
+                                    }
+                                   
+                                    { this.props.myRecipes.map((recipe,index)=>
+                                     <div key={recipe.id}  className="col-md-4 photo-album">
 	<div className="banner-block">
 	<div data-picturehover>
-<img src="{{recipe.poster}}" title='<a className="" data-toggle="tooltip" title="click to edit recipe" data-placement="bottom"><i className="fa fa-edit fa-2x white"></i></a> '>
+    <img src={recipe.media.source} title={`
+<a class="comment-like social-icons icon-rounded" ><i class="fa fa-comment-o"></i><span class="action-value margin-left-10">${recipe.socialValues.replies} </span></a>
+<a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10">${recipe.socialValues.upvotes} </span></a>
+<a class="comment-like social-icons icon-rounded" ><i class="fa fa-thumbs-down"></i><span class="action-value margin-left-10"> ${recipe.socialValues.downvotes} </span></a>
+    `
+     } />
 </div>
 <div className="content">
-<div><a className="title"><h5>My Recipe Background</h5></a><a className=" margin-left-10 float-left" data-ng-click="DeletePostedRecipe($index)" data-toggle="tooltip"  title="click to delete recipe" data-placement="bottom"><i className="fa fa-trash fa-2x"></i></a></div>
-<span className="sub-title">Added 4 hours ago</span>
-<span className="float-right"><a > <i  className="fa fa-chevron-down accordion-handle"></i></a></span>
-  <div className="margin-top-10 padding-top-10 comment-content collapse" >   <p>I love the recipe. I tried it once and all my kids enjoyed the taste and aroma</p>
-    <span>
-                <a>
-                  <i className="fa fa-spinner fa-spin"></i>
-                </a>
-            </span>
-     <a className="comment-like social-icons icon-rounded" ><i className="fa fa-heart"></i><span className="action-value margin-left-10"> 24 </span></a>
-        <span className="delete-recipe"> Reply </span>
-         <div className="comment-container margin-top-10 hide">
-           <form>
-          <div className="input-group">
-           <input className="form-control" placeholder="comment"/>
-           <span clas="input-group-btn">
-           <a className="btn white btn-warning "><i className="fa fa-send white"></i></a>
-           </span>
-           </div>
-            </form>
-           </div>
-     </div>
+<div>
+<a className="title"><h5>{recipe.title}</h5></a>
+<a className="margin-left-10 float-left" data-toggle="tooltip" title="click to edit recipe" data-placement="bottom"><i className="fa fa-edit"></i></a> 
+<a className="margin-left-10 float-left" data-toggle="tooltip"  title="click to delete recipe" data-placement="bottom">
+<i className="fa fa-trash"></i>
+</a>
+</div>
+<span className="sub-title">{moment(recipe.createdAt).fromNow()}</span>
 </div>
 </div>
-</div> */}
-
+</div> 
+                                    )}
                                     </div>
                                 </div>
                                 <div id="add-recipe" className="tab-pane fade">
                                     <div className="container">
-                                        <div className="row">
+                                        <div className="row ">
                                             <div className="col-md-6">
                                                 <h4 className="black text-center">Recipe Title</h4>
                                                 <input type="text" value={this.state.recipeTitle} name="recipeTitle" onChange={this.onChangeHandler} placeholder="Recipe Title" className="form-control" />

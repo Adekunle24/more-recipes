@@ -1,19 +1,14 @@
 
-const favouriteRecipes = (sequelize, DataTypes) => {
-  const favourites = sequelize.define('favourite_recipes', {
-    recipeId: { type: DataTypes.INTEGER, allowNull: false },
-    userId: { type: DataTypes.INTEGER, allowNull: false },
-    createdAt: { type: DataTypes.DATE, allowNull: false },
-    updatedAt: { type: DataTypes.DATE, allowNull: false }
+import Sequelize from 'sequelize';
+
+
+const FavouriteRecipe = sequelize =>
+  sequelize.define('favourite_recipes', {
+    recipeId: { type: Sequelize.INTEGER, allowNull: false },
+    userId: { type: Sequelize.INTEGER, allowNull: false },
+    createdAt: { type: Sequelize.DATE, allowNull: false },
+    updatedAt: { type: Sequelize.DATE, allowNull: false }
   });
-  favourites.associate = (models) => {
-    favourites.belongsTo(models.recipes, {
-      foreignKey: 'recipeId',
-    });
-    favourites.hasOne(models.users, {
-      foreignKey: 'id'
-    });
-  };
-  return favourites;
-};
-export default favouriteRecipes;
+
+
+export default FavouriteRecipe;

@@ -3,7 +3,7 @@ import formidable from 'formidable';
 import fs from 'fs';
 import path from 'path';
 import uuidv1 from 'uuid/v1';
-import { media } from '../models';
+import { MediaModel } from '../models';
 import MiddleWares from './../middleware/index';
 
 env.config();
@@ -27,7 +27,7 @@ const uploadPoster = (req, res) => {
       if (err) {
         throw err;
       }
-      media.create({
+      MediaModel.create({
         userId: req.decoded.id,
         source: `uploads/recipes/${poster}`,
         filename: originalFilename,
@@ -48,7 +48,7 @@ const getAllMedia = (req, res) => {
   if (req.query.offset) {
     defaultOffset = req.query.offset;
   }
-  media.findAll({
+  MediaModel.findAll({
     where: {
       userId: req.decoded.id,
     },

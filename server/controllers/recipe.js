@@ -1,31 +1,42 @@
 
-import allModels from '../models';
 import allControllers from '../controllers';
 import MiddleWare from '../middleware';
+import { UserModel, RecipeModel, MediaModel, SocialValuesModel } from './../models/index';
 
-const recipeModel = allModels.recipes;
-const userModel = allModels.users;
-const voteModel = allModels.votes;
-const reviewModel = allModels.reviews;
-const socialValuesModel = allModels.social_values;
 const middleware = new MiddleWare();
 
 const getTotalRecipes = (req, res) => {
+  let orderBy = ['createdAt', 'ASC'];
   if (req.query.sort && req.query.order) {
-    allControllers.socialValueController.getValuesInDesc(req, res);
-  } else {
-    recipeModel.findAll({
-      include: [{
-        model: userModel,
-        attributes: ['username', 'email', 'id'],
-        as: 'users',
-      }, {
-        model: socialValuesModel,
-        as: 'socialValues',
+    const orderOptions = ['asc', 'desc', 'ASC', 'DESC'];
+    if (req.query.sort === 'upvotes') {
+      if (orderOptions.includes(req.query.order)) {
+        orderBy = [SocialValuesModel, req.query.sort, req.query.order];
       }
-      ]
-    }).then(value => res.json({ status: 'success', data: value })).catch(error => res.send(error.toString()));
+    }
+    allControllers.socialValueController.getValuesInDesc(req, res);
   }
+  RecipeModel.findAll({
+    include: [{
+      model: UserModel,
+      attributes: ['username', 'email', 'id'],
+      as: 'users',
+    },
+    {
+      model: SocialValuesModel,
+      as: 'socialValues',
+    },
+    {
+      model: MediaModel,
+      as: 'media'
+    }
+    ],
+    limit: 9,
+    offset: req.query.offset,
+    order: [
+      orderBy,
+    ]
+  }).then(value => res.json({ status: 'success', data: value })).catch(error => res.send(error.toString()));
 };
 
 const addRecipe = (req, res) => {
@@ -45,7 +56,7 @@ const addRecipe = (req, res) => {
       });
       return;
     }
-    recipeModel.create({
+    RecipeModel.create({
       mediaId: req.body.poster,
       title: req.body.title,
       userId: req.decoded.id,
@@ -53,7 +64,7 @@ const addRecipe = (req, res) => {
       ingredients: req.body.ingredients,
 
     }).then((result) => {
-      socialValuesModel.create({
+      SocialValuesModel.create({
         recipeId: result.id,
         upvotes: 0,
         downvotes: 0,
@@ -61,7 +72,7 @@ const addRecipe = (req, res) => {
       }).then((social) => {
         res.json({
           status: 'success',
-          data: { recipes: result, socialValues: social },
+          data: { recipe: result, socialValues: social },
           message: 'Recipe added successfully'
         });
       }).catch(error => res.send(error.toString()));
@@ -111,7 +122,7 @@ const modifyRecipe = (req, res) => {
       res.json({ message: 'Recipe id must be a number', validations: false, status: 'fail' });
       return;
     }
-    recipeModel.findById(req.body.recipeId).then((result) => {
+    RecipeModel.findById(req.body.recipeId).then((result) => {
       if (result) {
         // call the method to save new recipe details
         saveModifiedRecipe(req, res, result);
@@ -136,7 +147,7 @@ const deleteRecipe = (req, res) => {
       res.json({ message: 'Recipe id must be a number', validations: false, status: 'fail' });
       return;
     }
-    recipeModel.findById(req.body.recipeId).then((recipe) => {
+    RecipeModel.findById(req.body.recipeId).then((recipe) => {
       if (!recipe) {
         res.json({ message: 'Specified recipe could not be found', status: 'fail' });
       } else {
@@ -161,7 +172,7 @@ const getRecipeWithMostUpVotes = (req, res) => {
  */
 const searchRecipeUsingIngredient = (req, res) => {
   if (req.query.keyword) {
-    recipeModel.findAndCountAll({
+    RecipeModel.findAndCountAll({
       where: {
         $or: [
           {
@@ -182,11 +193,11 @@ const searchRecipeUsingIngredient = (req, res) => {
         ]
       },
       include: [{
-        model: userModel,
+        model: RecipeModel,
         attributes: ['username', 'email', 'id'],
         as: 'users',
       }, {
-        model: socialValuesModel,
+        model: SocialValuesModel,
         as: 'socialValues',
       }
       ]

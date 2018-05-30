@@ -6,6 +6,7 @@ import AuthHome from './../Auth/index';
 import AddRecipe from '../Recipes/add';
 import Footer from './../Footer/index';
 import Header from './../Header/index';
+import TopRecipes from '../TopRecipes';
 
 function mapStateToProps(state) {
     return {
@@ -31,6 +32,7 @@ class PrivateRoute extends Component {
             <div className="container" id="body-container">
             <Route path="/home" component={AuthHome} />
             <Route path="/add-recipe" component={AddRecipe} />
+            <Route path="/top-recipes" component={TopRecipes} />
             </div>
             <Footer></Footer>
             </div>
