@@ -6,17 +6,56 @@ import HomeCarousel from './carousel';
 import HomeForm from './form';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { dummyRecipes } from './../../local/index';
+import { Facebook } from 'react-content-loader';
+import axios from 'axios';
+import { getRecipeApiForAnonymous } from './../../api/index';
 
 
 const mapStateToProps = state =>{
     return{
-        isAuthenticated: state.userReducer.isAuthenticated
+        isAuthenticated: state.userReducer.isAuthenticated,
+        userToken : state.userReducer.userToken,
+    };
+};
+function mapDispatchToProps(dispatch){
+    return {
+        displayAppNotification: data => dispatch(displayAppNotification(data))
     };
 };
 
 class Home extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            isLoadingRecipeCarousel: true,
+            recipesForCarousel: []
+        };
+    }
+    componentDidMount() {
+        axios.defaults.headers['x-access-token'] = this.props.userToken;
+        axios.get(`${getRecipeApiForAnonymous}?sort=random&limit=3`).then((response)=>{
+            if(response.data.data.length>0){
+              this.setState({
+                recipesForCarousel: response.data.data
+              });
+            }
+            else{
+              this.setState({
+                recipesForCarousel: formattedRecipes
+              });
+            }
+            this.setState({
+              isLoadingRecipeCarousel: false
+            });
+             
+        }).catch((error)=>{
+            this.props.displayAppNotification({
+                message: 'Oops! Recipes could not be retrieved',
+                type: 'error',
+                updateState: {}
+              });
+        });
     }
     
     render(){
@@ -32,7 +71,11 @@ class Home extends React.Component{
             <Notifier show={false}> </Notifier>
             <div className="row">
             <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
-            <HomeCarousel>
+            {
+                this.state.isLoadingRecipeCarousel ?
+                <Facebook />
+                :
+            <HomeCarousel items={this.state.recipesForCarousel}>
             <h1 className="intro-title">Welcome to the Biggest Recipe Repository in the World!</h1>
 	        <p className="">
 		    We are the best and biggest recipe library with over 5 billion active users and over 10 million recipes all around the world.
@@ -44,6 +87,7 @@ class Home extends React.Component{
 	        <a id="login-2" className="btn btn-lg btn-pill-right btn-warning white margin-top-20"> Sign In </a>
 	        </div>
             </HomeCarousel>
+            }
             </div>
             <div className="col-xl-5 col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <HomeForm></HomeForm>
@@ -55,4 +99,4 @@ class Home extends React.Component{
         );
     }
 }
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps,mapDispatchToProps)(Home);

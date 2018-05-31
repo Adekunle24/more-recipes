@@ -15,7 +15,6 @@ import { addRecipeApi } from '../../api';
 import { Facebook } from 'react-content-loader';
 import moment from 'moment';
 import initPictureHover from './../../static/js/picturehover';
-window.moment = moment;
 
 function mapStateToProps(state) {
     return {
@@ -132,7 +131,7 @@ class Content extends Component {
         }
         let addedRecipe = [{
             ...response.data.data.recipe,
-            socialValues: response.data.data.socialValues,
+            social_values: response.data.data.social_values,
             media: self.props.selectedPoster
         }];
         this.props.addRecipe(addedRecipe);
@@ -192,9 +191,9 @@ class Content extends Component {
 	<div className="banner-block">
 	<div data-picturehover>
     <img src={recipe.media.source} title={`
-<a class="comment-like social-icons icon-rounded" ><i class="fa fa-comment-o"></i><span class="action-value margin-left-10">${recipe.socialValues.replies} </span></a>
-<a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10">${recipe.socialValues.upvotes} </span></a>
-<a class="comment-like social-icons icon-rounded" ><i class="fa fa-thumbs-down"></i><span class="action-value margin-left-10"> ${recipe.socialValues.downvotes} </span></a>
+<a class="comment-like social-icons icon-rounded" ><i class="fa fa-comment-o"></i><span class="action-value margin-left-10">${recipe.social_values.replies} </span></a>
+<a class="comment-like social-icons icon-rounded" ><i class="fa fa-heart"></i><span class="action-value margin-left-10">${recipe.social_values.upvotes} </span></a>
+<a class="comment-like social-icons icon-rounded" ><i class="fa fa-thumbs-down"></i><span class="action-value margin-left-10"> ${recipe.social_values.downvotes} </span></a>
     `
      } />
 </div>

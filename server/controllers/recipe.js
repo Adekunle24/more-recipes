@@ -1,37 +1,48 @@
 
-import allControllers from '../controllers';
 import MiddleWare from '../middleware';
 import { UserModel, RecipeModel, MediaModel, SocialValuesModel } from './../models/index';
+import Sequelize from '../models';
 
 const middleware = new MiddleWare();
 
 const getTotalRecipes = (req, res) => {
   let orderBy = ['createdAt', 'ASC'];
-  if (req.query.sort && req.query.order) {
-    const orderOptions = ['asc', 'desc', 'ASC', 'DESC'];
-    if (req.query.sort === 'upvotes') {
-      if (orderOptions.includes(req.query.order)) {
-        orderBy = [SocialValuesModel, req.query.sort, req.query.order];
-      }
+  const orderOptions = ['asc', 'desc', 'ASC', 'DESC'];
+  let objectsLimit = 9;
+  if (req.query.sort) {
+    const { sort } = req.query;
+    switch (sort) {
+      case 'upvotes':
+        if (req.query.order && orderOptions.includes(req.query.order)) {
+          orderBy = [SocialValuesModel, req.query.sort, req.query.order];
+        }
+        break;
+      case 'random':
+        orderBy = Sequelize.random();
+        break;
+      default:
+        break;
     }
-    allControllers.socialValueController.getValuesInDesc(req, res);
+  }
+  if (req.query.limit) {
+    objectsLimit = req.query.limit;
   }
   RecipeModel.findAll({
     include: [{
       model: UserModel,
       attributes: ['username', 'email', 'id'],
-      as: 'users',
+      as: 'user',
     },
     {
       model: SocialValuesModel,
-      as: 'socialValues',
+      as: 'social_values',
     },
     {
       model: MediaModel,
       as: 'media'
     }
     ],
-    limit: 9,
+    limit: objectsLimit,
     offset: req.query.offset,
     order: [
       orderBy,

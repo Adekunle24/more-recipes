@@ -36,4 +36,6 @@ routes.post('/users/signin', controllers.usersController.signIn);
 
 // api generates test token
 routes.post('/token', new Middleware().encrypt);
+routes.get('/open-recipes', controllers.recipesController.getTotalRecipes);
+
 export default routes;

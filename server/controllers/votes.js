@@ -1,6 +1,5 @@
-// import all the models
-import allModels, { VoteModel } from '../models';
 import Middleware from '../middleware';
+import { VoteModel, SocialValuesModel } from '../models';
 
 const middleware = new Middleware();
 /**
@@ -31,7 +30,7 @@ const upVoteRecipe = (req, res) => {
           userId: req.decoded.id
         }).then((output) => {
           // increment total upvotes on social_values table
-          allModels.social_values.find({
+          SocialValuesModel.find({
             where: {
               recipeId: req.params.recipeId
             },
@@ -48,7 +47,7 @@ const upVoteRecipe = (req, res) => {
       if (result.upvote === 1) {
         // Undo upvote on second click when upvote is 1
         result.decrement('upvote').then((fromVotes) => {
-          allModels.social_values.find({
+          SocialValuesModel.find({
             where: {
               recipeId: req.params.recipeId
             }
@@ -62,13 +61,13 @@ const upVoteRecipe = (req, res) => {
       } else {
         // Redo upvote when upvote is 0
         result.increment('upvote').then((fromVotes) => {
-          allModels.social_values.find({
+          SocialValuesModel.find({
             where: {
               recipeId: req.params.recipeId
             }
           }).then(social => social.increment('upvotes').then((decrement) => {
             if (result.downvote === 1) {
-              result.decrement('downvote').then((downvoteResult) => {
+              result.decrement('downvote').then((downVoteResult) => {
                 social.decrement('downvotes').then((downVotesResult) => {
                   res.json({
                     status: 'success',
@@ -117,12 +116,12 @@ const downVoteRecipe = (req, res) => {
       // if this is the first upvote, save to db
       if (!result) {
         // add a row to votes table
-        voteModel.create({
+        VoteModel.create({
           recipeId: req.params.recipeId,
           userId: req.decoded.id
         }).then((output) => {
           // increment total upvotes on social_values table
-          allModels.social_values.find({
+          SocialValuesModel.find({
             where: {
               recipeId: req.params.recipeId
             }
@@ -136,7 +135,7 @@ const downVoteRecipe = (req, res) => {
       } else if (result.downvote === 1) {
         // Undo upvote on second click when upvote is 1
         result.decrement('downvote').then((fromVotes) => {
-          allModels.social_values.find({
+          SocialValuesModel.find({
             where: {
               recipeId: req.params.recipeId
             }
@@ -164,7 +163,7 @@ const downVoteRecipe = (req, res) => {
       } else {
         // Redo downvote when downvote is 0
         result.increment('downvote').then((fromVotes) => {
-          allModels.social_values.find({
+          SocialValuesModel.find({
             where: {
               recipeId: req.params.recipeId
             }

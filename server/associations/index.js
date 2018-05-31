@@ -17,14 +17,14 @@ const attachAssociations = (
   });
   RecipeModel.belongsTo(UserModel, {
     foreignKey: 'userId',
-    as: 'users'
+    as: 'user'
   });
   MediaModel.belongsTo(UserModel, {
     foreignKey: 'userId'
   });
   RecipeModel.hasOne(SocialValuesModel, {
     foreignKey: 'recipeId',
-    as: 'socialValues'
+    as: 'social_values',
   });
   RecipeModel.belongsTo(MediaModel, {
     foreignKey: 'mediaId',
@@ -42,6 +42,9 @@ const attachAssociations = (
 
   ReviewModel.belongsTo(RecipeModel, {
     foreignKey: 'recipeId'
+  });
+  SocialValuesModel.hasOne(RecipeModel, {
+    foreignKey: 'id',
   });
   SocialValuesModel.belongsTo(RecipeModel, {
     foreignKey: 'recipeId',

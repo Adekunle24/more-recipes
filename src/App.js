@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import Store from './store/index';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 render(
     <Provider store={Store}>
