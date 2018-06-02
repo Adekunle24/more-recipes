@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Filter from '../Auth/filter';
 import HomeCarousel from './../Home/carousel';
 import { Facebook } from 'react-content-loader';
 import { addRecipeApi } from './../../api/index';
@@ -10,6 +9,9 @@ import axios from 'axios';
 import RecipeItem from '../Recipes/single-item';
 import {displayAppNotification} from '../../actions/index';
 import Pagination from '../Pagination';
+import {withRouter} from 'react-router-dom';
+import * as queryString from 'query-string';
+import { Button } from 'reactstrap';
 
 function mapStateToProps(state) {
     return {
@@ -25,24 +27,44 @@ function mapDispatchToProps(dispatch){
 class TopRecipes extends Component {
     constructor(props){
         super(props);
+        let page = 1;
+        let count = 9;
+        const parsed = queryString.parse(props.location.search);
+        {parsed.page ? page = parsed.page : null};
         this.state = {
             isLoadingRecipeCarousel : true,
             isLoadingTopRecipes: true,
             recipesForCarousel: [],
             topRecipes: [],
+            page :page,
+            count:count,
+            pagination: 1
         };
     }
     componentDidMount(){
      this.loadCarouselRecipes();
     }
-    loadTopRecipes(){
+    componentDidUpdate (prevProps) {
+        let page = 1;
+        const parsed = queryString.parse(prevProps.history.location.search);
+        {parsed.page ? page = parsed.page : null};
+        if(this.state.page != page){
+            this.setState({
+                page,
+                isLoadingTopRecipes: true,
+            });
+            this.loadTopRecipes(page);
+        }
+      }
+    loadTopRecipes(page=this.state.page){        
         axios.defaults.headers['x-access-token'] = this.props.userToken;
-        axios.get(`${addRecipeApi}?sort=upvotes&order=desc&limit=9`).then((response)=>{
+        axios.get(`${addRecipeApi}?sort=upvotes&order=desc&limit=${this.state.count}&offset=${this.state.count*(page-1)}`).then((response)=>{
               this.setState({
                 topRecipes: response.data.data
               });
             this.setState({
-              isLoadingTopRecipes: false
+              isLoadingTopRecipes: false,
+              pagination: Math.ceil(response.data.totalCount/this.state.count)
             });
             
         }).catch((error)=>{
@@ -51,6 +73,11 @@ class TopRecipes extends Component {
                 type: 'error',
                 updateState: {}
               });
+        });
+    }
+    testPage(){
+        this.setState({
+            testPage: Math.ceil(Math.random()*10)
         });
     }
     loadCarouselRecipes(){
@@ -81,7 +108,6 @@ class TopRecipes extends Component {
     render() {
         return (
             <div>
-                <Filter></Filter>
                 {
             this.state.isLoadingRecipeCarousel ?
             <div className="row">
@@ -110,12 +136,12 @@ class TopRecipes extends Component {
                   }
                   </div>
               }
-              <Pagination />
+              <Pagination count={this.state.pagination} current={this.state.page} />
             </div>
         );
     }
 }
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,mapDispatchToProps
-)(TopRecipes);
+)(TopRecipes));

@@ -55,6 +55,7 @@ class HomeCarousel extends React.Component {
         activeIndex={this.state.activeIndex}
         next={this.next}
         previous={this.previous}
+        interval={false}
       >
         <CarouselIndicators items={this.state.recipes} activeIndex={this.state.activeIndex} onClickHandler={this.goToIndex} />
        { this.state.recipes.map((item) => 

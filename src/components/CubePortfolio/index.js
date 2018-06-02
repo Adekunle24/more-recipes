@@ -9,8 +9,8 @@ import { isNullOrUndefined } from 'util';
 import Modal from './../Modal/index';
 import { getRecipePostersApi } from './../../api/index';
 import { displayAppNotification } from '../../actions';
-import * as boostrap from 'bootstrap';
-
+import 'bootstrap';
+import 'popper.js';
 const mapStateToProps = state =>{
     return{
         myRecipePosters: state.recipeReducer.myRecipePosters,

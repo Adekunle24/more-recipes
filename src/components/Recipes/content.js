@@ -15,6 +15,10 @@ import { addRecipeApi } from '../../api';
 import { Facebook } from 'react-content-loader';
 import moment from 'moment';
 import initPictureHover from './../../static/js/picturehover';
+import 'froala-editor/js/froala_editor.pkgd.min.js';
+import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
+import FroalaEditor from 'react-froala-wysiwyg';
 
 function mapStateToProps(state) {
     return {
@@ -44,7 +48,6 @@ class Content extends Component {
         recipeTitle:'',
         ingredientQuantity:'1/2 cup',
         ingredientItem:'',
-        recipeProcedures: '',
       };
       this.addIngredient = this.addIngredient.bind(this);
       this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -107,7 +110,7 @@ class Content extends Component {
     const recipeTitle = this.state.recipeTitle;
     const ingredients = this.state.ingredients;
     const poster = this.props.selectedPoster;
-    const procedures = this.state.recipeProcedures;
+    const procedures = $('#summernote').summernote('code');
     if(validateAddRecipe(recipeTitle,ingredients,poster,procedures)){
        this.submitRecipe();
     }
@@ -276,11 +279,13 @@ class Content extends Component {
                                                     className="dropzone"
                                                     id="my-awesome-dropzone"></form>
                                                 <CubePortfolio modalId={"cubePortfolioOnAddRecipe"} show={this.state.showCubePortfolio} />
-                                                <div>
+                                                
+                                            </div>
+                                            <div className="col-md-12">
                                                     <div className="text-center">     <h4 className="black">Procedures:</h4></div>
-                                                    <textarea name="recipeProcedures" value={this.state.recipeProcedures} onChange={this.onChangeHandler} className="form-control" rows={10} ></textarea>
-                                                </div>
-                                                <a onClick={this.postRecipe} className="btn btn-dark white margin-bottom-10 margin-top-10" >Post Recipe</a>
+                                                    <FroalaEditor tag='textarea'/>
+                                                    {/* <textarea id="summernote" name="recipeProcedures" className="form-control" rows={10} ></textarea> */}
+                                                    <a onClick={this.postRecipe} className="btn btn-dark white margin-bottom-10 margin-top-10" >Post Recipe</a>
                                             </div>
                                         </div>
                                     </div>

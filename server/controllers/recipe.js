@@ -27,7 +27,7 @@ const getTotalRecipes = (req, res) => {
   if (req.query.limit) {
     objectsLimit = req.query.limit;
   }
-  RecipeModel.findAll({
+  RecipeModel.findAndCountAll({
     include: [{
       model: UserModel,
       attributes: ['username', 'email', 'id'],
@@ -47,7 +47,9 @@ const getTotalRecipes = (req, res) => {
     order: [
       orderBy,
     ]
-  }).then(value => res.json({ status: 'success', data: value })).catch(error => res.send(error.toString()));
+  }).then((result) => {
+    res.json({ status: 'success', data: result.rows, totalCount: result.count });
+  }).catch(error => res.send(error.toString()));
 };
 
 const addRecipe = (req, res) => {
