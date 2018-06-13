@@ -2,6 +2,7 @@ import React from "react";
 import {Carousel, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl } from 'reactstrap';
 import PropTypes from 'prop-types';
 
+
 class HomeCarousel extends React.Component {
     constructor(props) {
         super(props);
@@ -66,7 +67,7 @@ class HomeCarousel extends React.Component {
             style={{width:'50%',height:'50%'}}
           >
             <img src={item.media.source} alt={item.altText} />
-            <CarouselCaption captionText={item.procedures} captionHeader={item.title.substring(0,30)} />
+            <CarouselCaption captionText={`By ${item.user.username}`} captionHeader={item.title.substring(0,30)} />
           </CarouselItem>
         )
       }

@@ -38,7 +38,6 @@ function mapDispatchToProps(dispatch){
     };
 }
 class Content extends Component {
-    
   constructor(props) {
       super(props); 
       this.state ={
@@ -48,11 +47,16 @@ class Content extends Component {
         recipeTitle:'',
         ingredientQuantity:'1/2 cup',
         ingredientItem:'',
+        recipeProcedures: '',
       };
       this.addIngredient = this.addIngredient.bind(this);
       this.onChangeHandler = this.onChangeHandler.bind(this);
       this.removeIngredient = this.removeIngredient.bind(this);
       this.postRecipe = this.postRecipe.bind(this);
+      this.handleRecipeProceduresChange = this.handleRecipeProceduresChange.bind(this);
+      this.editorConfig = {
+        charCounterCount: false
+       };
   }
   componentDidMount() {
       const self = this;
@@ -110,7 +114,7 @@ class Content extends Component {
     const recipeTitle = this.state.recipeTitle;
     const ingredients = this.state.ingredients;
     const poster = this.props.selectedPoster;
-    const procedures = $('#summernote').summernote('code');
+    const procedures = this.state.recipeProcedures;
     if(validateAddRecipe(recipeTitle,ingredients,poster,procedures)){
        this.submitRecipe();
     }
@@ -151,7 +155,7 @@ class Content extends Component {
   }
   resetState(){
       this.setState({
-        title: '',
+        recipeTitle: '',
         recipeProcedures: '',
         ingredients: [],
       });
@@ -161,6 +165,11 @@ class Content extends Component {
       const target = e.target;
       this.setState({
         [target.name]: target.value
+      });
+  }
+  handleRecipeProceduresChange(model){
+      this.setState({
+        recipeProcedures: model
       });
   }
     render() {
@@ -283,8 +292,7 @@ class Content extends Component {
                                             </div>
                                             <div className="col-md-12">
                                                     <div className="text-center">     <h4 className="black">Procedures:</h4></div>
-                                                    <FroalaEditor tag='textarea'/>
-                                                    {/* <textarea id="summernote" name="recipeProcedures" className="form-control" rows={10} ></textarea> */}
+                                                    <FroalaEditor config={this.editorConfig} tag='textarea' model={this.state.recipeProcedures} onModelChange={this.handleRecipeProceduresChange}/>
                                                     <a onClick={this.postRecipe} className="btn btn-dark white margin-bottom-10 margin-top-10" >Post Recipe</a>
                                             </div>
                                         </div>

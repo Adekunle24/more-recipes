@@ -85,7 +85,7 @@ const addRecipe = (req, res) => {
       }).then((social) => {
         res.json({
           status: 'success',
-          data: { recipe: result, socialValues: social },
+          data: { recipe: result, social_values: social },
           message: 'Recipe added successfully'
         });
       }).catch(error => res.send(error.toString()));

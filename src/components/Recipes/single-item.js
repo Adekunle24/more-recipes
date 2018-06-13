@@ -4,6 +4,7 @@ import moment from 'moment';
 import axios from 'axios';
 import { upvoteRecipeApi, downvoteRecipeApi } from '../../api';
 import {displayAppNotification }  from '../../actions/index';
+import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
 
 
 function mapStateToProps(state) {
@@ -37,7 +38,6 @@ class RecipeItem extends Component {
                 isWorking: false,
                 recipe: updatedRecipe
             });
-            
             this.props.displayAppNotification({
                 message: response.data.message,
                 type: 'success',
@@ -96,7 +96,6 @@ class RecipeItem extends Component {
 				<div className="recipe-content">
 					<a href="#" className="recipe-category bg-orange">TOP RECIPES</a>
 			<h4>		<a href="#" className=" recipe-title black">{this.state.recipe.title}</a></h4>
-					<p>{this.state.recipe.procedures.substring(0,60)}...</p>
 
 					<div className="recipe-author">
 						by &nbsp;

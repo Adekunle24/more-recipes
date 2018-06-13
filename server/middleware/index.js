@@ -85,7 +85,8 @@ class MiddleWares {
           message: error.errors[0].message,
           type: error.errors[0].type,
           field: error.fields
-        }
+        },
+        stack: error
       });
     } else if (error.parent) {
       res.json({
@@ -93,7 +94,8 @@ class MiddleWares {
         data: {
           message: JSON.stringify(error),
           error: error.name
-        }
+        },
+        stack: error
       });
     }
     return this;
